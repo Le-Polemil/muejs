@@ -1,0 +1,28 @@
+@import './colors.styl'
+
+body
+  background-color body-bg
+
+&.no-scrollbar
+  overflow hidden
+
+[class^="bg-"]
+  &[class$="success"]
+    background-color success-color
+  &[class$="warning"]
+    background-color warning-color
+  &[class$="error"]
+    background-color error-color
+
+[class^="border-"]
+  box-sizing border-box
+  border 1 solid #222
+  &.border-rounded
+    border-radius .2rem
+
+  &[class$="success"]
+    border-color success-color
+  &[class$="warning"]
+    border-color warning-color
+  &[class$="error"]
+    border-color error-color

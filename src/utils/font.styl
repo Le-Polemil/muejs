@@ -1,0 +1,48 @@
+import '../variables.styl'
+
+font-stack = -apple-system BlinkMacSystemFont "Segoe UI" Roboto Oxygen-Sans Ubuntu Cantarell "Helvetica Neue" sans-serif
+off-black = rgba(0, 0, 0, 0.87)
+
+h1-fontsize = 4.2rem
+h2-fontsize = 3.56rem
+h3-fontsize = 2.92rem
+h4-fontsize = 2.28rem
+h5-fontsize = 1.64rem
+h6-fontsize = 1.15rem
+
+a
+  text-decoration none
+
+html
+  line-height 1.5
+
+  @media only screen and (min-width 0)
+    font-size 14px
+  @media only screen and (min-width medium-screen)
+    font-size 14.5px
+  @media only screen and (min-width large-screen)
+    font-size 15px
+
+  color off-black
+  font-family font-stack
+  font-weight normal
+
+h1, h2, h3, h4, h5, h6
+  font-weight 400
+  color 1.3
+
+  a
+    font-weight inherit
+
+h1
+  font-size h1-fontsize
+h2
+  font-size h2-fontsize
+h3
+  font-style h3-fontsize
+h4
+  font-style h4-fontsize
+h5
+  font-style h5-fontsize
+h6
+  font-style h6-fontsize
