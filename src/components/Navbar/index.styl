@@ -1,20 +1,19 @@
 @import '../../utils/colors.styl'
 
-navbar-height = 64px !default
-navbar-line-height = navbar-height !default
-navbar-height-mobile = 56px !default
-navbar-line-height-mobile = navbar-height-mobile !default
-navbar-font-size = 1rem !default
-navbar-font-color = #fff !default
-navbar-brand-font-size = 2.1rem !default
+navbar-height = 64px
+navbar-line-height = navbar-height
 
-.navbar
-  background-color primary-color
+navbar-height-mobile = 56px
+navbar-line-height-mobile = navbar-height-mobile
 
+navbar-font-size = 1rem
+navbar-brand-font-size = 2.1rem
+
+nav
   &.nav-extended
     height auto
 
-    .nav-wrapper
+    .wrap
       min-height navbar-height-mobile
       height auto
 
@@ -22,3 +21,12 @@ navbar-brand-font-size = 2.1rem !default
       position relative
       line-height normal
 
+  color font-color-on-primary
+  background-color primary-color
+  width 100%
+  height navbar navbar-height-mobile
+  line-height navbar-height-mobile
+
+  .navlabel, .navicon
+    color font-color-on-primary
+    width 100%

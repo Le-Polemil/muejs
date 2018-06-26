@@ -29,7 +29,7 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --mode development --open --public --host mue",
     "babel": "./node_modules/.bin/babel src --out-dir lib",
     "test": "",
     "watch": "webpack --watch",

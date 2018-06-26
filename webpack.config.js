@@ -9,6 +9,10 @@ let config = {
         path: path.resolve(__dirname, "./dist"),
         filename: "./index.js"
     },
+    devServer: {
+        inline:true,
+        port: 3006
+    },
     module: {
         rules: [
         {
