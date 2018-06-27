@@ -32,7 +32,7 @@ export default class Grid extends Component {
         if (element.props.className) {
             const classList = element.props.className.split(' ');
             classList.forEach((classname) => {
-                const match = classname.match(/(\w+)-(\d)/);
+                const match = classname.match(/(\w+)-(\d+)/);
                 if (match) {
                     const key = match[1] || null;
                     props[key] = match[2] || 0;
