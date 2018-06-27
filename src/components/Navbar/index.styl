@@ -9,7 +9,8 @@ navbar-line-height-mobile = navbar-height-mobile
 navbar-font-size = 1rem
 navbar-brand-font-size = 2.1rem
 
-nav
+.navbar
+
   &.nav-extended
     height auto
 
@@ -24,9 +25,25 @@ nav
   color font-color-on-primary
   background-color primary-color
   width 100%
-  height navbar navbar-height-mobile
+  height navbar-height-mobile
   line-height navbar-height-mobile
 
+  .brand
+    position absolute
+    color navbar-font-color
+    display inline-block
+    font-size navbar-brand-font-size
+    padding 0 .5rem
+    
   .navlabel, .navicon
+    display inline-grid
+
     color font-color-on-primary
-    width 100%
+
+    padding 0 .5rem
+
+    transition background-color .2s
+
+    &hover
+      background-color link-hover-black-shade-bg
+      transition background-color .2s

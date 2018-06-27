@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Navbar from "../Navbar/index.jsx";
+import Navbar, { NavLabel, NavLogo } from "../Navbar/index.jsx";
 import Grid from "../Grid/index.jsx";
+import GridElement from "../Grid/GridElement/index.jsx";
 
-import '../../utils/generic.styl';
+import './index.styl';
 import '../../utils/font.styl';
 
 
@@ -10,18 +11,23 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <Navbar/>
-                <div className="grid col-3 row-1 adaptToContent">
-                    <div className="col-1 row-1 gridWidth-2 gridHeight-1">
-                        <h1 className="bg-success">Success !</h1>
-                    </div>
-                    <div className="col-2 row-1 gridWidth-1 gridHeight-1">
-                        <h1 className="bg-warning">Warning !</h1>
-                    </div>
-                    <div className="col-3 row-1 gridWidth-1 gridHeight-1">
-                        <h1 className="bg-error">Error !</h1>
-                    </div>
-                </div>
+                <Grid columnsTemplate='min-content 1fr 1fr min-content' rowsTemplate='min-content 1fr 1fr min-content'>
+                    <GridElement col={1} row={1} width={4} height={1}>
+                        <Navbar>
+                            <NavLogo>Cobelt.fr</NavLogo>
+                            <NavLabel justify="end" label='Cobelt.fr' route='http://cobelt.fr'/>
+                            <NavLabel justify="end" label='Github' route='http://github.cobelt.fr'/>
+                        </Navbar>
+                    </GridElement>
+                    <GridElement col={2} row={2} width={2} height={2}>
+                        {/*<Grid adaptToContent>*/}
+                            {/*<h1>Warning !</h1>*/}
+                        {/*</Grid>*/}
+                    </GridElement>
+                    <GridElement col={1} row={4} width={4} height={1}>
+                        <h4>Error !</h4>
+                    </GridElement>
+                </Grid>
             </div>
         );
     }
