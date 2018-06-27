@@ -16,7 +16,6 @@ export default class Grid extends Component {
             columnsTemplate: props.columnsTemplate || this.simpleTemplateFrom(100, props.col),
             rowsTemplate: props.rowsTemplate || this.simpleTemplateFrom(100, props.row),
         };
-        // if adaptToContent on se base sur child else on se base sur col et row donné ici
     }
 
     simpleTemplateFrom(toDivide, divisor) {
@@ -29,16 +28,17 @@ export default class Grid extends Component {
 
 
     getGridElementProps(element, index) {
-        const classList = element.props.className.split(' ');
         const props = {};
-        classList.forEach((classname) => {
-            const match = classname.match(/(\w+)-(\d)/);
-            if (match) {
-                const key = match[1] || null;
-                props[key] = match[2] || 0;
-            }
-        });
-
+        if (element.props.className) {
+            const classList = element.props.className.split(' ');
+            classList.forEach((classname) => {
+                const match = classname.match(/(\w+)-(\d)/);
+                if (match) {
+                    const key = match[1] || null;
+                    props[key] = match[2] || 0;
+                }
+            });
+        }
         // Default values if not found
         props['col'] = props['col'] || index + 1;
         props['row'] = props['row'] || 1;
@@ -81,27 +81,29 @@ export default class Grid extends Component {
     }
 
     calculateChildrenProps() {
+        if (!this.children) return null;
+
         this.children = this.children.map((element, index) => {
             return { jsx: element, gridProps: this.getGridElementProps(element, index) };
         });
     }
 
     renderChildren() {
-        return this.children.map((element, index) => {
+        return this.children ? this.children.map((element, index) => {
             return (
                 <GridElement key={index} {...element.gridProps}>
                     { element.jsx }
                 </GridElement>
             );
-        });
+        }) : null;
     }
     render() {
         this.calculateChildrenProps();
 
         const style = {
-            gridTemplateColumns: this.state.adaptToContent ? this.calculateTemplateColumns() : this.state.columnsTemplate,
-            gridTemplateRows: this.state.adaptToContent ? this.calculateTemplateRows() : this.state.rowsTemplate,
-        }
+            gridTemplateColumns: this.state.adaptToContent && this.children ? this.calculateTemplateColumns() : this.state.columnsTemplate,
+            gridTemplateRows: this.state.adaptToContent && this.children ? this.calculateTemplateRows() : this.state.rowsTemplate,
+        };
         return (
             <div className="grid" style={ style }>
                 { this.renderChildren() }

@@ -11,7 +11,7 @@ export default class App extends Component {
         return (
             <div>
                 <Navbar/>
-                <Grid col={4} row={1} columnsTemplate='25% 25% 1fr' rowsTemplate=''>
+                <Grid col={3} row={1} columnsTemplate='25% 25% 1fr' rowsTemplate='' adaptToContent>
                     <div className="col-1 row-1 gridWidth-2 gridHeight-1">
                         <h1 className="bg-success">Success !</h1>
                     </div>
