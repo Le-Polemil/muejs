@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './index.styl';
 
-import Grid from "../Grid/index.jsx";
-import GridElement from "../GridElement/index.jsx";
+import Grid, { GridElement } from '../Grid/index.jsx';
+
 
 export default class Navbar extends Component {
     constructor(props) {

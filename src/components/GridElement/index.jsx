@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class GridElement extends Component {
+export class GridElement extends Component {
     constructor (props) {
         super(props);
 
@@ -8,8 +8,8 @@ export default class GridElement extends Component {
         this.className = props.className || '';
 
         this.state = {
-            col: props.col || 1,
-            row: props.row || 1,
+            col: props.col || 'auto',
+            row: props.row || 'auto',
             width: props.width || 1,
             height: props.height || 1,
             children: props.children,

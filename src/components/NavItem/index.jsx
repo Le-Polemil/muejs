@@ -10,5 +10,5 @@ export const NavLabel = ({ label, route }) => {
 };
 
 export const NavIcon = ({ icon, route }) => {
-    return <a className='navicon' href={ route }><i className="material-icons">{ icon }</i></a>;
+    return <a className='navicon' href={ route }><i className='material-icons'>{ icon }</i></a>;
 };

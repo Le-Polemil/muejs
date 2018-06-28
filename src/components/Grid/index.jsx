@@ -49,3 +49,5 @@ export default class Grid extends Component {
         );
     }
 }
+
+export * from '../GridElement/index.jsx';
