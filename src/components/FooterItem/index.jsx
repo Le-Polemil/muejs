@@ -9,7 +9,7 @@ export const FooterList = ({ children, className }) => {
     const renderChild = () => {
         return children.map((child, index) => {
             return (
-                <GridElement className='footer-list-element' key={index+1} row={index+1}>
+                <GridElement className='footer-list-element' key={index+1} row={index+1} style={{ justifySelf: 'center'}}>
                     { child }
                 </GridElement>
             );

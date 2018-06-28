@@ -23,8 +23,11 @@ export default class App extends Component {
                         <NavIcon justify='right' icon='more' route='http://plex.cobelt.fr'/>
                     </Navbar>
                 </GridElement>
-                <GridElement col={2} row={2} width={4} height={2}>
+                <GridElement col={2} row={2} width={4} height={2} style={{justifySelf: 'center'}}>
                     <Body className='bg-success'>
+                        <h1>Warning !</h1>
+                        <h1>Warning !</h1>
+                        <h1>Warning !</h1>
                         <h1>Warning !</h1>
                     </Body>
                 </GridElement>
