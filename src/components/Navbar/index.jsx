@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.styl';
 
 import Grid from "../Grid/index.jsx";
-import GridElement from "../Grid/GridElement/index.jsx";
+import GridElement from "../GridElement/index.jsx";
 
 export default class Navbar extends Component {
     constructor(props) {
@@ -21,13 +21,12 @@ export default class Navbar extends Component {
             columns[child.props.justify || 'left'].push(child);
         });
         this.columns = [ ...columns.start, ...columns.left, null, ...columns.center, null, ...columns.right, ...columns.end ] || this.columns;
-        console.log(this.columns);
         return this.columns;
     }
 
     generateNavColumnsTemplate () {
         if (!this.children) return null;
-        const template = { start:'', left: '', center: '', right: '', end:'' };
+        const template = { start: '', left: '', center: '', right: '', end:'' };
         this.columns.map((col) => {
             if (col) {
                 template[col.props.justify || 'left'] += 'max-content ';
@@ -40,7 +39,7 @@ export default class Navbar extends Component {
         if (!this.children) return null;
         return this.children.map((element, index) => {
             return (
-                <GridElement key={index} row={1}>
+                <GridElement key={index} row={1} col={this.columns.findIndex(function (col) { return col === element }) + 1}>
                     { element }
                 </GridElement>
             );
@@ -51,22 +50,11 @@ export default class Navbar extends Component {
 
         const className = 'navbar' + (this.className ? ' ' + this.className : '');
         return (
-            <Grid className={className} style={this.style} columnsTemplate={this.generateNavColumnsTemplate()} rowsTemplate='1fr'>
+            <Grid className={className} style={this.style} forceTemplate columnsTemplate={this.generateNavColumnsTemplate()} rowsTemplate='1fr'>
                 { this.renderChildren() }
             </Grid>
         );
     }
 };
 
-export const NavLogo = ({ children, imgSrc }) => {
-    if (!children && !imgSrc) return null;
-        return (imgSrc) ? <img className='logo' src={imgSrc} alt={children}/> : <a className='brand' href='/'>{ children }</a>
-};
-
-export const NavLabel = ({ label, route }) => {
-    return <a className='navlabel' href={ route }>{ label }</a>;
-};
-
-export const NavIcon = ({ icon, route }) => {
-    return <a className='navicon' href={ route }><i className="material-icons">{ icon }</i></a>;
-};
+export * from '../NavItem/index.jsx';

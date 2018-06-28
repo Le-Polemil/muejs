@@ -4,7 +4,7 @@ import './index.styl';
 import Grid from "../Grid/index.jsx";
 import GridElement from "../GridElement/index.jsx";
 
-export default class Footer extends Component {
+export default class Body extends Component {
     constructor(props) {
         super(props);
 
@@ -19,14 +19,14 @@ export default class Footer extends Component {
         if (!this.children) return null;
         return this.children.map((element, index) => {
             return (
-                <GridElement key={index} row={1}>
+                <GridElement key={index} row={1} col={index + 1}>
                     { element }
                 </GridElement>
             );
         });
     };
     render () {
-        const className = 'footer' + (this.className ? ' ' + this.className : '');
+        const className = 'body' + (this.className ? ' ' + this.className : '');
         return (
             <Grid className={className} style={this.style}>
                 { this.renderChildren() }
@@ -34,3 +34,5 @@ export default class Footer extends Component {
         );
     }
 };
+
+export * from '../NavItem/index.jsx';
