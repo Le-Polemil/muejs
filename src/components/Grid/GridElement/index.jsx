@@ -23,7 +23,7 @@ export default class GridElement extends Component {
         };
         style = { ...style, ...this.style };
 
-        const className = 'grid-element ' + this.className;
+        const className = 'grid-element' + (this.className ? ' ' + this.className : '');
         return (
             <div className={className} style={ style }>
                 { this.state.children }

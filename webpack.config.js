@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 
+const stylus_plugin = require("stylus_plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 let config = {
@@ -35,7 +36,12 @@ let config = {
             use: [
                 'style-loader',
                 'css-loader',
-                'stylus-loader',
+                {
+                    loader: 'stylus-loader',
+                    options: {
+                        use: [stylus_plugin()],
+                    }
+                }
             ]
         },
         ]

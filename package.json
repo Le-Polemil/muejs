@@ -33,17 +33,18 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --public --host mue",
+    "start": "webpack-dev-server --mode development --open --public --host muejs",
     "babel": "./node_modules/.bin/babel src --out-dir lib",
     "test": "",
     "watch": "webpack --watch",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "devbuild": "webpack --mode development"
   },
-  "name": "Mue",
+  "name": "MueJS",
   "version": "0.0.1",
   "description": "A not professional css framework for some prefect UIs.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cobelt/Mue.git"
+    "url": "https://github.com/Cobelt/muejs.git"
   }
 }
