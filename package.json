@@ -1,7 +1,16 @@
 {
-  "dependencies": {
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+  "name": "MueJS",
+  "version": "0.0.2",
+  "description": "A not professional css framework for some prefect UIs.",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cobelt/muejs.git"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -39,12 +48,5 @@
     "watch": "webpack --watch",
     "build": "webpack --mode production",
     "devbuild": "webpack --mode development"
-  },
-  "name": "MueJS",
-  "version": "0.0.2",
-  "description": "A not professional css framework for some prefect UIs.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Cobelt/muejs.git"
   }
 }
