@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import Navbar, { NavLabel, NavLogo, NavIcon } from '../Navbar/index.jsx';
 import Footer, { FooterList } from '../Footer/index.jsx';
 
-import Body from '../Body/index.jsx';
-
 import Grid, { GridElement } from '../Grid/index.jsx';
+
+import Body, { BodyElement } from '../Body/index.jsx';
+
 
 
 import './index.styl';
@@ -23,12 +24,17 @@ export default class App extends Component {
                         <NavIcon justify='right' icon='more' route='http://plex.cobelt.fr'/>
                     </Navbar>
                 </GridElement>
-                <GridElement col={2} row={2} width={4} height={2} style={{justifySelf: 'center'}}>
-                    <Body className='bg-success'>
-                        <h1>Warning !</h1>
-                        <h1>Warning !</h1>
-                        <h1>Warning !</h1>
-                        <h1>Warning !</h1>
+                <GridElement col={2} row={2} width={4} height={2}>
+                    <Body>
+                        <BodyElement col={1} row={1} width={1} className='bg-success'>
+                            <h1>Success !</h1>
+                        </BodyElement>
+                        <BodyElement col={3} row={1} width={1} className='bg-warning'>
+                            <h1>Warning !</h1>
+                        </BodyElement>
+                        <BodyElement col={1} row={2} width={3} className='bg-error'>
+                            <h1>Error !</h1>
+                        </BodyElement>
                     </Body>
                 </GridElement>
                 {/*<GridElement className='bg-error' col={6} row={2} width={1} height={2} style={{zIndex: 1}}>*/}
@@ -45,6 +51,16 @@ export default class App extends Component {
                             <p>4</p>
                             <p>5</p>
                             <p>6</p>
+                        </FooterList>
+                        <FooterList className='social'>
+                            <p>7</p>
+                            <p>8</p>
+                            <p>9</p>
+                        </FooterList>
+                        <FooterList className='social'>
+                            <p>10</p>
+                            <p>11</p>
+                            <p>12</p>
                         </FooterList>
                     </Footer>
                 </GridElement>

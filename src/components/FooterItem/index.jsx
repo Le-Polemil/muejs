@@ -2,7 +2,7 @@ import React from 'react';
 
 import Grid, { GridElement } from '../Grid/index.jsx';
 
-export const FooterList = ({ children, className }) => {
+export const FooterList = ({ children, className, style }) => {
     if (!children) return null;
     if (!Array.isArray(children)) children = [children];
 
@@ -16,5 +16,5 @@ export const FooterList = ({ children, className }) => {
         });
     };
     const finalClassName = 'footer-list' + (className ? ' ' + className : '');
-    return <Grid className={finalClassName}>{ renderChild() }</Grid>
+    return <Grid className={finalClassName} style={style}>{ renderChild() }</Grid>
 };

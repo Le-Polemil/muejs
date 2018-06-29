@@ -3,7 +3,6 @@ import './index.styl';
 
 import Grid, { GridElement } from '../Grid/index.jsx';
 
-
 export default class Body extends Component {
     constructor(props) {
         super(props);
@@ -18,11 +17,7 @@ export default class Body extends Component {
     renderChildren () {
         if (!this.children) return null;
         return this.children.map((element, index) => {
-            return (
-                <GridElement key={index} row={1} col={index + 1}>
-                    { element }
-                </GridElement>
-            );
+            return element;
         });
     };
     render () {
@@ -35,4 +30,4 @@ export default class Body extends Component {
     }
 };
 
-export * from '../NavItem/index.jsx';
+export * from '../BodyItem/index.jsx';
