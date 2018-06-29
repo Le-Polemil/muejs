@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.styl';
 
-import Grid, { GridElement } from '../Grid/index.jsx';
+import Grid from '../Grid/index.jsx';
 
 export default class Body extends Component {
     constructor(props) {

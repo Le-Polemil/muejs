@@ -31,11 +31,12 @@ export default class Grid extends Component {
     renderChildren() {
         if (!this.children) return null;
         return this.children.map((element) => {
+            // if (element.props.width === 'max' || element.props.fullWidth) element.props.width = this.
             return element;
         });
     }
-    render() {
 
+    render() {
         let style = {
             gridTemplateColumns: (this.forceTemplate && this.propsColumnsTemplate) ? this.propsColumnsTemplate : 'auto-fit',
             gridTemplateRows: (this.forceTemplate && this.propsRowsTemplate) ? this.propsRowsTemplate : 'auto-fit',

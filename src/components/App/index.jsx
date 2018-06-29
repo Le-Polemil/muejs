@@ -24,7 +24,7 @@ export default class App extends Component {
                         <NavIcon justify='right' icon='more' route='http://plex.cobelt.fr'/>
                     </Navbar>
                 </GridElement>
-                <GridElement col={2} row={2} width={4} height={2}>
+                <GridElement col={1} row={2} width={6} height={2} style={{ minWidth: '76%', justifySelf: 'center' }}>
                     <Body>
                         <BodyElement col={1} row={1} width={1} className='bg-success'>
                             <h1>Success !</h1>
@@ -56,11 +56,6 @@ export default class App extends Component {
                             <p>7</p>
                             <p>8</p>
                             <p>9</p>
-                        </FooterList>
-                        <FooterList className='social'>
-                            <p>10</p>
-                            <p>11</p>
-                            <p>12</p>
                         </FooterList>
                     </Footer>
                 </GridElement>
