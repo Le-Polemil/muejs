@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import Navbar, { NavLabel, NavLogo, NavIcon } from '../Navbar/index.jsx';
-import Footer, { FooterList } from '../Footer/index.jsx';
+import Navbar, { NavLabel, NavLogo, NavIcon } from '../Navbar';
+import Footer, { FooterList } from '../Footer';
 
-import Grid, { GridElement } from '../Grid/index.jsx';
+import Grid, { GridElement } from '../Grid';
 
-import Body, { BodyElement } from '../Body/index.jsx';
+import Body, { BodyElement } from '../Body';
 
 
 

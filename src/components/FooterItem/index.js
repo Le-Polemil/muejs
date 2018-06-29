@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Grid, { GridElement } from '../Grid/index.jsx';
+import Grid, { GridElement } from '../Grid';
 
 export const FooterList = ({ children, className, style }) => {
     if (!children) return null;

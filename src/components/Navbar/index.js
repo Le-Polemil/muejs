@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.styl';
 
-import Grid, { GridElement } from '../Grid/index.jsx';
+import Grid, { GridElement } from '../Grid';
 
 
 export default class Navbar extends Component {
@@ -57,4 +57,4 @@ export default class Navbar extends Component {
     }
 };
 
-export * from '../NavItem/index.jsx';
+export * from '../NavItem';

@@ -1,1 +1,1 @@
-export { GridElement as BodyElement } from '../Grid/index.jsx';
+export { GridElement as BodyElement } from '../Grid';

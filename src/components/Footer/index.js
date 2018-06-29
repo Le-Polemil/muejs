@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.styl';
 
-import Grid, { GridElement } from '../Grid/index.jsx';
+import Grid, { GridElement } from '../Grid';
 
 
 export default class Footer extends Component {
@@ -35,4 +35,4 @@ export default class Footer extends Component {
     }
 };
 
-export * from '../FooterItem/index.jsx';
+export * from '../FooterItem';

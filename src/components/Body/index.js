@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.styl';
 
-import Grid from '../Grid/index.jsx';
+import Grid from '../Grid';
 
 export default class Body extends Component {
     constructor(props) {
@@ -30,4 +30,4 @@ export default class Body extends Component {
     }
 };
 
-export * from '../BodyItem/index.jsx';
+export * from '../BodyItem';

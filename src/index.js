@@ -5,16 +5,16 @@ import ReactDOM from 'react-dom';
 import './styles/muejs.styl';
 // import './scripts/index.js';
 //
-// import App from './components/App/index.jsx';
+// import App from './components/App';
 // ReactDOM.render(<App />, document.getElementById('root'));
 
-import Body, { BodyElement } from './components/Body/index.jsx';
+import Body, { BodyElement } from './components/Body';
 
-import Footer, { FooterList } from './components/Footer/index.jsx';
+import Footer, { FooterList } from './components/Footer';
 
-import Grid, { GridElement } from './components/Grid/index.jsx';
+import Grid, { GridElement } from './components/Grid';
 
-import Navbar, {NavIcon, NavLabel, NavLogo} from './components/Navbar/index.jsx';
+import Navbar, {NavIcon, NavLabel, NavLogo} from './components/Navbar';
 
 export {
     Body,
