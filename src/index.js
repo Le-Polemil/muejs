@@ -19,3 +19,5 @@ export * from './components/GridElement/index.jsx';
 
 export * from './components/Navbar/index.jsx';
 export * from './components/NavItem/index.jsx';
+
+export * from './styles/muejs.styl';

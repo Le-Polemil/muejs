@@ -41,7 +41,7 @@
     "devbuild": "webpack --mode development"
   },
   "name": "MueJS",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A not professional css framework for some prefect UIs.",
   "repository": {
     "type": "git",
