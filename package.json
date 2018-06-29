@@ -1,6 +1,6 @@
 {
   "name": "MueJS",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A not professional css framework for some prefect UIs.",
   "main": "src/index.js",
   "module": "src/index.js",
