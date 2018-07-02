@@ -1,12 +1,10 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import './styles/muejs.styl';
-// import './scripts/index.js';
-//
-// import App from './components/App';
-// ReactDOM.render(<App />, document.getElementById('root'));
+
+import App from './components/App';
+ReactDOM.render(<App />, document.getElementById('root'));
 
 import Body, { BodyElement } from './components/Body';
 

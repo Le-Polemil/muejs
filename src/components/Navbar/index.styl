@@ -7,7 +7,7 @@ navbar-line-height = navbar-height
 navbar-height-mobile = 64px
 navbar-line-height-mobile = navbar-height-mobile
 
-navbar-font-size = 1rem
+navbar-font-size = 1.15rem
 navbar-brand-font-size = 2.1rem
 
 navbar-font-color = #fff
@@ -23,25 +23,34 @@ navbar-brand-font-color = #fff
 
   font-size navbar-font-size
 
-  .navlabel, .navicon, .brand
+  a
     display inline-grid
-    color rgba(navbar-font-color, .8)
-    transition background-color .3s, color .3s
-    padding 0 .6rem
+
+  .brand
+    padding 0 .8rem
+    font-size navbar-brand-font-size
+    font-weight bold
+
+    color rgba(navbar-font-color, .6)
+    transition color .2s
 
     &:hover
-      cursor pointer
+      color navbar-brand-font-color
+      transition color .2s
+
+  .navlabel, .navicon
+    padding 0 .6rem
+    display inline-grid
+    align-self center
+
+    color rgba(navbar-font-color, .8)
+    transition background-color .3s, color .3s
+
+    &:hover
       background-color link-hover-black-shade-bg
       color navbar-brand-font-color
       transition background-color .3s, color .3s
 
   .navlabel, .navicon
-
     i.material-icons
       line-height navbar-height-mobile
-
-  .brand
-    font-family brand-font, Roboto, sans-serif;
-    font-size navbar-brand-font-size
-
-    padding 0 .8rem

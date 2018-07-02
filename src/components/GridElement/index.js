@@ -7,27 +7,89 @@ export class GridElement extends Component {
         this.style = props.style;
         this.className = props.className || '';
 
+        this.children = props.children;
+
+        this.maxWidthPossible = props.maxWidth;
+        this.maxHeightPossible = props.maxHeight;
+
         this.state = {
             col: props.col || 'auto',
             row: props.row || 'auto',
             width: props.width || 1,
             height: props.height || 1,
-            children: props.children,
+            isFullWidth: props.fullWidth,
+            isFullHeight: props.fullHeight,
         };
     }
 
-    render() {
-        let style = {
+    checkIfFullWidth() {
+        if ( this.state.isFullWidth || this.state.width === 'max') {
+            this.state.width = this.maxWidthPossible;
+            console.log('new width :', this.state.width);
+        }
+    }
+
+    checkIfFullHeight() {
+        if ( this.state.isFullHeight || this.state.height === 'max') {
+            this.state.height = this.maxHeightPossible;
+        }
+    }
+
+    getStyle () {
+        this.checkIfFullWidth();
+        this.checkIfFullHeight();
+
+        const style = {
             gridColumn: this.state.col + (this.state.width > 1 ? ' / span ' + this.state.width : ''),
             gridRow: this.state.row + (this.state.height > 1 ? ' / span ' + this.state.height : ''),
         };
-        style = { ...style, ...this.style };
 
-        const className = 'grid-element' + (this.className ? ' ' + this.className : '');
+        return { ...style, ...this.style };
+    }
+
+    getClassName () {
+        return 'grid-element' + (this.className ? ' ' + this.className : '');
+    }
+
+    render() {
         return (
-            <div className={className} style={ style }>
-                { this.state.children }
+            <div className={this.getClassName()} style={this.getStyle()}>
+                { this.children }
             </div>
         );
+    }
+}
+
+export class Row extends GridElement {
+    constructor (props) {
+        super(props);
+
+        this.state.row = props.pos || props.row || this.state.row;
+        this.state.isFullWidth = true; // a changer car c'est un peu tard je pense
+    }
+
+    getClassName() {
+        return 'grid-row ' + super.getClassName();
+    }
+
+    render() {
+        return super.render();
+    }
+}
+
+export class Col extends GridElement {
+    constructor (props) {
+        super(props);
+
+        this.state.col = props.pos || props.col || this.state.col;
+        this.state.isFullHeight = true; // a changer car c'est un peu tard je pense
+    }
+
+    getClassName() {
+        return 'grid-col ' + super.getClassName();
+    }
+
+    render() {
+        return super.render();
     }
 }

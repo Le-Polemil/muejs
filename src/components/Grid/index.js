@@ -17,8 +17,40 @@ export default class Grid extends Component {
 
         this.calculateChildrenProps();
 
+        this.maxWidth = this.calculateNumberOfColumns();
+        this.maxHeight = this.calculateNumberOfRows();
+
         this.forceTemplate = props.forceTemplate;
 
+    }
+
+    calculateNumberOfColumns() {
+        if (!this.children) return 0;
+        const columns = this.children.map((child) => {
+            return { pos: (child.props.col !== 'auto' ? child.props.col : 1) || 1, width: child.props.width || 1 };
+        });
+        let maxCol = 0;
+        columns.forEach((col) => {
+            if (col) {
+                const size = col.pos + col.width - 1;
+                maxCol = Math.max(maxCol, size);
+            }
+        });
+        return maxCol;
+    }
+    calculateNumberOfRows() {
+        if (!this.children) return 0;
+        const rows = this.children.map((child) => {
+            return { pos: (child.props.row !== 'auto' ? child.props.row : 1) || 1, height: child.props.height || 1 };
+        });
+        let maxRow = 0;
+        rows.forEach((row) => {
+            if (row) {
+                const size = row.pos + row.height - 1;
+                maxRow = Math.max(maxRow, size);
+            }
+        });
+        return maxRow;
     }
 
     calculateChildrenProps() {
@@ -31,7 +63,7 @@ export default class Grid extends Component {
     renderChildren() {
         if (!this.children) return null;
         return this.children.map((element) => {
-            // if (element.props.width === 'max' || element.props.fullWidth) element.props.width = this.
+            element.props = { ...element.props, maxWidth: this.maxWidth, maxHeight: this.maxHeight };
             return element;
         });
     }
