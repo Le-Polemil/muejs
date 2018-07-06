@@ -25,7 +25,6 @@ export class GridElement extends Component {
     checkIfFullWidth() {
         if ( this.state.isFullWidth || this.state.width === 'max') {
             this.state.width = this.maxWidthPossible;
-            console.log('new width :', this.state.width);
         }
     }
 

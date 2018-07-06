@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.styl';
 
-import Grid, { GridElement } from '../Grid';
+import Grid from '../Grid';
 
 
 export default class Footer extends Component {
@@ -15,12 +15,22 @@ export default class Footer extends Component {
 
         this.fullWidth = props.fullWidth;
         this.fullHeight = props.fullHeight;
+
+        this.forceTemplate = props.forceTemplate;
+
+        this.columnsTemplate = props.columnsTemplate;
+        this.rowsTemplate = props.rowsTemplate;
     }
 
     render () {
         const className = 'footer' + (this.className ? ' ' + this.className : '');
+        console.log('footer:');
         return (
-            <Grid className={className} style={this.style}>
+            <Grid forceTemplate={this.forceTemplate}
+                  columnsTemplate={this.columnsTemplate}
+                  rowsTemplate={this.rowsTemplate}
+                  className={className} style={this.style}
+            >
                 { this.children }
             </Grid>
         );

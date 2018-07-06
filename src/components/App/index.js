@@ -40,29 +40,24 @@ export default class App extends Component {
                     </GridElement>
                 </Row>
                 <Row pos={3}>
-                    <Footer>
+                    <Footer forceTemplate columnsTemplate="33.33% 33.33% 33.33%">
                         <FooterList row={1}>
                             <h5>Groupe 1</h5>
                             <p>1</p>
-                            <p>2</p>
-                            <p>3</p>
                         </FooterList>
                         <FooterList className='social' row={1}>
                             <h5>Social</h5>
                             <p>4</p>
-                            <p>5</p>
-                            <p>6</p>
                         </FooterList>
                         <FooterList className='donation' row={1}>
                             <h5>Donation</h5>
                             <p>7</p>
-                            <p>8</p>
-                            <p>9</p>
                         </FooterList>
                         <FooterLine row={2}>
                             <p>fb</p>
                             <p>twitwi</p>
-                            <p>ok</p>
+                            <p>twitwi</p>
+                            <p>twitwi</p>
                         </FooterLine>
                     </Footer>
                 </Row>

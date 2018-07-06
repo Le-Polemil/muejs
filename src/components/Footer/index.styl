@@ -1,8 +1,6 @@
 @import '../../styles/font.styl'
 @import '../../styles/colors.styl'
 
-
-
 footer-font-size = 1.1rem
 footer-title-font-size = 2.1rem
 
@@ -18,9 +16,16 @@ footer-title-font-size = 2.1rem
   .footer-list
     padding .8rem 0
 
+    .footer-list-element, .footer-line-element
+      & > *
+        margin 0
+        padding 0
+        border 0
+
     .footer-list-element
       justify-self center
       & > *
-        padding 0
         margin .4rem 0
-        border 0
+
+    .footer-line-element
+      justify-self center

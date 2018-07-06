@@ -24,16 +24,13 @@ export class FooterList extends GridElement {
 
 
 export class FooterLine extends GridElement {
-    constructor(props) {
-        super(props);
-
-        this.state.isFullWidth = true;
-    }
     renderChildren () {
         if (!this.children) return null;
         if (!Array.isArray(this.children)) this.children = [this.children];
 
         return this.children.map((element, index) => {
+
+            console.log('maxWidthPossible:', this.maxWidthPossible);
             return (
                 <GridElement key={index + 1}
                              className='footer-line-element'

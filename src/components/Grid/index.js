@@ -17,40 +17,39 @@ export default class Grid extends Component {
 
         this.calculateChildrenProps();
 
-        this.maxWidth = this.calculateNumberOfColumns();
-        this.maxHeight = this.calculateNumberOfRows();
+        const { maxCol, maxRow } = this.calculateOfColumnsAndRows();
+        this.maxWidth = maxCol;
+        this.maxHeight = maxRow;
 
         this.forceTemplate = props.forceTemplate;
 
     }
 
-    calculateNumberOfColumns() {
+    calculateOfColumnsAndRows() {
         if (!this.children) return 0;
-        const columns = this.children.map((child) => {
-            return { pos: (child.props.col !== 'auto' ? child.props.col : 1) || 1, width: child.props.width || 1 };
+        const rows = [];
+        this.children.forEach((child) => {
+            const details = {
+                col: child.props.col || 1,
+                width: child.props.width || 1,
+                row: child.props.row || 1,
+                height: child.props.height || 1,
+            };
+            if (!rows[details.row]) rows[details.row] = {};
+            const colSize = details.col + details.width - 1;
+            const width =  details.col === 'auto' ? (rows[details.row].width || 1) + colSize :  Math.max(rows[details.row].width || 1, colSize);
+            const height =  details.row === 'auto' ? (rows[details.row].height || 1) + details.height :  Math.max(rows[details.row].height || 1, details.height);
+            rows[details.row] = { width, height }
         });
         let maxCol = 0;
-        columns.forEach((col) => {
-            if (col) {
-                const size = col.pos + col.width - 1;
-                maxCol = Math.max(maxCol, size);
-            }
-        });
-        return maxCol;
-    }
-    calculateNumberOfRows() {
-        if (!this.children) return 0;
-        const rows = this.children.map((child) => {
-            return { pos: (child.props.row !== 'auto' ? child.props.row : 1) || 1, height: child.props.height || 1 };
-        });
         let maxRow = 0;
-        rows.forEach((row) => {
-            if (row) {
-                const size = row.pos + row.height - 1;
-                maxRow = Math.max(maxRow, size);
-            }
+        rows.forEach((row, index) => {
+            console.log('row:', row);
+            maxCol = Math.max(maxCol, row.width);
+            maxRow = Math.max(maxRow, index + row.height - 1);
         });
-        return maxRow;
+        console.log('rows', rows.length, "maxCol:", maxCol, "maxRow:", maxRow);
+        return { maxCol, maxRow };
     }
 
     calculateChildrenProps() {
@@ -61,6 +60,10 @@ export default class Grid extends Component {
     }
 
     renderChildren() {
+        const { maxCol, maxRow } = this.calculateOfColumnsAndRows();
+        this.maxWidth = maxCol;
+        this.maxHeight = maxRow;
+
         if (!this.children) return null;
         return this.children.map((element) => {
             element.props = { ...element.props, maxWidth: this.maxWidth, maxHeight: this.maxHeight };
