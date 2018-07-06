@@ -1,21 +1,34 @@
 @import './colors.styl'
 
+.font-success
+  color success-color
+.font-warning
+  color warning-color
+.font-error
+  color error-color
+.font-info
+  color info-color
+
 .bg-success
   background-color success-color
 .bg-warning
   background-color warning-color
 .bg-error
   background-color error-color
+.bg-info
+  background-color info-color
 
-[class*='border-']
+.border-success, .border-warning, .border-error, .border-info
   box-sizing border-box
   border 1 solid #222
   &.border-rounded
     border-radius .2rem
 
-  &.border-success
-    border-color success-color
-  &.border-warning
-    border-color warning-color
-  &.border-error
-    border-color error-color
+.border-success
+  border-color success-color
+.border-warning
+  border-color warning-color
+.border-error
+  border-color error-color
+.border-info
+  border-color info-color
