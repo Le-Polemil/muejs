@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 
+import Grid, { Row } from '../Grid';
 import Navbar, { NavLabel, NavLogo, NavIcon } from '../Navbar';
-import Footer, {FooterLine, FooterList} from '../Footer';
-
-import Grid, { GridElement, Row } from '../Grid';
-
 import Body, { BodyElement } from '../Body';
+import Footer, { FooterLine, FooterList } from '../Footer';
 
-
-
-import './index.styl';
+import Card from '../Card';
 
 export default class App extends Component {
     render() {
@@ -25,22 +21,27 @@ export default class App extends Component {
                     </Navbar>
                 </Row>
                 <Row pos={2}>
-                    <GridElement row={2} height={2} className="grid-container">
-                        <Body>
-                            <BodyElement col={1} row={1} width={1} className='bg-success'>
+                    <Body className="container">
+                        <BodyElement row={1} width={2} height={2}>
+                            <Card className='bg-success'>
                                 <h1 className="horiz-align-center">Success !</h1>
-                            </BodyElement>
-                            <BodyElement col={3} row={1} width={1} className='bg-warning'>
-                                <h1 className="horiz-align-center">Warning !</h1>
-                            </BodyElement>
-                            <BodyElement col={1} row={2} width={3} className='bg-error'>
-                                <h1 className="horiz-align-center">Error !</h1>
-                            </BodyElement>
-                        </Body>
-                    </GridElement>
+                                <h1 className="horiz-align-center">Success !</h1>
+                            </Card>
+                        </BodyElement>
+                        <BodyElement row={1} col={4} width={2} className='bg-warning'>
+                            <h1 className="horiz-align-center">Warning !</h1>
+                        </BodyElement>
+                        <BodyElement row={3} col={2} width={3} className='bg-info'>
+                            <h1 className="horiz-align-center">Information</h1>
+                        </BodyElement>
+                        <BodyElement row={4} width={5} className='bg-error'>
+                            <h1 className="horiz-align-center">Error !</h1>
+                        </BodyElement>
+
+                    </Body>
                 </Row>
                 <Row pos={3}>
-                    <Footer forceTemplate columnsTemplate="33.33% 33.33% 33.33%">
+                    <Footer>
                         <FooterList row={1}>
                             <h5>Groupe 1</h5>
                             <p>1</p>
@@ -53,7 +54,7 @@ export default class App extends Component {
                             <h5>Donation</h5>
                             <p>7</p>
                         </FooterList>
-                        <FooterLine row={2}>
+                        <FooterLine>
                             <p>fb</p>
                             <p>twitwi</p>
                             <p>twitwi</p>

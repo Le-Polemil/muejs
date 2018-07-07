@@ -5,8 +5,13 @@ html
   -webkit-text-size-adjust 100% /* 2 */
 
 body
-  max-width 100%
+  background-color $body-bg
   margin 0
+  padding 0
+  max-width 100%
+
+a
+  text-decoration none
 
 .container
   max-width 80%
@@ -18,3 +23,13 @@ h1
   font-size 2em
   margin 0.65em 0
 
+.no-scrollbar
+  overflow scroll
+  overflow-x hidden
+
+  &::-webkit-scrollbar
+    width 0
+    background transparent
+
+  &::-webkit-scrollbar-thumb
+    background red

@@ -8,6 +8,7 @@ export class GridElement extends Component {
         this.className = props.className || '';
 
         this.children = props.children;
+        if (!Array.isArray(this.children)) this.children = [this.children];
 
         this.maxWidthPossible = props.maxWidth;
         this.maxHeightPossible = props.maxHeight;
@@ -23,13 +24,13 @@ export class GridElement extends Component {
     }
 
     checkIfFullWidth() {
-        if ( this.state.isFullWidth || this.state.width === 'max') {
+        if (this.state.isFullWidth || this.state.width === 'max') {
             this.state.width = this.maxWidthPossible;
         }
     }
 
     checkIfFullHeight() {
-        if ( this.state.isFullHeight || this.state.height === 'max') {
+        if (this.state.isFullHeight || this.state.height === 'max') {
             this.state.height = this.maxHeightPossible;
         }
     }
@@ -47,15 +48,11 @@ export class GridElement extends Component {
     }
 
     getClassName () {
-        return 'grid-element' + (this.className ? ' ' + this.className : '');
+        return `grid-element${this.className && ' ' + this.className}`;
     }
 
     render() {
-        return (
-            <div className={this.getClassName()} style={this.getStyle()}>
-                { this.children }
-            </div>
-        );
+        return <div className={this.getClassName()} style={this.getStyle()}>{ this.children }</div>;
     }
 }
 
@@ -64,15 +61,10 @@ export class Row extends GridElement {
         super(props);
 
         this.state.row = props.pos || props.row || this.state.row;
-        this.state.isFullWidth = true; // a changer car c'est un peu tard je pense
+        this.state.isFullWidth = true;
     }
-
     getClassName() {
-        return 'grid-row ' + super.getClassName();
-    }
-
-    render() {
-        return super.render();
+        return `grid-row${this.className && ' ' + this.className}`;
     }
 }
 
@@ -81,14 +73,9 @@ export class Col extends GridElement {
         super(props);
 
         this.state.col = props.pos || props.col || this.state.col;
-        this.state.isFullHeight = true; // a changer car c'est un peu tard je pense
+        this.state.isFullHeight = true;
     }
-
     getClassName() {
-        return 'grid-col ' + super.getClassName();
-    }
-
-    render() {
-        return super.render();
+        return `grid-col${this.className && ' ' + this.className}`;
     }
 }

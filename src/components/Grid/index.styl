@@ -1,15 +1,12 @@
+@import '../../styles/variables.styl'
+
 .grid
-  display grid
-  max-width 100%
-
-  .grid-container
-    min-width 80%
-    justify-self center
-
-
-  .grid-element
+  .grid-element, .grid-row, .grid-column
     display inline-grid
 
+  .container
+    justify-self center
+    min-width 80%
 
   .horiz-align-normal
     justify-self normal
@@ -35,3 +32,14 @@
     justify-self first baseline
   .horiz-align-last-baseline
     justify-self last baseline
+
+.grid, .navbar, .body, .footer, .card
+    display grid
+    grid-auto-flow row
+    min-width 100%
+
+@media (max-width small-screen)
+  .grid, .body, .footer, .card
+    display flex
+    flex-direction column
+

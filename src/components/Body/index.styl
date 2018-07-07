@@ -3,6 +3,21 @@
 
 .body
 
-  .body-element > div
-    width 100%
-    height 100%
+  & > *
+    &
+      filter brightness(108%)
+      opacity .94
+      box-shadow 0 1px 2px rgba(0,0,0,0.15)
+      transition filter .4s, opacity .4s, box-shadow .4s ease-in-out
+
+    &:hover
+      filter brightness(100%)
+      opacity 1
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 1
+
+  .body-element
+    display inline-grid
+    & > div
+      width 100%
+      height 100%

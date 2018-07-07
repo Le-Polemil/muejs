@@ -1,5 +1,6 @@
 @import '../../styles/font.styl'
 @import '../../styles/colors.styl'
+@import '../../styles/variables.styl'
 
 navbar-height = 5.1vw
 navbar-line-height = navbar-height
@@ -22,35 +23,42 @@ navbar-brand-font-color = #fff
   line-height navbar-height-mobile
 
   font-size navbar-font-size
-
-  a
+  .navbar-element
     display inline-grid
 
-  .brand
-    padding 0 .8rem
-    font-size navbar-brand-font-size
-    font-weight bold
+    &.brand
+      padding 0 .8rem
+      font-size navbar-brand-font-size
+      font-weight bold
 
-    color rgba(navbar-font-color, .6)
-    transition color .2s
-
-    &:hover
-      color navbar-brand-font-color
+      color rgba(navbar-font-color, .6)
       transition color .2s
 
-  .navlabel, .navicon
-    padding 0 .6rem
-    display inline-grid
-    align-self center
+      &:hover
+        color navbar-brand-font-color
+        transition color .2s
 
-    color rgba(navbar-font-color, .8)
-    transition background-color .3s, color .3s
+    &.label, &.icon
+      padding 0 .6rem
+      display inline-grid
+      align-self center
 
-    &:hover
-      background-color link-hover-black-shade-bg
-      color navbar-brand-font-color
+      color rgba(navbar-font-color, .8)
       transition background-color .3s, color .3s
 
-  .navlabel, .navicon
-    i.material-icons
-      line-height navbar-height-mobile
+      &:hover
+        background-color link-hover-black-shade-bg
+        color navbar-brand-font-color
+        transition background-color .3s, color .3s
+
+    &.label, &.icon
+      i.material-icons
+        line-height navbar-height-mobile
+
+    @media (min-width small-screen-up)
+      &.collapse-icon
+        display none
+
+    @media (max-width small-screen)
+      &:not(.collapse-icon):not(.brand)
+        display none !important

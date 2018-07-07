@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import './index.styl';
-
+import { NavIcon } from './NavItem';
 import Grid, { GridElement } from '../Grid';
 
 
-export default class Navbar extends Component {
+export default class Navbar extends Grid {
     constructor(props) {
         super(props);
 
-        this.className = props.className || '';
-        this.style = props.style;
+        this.forceTemplate = true;
+        this.propsColumnsTemplate = this.generateColumnsTemplate();
+        this.propsRowsTemplate = '1fr';
 
-        this.children = props.children;
-        if (this.children && !Array.isArray(this.children)) this.children = [this.children];
+        this.justifyCollapseIcon = props.justifyCollapseIcon || 'right';
+        this.collapseIcon = props.collapseIcon || 'menu';
+    }
+
+    addCollapseIconToChildren () {
+        const collaspeIconChild = <NavIcon className='collapse-icon' col={this.columns.length || 0} large icon={this.collapseIcon}>{this.children}</NavIcon>;
+        this.children = [...this.children, collaspeIconChild];
     }
 
     calculateColumnsRepartition () {
+        if (!this.children) return null;
         const columns = { start:[], left: [], center: [], right: [], end:[] };
         this.children.map((child) => {
             columns[child.props.justify || 'left'].push(child);
@@ -24,8 +31,9 @@ export default class Navbar extends Component {
         return this.columns;
     }
 
-    generateNavColumnsTemplate () {
-        if (!this.children) return null;
+    generateColumnsTemplate () {
+        this.calculateColumnsRepartition();
+
         const template = { start: '', left: '', center: '', right: '', end:'' };
         this.columns.map((col) => {
             if (col) {
@@ -35,26 +43,18 @@ export default class Navbar extends Component {
         return template.start + template.left + '1fr ' + template.center + '1fr ' + template.right + template.end;
     }
 
+    getClassName() {
+        return `navbar${this.className && ' ' + this.className}`;
+    }
+
     renderChildren () {
+        this.addCollapseIconToChildren();
         if (!this.children) return null;
         return this.children.map((element, index) => {
-            return (
-                <GridElement key={index} row={1} col={this.columns.findIndex(function (col) { return col === element }) + 1}>
-                    { element }
-                </GridElement>
-            );
+            const col = this.columns.findIndex(col => col === element) + 1 || element.props && element.props.col;
+            return <GridElement key={index} row={1} col={col}>{ element }</GridElement>;
         });
     };
-    render () {
-        this.calculateColumnsRepartition();
-
-        const className = 'navbar' + (this.className ? ' ' + this.className : '');
-        return (
-            <Grid className={className} style={this.style} forceTemplate columnsTemplate={this.generateNavColumnsTemplate()} rowsTemplate='1fr'>
-                { this.renderChildren() }
-            </Grid>
-        );
-    }
 };
 
-export * from '../NavItem';
+export * from './NavItem';

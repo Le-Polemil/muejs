@@ -1,1 +1,0 @@
-export { GridElement as BodyElement } from '../Grid';
