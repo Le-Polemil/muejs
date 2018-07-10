@@ -1,6 +1,8 @@
 import React from 'react';
 import Grid, { GridElement } from '../Grid';
 
+import './index.styl';
+
 export default class Card extends Grid {
     getClassName() {
         return `card${this.className && ' ' + this.className}`;
@@ -11,3 +13,5 @@ export default class Card extends Grid {
         });
     }
 }
+
+export * from './CardItem';

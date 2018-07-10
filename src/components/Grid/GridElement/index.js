@@ -40,8 +40,8 @@ export class GridElement extends Component {
         this.checkIfFullHeight();
 
         const style = {
-            gridColumn: this.state.col + (this.state.width > 1 ? ' / span ' + this.state.width : ''),
-            gridRow: this.state.row + (this.state.height > 1 ? ' / span ' + this.state.height : ''),
+            gridColumn: this.state.col + ' / span ' + this.state.width,
+            gridRow: this.state.row + ' / span ' + this.state.height,
         };
 
         return { ...style, ...this.style };

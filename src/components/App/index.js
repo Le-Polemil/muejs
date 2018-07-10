@@ -5,7 +5,7 @@ import Navbar, { NavLabel, NavLogo, NavIcon } from '../Navbar';
 import Body, { BodyElement } from '../Body';
 import Footer, { FooterLine, FooterList } from '../Footer';
 
-import Card from '../Card';
+import Card, {CardDescription, CardImage} from '../Card';
 
 export default class App extends Component {
     render() {
@@ -22,19 +22,34 @@ export default class App extends Component {
                 </Row>
                 <Row pos={2}>
                     <Body className="container">
-                        <BodyElement row={1} width={2} height={2}>
+                        <BodyElement width={2}>
                             <Card className='bg-success'>
-                                <h1 className="horiz-align-center">Success !</h1>
-                                <h1 className="horiz-align-center">Success !</h1>
+                                <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
+                                <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
                             </Card>
                         </BodyElement>
-                        <BodyElement row={1} col={4} width={2} className='bg-warning'>
-                            <h1 className="horiz-align-center">Warning !</h1>
+                        <BodyElement col={3} width={2}>
+                            <Card className='bg-success'>
+                                <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
+                                <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                            </Card>
                         </BodyElement>
-                        <BodyElement row={3} col={2} width={3} className='bg-info'>
+                        <BodyElement col={5} width={2}>
+                            <Card className='bg-success'>
+                                <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
+                                <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                            </Card>
+                        </BodyElement>
+                        <BodyElement col={7} width={2}>
+                            <Card className='bg-success'>
+                                <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
+                                <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                            </Card>
+                        </BodyElement>
+                        <BodyElement col={2} width={6} className='bg-info'>
                             <h1 className="horiz-align-center">Information</h1>
                         </BodyElement>
-                        <BodyElement row={4} width={5} className='bg-error'>
+                        <BodyElement width={8} className='bg-error'>
                             <h1 className="horiz-align-center">Error !</h1>
                         </BodyElement>
 
