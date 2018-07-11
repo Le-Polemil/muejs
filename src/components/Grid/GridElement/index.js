@@ -10,8 +10,8 @@ export class GridElement extends Component {
         this.children = props.children;
         if (!Array.isArray(this.children)) this.children = [this.children];
 
-        this.maxWidthPossible = props.maxWidth;
-        this.maxHeightPossible = props.maxHeight;
+        this.maxWidthPossible = props.maxwidth || props.width || 1;
+        this.maxHeightPossible = props.maxheight || props.width || 1;
 
         this.state = {
             col: props.col || 'auto',

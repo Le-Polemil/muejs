@@ -73,7 +73,7 @@ export default class Grid extends Component {
         if (!this.children) return null;
         return this.children.map((element) => {
             // because element.props is not flexible
-            element = { ...element, props: { ...element.props, maxWidth: this.maxWidth, maxHeight: this.maxHeight } };
+            element = { ...element, props: { ...element.props, maxwidth: this.maxWidth, maxheight: this.maxHeight } };
             return element;
         });
     }

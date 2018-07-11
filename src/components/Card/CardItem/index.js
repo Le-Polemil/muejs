@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {FooterLine} from "../../Footer/FooterItem";
+import Footer from "../../Footer";
 
 export class CardImage extends Component {
     constructor(props) {
@@ -25,5 +27,11 @@ export class CardDescription extends Component {
     }
     render() {
         return <div className={this.getClassName()}>{ this.children }</div>;
+    }
+}
+
+export class CardFooter extends Footer {
+    renderChildren() {
+        return <FooterLine>{super.renderChildren()}</FooterLine>
     }
 }

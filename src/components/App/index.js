@@ -5,7 +5,7 @@ import Navbar, { NavLabel, NavLogo, NavIcon } from '../Navbar';
 import Body, { BodyElement } from '../Body';
 import Footer, { FooterLine, FooterList } from '../Footer';
 
-import Card, {CardDescription, CardImage} from '../Card';
+import Card, { CardDescription, CardImage, CardFooter } from '../Card';
 
 export default class App extends Component {
     render() {
@@ -26,24 +26,28 @@ export default class App extends Component {
                             <Card className='bg-success'>
                                 <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
                                 <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                                <CardFooter><p>More to come</p><a href="https://twitter.com/">twitwi</a></CardFooter>
                             </Card>
                         </BodyElement>
                         <BodyElement col={3} width={2}>
                             <Card className='bg-success'>
                                 <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
                                 <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                                <CardFooter><p>More to come</p><a href="https://twitter.com/">twitwi</a></CardFooter>
                             </Card>
                         </BodyElement>
                         <BodyElement col={5} width={2}>
                             <Card className='bg-success'>
                                 <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
                                 <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                                <CardFooter><p>More to come</p><a href="https://twitter.com/">twitwi</a></CardFooter>
                             </Card>
                         </BodyElement>
                         <BodyElement col={7} width={2}>
                             <Card className='bg-success'>
                                 <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
                                 <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                                <CardFooter><p>More to come</p><a href="https://twitter.com/">twitwi</a></CardFooter>
                             </Card>
                         </BodyElement>
                         <BodyElement col={2} width={6} className='bg-info'>
