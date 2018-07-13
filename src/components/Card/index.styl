@@ -2,6 +2,7 @@
 @import '../../styles/colors.styl'
 
 .card
+  background-color #dfdfdf
 
   .card-image, .card-description
     display inline-grid
@@ -19,9 +20,13 @@
   .footer
     //background-color secondary-color
     .footer-element
+      width 100%
 
-      a
-        width 100%
+      & > *
+        display inline-grid
+        text-align center
+
+      & > a
         color white
         transition background-color .2s
         &:hover
