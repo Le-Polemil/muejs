@@ -4,6 +4,8 @@ const path = require("path");
 const pkg = require('../package.json');
 const libraryName = pkg.name;
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
     entry: "./src/index.js",
     output: {
@@ -30,7 +32,10 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['env']
+                    }
                 }
             },
             {
