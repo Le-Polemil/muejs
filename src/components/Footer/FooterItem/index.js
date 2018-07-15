@@ -24,7 +24,7 @@ export class FooterLine extends GridElement {
         this.state.isFullWidth = true;
     }
     getClassName() {
-        return `footer-line${this.className && ' ' + this.className}`;
+        return `footer-line${this.className && ' ' + this.className} h-align-items-center`;
     }
     renderChildren () {
         return this.children.map((element, index) => {

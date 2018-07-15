@@ -48,7 +48,7 @@ export class GridElement extends Component {
     }
 
     getClassName () {
-        return `grid-element${this.className && ' ' + this.className}`;
+        return `grid-element${this.className ? ' ' + this.className : ''}`;
     }
 
     render() {

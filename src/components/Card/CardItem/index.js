@@ -9,7 +9,7 @@ export class CardImage extends Component {
         this.source = props.src;
     }
     getClassName() {
-        return `card-image${this.className && ' ' + this.className}`;
+        return `card-image h-align-center${this.className ? ' ' + this.className : ''}`;
     }
     render() {
         return <img src={this.source} className={this.getClassName()} />;
@@ -23,7 +23,7 @@ export class CardDescription extends Component {
         this.children = props.children;
     }
     getClassName() {
-        return `card-description${this.className && ' ' + this.className}`;
+        return `card-description h-align-center${this.className && ' ' + this.className}`;
     }
     render() {
         return <div className={this.getClassName()}>{ this.children }</div>;
@@ -31,7 +31,10 @@ export class CardDescription extends Component {
 }
 
 export class CardFooter extends Footer {
+    getClassName() {
+        return `footer h-align-center${this.className && ' ' + this.className}`;
+    }
     renderChildren() {
-        return <FooterLine>{super.renderChildren()}</FooterLine>
+        return <FooterLine className={this.getClassName()}>{super.renderChildren()}</FooterLine>
     }
 }

@@ -6,6 +6,7 @@ import Body, { BodyElement } from '../Body';
 import Footer, { FooterLine, FooterList } from '../Footer';
 
 import Card, { CardDescription, CardImage, CardFooter } from '../Card';
+import Product, { ProductDescription, ProductImage, ProductInfo, ProductTitle } from '../Product';
 
 export default class App extends Component {
     render() {
@@ -23,40 +24,54 @@ export default class App extends Component {
                 <Row pos={2}>
                     <Body className="container">
                         <BodyElement width={2}>
-                            <Card className='bg-success'>
-                                <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
-                                <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                            <Card>
+                                <CardImage src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
+                                <CardDescription><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></CardDescription>
                                 <CardFooter><p>More to come</p><a href="https://twitter.com/">twitwi</a></CardFooter>
                             </Card>
                         </BodyElement>
                         <BodyElement col={3} width={2}>
-                            <Card className='bg-success'>
-                                <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
-                                <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                            <Card>
+                                <CardImage src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
+                                <CardDescription><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></CardDescription>
                                 <CardFooter><p>More to come</p><a href="https://twitter.com/">twitwi</a></CardFooter>
                             </Card>
                         </BodyElement>
                         <BodyElement col={5} width={2}>
-                            <Card className='bg-success'>
-                                <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
-                                <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                            <Card>
+                                <CardImage src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
+                                <CardDescription><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></CardDescription>
                                 <CardFooter><p>More to come</p><a href="https://twitter.com/">twitwi</a></CardFooter>
                             </Card>
                         </BodyElement>
                         <BodyElement col={7} width={2}>
-                            <Card className='bg-success'>
-                                <CardImage className="horiz-align-center" src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
-                                <CardDescription className="horiz-align-center"><h3>Success !</h3></CardDescription>
+                            <Card>
+                                <CardImage src='https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg'/>
+                                <CardDescription><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></CardDescription>
                                 <CardFooter><p>More to come</p><a href="https://twitter.com/">twitwi</a></CardFooter>
                             </Card>
                         </BodyElement>
                         <BodyElement col={2} width={6} className='bg-info'>
-                            <h1 className="horiz-align-center">Information</h1>
+                            <h1 className="h-align-center">Information</h1>
                         </BodyElement>
-                        <BodyElement width={8} className='bg-error'>
-                            <h1 className="horiz-align-center">Error !</h1>
+                        <BodyElement width={8}>
+                            <Product>
+                                <ProductImage src="https://i.redd.it/2t68z42blebz.jpg" />
+                                <ProductInfo col={2}>
+                                    <ProductTitle>Python Regius</ProductTitle>
+                                    <ProductDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ProductDescription>
+                                </ProductInfo>
+                            </Product>
                         </BodyElement>
-
+                        <BodyElement width={8}>
+                            <Product reverted>
+                                <ProductInfo>
+                                    <ProductTitle>Python Regius</ProductTitle>
+                                    <ProductDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ProductDescription>
+                                </ProductInfo>
+                                <ProductImage col={2} src="https://i.redd.it/2t68z42blebz.jpg" />
+                            </Product>
+                        </BodyElement>
                     </Body>
                 </Row>
                 <Row pos={3}>

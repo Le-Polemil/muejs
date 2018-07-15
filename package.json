@@ -1,16 +1,15 @@
 {
   "name": "MueJS",
-  "version": "0.0.3",
-  "description": "A not professional css framework for some prefect UIs.",
+  "version": "0.1.0",
+  "description": "A not professional framework js for some prefect UIs.",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "publishConfig": {
+    "access": "restricted"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Cobelt/muejs.git"
-  },
-  "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
   },
   "peerDependencies": {
     "react": "^16.0.0",
@@ -25,12 +24,17 @@
     "css-loader": "^0.28.11",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.3",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "uglifyjs-webpack-plugin": "^1.2.7"
   },
   "engines": {
     "node": ">=8",
@@ -46,11 +50,17 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --public --host muejs",
+    "start": "webpack-dev-server --mode development --host muejs --config webpack/dev.config.js",
+
+    "deploy": "yarn build",
+    "build": "webpack --mode production --config webpack/prod.config.js",
+
+    "deploy-package": "yarn build-package",
+    "build-package": "webpack --mode production --config webpack/package.config.js",
+
     "babel": "./node_modules/.bin/babel src --out-dir lib",
     "test": "",
     "watch": "webpack --watch",
-    "build": "webpack --mode production",
-    "devbuild": "webpack --mode development"
+    "prepublish": "rm -rf ./dist && npm run build"
   }
 }

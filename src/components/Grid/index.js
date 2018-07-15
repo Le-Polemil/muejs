@@ -59,7 +59,7 @@ export default class Grid extends Component {
     }
 
     getClassName() {
-        return `grid${this.className && ' ' + this.className}`;
+        return `grid${this.className ? ' ' + this.className : ''}`;
     }
     getStyle() {
         const style = {

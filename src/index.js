@@ -1,31 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 import './styles/muejs.styl';
-
-import App from './components/App';
-ReactDOM.render(<App />, document.getElementById('root'));
-
-import Body, { BodyElement } from './components/Body';
-
-import Footer, { FooterList } from './components/Footer';
 
 import Grid, { GridElement } from './components/Grid';
 
 import Navbar, {NavIcon, NavLabel, NavLogo} from './components/Navbar';
 
+import Body, { BodyElement } from './components/Body';
+
+import Footer, { FooterList } from './components/Footer';
+
+import Card, { CardDescription, CardImage, CardFooter } from './components/Card';
+
+import Product, { ProductDescription, ProductImage, ProductInfo, ProductTitle } from './components/Product';
+
 export {
-    Body,
-    BodyElement,
-
-    Footer,
-    FooterList,
-
     Grid,
     GridElement,
 
     Navbar,
     NavLogo,
     NavLabel,
-    NavIcon
+    NavIcon,
+
+    Body,
+    BodyElement,
+
+    Footer,
+    FooterList,
+
+    Card,
+    CardImage,
+    CardDescription,
+    CardFooter,
+
+    Product,
+    ProductImage,
+    ProductInfo,
+    ProductTitle,
+    ProductDescription,
 };

@@ -9,7 +9,7 @@ export default class Card extends Grid {
     }
     renderChildren () {
         return this.children.map((element, index) => {
-            return <GridElement key={index + 1} className='list' row={index + 1}>{ element }</GridElement>;
+            return <GridElement key={index + 1} row={index + 1}>{ element }</GridElement>;
         });
     }
 }

@@ -8,38 +8,45 @@
     justify-self center
     min-width 80%
 
-  .horiz-align-normal
-    justify-self normal
-  .horiz-align-auto
-    justify-self auto
-  .horiz-align-stretch
-    justify-self stretch
-
-  .horiz-align-start
+  .h-align-start
     justify-self start
-  .horiz-align-left
+  .h-align-left
     justify-self left
-  .horiz-align-center
+  .h-align-center
     justify-self center
-  .horiz-align-right
+  .h-align-right
     justify-self right
-  .horiz-align-end
+  .h-align-end
     justify-self end
 
-  .horiz-align-baseline
-    justify-self baseline
-  .horiz-align-first-baseline
-    justify-self first baseline
-  .horiz-align-last-baseline
-    justify-self last baseline
+  .h-align-content-center
+    justify-content center
+  .h-align-items-center
+    justify-items center
 
-.grid, .navbar, .body, .footer, .card
+  .v-align-start
+    align-self start
+  .v-align-left
+    align-self left
+  .v-align-center
+    align-self center
+  .v-align-right
+    align-self right
+  .v-align-end
+    align-self end
+
+  .v-align-content-center
+    align-content center
+  .v-align-items-center
+    align-items center
+
+.grid, .navbar, .body, .footer, .card, .product
     display grid
     grid-auto-flow row
     min-width 100%
 
 @media (max-width small-screen)
-  .grid, .body, .footer, .card
+  .grid, .body, .footer, .card, .product
     display flex
     flex-direction column
 

@@ -1,25 +1,30 @@
 @import '../../styles/font.styl'
 @import '../../styles/colors.styl'
 
-.card
+.product
   background-color #dfdfdf
   border-radius .2rem
   overflow hidden
 
-  .card-image, .card-description
+  .product-image, .product-description
     display inline-grid
 
-  .card-image
+  .product-image
     object-fit cover
-    min-width 100%
     max-width 100%
-
-  .card-description
-    padding .3rem
-    overflow hidden
-    wrap ellipsis
-    z-index 1
+    min-height 100%
+    max-height 20rem
     width 100%
+
+  .product-info
+    margin 2rem
+
+  .product-title > *
+    font-weight 600
+
+  .product-description
+    z-index 1
+    max-width 100%
     font-size 1.4rem
 
   .footer
