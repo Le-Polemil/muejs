@@ -4,15 +4,13 @@ const path = require("path");
 const pkg = require('../package.json');
 const libraryName = pkg.name;
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, "../dist"),
         filename: "./index.js",
         library: libraryName,
-        libraryTarget: 'commonjs2',
+        libraryTarget: 'umd',
         publicPath: '/dist/',
         umdNamedDefine: true
     },
@@ -22,8 +20,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'react': path.resolve(__dirname, './node_modules/react'),
-            'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+            'react': path.resolve(__dirname, '../node_modules/react'),
+            'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
         }
     },
     module: {
