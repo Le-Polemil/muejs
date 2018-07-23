@@ -1,6 +1,6 @@
 {
   "name": "MueJS",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A not professional framework js for some prefect UIs.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -16,8 +16,7 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -28,6 +27,8 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
@@ -60,6 +61,8 @@
     "babel": "./node_modules/.bin/babel src --out-dir lib",
     "test": "",
     "watch": "webpack --watch",
-    "prepublish": "rm -rf ./dist && npm run build"
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile",
+    "publish": "rm -rf ./dist && npm run build-package"
   }
 }
