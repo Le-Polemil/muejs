@@ -1,12 +1,9 @@
 {
-  "name": "MueJS",
-  "version": "0.1.2",
+  "name": "muejs",
+  "version": "1.0.0",
   "description": "A not professional framework js for some prefect UIs.",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "publishConfig": {
-    "access": "restricted"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Cobelt/muejs.git"
@@ -64,5 +61,6 @@
     "transpile": "babel src -d dist --copy-files",
     "prepublishOnly": "yarn run transpile",
     "publish": "rm -rf ./dist && yarn run build-package"
-  }
+  },
+  "dependencies": {}
 }
