@@ -1,6 +1,8 @@
 const webpack = require("webpack");
 const path = require("path");
 
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+
 const pkg = require('../package.json');
 const libraryName = pkg.name;
 
@@ -56,5 +58,5 @@ module.exports = {
             amd: "ReactDOM",
             root: "ReactDOM"
         }
-    }
+    },
 };

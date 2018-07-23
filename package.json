@@ -62,7 +62,7 @@
     "test": "",
     "watch": "webpack --watch",
     "transpile": "babel src -d dist --copy-files",
-    "prepublishOnly": "npm run transpile",
-    "publish": "rm -rf ./dist && npm run build-package"
+    "prepublishOnly": "yarn run transpile",
+    "publish": "rm -rf ./dist && yarn run build-package"
   }
 }
