@@ -15,23 +15,28 @@
     max-width 100%
 
   .card-description
-    padding .3rem
-    overflow hidden
-    wrap ellipsis
+    padding 1.5rem
+    text-overflow ellipsis
     z-index 1
-    width 100%
+    width 90%
     font-size 1.4rem
 
   .footer
     //background-color secondary-color
     .footer-element
+      padding 0
+      text-align center
       width 100%
 
-      & > *
-        display inline-grid
-        text-align center
+      span, p
+        margin-top auto
+        margin-bottom auto
+        color #eee
 
-      & > a
+      a
+        align-content center
+        display inline-grid
+        font-weight bold
         color white
         transition background-color .2s
         &:hover

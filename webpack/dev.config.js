@@ -9,7 +9,7 @@ module.exports = {
     devServer: {
         inline: true,
         contentBase: 'src',
-        port: 3006,
+        port: 3014,
     },
 
     entry: "./src/app.js",
