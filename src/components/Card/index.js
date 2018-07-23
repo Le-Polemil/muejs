@@ -9,7 +9,7 @@ export default class Card extends Grid {
 
         this.forceTemplate = true;
         this.propsColumnsTemplate = '1fr';
-        this.propsRowsTemplate = '65% 26% 9%';
+        this.propsRowsTemplate = '6.5fr 2.6fr 0.9fr';
     }
     getClassName() {
         return `card${this.className ? ' ' + this.className : ''}`;

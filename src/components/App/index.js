@@ -18,7 +18,6 @@ export default class App extends Component {
                         <NavLabel justify='right' label='cobelt.fr' route='http://cobelt.fr'/>
                         <NavLabel justify='right' label='ophis.cobelt.fr' route='http://ophis.cobelt.fr'/>
                         <NavLabel justify='right' label='Github' route='http://github.cobelt.fr'/>
-                        <NavIcon justify='right' icon='more' route='http://plex.cobelt.fr'/>
                     </Navbar>
                 </Row>
                 <Row pos={2}>
