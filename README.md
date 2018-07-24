@@ -36,7 +36,7 @@ This example render a grid with 2 columns and 3 rows with forced templates.
 
 You can see more details of each components here :
 
-- ##### [Grid and GridElements](./docs/grid.md)
+#### [Grid and GridElements](./docs/grid.md)
 
 ## Contribute
 You can help us improve our components with Merge Requests !

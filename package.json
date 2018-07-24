@@ -1,6 +1,6 @@
 {
   "name": "muejs",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A not professional framework js for some prefect UIs.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -56,11 +56,8 @@
     "deploy-package": "yarn build-package",
     "build-package": "webpack --mode production --config webpack/package.config.js",
     "babel": "./node_modules/.bin/babel src --out-dir lib",
-    "test": "",
     "watch": "webpack --watch",
     "transpile": "babel src -d dist --copy-files",
-    "prepublishOnly": "yarn run transpile",
-    "publish": "rm -rf ./dist && yarn run build-package"
-  },
-  "dependencies": {}
+    "publish": "rm -rf ./dist && yarn run transpile"
+  }
 }
