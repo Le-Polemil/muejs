@@ -1,4 +1,5 @@
-# [MueJS](https://cobelt.github.io/muejs) [![npm version](https://img.shields.io/npm/v/muejs.svg?style=flat)](https://www.npmjs.com/package/muejs)
+# [MueJS](https://cobelt.github.io/muejs)
+[![npm version](https://img.shields.io/npm/v/muejs.svg?style=flat)](https://www.npmjs.com/package/muejs)
 
 [MueJS](https://cobelt.github.io/muejs) is a Framework of React components that will help you to create pretty websites in 5 minutes.
 
