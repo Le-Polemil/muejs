@@ -14,7 +14,6 @@
 ```
 
 ###### Properties :
-- **forceTemplate** - Allow you to force a grid template
 - **columnsTemplate** - Used *if forceTemplate = true*. Template for the **columns** of your grid
 - **rowsTemplate** - Used *if forceTemplate = true*. Template for the **rows** of your grid
 
