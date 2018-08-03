@@ -1,0 +1,63 @@
+{
+  "name": "muejs",
+  "version": "1.1.0",
+  "description": "A not professional framework js for some prefect UIs.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cobelt/muejs.git"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "style-loader": "^0.21.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-react-jsx"
+    ]
+  },
+  "scripts": {
+    "start": "webpack-dev-server --mode development --host muejs --config webpack/dev.config.babel.js",
+    "watch": "webpack --watch",
+    "deploy": "yarn build",
+    "build": "webpack --mode production --config webpack/prod.config.babel.js",
+    "deploy-package": "yarn build-package",
+    "build-package": "webpack --mode production --config webpack/package.config.babel.js",
+    "babel": "./node_modules/.bin/babel src --out-dir lib",
+    "transpile": "babel src -d dist --copy-files",
+    "publish": "rm -rf ./dist && yarn run transpile"
+  }
+}

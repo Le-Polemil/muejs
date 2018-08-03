@@ -1,0 +1,35 @@
+html
+  max-width 100%
+  line-height 1.15 /* 1 */
+  -ms-text-size-adjust 100% /* 2 */
+  -webkit-text-size-adjust 100% /* 2 */
+
+body
+  background-color $body-bg
+  margin 0
+  padding 0
+  max-width 100%
+
+a
+  text-decoration none
+
+.container
+  max-width 80%
+
+article, aside, footer, header, nav, section
+  display block
+
+h1
+  font-size 2em
+  margin 0.65em 0
+
+.no-scrollbar
+  overflow scroll
+  overflow-x hidden
+
+  &::-webkit-scrollbar
+    width 0
+    background transparent
+
+  &::-webkit-scrollbar-thumb
+    background red
