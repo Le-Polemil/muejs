@@ -13,9 +13,10 @@ export class Grid extends Component {
         this.children = props.children;
         if (!Array.isArray(this.children)) this.children = [this.children];
 
+        this.calculateGridSize();
+
         this.propsColumnsTemplate = props.columnsTemplate;
         this.propsRowsTemplate = props.rowsTemplate;
-
     }
 
     getClassName() {
@@ -24,14 +25,15 @@ export class Grid extends Component {
 
     getStyle() {
         const style = {
-            gridTemplateColumns: this.propsColumnsTemplate || 'auto',
-            gridTemplateRows: this.propsRowsTemplate || 'auto',
+            gridTemplateColumns: this.propsColumnsTemplate || '1fr'.repeat(this.maxCol) || 'auto',
+            gridTemplateRows: this.propsRowsTemplate || '1fr'.repeat(this.maxRow) || 'auto',
         };
         return { ...style, ...this.style };
     }
 
-    calculateOfColumnsAndRows() {
+    calculateGridSize() {
         if (!this.children) return { maxCol: 0, maxRow: 0 };
+
         const rows = [];
         this.children.forEach((child) => {
             const details = {
@@ -40,9 +42,9 @@ export class Grid extends Component {
                 width: child.props.width || 'auto',
                 height: child.props.height || 'auto',
             };
-            if (!rows[details.row]) rows[details.row] = { width: 0, height: 0 }; // create row on first entry of this row
+            if (!rows[details.row]) rows[details.row] = { width: 0, height: 0 }; // create row on first entry of each row
 
-            const colSize = returnNumberOrOne(details.col) + returnNumberOrOne(details.width) - 1; // Because col n + width 1 = n +1 instead of n
+            const colSize = returnNumberOrOne(details.col) + returnNumberOrOne(details.width) - 1; // Because col n with width 1 should return a col of n instead of n + 1
 
             const width = details.col === 'auto' ? (rows[details.row].width) + colSize :  Math.max(rows[details.row].width, colSize);
             const height = details.row === 'auto' ? (rows[details.row].height) + returnNumberOrOne(details.height) :  Math.max(rows[details.row].height, returnNumberOrOne(details.height));
@@ -57,13 +59,9 @@ export class Grid extends Component {
             maxRow = Math.max(maxRow, returnNumberOrOne(index) + row.height - 1);
         });
 
+        this.maxCol = maxCol;
+        this.maxRow = maxRow;
         return { maxCol, maxRow };
-    }
-
-    keepUpToDateChildren() {
-        const { maxCol, maxRow } = this.calculateOfColumnsAndRows();
-        this.maxWidth = maxCol;
-        this.maxHeight = maxRow;
     }
 
     renderChildren() {
@@ -75,7 +73,7 @@ export class Grid extends Component {
         });
     }
     render() {
-        this.keepUpToDateChildren();
+        this.calculateGridSize();
         return <div className={this.getClassName()} style={this.getStyle()}>{ this.renderChildren() }</div>;
     }
 }

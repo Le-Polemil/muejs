@@ -56,26 +56,34 @@ export class GridElement extends Component {
     }
 }
 
-export class Row extends GridElement {
+export class Row extends Component {
     constructor (props) {
         super(props);
-
-        this.state.row = props.pos || props.row || this.state.row;
-        this.state.isFullWidth = true;
+        // todo
+        props.row = props.pos || props.row || this.state.row;
+        props.isFullWidth = true;
     }
     getClassName() {
-        return `grid-row${this.className && ' ' + this.className}`;
+        return `grid-row ${this.className || ''}`;
+    }
+    render() {
+        const { children } = this;
+        return <GridElement>{ children }</GridElement>
     }
 }
 
-export class Col extends GridElement {
+export class Col extends Component {
     constructor (props) {
         super(props);
-
-        this.state.col = props.pos || props.col || this.state.col;
-        this.state.isFullHeight = true;
+        // todo
+        props.col = props.pos || props.col || this.state.col;
+        props.isFullHeight = true;
     }
     getClassName() {
-        return `grid-col${this.className && ' ' + this.className}`;
+        return `grid-col ${this.className || ''}`;
+    }
+    render() {
+        const { children } = this;
+        return <GridElement>{ children }</GridElement>
     }
 }
