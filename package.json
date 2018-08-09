@@ -2,8 +2,8 @@
   "name": "muejs",
   "version": "1.1.0",
   "description": "A not professional framework js for some prefect UIs.",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "build/index.js",
+  "module": "build/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Cobelt/muejs.git"
@@ -57,6 +57,7 @@
     "build-package": "webpack --mode production --config webpack/package.config.babel.js",
     "babel": "./node_modules/.bin/babel src --out-dir lib",
     "transpile": "babel src -d dist --copy-files",
-    "publish": "rm -rf ./dist && yarn run transpile"
+    "prepublish": "rm -rf ./dist && yarn transpile",
+    "publish": "rm -rf ./build && yarn build-package"
   }
 }
