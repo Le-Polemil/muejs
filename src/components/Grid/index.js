@@ -7,6 +7,7 @@ export class Grid extends Component {
     constructor (props) {
         super(props);
 
+        console.log(props.children);
         this.children = Array.isArray(props.children) ? props.children : [props.children];
 
         this.columnsTemplate = props.columnsTemplate;

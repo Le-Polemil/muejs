@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Footer, FooterLine } from '../Footer';
+import { Footer, FooterLine } from '../../Footer';
 import { GridElement } from '../../Grid/GridElement';
 
 export class CardImage extends Component {
@@ -13,7 +13,7 @@ export class CardDescription extends Component {
     render() {
         const { props } = this;
         const { className, children, style } = props;
-        return React.createElement(<div />, { ...props, className: `card-description h-align-center ${className || ''}`, style, children });
+        return React.createElement('div', { ...props, className: `card-description h-align-center ${className || ''}`, style, children });
     }
 }
 

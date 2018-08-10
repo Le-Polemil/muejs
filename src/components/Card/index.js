@@ -21,4 +21,4 @@ export class Card extends Component {
     }
 }
 
-export * from '../CardItem';
+export * from './CardItem';
