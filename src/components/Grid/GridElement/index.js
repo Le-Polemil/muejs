@@ -20,6 +20,10 @@ export class GridElement extends Component {
             fullWidth: props.fullWidth,
             fullHeight: props.fullHeight,
         };
+
+        this.checkIfFullWidth = this.checkIfFullWidth.bind(this);
+        this.checkIfFullHeight = this.checkIfFullHeight.bind(this);
+        this.getStyle = this.getStyle.bind(this);
     }
 
     checkIfFullWidth() {
@@ -27,7 +31,6 @@ export class GridElement extends Component {
             this.state.width = this.maxwidth;
         }
     }
-
     checkIfFullHeight() {
         if (this.state.fullHeight || this.state.height === 'max') {
             this.state.height = this.maxheight;

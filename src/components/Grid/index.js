@@ -11,20 +11,27 @@ export class Grid extends Component {
 
         this.columnsTemplate = props.columnsTemplate;
         this.rowsTemplate = props.rowsTemplate;
+
+        this.maxCol = 0;
+        this.maxRow = 0;
+
+        this.calculateGridSize = this.calculateGridSize.bind(this);
+        this.getStyle = this.getStyle.bind(this);
+        this.renderChildren = this.renderChildren.bind(this);
     }
 
     calculateGridSize() {
-        if (!this.children) return { maxCol: 0, maxRow: 0 };
-
+        const { children } = this.props;
+        if (!children) return null;
         const rows = [];
-        this.children.forEach((child) => {
+        children.forEach((child) => {
             const details = {
                 col: child.props.col || 'auto',
                 row: child.props.row || 'auto',
                 width: child.props.width || 'auto',
                 height: child.props.height || 'auto',
             };
-            if (!rows[details.row]) rows[details.row] = { width: 0, height: 0 }; // create row on first entry of each row
+            if (!rows[details.row]) rows[details.row] = {width: 0, height: 0}; // create row on first entry of each row
 
             const colSize = returnNumberOrOne(details.col) + returnNumberOrOne(details.width) - 1; // Because col n with width 1 should return a col of n instead of n + 1
 
@@ -35,25 +42,18 @@ export class Grid extends Component {
                 (rows[details.row].height) + returnNumberOrOne(details.height) :
                 Math.max(rows[details.row].height, returnNumberOrOne(details.height));
 
-            rows[details.row] = { width, height };
+            rows[details.row] = {width, height};
         });
 
-        let maxCol = 0;
-        let maxRow = 0;
         rows.forEach((row, index) => {
-            maxCol = Math.max(maxCol, row.width);
-            maxRow = Math.max(maxRow, returnNumberOrOne(index) + row.height - 1);
+            this.maxCol = Math.max(this.maxCol, row.width);
+            this.maxRow = Math.max(this.maxRow , returnNumberOrOne(index) + row.height - 1);
         });
-
-        this.maxCol = maxCol;
-        this.maxRow = maxRow;
-        return { maxCol, maxRow };
     }
 
     // to perform
     getStyle() {
         const { maxCol, maxRow } = this;
-
         return {
             gridTemplateColumns: this.columnsTemplate || '1fr'.repeat(maxCol) || 'auto',
             gridTemplateRows: this.rowsTemplate || '1fr'.repeat(maxRow) || 'auto',
@@ -73,7 +73,7 @@ export class Grid extends Component {
     render() {
         this.calculateGridSize();
         const { props, getStyle, renderChildren } = this;
-        return <div className={`grid ${props.className || ''}`} style={getStyle()}>{ renderChildren() }</div>;
+        return <div className={`grid ${props.className || ''}`} style={ getStyle() }>{ renderChildren() }</div>;
     }
 }
 
