@@ -1,9 +1,8 @@
 import './styles/muejs.styl';
 
-export { Grid, GridElement } from './components/Grid';
+export { Grid, GridElement, Row, Col } from './components/Grid';
+export { Navbar, NavIcon, NavLabel, NavLogo } from './components/Navbar';
 
-// export { Navbar, NavIcon, NavLabel, NavLogo} from './components/Navbar';
-//
 // export { Body, BodyElement } from './components/Body';
 //
 // export { Footer, FooterList } from './components/Footer';
