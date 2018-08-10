@@ -21,10 +21,10 @@ export class Grid extends Component {
     }
 
     calculateGridSize() {
-        const { children } = this.props;
-        if (!children) return null;
+        const { children } = this;
         const rows = [];
         children.forEach((child) => {
+            if (!child || !child.props) return null;
             const details = {
                 col: child.props.col || 'auto',
                 row: child.props.row || 'auto',
@@ -46,6 +46,7 @@ export class Grid extends Component {
         });
 
         rows.forEach((row, index) => {
+            if (!row || !row.width || !row.height) return null;
             this.maxCol = Math.max(this.maxCol, row.width);
             this.maxRow = Math.max(this.maxRow , returnNumberOrOne(index) + row.height - 1);
         });
@@ -62,11 +63,10 @@ export class Grid extends Component {
     }
 
     renderChildren() {
-        const { maxCol, maxRow } = this;
-
+        const { children, maxCol, maxRow } = this;
         return React.Children.map(children, child => {
-            React.cloneElement(child, { maxwidth: maxCol, maxheight: maxRow });
-            return child;
+            if (!child) return null;
+            return React.cloneElement(child, { maxwidth: maxCol, maxheight: maxRow });
         });
     }
 
