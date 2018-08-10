@@ -55,7 +55,7 @@ export class Navbar extends Component {
 
     render () {
         const { columnsTemplate, rowsTemplate } = this;
-        return React.createElement(<Grid />, { ...props, className: `navbar ${this.className || ''}`, columnsTemplate, rowsTemplate, children: this.renderChildren() });
+        return React.createElement(Grid , { ...props, className: `navbar ${this.className || ''}`, columnsTemplate, rowsTemplate, children: this.renderChildren() });
     }
 };
 

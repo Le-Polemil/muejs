@@ -5,7 +5,7 @@ export class FooterElement extends Component {
     render() {
         const { props } = this;
         const { className, children } = props;
-        return React.createElement(<GridElement />, { ...props, className: `footer-element ${className || ''}`, children });
+        return React.createElement(GridElement , { ...props, className: `footer-element ${className || ''}`, children });
     }
 }
 
@@ -19,7 +19,7 @@ export class FooterList extends Component {
     render() {
         const { props, renderChildren } = this;
         const { className } = props;
-        return React.createElement(<FooterElement />, { ...props, className: `footer-list ${className || ''}`, children: <Grid>{ renderChildren() }</Grid> });
+        return React.createElement(FooterElement , { ...props, className: `footer-list ${className || ''}`, children: <Grid>{ renderChildren() }</Grid> });
     }
 }
 
@@ -33,6 +33,6 @@ export class FooterLine extends Component {
     render() {
         const { props, renderChildren } = this;
         const { className } = props;
-        return React.createElement(<FooterElement />, { ...props, fullWidth: true, className: `footer-line ${className || ''} h-align-items-center`, children: <Grid>{ renderChildren() }</Grid> });
+        return React.createElement(FooterElement , { ...props, fullWidth: true, className: `footer-line ${className || ''} h-align-items-center`, children: <Grid>{ renderChildren() }</Grid> });
     }
 }

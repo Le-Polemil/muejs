@@ -28,11 +28,11 @@ export class CardFooter extends Component {
         const { props } = this;
         const children = Array.isArray(props.children) ? props.children : [props.children];
 
-        return React.createElement(<FooterLine/>, { ...props, children });
+        return React.createElement(FooterLine, { ...props, children });
     }
     render() {
         const { props, renderChildren } = this;
         const { className } = props;
-        return React.createElement(<GridElement />, { ...props, className: `h-align-center ${className || ''}`, children: <Footer>{ renderChildren() }</Footer> });
+        return React.createElement(GridElement , { ...props, className: `h-align-center ${className || ''}`, children: <Footer>{ renderChildren() }</Footer> });
     }
 }

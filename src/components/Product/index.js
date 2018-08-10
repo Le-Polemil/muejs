@@ -14,7 +14,7 @@ export class Product extends Component {
         });
     }
     render () {
-        return React.createElement(<Grid />, { ...this.props, className: `product ${this.props.className || ''}`, children: this.renderChildren() });
+        return React.createElement(Grid , { ...this.props, className: `product ${this.props.className || ''}`, children: this.renderChildren() });
     }
 }
 

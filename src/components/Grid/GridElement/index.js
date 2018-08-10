@@ -62,7 +62,7 @@ export class Row extends Component {
     }
     render() {
         const { props, row, fullWidth} = this;
-        return React.createElement(<GridElement/>, { ...props, className: `grid-row ${props.className || ''}`, row, fullWidth });
+        return React.createElement(GridElement, { ...props, className: `grid-row ${props.className || ''}`, row, fullWidth });
     }
 }
 
@@ -76,6 +76,6 @@ export class Col extends Component {
     }
     render() {
         const { props, col, fullHeight} = this;
-        return React.createElement(<GridElement/>, { ...props, className: `grid-col ${props.className || ''}`, col, fullHeight });
+        return React.createElement(GridElement, { ...props, className: `grid-col ${props.className || ''}`, col, fullHeight });
     }
 }

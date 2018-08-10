@@ -7,7 +7,6 @@ export class Grid extends Component {
     constructor (props) {
         super(props);
 
-        console.log(props.children);
         this.children = Array.isArray(props.children) ? props.children : [props.children];
 
         this.columnsTemplate = props.columnsTemplate;
@@ -67,7 +66,8 @@ export class Grid extends Component {
         const { children, maxCol, maxRow } = this;
         return React.Children.map(children, child => {
             if (!child) return null;
-            return React.cloneElement(child, { maxwidth: maxCol, maxheight: maxRow });
+            if (!(typeof child.props === {})) return child;
+            return React.cloneElement(child, {maxwidth: maxCol, maxheight: maxRow});
         });
     }
 
