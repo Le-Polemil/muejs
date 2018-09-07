@@ -14,13 +14,13 @@ export class FooterList extends Component {
 }
 
 export class FooterLine extends Component {
-    static renderChildren (children) {
+    static renderChildren (children, key) {
         return React.Children.map(children, (child, index) => {
-            return <GridElement className='line-item' key={`${child.name}#${index}`} col={index + 1}>{ child }</GridElement>;
+            return <GridElement className='line-item' key={`${key}#${index}`} col={index + 1}>{ child }</GridElement>;
         });
     }
     render() {
-        const { className, children } = this.props;
-        return React.createElement(Grid, { ...this.props, fullWidth: true, className: `footer-line ${className || ''}`, children: FooterLine.renderChildren(children) });
+        const { className, children, key } = this.props;
+        return React.createElement(Grid, { ...this.props, fullWidth: true, className: `footer-line ${className || ''}`, children: FooterLine.renderChildren(children, key) });
     }
 }

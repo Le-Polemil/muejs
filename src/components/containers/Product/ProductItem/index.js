@@ -7,8 +7,8 @@ export class ProductImage extends GridElement {
         const { className, reverted, src } = this.props;
         return React.createElement(GridElement , {
             ...this.props,
-            className: `product-image text-align-${reverted ? 'right' : 'left'} ${className || ''}`,
-            children: <img key={src} src={src}/>
+            className,
+            children: <img className={`product-image text-align-${reverted ? 'right' : 'left'}`} key={src} src={src}/>
         });
     }
 }
@@ -45,11 +45,8 @@ export class ProductInfo extends Component {
 }
 
 export class ProductFooter extends Component {
-    static renderChildren (children) {
-        return React.createElement(FooterLine, { children });
-    }
     render() {
         const { className } = this.props;
-        return React.createElement(GridElement , { ...this.props, className: `h-align-center ${className || ''}`, children: <Footer>{ ProductFooter.renderChildren(children) }</Footer> });
+        return React.createElement(GridElement , { ...this.props, className: `h-align-center ${className || ''}`, children: <Footer><FooterLine>{ children }</FooterLine></Footer> });
     }
 }

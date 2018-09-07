@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
-import { GridElement } from './GridElement';
 import './index.styl';
 
-import { NumberOrOne } from '../../static/Math';
+import { NumberOrOne } from '../../../static/Math';
 
 export class Grid extends Component {
     constructor (props) {
@@ -26,23 +25,29 @@ export class Grid extends Component {
             const rows = [];
             React.Children.forEach(children, child => {
                 const details = {
-                    col: child.props.col || 'auto',
-                    row: child.props.row || 'auto',
-                    width: child.props.width || 'auto',
-                    height: child.props.height || 'auto',
+                    col: child.props.col,
+                    row: child.props.row,
+                    width: child.props.width || 1,
+                    height: child.props.height || 1,
                 };
+
+                const isAuto = (!details.col || !details.row);
+                if (isAuto) {
+                    details.col = 'auto';
+                }
+
                 if (!rows[details.row]) rows[details.row] = {width: 0, height: 0}; // create row on first entry of each row
 
-                const colSize = NumberOrOne(details.col) + NumberOrOne(details.width) - 1; // Because col n with width 1 should return a col of n instead of n + 1
+                const colSize = NumberOrOne(details.col) + details.width - 1; // Because col n with width 1 should return a col of n instead of n + 1
 
                 const width = details.col === 'auto' ?
                     (rows[details.row].width) + colSize :
                     Math.max(rows[details.row].width, colSize);
-                const height = Math.max(rows[details.row].height, NumberOrOne(details.height));
+                const height = Math.max(rows[details.row].height, details.height);
 
                 rows[details.row] = {width, height};
             });
-            console.log(rows);
+            // console.log(rows);
 
             let maxCol = 1;
             let maxRow = 1;
@@ -63,10 +68,9 @@ export class Grid extends Component {
         const { rows, ...gridDimensions } = this.calculateGridSize(children);
         if (!children) return { editedChildren: null, gridDimensions };
 
-        console.log('at start', grid);
-        const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x));
-        console.log('test', Array(gridDimensions.y).fill(Array(gridDimensions.x)));
-        console.log('at start', grid);
+        console.log('Should return', gridDimensions.y, 'arrays of', gridDimensions.x, 'element(s)');
+        const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
+        console.log('Got', grid);
 
         let currentRow = 1;
         let currentCol = 1;
@@ -78,27 +82,26 @@ export class Grid extends Component {
             let { row, col, height, width, fullHeight, fullWidth } = child.props;
 
             const childInfos = {
-                cStart: col || currentCol,
-                cEnd: fullWidth ? gridDimensions.x : col || (currentCol + (width || 1) - 1),
-                rStart: row || currentRow,
-                rEnd: fullHeight ? gridDimensions.y : row || (currentRow + (height || 1) -1),
+                col: col || currentCol,
+                width: fullWidth ? gridDimensions.x : (width || currentCol),
+                row: row || currentRow,
+                height: fullHeight ? gridDimensions.y : height,
                 fullWidth,
                 fullHeight,
             };
             childrenInfos.push(childInfos);
 
             // grid[0] = the 1st row of the grid, grid[1][6] the 7th column of the second row, ....
-            for (let y = childInfos.rStart -1; y < childInfos.rEnd; y++) {
-                for (let x = childInfos.cStart -1; x < childInfos.cEnd; x++) {
-                    console.log('[', x, ',', y, ']', grid[y][x]);
+            for (let y = childInfos.row -1; y <  childInfos.row + childInfos.height - 1; y++) {
+                for (let x = childInfos.cStart -1; x <  childInfos.col + childInfos.width - 1; x++) {
+                    // console.log('', grid[y][x], `elements already placed in [${y}][${x}]`);
                     grid[y][x] = grid[y][x]++ || 1;
                 }
             }
-            console.log(grid);
 
             return React.cloneElement(child, { ...child.props, ...childInfos } );
         });
-        console.log('final', grid);
+        // console.log('final', grid);
         return { editedChildren, gridDimensions };
     }
 

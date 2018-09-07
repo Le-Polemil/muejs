@@ -45,7 +45,6 @@ export class Row extends Component {
         return React.createElement(GridElement, { ...props, className: props.className || '', fullWidth });
     }
 }
-
 // Doesn't work very well
 export class Col extends Component {
     constructor (props) {
