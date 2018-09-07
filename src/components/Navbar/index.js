@@ -7,33 +7,34 @@ export class Navbar extends Component {
     constructor(props) {
         super(props);
 
+        this.children = Array.isArray(props.children) ? props.children : [props.children];
+
         this.columnsTemplate = this.generateColumnsTemplate();
         this.rowsTemplate = '1fr';
 
         this.justifyCollapseIcon = props.justifyCollapseIcon || 'right';
         this.collapseIcon = props.collapseIcon || 'menu';
-
-        this.columns = {};
     }
 
     calculateColumnsRepartition () {
         if (!this.children) return null;
+
+        const { children } = this;
         const columns = { start:[], left: [], center: [], right: [], end:[] };
-        this.children.map((child) => {
+
+        React.Children.map(children, child => {
             columns[child.props.justify || 'left'].push(child);
         });
+
         this.columns = [ ...columns.start, ...columns.left, null, ...columns.center, null, ...columns.right, ...columns.end ] || this.columns;
         return this.columns;
     }
 
     generateColumnsTemplate () {
-        this.calculateColumnsRepartition();
-
         const template = { start: '', left: '', center: '', right: '', end:'' };
-        this.columns.map((col) => {
-            if (col) {
-                template[col.props.justify || 'left'] += 'max-content ';
-            }
+
+        this.calculateColumnsRepartition().map((col) => {
+            if (col) template[col.props.justify || 'left'] += 'max-content ';
         });
         return template.start + template.left + '1fr ' + template.center + '1fr ' + template.right + template.end;
     }
@@ -43,18 +44,17 @@ export class Navbar extends Component {
     }
 
     renderChildren () {
-        const { props, getCollapseIcon } = this;
-        const children = Array.isArray(props.children) ? props.children : [props.children];
-        children.push(getCollapseIcon());
+        const { children, props, columns, getCollapseIcon } = this;
+        //children.push(getCollapseIcon());
 
         return React.Children.map(children, (child, index) => {
-            const col = this.columns.findIndex(element => element === child) + 1 || child.props && child.props.col;
+            const col = columns.findIndex(element => element === child) + 1 || child.props && child.props.col;
             return <GridElement key={index} row={1} col={col}>{ child }</GridElement>;
         });
     };
 
     render () {
-        const { columnsTemplate, rowsTemplate } = this;
+        const { columnsTemplate, rowsTemplate, props } = this;
         return React.createElement(Grid , { ...props, className: `navbar ${this.className || ''}`, columnsTemplate, rowsTemplate, children: this.renderChildren() });
     }
 };

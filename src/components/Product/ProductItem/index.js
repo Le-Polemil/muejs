@@ -4,59 +4,52 @@ import {GridElement} from "../../Grid/GridElement/index";
 
 export class ProductImage extends GridElement {
     render() {
-        const { props } = this;
-        const { className, reverted, src } = props;
+        const { className, reverted, src } = this.props;
         return React.createElement(GridElement , {
-            ...props,
+            ...this.props,
             className: `product-image text-align-${reverted ? 'right' : 'left'} ${className || ''}`,
-            children: <img src={src}/> });
+            children: <img key={src} src={src}/>
+        });
     }
 }
 
 export class ProductDescription extends Component {
     render() {
-        const { props } = this;
-        const { className, children, style, reverted } = props;
+        const { className, children, style, reverted } = this.props;
         return React.createElement(GridElement , {
-            ...props,
+            ...this.props,
             className: `product-description text-align-${reverted ? 'right' : 'left'} ${className || ''}`,
             style: { ...style, alignSelf: 'center' },
-            children: <div><span>{ children }</span></div> // div to get a display block around
+            children: <span key={0} className="block">{ children }</span> // div to get a display block around
         });
     }
 }
 
 export class ProductTitle extends Component {
     render() {
-        const { props } = this;
-        const { className, children, style, reverted } = props;
+        const { className, children, style, reverted } = this.props;
         return React.createElement(GridElement , {
-            ...props,
+            ...this.props,
             className: `product-title text-align-${reverted ? 'right' : 'left'} ${className || ''}`,
             style: { ...style, alignSelf: 'center' },
-            children: <h4>{ children }</h4>
+            children: <h4 key={0}>{ children }</h4>
         });
     }
 }
 
 export class ProductInfo extends Component {
     render() {
-        const { props } = this;
-        const { className, children } = props;
-        return React.createElement(GridElement , { ...props, className: `product-info h-align-center ${className || ''}`, children });
+        const { className, children } = this.props;
+        return React.createElement(GridElement , { ...this.props, className: `product-info h-align-center ${className || ''}`, children });
     }
 }
 
 export class ProductFooter extends Component {
-    renderChildren () {
-        const { props } = this;
-        const children = Array.isArray(props.children) ? props.children : [props.children];
-
-        return React.createElement(FooterLine, { ...props, children });
+    static renderChildren (children) {
+        return React.createElement(FooterLine, { children });
     }
     render() {
-        const { props, renderChildren } = this;
-        const { className } = props;
-        return React.createElement(GridElement , { ...props, className: `h-align-center ${className || ''}`, children: <Footer>{ renderChildren() }</Footer> });
+        const { className } = this.props;
+        return React.createElement(GridElement , { ...this.props, className: `h-align-center ${className || ''}`, children: <Footer>{ ProductFooter.renderChildren(children) }</Footer> });
     }
 }

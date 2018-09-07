@@ -1,51 +1,19 @@
 @import '../../styles/variables.styl'
 
-.grid
-  .grid-element, .grid-row, .grid-column
-    display inline-grid
-
-  .container
-    justify-self center
-    min-width 80%
-
-  .h-align-start
-    justify-self start
-  .h-align-left
-    justify-self left
-  .h-align-center
-    justify-self center
-  .h-align-right
-    justify-self right
-  .h-align-end
-    justify-self end
-
-  .h-align-content-center
-    justify-content center
-  .h-align-items-center
-    justify-items center
-
-  .v-align-start
-    align-self start
-  .v-align-left
-    align-self left
-  .v-align-center
-    align-self center
-  .v-align-right
-    align-self right
-  .v-align-end
-    align-self end
-
-  .v-align-content-center
-    align-content center
-  .v-align-items-center
-    align-items center
-
 .grid, .navbar, .body, .footer, .card, .product
-    display grid
-    grid-auto-flow row
-    min-width 100%
+  display grid
+  grid-auto-flow row
+  min-width 100%
 
 @media (max-width small-screen)
   .grid, .body, .footer, .card, .product
     display flex
     flex-direction column
+
+.grid
+  > *
+    display inline-grid
+
+  .container
+    justify-self center
+    min-width 80%
