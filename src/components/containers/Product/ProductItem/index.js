@@ -31,7 +31,7 @@ export class ProductTitle extends Component {
         return React.createElement(GridElement , {
             ...this.props,
             className: `product-title text-align-${reverted ? 'right' : 'left'} ${className || ''}`,
-            style: { ...style, alignSelf: 'center' },
+            style: { alignSelf: 'center',  textTransform: 'uppercase', ...style },
             children: <h4 key={0}>{ children }</h4>
         });
     }

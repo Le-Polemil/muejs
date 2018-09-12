@@ -142,7 +142,7 @@ class App extends Component {
                     {/*</Body>*/}
                 {/*</GridElement>*/}
                 <Row row={3}>
-                    <Footer columnsTemplate={"2.5fr 1fr 2.5fr"}>
+                    <Footer columnsTemplate={"1.1fr 0.8fr 1.1fr"}>
                         <FooterList row={1}>
                             <h5>Who am I ?</h5>
                             <p style={{ textAlign: 'left' }}>
@@ -151,18 +151,29 @@ class App extends Component {
                                 I currently work at Artprice, a french company near from Lyon, as a junior Full-Stack developer
                             </p>
                         </FooterList>
+
+                        <FooterList className="donation" row={1}>
+                            <h5>Donation</h5>
+                            <p>If you like my work and want to support me, you can do it here :</p>
+                            <FooterLine>
+                                <a href="https://www.tipeee.com/cobelt">Tipeee</a>
+                                <a href="https://www.utip.io">U-Tip</a>
+                                <a href="https://www.twitch.tv/cobeltdierk">Twitch</a>
+                            </FooterLine>
+                        </FooterList>
+
                         <FooterList className="social" row={1}>
                             <h5>What do I do ?</h5>
-                            <p>
+                            <p style={{ textAlign: 'right' }}>
                                 Websites. I'm creating a framework, MueJS, to make website creation easier for developers.
                                 Done in React.
                             </p>
+                            <FooterLine row={1}>
+                                <a href="http://cobelt.fr">cobelt.fr</a>
+                                <a href="http://karyt.fr">karyt.fr</a>
+                            </FooterLine>
                         </FooterList>
-                        <FooterList className="donation" row={1} style={{ textAlign: 'left' }}>
-                            <h5>Donation</h5>
-                            <p>If you like my work and want to support me, you can do it here :</p>
-                            <FooterLine><a>Tipeee</a><a>U-Tip</a><a>Twitch</a></FooterLine>
-                        </FooterList>
+
                         <FooterLine style={{ gridColumn: "1 / span 3" }}>
                             <a>Facebook</a>
                             <a href="https://www.youtube.com/channel/UC7rRGEAXomdP_iUCC0LV3Ag/live">Youtube</a>
