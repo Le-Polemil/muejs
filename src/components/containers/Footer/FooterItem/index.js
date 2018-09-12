@@ -9,7 +9,7 @@ export class FooterList extends Component {
     }
     render() {
         const { className, children } = this.props;
-        return React.createElement(Grid, { ...this.props, className: `footer-list ${className || ''}`, children: FooterList.renderChildren(children) });
+        return React.createElement(Grid, { ...this.props, className: `footer-list ${className || ''}` }, FooterList.renderChildren(children));
     }
 }
 
@@ -21,6 +21,6 @@ export class FooterLine extends Component {
     }
     render() {
         const { className, children, key } = this.props;
-        return React.createElement(Grid, { ...this.props, fullWidth: true, className: `footer-line ${className || ''}`, children: FooterLine.renderChildren(children, key) });
+        return React.createElement(Grid, { ...this.props, fullWidth: true, className: `footer-line ${className || ''}` }, FooterLine.renderChildren(children, key));
     }
 }

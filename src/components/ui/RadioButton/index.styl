@@ -1,0 +1,30 @@
+height = 1.6rem
+
+.radiobutton,
+.input-label 
+  color #404040
+  cursor pointer
+  font-size 'calc(%s / 1.3)' % height
+  margin 0
+
+.input-label 
+  padding-left 0.3rem
+  vertical-align baseline
+
+.radiobutton 
+  width $height
+  
+  .svg-container 
+    vertical-align middle
+  
+    .svg-radiobutton 
+      fill none
+      stroke currentColor
+      stroke-linecap round
+      stroke-linejoin round
+      stroke-width 2.5px
+
+.input-hidden 
+  height 0
+  visibility hidden
+  width 0

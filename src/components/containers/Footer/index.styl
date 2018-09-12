@@ -2,6 +2,7 @@
 @import '../../../styles/colors.styl'
 
 footer-font-size = 1.1rem
+footer-font-size-bigger = 1.6rem
 footer-title-font-size = 2.1rem
 
 .footer
@@ -10,39 +11,39 @@ footer-title-font-size = 2.1rem
   width 100%
   font-size footer-font-size
 
-
   .footer-list, .footer-line
     display inline-grid
+    align-self start
 
     .list-item, .line-item
       align-items center
       justify-self center
-      & > *
-        margin 0
-        padding 0
+      text-align center
+      overflow hidden
+
+      > *
+        color white
         border 0
+        margin 0
+        padding .5rem 0
+
+      a
+        cursor pointer
 
     .list-item
-      padding .5rem 0
-      & > *
-        margin .4rem 0
+      width 80%
+
+      > h1, h2, h3, h4, h5, h6
+        font-weight bold
+
+      a, .line-item a
+        box-sizing border-box
+        font-weight normal
 
     .line-item
       width 100%
-      text-align center
-
-      span, p
-        margin-top auto
-        margin-bottom auto
-        color #eee
-
       a
-        padding .5rem 0
-        align-content center
-        display inline-grid
         font-weight bold
-        color white
-        cursor pointer
-        transition background-color .2s
+        transition background .3s
         &:hover
           background-color link-hover-black-shade-bg

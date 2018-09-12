@@ -10,10 +10,10 @@ export class GridElement extends Component {
         this.children = Array.isArray(props.children) ? props.children : [props.children];
 
         this.state = {
-            col: props.cStart || props.col || 'auto',
-            row: props.rStart || props.row || 'auto',
-            width: props.cEnd || props.width || 1,
-            height: props.rEnd || props.height || 1,
+            col: props.col || 'auto',
+            row: props.row || 'auto',
+            width: props.width || 1,
+            height: props.height || 1,
             fullWidth: props.fullWidth,
             fullHeight: props.fullHeight,
         };
@@ -24,8 +24,8 @@ export class GridElement extends Component {
     getStyle () {
         const { col, row, width, height } = this.state;
         return {
-            gridColumn: col + ' / ' + width,
-            gridRow: row + ' / ' + height,
+            gridColumn: `${col} / span ${width}`,
+            gridRow: `${row} / span ${height}`,
             ...this.style
         };
     }

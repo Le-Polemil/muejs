@@ -11,9 +11,9 @@ export const NavLabel = ({ label, route, className }) => {
     return <a className={`navbar-element label ${className || ''}`} href={ route }>{ label }</a>;
 };
 
-export const NavIcon = ({ icon, route, className, small, big, large }) => {
+export const NavIcon = ({ icon, route, className, small, big, large, onClick }) => {
     return (
-        <a className={`navbar-element icon ${className || ''}`} href={ route }>
+        <a className={`navbar-element icon ${className || ''}`} href={ route } onClick={onClick}>
             <i className='material-icons'
                style={{fontSize: large ? '2.35rem' : big ? '2.05rem' : small ? '1.55rem' : '1.75rem' }}
             >
