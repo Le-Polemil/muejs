@@ -39,17 +39,17 @@ class App extends Component {
                         <BodyElement col={1}>
                             <Product reverted>
                                 <ProductInfo>
-                                    <ProductTitle>Python Regius</ProductTitle>
+                                    <ProductTitle>TACOS</ProductTitle>
                                     <ProductDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ProductDescription>
                                 </ProductInfo>
-                                <ProductImage col={2} src="https://i.redd.it/2t68z42blebz.jpg" />
+                                <ProductImage col={2} src="http://mustikebab.com/wp-content/uploads/2016/02/Tacos-Kebab-musti-kebab.jpg" />
                             </Product>
                         </BodyElement>
                         <BodyElement col={2}>
                             <Product>
                                 <ProductImage src="https://i.redd.it/2t68z42blebz.jpg" />
                                 <ProductInfo col={2}>
-                                    <ProductTitle>Python Regius</ProductTitle>
+                                    <ProductTitle>BUCHETTE</ProductTitle>
                                     <ProductDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ProductDescription>
                                 </ProductInfo>
                             </Product>
