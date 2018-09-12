@@ -36,11 +36,11 @@ class App extends Component {
                 </Row>
                 <Row row={2}>
                     <Body className="container">
-                        <BodyElement>
+                        {/*<BodyElement>*/}
                             {/*<form>*/}
                                 {/*<Checkbox name="checkbox" onChange={(e) => (console.log(e.target.checked, e.target.value))} />*/}
                             {/*</form>*/}
-                        </BodyElement>
+                        {/*</BodyElement>*/}
                         {/*<BodyElement width={2}>*/}
                             {/*<Card>*/}
                                 {/*<CardImage src="https://www.zoomalia.com/blogz/150/l_mue-du-lezard.jpg"/>*/}

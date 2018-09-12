@@ -1,3 +1,5 @@
+@import '../../../styles/colors.styl'
+
 .grid, .navbar, .body, .footer, .card, .product
   display grid
   grid-auto-flow row
@@ -9,10 +11,11 @@
     flex-direction column
 
 .grid
-  border-width = 2.6rem
+  border-width = 4rem
 
   &.border-menu-opened
-    border border-width
+    border border-width solid primary-color
+
   .border-menu-icon
     width border-width
 
