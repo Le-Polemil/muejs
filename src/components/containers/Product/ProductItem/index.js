@@ -4,10 +4,11 @@ import {GridElement} from "../../Grid/GridElement/index";
 
 export class ProductImage extends GridElement {
     render() {
-        const { className, reverted, src } = this.props;
+        const { className, style, reverted, src } = this.props;
         return React.createElement(GridElement , {
             ...this.props,
             className,
+            style,
             children: <img className={`product-image text-align-${reverted ? 'right' : 'left'}`} key={src} src={src}/>
         });
     }

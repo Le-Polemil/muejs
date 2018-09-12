@@ -27,6 +27,7 @@
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-motion": "^0.5.2",
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
@@ -44,24 +45,24 @@
       "react"
     ],
     "plugins": [
-      "transform-object-rest-spread",
-      "transform-react-jsx"
+      "transform-react-jsx",
+      "transform-object-rest-spread"
     ]
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --host muejs --config webpack/dev.config.babel.js",
     "watch": "webpack --watch",
-    "deploy": "yarn build",
+
     "build": "webpack --mode production --config webpack/prod.config.babel.js",
-    "deploy-package": "yarn build-package",
     "build-package": "webpack --mode production --config webpack/package.config.babel.js",
+
     "babel": "./node_modules/.bin/babel src --out-dir lib",
     "transpile": "babel src -d dist --copy-files",
+
     "prepublish": "rm -rf ./dist && yarn transpile",
     "publish": "rm -rf ./build && yarn build-package"
   },
   "dependencies": {
-    "react-motion": "^0.5.2",
     "uuid": "^3.3.2"
   }
 }

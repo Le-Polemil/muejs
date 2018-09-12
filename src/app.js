@@ -6,16 +6,21 @@ import './styles/muejs.styl';
 import {Grid, GridElement, Row} from './components/containers/Grid';
 import {Navbar, NavIcon, NavLabel, NavLogo} from './components/containers/Navbar';
 import { Body, BodyElement } from './components/containers/Body';
-import { Footer, FooterLine, FooterList } from './components/containers/Footer';
+import { Footer, FooterLine, FooterList, FooterSeparator } from './components/containers/Footer';
 
 import { Card, CardDescription, CardImage, CardFooter } from './components/containers/Card';
 import { Product, ProductDescription, ProductImage, ProductInfo, ProductTitle } from './components/containers/Product';
 import Checkbox from "./components/ui/Checkbox";
+import RadioButton from "./components/ui/RadioButton";
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = { borderMenuOpened: false };
+        this.state = { borderMenuOpened: false, radioChecked: null };
+    }
+
+    handleChange (e) {
+        this.setState({ radioChecked: e.target.value });
     }
 
     handleBorderMenuClick() {
@@ -23,20 +28,34 @@ class App extends Component {
     }
 
     render() {
+        const { borderMenuOpened, radioChecked } = this.state;
+        console.log('state=', radioChecked);
         return (
-            <Grid columnsTemplate={"1fr auto"} rowsTemplate={"auto 1fr auto"}>
+            <Grid className={`border-menu${borderMenuOpened ? ' opn' : ''}`} columnsTemplate={"1fr auto"} rowsTemplate={"auto 1fr auto"}>
                 <Row>
                     <Navbar>
                         <NavLogo justify="left">MueJS</NavLogo>
                         <NavLabel justify="right" label="cobelt.fr" route="http://cobelt.fr"/>
-                        <NavLabel justify="right" label="ophis.cobelt.fr" route="http://ophis.cobelt.fr"/>
-                        <NavLabel justify="right" label="Github" route="http://github.com/cobelt"/>
-                        {/*<NavIcon className={`border-menu-icon${this.state.borderMenuOpened ? ' opn' : ''}`} justify="right" icon="menu" onClick={() => this.handleBorderMenuClick()} />*/}
+                        <NavLabel justify="right" label="Ophis" route="http://ophis.cobelt.fr"/>
+                        <NavIcon justify="right" route="http://github.com/cobelt" icon="github" svg />
+                        <NavIcon className="border-menu-icon" justify="right" icon="menu" onClick={() => this.handleBorderMenuClick()} />
                     </Navbar>
                 </Row>
                 <GridElement row={2}>
                     <Body className="container">
-                        <BodyElement col={1}>
+                        <BodyElement width={2}>
+                            <img className="rotate-anim" style={{ borderRadius: '5rem', opacity: 0.95 }} src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/27657401_345144665967876_135324906561244726_n.jpg?_nc_cat=0&oh=2c80a6ea78d641500a9ef283ba49be57&oe=5C39382D" />
+                        </BodyElement>
+                        <BodyElement row={2} width={2}>
+                            <Product reverted>
+                                <ProductInfo>
+                                    <ProductTitle>PROMO EXCLUSIVE</ProductTitle>
+                                    <ProductDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ProductDescription>
+                                </ProductInfo>
+                                <ProductImage col={2} src="https://restomalin.com/domaine/le-tacos-de-grenoble.fr/images/image4_tacos_de_grenoble.PNG" />
+                            </Product>
+                        </BodyElement>
+                        <BodyElement row={3} col={1}>
                             <Product reverted>
                                 <ProductInfo>
                                     <ProductTitle>TACOS</ProductTitle>
@@ -45,7 +64,7 @@ class App extends Component {
                                 <ProductImage col={2} src="http://mustikebab.com/wp-content/uploads/2016/02/Tacos-Kebab-musti-kebab.jpg" />
                             </Product>
                         </BodyElement>
-                        <BodyElement col={2}>
+                        <BodyElement row={3} col={2}>
                             <Product>
                                 <ProductImage src="https://i.redd.it/2t68z42blebz.jpg" />
                                 <ProductInfo col={2}>
@@ -54,7 +73,7 @@ class App extends Component {
                                 </ProductInfo>
                             </Product>
                         </BodyElement>
-                        <BodyElement row={2} width={2}>
+                        <BodyElement row={4} width={2}>
                             <Product>
                                 <ProductImage src="https://restomalin.com/domaine/le-tacos-de-grenoble.fr/images/image4_tacos_de_grenoble.PNG" />
                                 <ProductInfo col={2}>
@@ -63,14 +82,21 @@ class App extends Component {
                                 </ProductInfo>
                             </Product>
                         </BodyElement>
+                        <BodyElement row={5} height={2} width={1}>
+                            <form>
+                                <span>coucou{ radioChecked }</span>
+                                <RadioButton name="radiotest" value="man" checked={radioChecked} onChange={(e) => this.handleChange(e)} />
+                                <RadioButton name="radiotest" value="woman" checked={radioChecked} onChange={(e) => this.handleChange(e)} />
+                                <RadioButton name="radiotest" value="unbinary" checked={radioChecked} onChange={(e) => this.handleChange(e)} />
+                            </form>
+                        </BodyElement>
+                        <BodyElement row={5} col={2} width={1} />
+                        <BodyElement row={6} col={2} width={1} />
                     </Body>
                 </GridElement>
                 {/*<GridElement row={2} col={2}>*/}
                     {/*<Body className="container">*/}
                         {/*<BodyElement>*/}
-                            {/*<form>*/}
-                                {/*<Checkbox name="checkbox" onChange={(e) => (console.log(e.target.checked, e.target.value))} />*/}
-                            {/*</form>*/}
                         {/*</BodyElement>*/}
                         {/*<BodyElement width={2}>*/}
                             {/*<Card>*/}
@@ -142,8 +168,8 @@ class App extends Component {
                     {/*</Body>*/}
                 {/*</GridElement>*/}
                 <Row row={3}>
-                    <Footer columnsTemplate={"1.1fr 0.8fr 1.1fr"}>
-                        <FooterList row={1}>
+                    <Footer columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
+                        <FooterList row={1} col={1} width={2}>
                             <h5>Who am I ?</h5>
                             <p style={{ textAlign: 'left' }}>
                                 Hi ! I'm Paul / Cobelt, I'm a french 19 y.o. web developer.<br />
@@ -152,7 +178,7 @@ class App extends Component {
                             </p>
                         </FooterList>
 
-                        <FooterList className="donation" row={1}>
+                        <FooterList className="donation" row={1} col={3} width={2}>
                             <h5>Donation</h5>
                             <p>If you like my work and want to support me, you can do it here :</p>
                             <FooterLine>
@@ -162,7 +188,7 @@ class App extends Component {
                             </FooterLine>
                         </FooterList>
 
-                        <FooterList className="social" row={1}>
+                        <FooterList className="social" row={1} col={5} width={2}>
                             <h5>What do I do ?</h5>
                             <p style={{ textAlign: 'right' }}>
                                 Websites. I'm creating a framework, MueJS, to make website creation easier for developers.
@@ -174,7 +200,9 @@ class App extends Component {
                             </FooterLine>
                         </FooterList>
 
-                        <FooterLine style={{ gridColumn: "1 / span 3" }}>
+                        <FooterSeparator row={2} col={2} width={4} />
+
+                        <FooterLine row={3}>
                             <a>Facebook</a>
                             <a href="https://www.youtube.com/channel/UC7rRGEAXomdP_iUCC0LV3Ag/live">Youtube</a>
                             <a href="https://twitter.com/cobelt_dierk">Twitter</a>

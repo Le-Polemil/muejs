@@ -10,7 +10,6 @@ export class Navbar extends Component {
         this.children = Array.isArray(props.children) ? props.children : [props.children];
 
         this.columnsTemplate = this.generateColumnsTemplate();
-        this.rowsTemplate = '1fr';
 
         this.justifyCollapseIcon = props.justifyCollapseIcon || 'right';
         this.collapseIcon = props.collapseIcon || 'menu';
@@ -54,8 +53,8 @@ export class Navbar extends Component {
     };
 
     render () {
-        const { columnsTemplate, rowsTemplate, props } = this;
-        return React.createElement(Grid , { ...props, className: `navbar ${this.className || ''}`, columnsTemplate, rowsTemplate, children: this.renderChildren() });
+        const { columnsTemplate, props } = this;
+        return <Grid columnsTemplate={columnsTemplate} rowsTemplate={"1fr"} { ...props } className={`navbar ${props.className || ''}`}>{ this.renderChildren() }</Grid>;
     }
 };
 

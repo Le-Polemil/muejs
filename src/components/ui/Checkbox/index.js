@@ -4,7 +4,7 @@ import uuidv4 from 'uuid/v4';
 
 import './index.styl';
 
-const squareLength = 50.235;
+const squareLength = 50.2;
 const checkedLength = 21.9;
 const undeterminedLength = 18;
 const totalLength = squareLength + checkedLength + undeterminedLength;
@@ -49,7 +49,7 @@ class Checkbox extends Component {
             <Fragment>
                 <input className="input-hidden" type="checkbox" defaultChecked={defaultChecked} name={name} id={id} value={value} disabled={disabled} onChange={(e) => this.handleChange(e)} />
                 <label htmlFor={id} className="checkbox" style={{ color: (undetermined && '#aaa') || (inputIsChecked ? '#7ca728' : ''), transition: 'color 0.6s' }}>
-                    <svg className="svg-container" viewBox="0 0 20 20">
+                    <svg className="svg-container" viewBox="0 0 24 24">
                         <g className="svg-checkbox">
                             <Motion
                                 defaultStyle={{ offset: -totalLength, dashArray: totalLength }}

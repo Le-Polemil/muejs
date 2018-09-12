@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Row } from './GridElement';
+import { FooterLine } from '../Footer/FooterItem';
+import { NumberOrOne } from '../../../static/Math';
 
 import './index.styl';
-
-import { NumberOrOne } from '../../../static/Math';
 
 export class Grid extends Component {
     constructor (props) {
@@ -68,9 +69,9 @@ export class Grid extends Component {
         const { rows, ...gridDimensions } = this.calculateGridSize(children);
         if (!children) return { editedChildren: null, gridDimensions };
 
-        console.log('Should return', gridDimensions.y, 'arrays of', gridDimensions.x, 'element(s)');
+        // console.log('Should return', gridDimensions.y, 'arrays of', gridDimensions.x, 'element(s)');
         const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
-        console.log('Got', grid);
+        // console.log('Got', grid);
 
         let currentRow = 1;
         let currentCol = 1;
@@ -79,23 +80,28 @@ export class Grid extends Component {
 
         const childrenInfos = [];
         const editedChildren = React.Children.map(children, child => {
-            let { row, col, height, width, fullHeight, fullWidth } = child.props;
+            let { row, col, height, width, fullWidth } = child.props;
+
+            fullWidth = fullWidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine');
+            width = fullWidth ? gridDimensions.x : (width || currentCol);
+
+            const result = this.findNextEmptyCoordinates(grid, width, height);
 
             fullWidth = fullWidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine');
 
             const childInfos = {
                 col: col || currentCol,
-                width: fullWidth ? gridDimensions.x : (width || currentCol),
+                width,
                 row: row || currentRow,
-                height: fullHeight ? gridDimensions.y : height,
+                height,
                 fullWidth,
-                fullHeight,
             };
+            console.log('child:', child.type.name, '=', childInfos.col);
             childrenInfos.push(childInfos);
 
             // grid[0] = the 1st row of the grid, grid[1][6] the 7th column of the second row, ....
             for (let y = childInfos.row -1; y <  childInfos.row + childInfos.height - 1; y++) {
-                for (let x = childInfos.cStart -1; x <  childInfos.col + childInfos.width - 1; x++) {
+                for (let x = childInfos.col -1; x <  childInfos.col + childInfos.width - 1; x++) {
                     // console.log('', grid[y][x], `elements already placed in [${y}][${x}]`);
                     grid[y][x] = grid[y][x]++ || 1;
                 }
@@ -105,6 +111,12 @@ export class Grid extends Component {
         });
         // console.log('final', grid);
         return { editedChildren, gridDimensions };
+    }
+
+    findNextEmptyCoordinates(grid, width, height) {
+        grid.forEach(row => {
+
+        })
     }
 
     // to perform

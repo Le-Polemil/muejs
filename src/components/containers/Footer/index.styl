@@ -6,6 +6,7 @@ footer-font-size-bigger = 1.6rem
 footer-title-font-size = 2.1rem
 
 .footer
+  grid-row-gap 0.8rem
   background-color primary-color
   color font-color-on-primary
   width 100%
@@ -16,10 +17,11 @@ footer-title-font-size = 2.1rem
     align-self start
 
     .list-item, .line-item
-      align-items center
+      align-content center
       justify-self center
       text-align center
       overflow hidden
+      height 100%
 
       > *
         color white
@@ -29,6 +31,7 @@ footer-title-font-size = 2.1rem
 
       a
         cursor pointer
+        height 100%
 
     .list-item
       width 80%
@@ -47,3 +50,7 @@ footer-title-font-size = 2.1rem
         transition background .3s
         &:hover
           background-color link-hover-black-shade-bg
+
+  .footer-separator
+    height 1px
+    border-bottom solid 1px rgba(white, 0.5)

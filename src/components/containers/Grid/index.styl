@@ -1,14 +1,15 @@
 @import '../../../styles/colors.styl'
+@import '../../../styles/variables.styl'
 
 .grid, .navbar, .body, .footer, .card, .product
   display grid
-  grid-auto-flow row
+  grid-auto-flow column
   min-width 100%
 
 @media (max-width small-screen)
   .grid, .body, .footer, .card, .product
-    display flex
-    flex-direction column
+    grid-auto-flow column
+
 
 .grid
   > *

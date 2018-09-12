@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, GridElement } from '../../Grid/index';
+import { Grid, GridElement, Row } from '../../Grid/index';
 
 export class FooterList extends Component {
     static renderChildren (children) {
@@ -9,7 +9,7 @@ export class FooterList extends Component {
     }
     render() {
         const { className, children } = this.props;
-        return React.createElement(Grid, { ...this.props, className: `footer-list ${className || ''}` }, FooterList.renderChildren(children));
+        return React.createElement(GridElement, { ...this.props, className: `footer-list ${className || ''}` }, <Grid>{ FooterList.renderChildren(children) }</Grid>);
     }
 }
 
@@ -21,6 +21,12 @@ export class FooterLine extends Component {
     }
     render() {
         const { className, children, key } = this.props;
-        return React.createElement(Grid, { ...this.props, fullWidth: true, className: `footer-line ${className || ''}` }, FooterLine.renderChildren(children, key));
+        return React.createElement(Row, { ...this.props, className: `footer-line ${className || ''}` }, <Grid>{ FooterLine.renderChildren(children, key) }</Grid>);
+    }
+}
+
+export class FooterSeparator extends Component {
+    render() {
+        return <GridElement {...this.props} className="footer-separator" />;
     }
 }

@@ -17,6 +17,19 @@ border-wdth = 4rem
   &.opn
     width border-wdth
 
+.rotate-anim
+  max-height 15rem
+  transform rotate(20deg)
+  &:hover
+    animation rotate 0.5s
+
+  @keyframes rotate
+    0%
+      transform rotate(20deg)
+    100%
+      transform rotate(379deg)
+
+
 .font-success
   color success-color
 .font-warning

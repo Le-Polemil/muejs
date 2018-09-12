@@ -30,26 +30,10 @@ export class GridElement extends Component {
     }
 }
 
-export class Row extends Component {
-    constructor (props) {
-        super(props);
-        this.fullWidth = true;
-    }
-    render() {
-        const { props, fullWidth} = this;
-        return React.createElement(GridElement, { ...props, className: props.className || '', fullWidth });
-    }
-}
+export const Row = (props) => {
+    return <GridElement { ...props } className={props.className} fullWidth>{ props.children }</GridElement>;
+};
 // Doesn't work very well
-export class Col extends Component {
-    constructor (props) {
-        super(props);
-
-        this.col = props.col || props.pos;
-        this.fullHeight = true;
-    }
-    render() {
-        const { props, col, fullHeight} = this;
-        return React.createElement(GridElement, { ...props, className: props.className || '', col, fullHeight });
-    }
-}
+export const Col = (props) => {
+    return <GridElement { ...props } className={props.className} fullHeight>{ props.children }</GridElement>;
+};
