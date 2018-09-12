@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './styles/muejs.styl';
 
-import { Grid, Row } from './components/containers/Grid';
+import {Grid, GridElement, Row} from './components/containers/Grid';
 import {Navbar, NavIcon, NavLabel, NavLogo} from './components/containers/Navbar';
 import { Body, BodyElement } from './components/containers/Body';
 import { Footer, FooterLine, FooterList } from './components/containers/Footer';
@@ -24,18 +24,49 @@ class App extends Component {
 
     render() {
         return (
-            <Grid className={this.state.borderMenuOpened && 'border-menu-opened'} rowsTemplate={"auto 1fr auto"}>
-                <Row row={1}>
+            <Grid columnsTemplate={"1fr auto"} rowsTemplate={"auto 1fr auto"}>
+                <Row>
                     <Navbar>
                         <NavLogo justify="left">MueJS</NavLogo>
                         <NavLabel justify="right" label="cobelt.fr" route="http://cobelt.fr"/>
                         <NavLabel justify="right" label="ophis.cobelt.fr" route="http://ophis.cobelt.fr"/>
-                        <NavLabel justify="right" label="Github" route="http://github.cobelt.fr"/>
-                        <NavIcon className="border-menu-icon" justify="right" icon="menu" onClick={() => this.handleBorderMenuClick()} />
+                        <NavLabel justify="right" label="Github" route="http://github.com/cobelt"/>
+                        {/*<NavIcon className={`border-menu-icon${this.state.borderMenuOpened ? ' opn' : ''}`} justify="right" icon="menu" onClick={() => this.handleBorderMenuClick()} />*/}
                     </Navbar>
                 </Row>
-                <Row row={2}>
+                <GridElement row={2}>
                     <Body className="container">
+                        <BodyElement col={1}>
+                            <Product reverted>
+                                <ProductInfo>
+                                    <ProductTitle>Python Regius</ProductTitle>
+                                    <ProductDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ProductDescription>
+                                </ProductInfo>
+                                <ProductImage col={2} src="https://i.redd.it/2t68z42blebz.jpg" />
+                            </Product>
+                        </BodyElement>
+                        <BodyElement col={2}>
+                            <Product>
+                                <ProductImage src="https://i.redd.it/2t68z42blebz.jpg" />
+                                <ProductInfo col={2}>
+                                    <ProductTitle>Python Regius</ProductTitle>
+                                    <ProductDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ProductDescription>
+                                </ProductInfo>
+                            </Product>
+                        </BodyElement>
+                        <BodyElement row={2} width={2}>
+                            <Product>
+                                <ProductImage src="https://restomalin.com/domaine/le-tacos-de-grenoble.fr/images/image4_tacos_de_grenoble.PNG" />
+                                <ProductInfo col={2}>
+                                    <ProductTitle>PROMO EXCLUSIVE</ProductTitle>
+                                    <ProductDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ProductDescription>
+                                </ProductInfo>
+                            </Product>
+                        </BodyElement>
+                    </Body>
+                </GridElement>
+                {/*<GridElement row={2} col={2}>*/}
+                    {/*<Body className="container">*/}
                         {/*<BodyElement>*/}
                             {/*<form>*/}
                                 {/*<Checkbox name="checkbox" onChange={(e) => (console.log(e.target.checked, e.target.value))} />*/}
@@ -108,8 +139,8 @@ class App extends Component {
                                 {/*</ProductInfo>*/}
                             {/*</Product>*/}
                         {/*</BodyElement>*/}
-                    </Body>
-                </Row>
+                    {/*</Body>*/}
+                {/*</GridElement>*/}
                 <Row row={3}>
                     <Footer columnsTemplate={"2.5fr 1fr 2.5fr"}>
                         <FooterList row={1}>
@@ -124,7 +155,7 @@ class App extends Component {
                             <h5>What do I do ?</h5>
                             <p>
                                 Websites. I'm creating a framework, MueJS, to make website creation easier for developers.
-                                It's fully in React
+                                Done in React.
                             </p>
                         </FooterList>
                         <FooterList className="donation" row={1} style={{ textAlign: 'left' }}>
@@ -134,9 +165,10 @@ class App extends Component {
                         </FooterList>
                         <FooterLine style={{ gridColumn: "1 / span 3" }}>
                             <a>Facebook</a>
-                            <a>Twitter</a>
-                            <a>Instagram</a>
-                            <a>Github</a>
+                            <a href="https://www.youtube.com/channel/UC7rRGEAXomdP_iUCC0LV3Ag/live">Youtube</a>
+                            <a href="https://twitter.com/cobelt_dierk">Twitter</a>
+                            <a href="https://www.instagram.com/cobelt_dierk">Instagram</a>
+                            <a href="http://github.com/cobelt">Github</a>
                         </FooterLine>
                     </Footer>
                 </Row>

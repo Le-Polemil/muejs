@@ -81,6 +81,8 @@ export class Grid extends Component {
         const editedChildren = React.Children.map(children, child => {
             let { row, col, height, width, fullHeight, fullWidth } = child.props;
 
+            fullWidth = fullWidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine');
+
             const childInfos = {
                 col: col || currentCol,
                 width: fullWidth ? gridDimensions.x : (width || currentCol),

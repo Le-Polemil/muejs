@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 export class GridElement extends Component {
     constructor (props) {
         super(props);
-
-        this.style = props.style;
-        this.className = props.className || '';
-
         this.children = Array.isArray(props.children) ? props.children : [props.children];
 
         this.state = {
@@ -17,7 +13,6 @@ export class GridElement extends Component {
             fullWidth: props.fullWidth,
             fullHeight: props.fullHeight,
         };
-
         this.getStyle = this.getStyle.bind(this);
     }
 
@@ -26,7 +21,7 @@ export class GridElement extends Component {
         return {
             gridColumn: `${col} / span ${width}`,
             gridRow: `${row} / span ${height}`,
-            ...this.style
+            ...this.props.style
         };
     }
     render() {

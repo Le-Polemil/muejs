@@ -1,5 +1,22 @@
 @import './colors.styl'
 
+border-wdth = 4rem
+.border-menu
+  border-width 0
+  border-color primary-color
+  border-style solid
+  transition border-width .2s
+
+  &.opn
+    border-width border-wdth
+    border-top 0
+    border-bottom 0
+
+.border-menu-icon
+  transition width .2s
+  &.opn
+    width border-wdth
+
 .font-success
   color success-color
 .font-warning
