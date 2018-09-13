@@ -1,31 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Footer, FooterLine } from '../../Footer/index';
 import { GridElement } from '../../Grid/GridElement/index';
 
-export class CardImage extends Component {
-    render() {
-        const { src, className } = this.props;
-        return <img src={src} className={`card-image h-align-center ${className || ''}`} />;
-    }
-}
+export const CardImage = (props) => {
+    const { src, className, style } = props;
+    return <GridElement { ...props } className={className}><img src={src} className={`card-image`} style={style} /></GridElement>;
+};
 
-export class CardDescription extends Component {
-    render() {
-        const { props } = this;
-        const { className, children, style } = props;
-        return React.createElement('div', { ...props, className: `card-description ${className || ''}`, style, children });
-    }
-}
+export const CardDescription = (props) => {
+    const { className, children, style } = props;
+    return <GridElement { ...props } className={`card-description ${className || ''}`} style={style}>{ children }</GridElement>;
+};
 
-// This is a
-// <GridElement>
-//      <Footer>
-//          <FooterLine />
-//      </Footer>
-// </GridElement>
-export class CardFooter extends Component {
-    render() {
-        const { className, children } = this.props;
-        return React.createElement(GridElement , { ...this.props, className: `card-footer ${className || ''}`, children: <Footer><FooterLine>{ children }</FooterLine></Footer> });
-    }
-}
+export const CardFooter = (props) => {
+    const { className, children } = props;
+    return <GridElement { ...props } className={`card-footer ${className || ''}`}>{ <Footer><FooterLine>{ children }</FooterLine></Footer> }</GridElement>;
+};
