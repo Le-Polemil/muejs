@@ -1,63 +1,70 @@
 #drawer-root 
   position relative
-  z-index 4022
+  z-index 4025
 
 
-$modal-width 70%
-$modal-height 70%
+modal-width = 70%
+modal-height = 70%
 
 .drawer-black-bg 
-  $slideduration 0.2s
-
-animation opacity-0-to-1 $slideduration
-background-color rgba(0, 0, 0, 0.65)
-display inline-grid
-height 100%
-opacity 1
-position fixed
-top 0
-width 100%
-
-.artp-drawer 
-  background-color #fff
-  border-radius 0.15rem
+  background-color rgba(0, 0, 0, 0.65)
+  display inline-grid
   height 100%
-  overflow-x hidden
-  overflow-y auto
-  position relative
+  opacity 1
+  position fixed
+  top 0
+  width 100%
 
-  &.left 
-    animation appears-from-left $slideduration
-    justify-self left
-    left 0
+  .artp-drawer 
+    background-color #fff
+    border-radius 0.15rem
+    height auto
+    overflow-x hidden
+    overflow-y auto
+    position relative
 
-  &.right 
-    animation appears-from-right $slideduration
-    justify-self right
-    right 0
+    &:-webkit-scrollbar 
+      display none
+    
 
-.clickable-icon 
+    &.left 
+      justify-self left
+      left 0
+    
 
+    &.right 
+      justify-self right
+      right 0
+    
+  
+
+
+.clickable-icon
   cursor pointer
   font-size 1.5rem
   padding 0.5rem
   transition filter 0.2s
 
-  &hover 
+  &:hover 
     filter brightness(90%)
   
 
-  &active 
+  &:active 
     filter brightness(60%)
+  
+
 
 @keyframes opacity-0-to-1 
   0%  opacity 0 
-  100%  opacity 1
+  100%  opacity 1 
+
 
 @keyframes appears-from-left 
   0%  left -100% 
-  100%  left 0
+  100%  left 0 
+
 
 @keyframes appears-from-right 
   0%  right -100% 
   100%  right 0 
+
