@@ -24,48 +24,40 @@ navbar-brand-font-color = #fff
 
   font-size navbar-font-size
 
-  .navbar-element
+  .nav-icon, .nav-label, .nav-brand, .nav-logo
     cursor pointer
     display inline-grid
     justify-content center
 
-    &.brand
-      padding 0 .8rem
-      font-size navbar-brand-font-size
-      font-weight bold
+  .nav-brand
+    padding 0 .8rem
+    font-size navbar-brand-font-size
+    font-weight bold
 
-      color rgba(navbar-font-color, .6)
+    color rgba(navbar-font-color, .6)
+    transition color .2s
+
+    &:hover
+      color navbar-brand-font-color
       transition color .2s
 
-      &:hover
-        color navbar-brand-font-color
-        transition color .2s
+  .nav-label, .nav-icon
+    padding 0 .6rem
+    align-self center
+    height 100%
 
-    &.label, &.icon
-      padding 0 .6rem
-      display inline-grid
-      align-self center
-      height 100%
+    color rgba(navbar-font-color, .8)
+    transition background-color .3s, color .3s
 
-      color rgba(navbar-font-color, .8)
+    &:hover
+      background-color link-hover-black-shade-bg
+      color navbar-brand-font-color
       transition background-color .3s, color .3s
 
-      &:hover
-        background-color link-hover-black-shade-bg
-        color navbar-brand-font-color
-        transition background-color .3s, color .3s
-
-    &.label, &.icon
-      i.material-icons
-        line-height navbar-height-mobile
-
-    @media (min-width small-screen-up)
-      &.collapse-icon
-        display none
-
-    @media (max-width small-screen)
-      &:not(.collapse-icon):not(.brand)
-        display none !important
+    i.material-icons
+      line-height navbar-height-mobile
+      justify-content center
+      display inline-grid
 
   h1, h2, h3, h4, h5, h6, p
     margin 0

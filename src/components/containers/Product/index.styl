@@ -5,6 +5,7 @@
   background-color #efefef
   border-radius .2rem
   overflow hidden
+  justify-self stretch
 
   .product-image, .product-description
     display inline-grid
@@ -18,9 +19,10 @@
   .product-info
     margin 2rem
 
-  .product-title > *
-    font-weight bold
+  .product-title
     color darken(primary-color, 10%)
+    > *
+      font-weight bold
 
   .product-description
     z-index 1

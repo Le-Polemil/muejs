@@ -23,18 +23,23 @@ class Checkbox extends Component {
     constructor(props) {
         super(props);
         const { defaultChecked = null, onChange = null } = this.props;
-        this.state = { inputIsChecked: defaultChecked, undetermined: !defaultChecked };
-        this.onChange = onChange;
+        this.state = { inputIsChecked: defaultChecked, undetermined: defaultChecked === null, onChange };
+    }
+
+    getDerivedStateFromProps(newProps, prevState) {
+        if (newProps.onChange !== prevState.onChange)
+            return { onChange: newProps.onChange };
     }
 
     handleChange (e) {
+        const { onChange } = this.state;
         this.setState({ inputIsChecked: e.target.checked, undetermined: false });
-        if (this.onChange) this.onChange(e);
+        if (onChange) onChange(e);
     };
 
     render() {
         const { inputIsChecked, undetermined } = this.state;
-        const { name = 'checkbox', id = uuidv4(), disabled = false, value = id, defaultChecked = null } = this.props;
+        const { name = 'checkbox', id = uuidv4(), disabled = false, value = id, defaultChecked = null, label = null } = this.props;
 
         let offsetSpring = undeterminedSpringOffset;
         let dashArraySpring = undeterminedSpringDash;
@@ -43,11 +48,8 @@ class Checkbox extends Component {
             dashArraySpring = inputIsChecked ? checkedSpringDash : squareSpringDash;
         }
 
-        console.log(<input className="input-hidden" type="checkbox" defaultChecked={defaultChecked} name={name} id={id} value={value} disabled={disabled} onChange={(e) => this.handleChange(e)} />);
-
         return (
-            <Fragment>
-                <input className="input-hidden" type="checkbox" defaultChecked={defaultChecked} name={name} id={id} value={value} disabled={disabled} onChange={(e) => this.handleChange(e)} />
+            <span>
                 <label htmlFor={id} className="checkbox" style={{ color: (undetermined && '#aaa') || (inputIsChecked ? '#7ca728' : ''), transition: 'color 0.6s' }}>
                     <svg className="svg-container" viewBox="0 0 24 24">
                         <g className="svg-checkbox">
@@ -73,8 +75,10 @@ class Checkbox extends Component {
                             </Motion>
                         </g>
                     </svg>
+                    { label && <span className="checkbox-label">{ label }</span> }
                 </label>
-            </Fragment>
+                <input className="hidden" type="checkbox" defaultChecked={defaultChecked} name={name} id={id} value={value} disabled={disabled} onChange={(e) => this.handleChange(e)} />
+            </span>
         );
     }
 }

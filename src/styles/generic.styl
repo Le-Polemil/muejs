@@ -20,6 +20,7 @@ border-wdth = 4rem
 .rotate-anim
   max-height 15rem
   transform rotate(20deg)
+  transition transform 0.5s
   &:hover
     animation rotate 0.5s
 
@@ -29,6 +30,10 @@ border-wdth = 4rem
     100%
       transform rotate(379deg)
 
+.banner
+  max-height 7rem
+  img
+    min-width 100%
 
 .font-success
   color success-color
@@ -73,5 +78,19 @@ border-wdth = 4rem
   &:hover
     height 120%
 
-span.block
+.block
   display block
+
+.hidden
+  visibility hidden
+  height 0
+  width 0
+  padding 0
+  margin 0
+  border 0
+
+span >
+    h1, h2, h3, h4, h5, h6
+      display inline-grid
+      margin 0
+      font-weight bold

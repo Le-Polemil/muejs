@@ -1,53 +1,36 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Footer, FooterLine } from '../../Footer/index';
-import {GridElement} from "../../Grid/GridElement/index";
+import { GridElement } from '../../Grid/GridElement/index';
 
-export class ProductImage extends GridElement {
-    render() {
-        const { className, style, reverted, src } = this.props;
-        return React.createElement(GridElement , {
-            ...this.props,
-            className,
-            style,
-            children: <img className={`product-image text-align-${reverted ? 'right' : 'left'}`} key={src} src={src}/>
-        });
-    }
-}
+export const ProductImage = (props) => {
+    const { src, style, ...otherProps } = props;
+    return <GridElement { ...otherProps }><img className="product-image" src={src} style={style} /></GridElement>;
+};
 
-export class ProductDescription extends Component {
-    render() {
-        const { className, children, style, reverted } = this.props;
-        return React.createElement(GridElement , {
-            ...this.props,
-            className: `product-description text-align-${reverted ? 'right' : 'left'} ${className || ''}`,
-            style: { ...style, alignSelf: 'center' },
-            children: <span key={0} className="block">{ children }</span> // div to get a display block around
-        });
-    }
-}
+export const ProductDescription = (props) => {
+    const { className, children, style, align, ...otherProps } = props;
+    return (
+        <GridElement { ...otherProps } className={`product-description text-align-${align ? align : 'left'} ${className || ''}`} style={{ alignSelf: 'center', ...style }}>
+            <span className="block">{ children }</span>
+        </GridElement>
+    );
+};
 
-export class ProductTitle extends Component {
-    render() {
-        const { className, children, style, reverted } = this.props;
-        return React.createElement(GridElement , {
-            ...this.props,
-            className: `product-title text-align-${reverted ? 'right' : 'left'} ${className || ''}`,
-            style: { alignSelf: 'center',  textTransform: 'uppercase', ...style },
-            children: <h4 key={0}>{ children }</h4>
-        });
-    }
-}
+export const ProductTitle = (props) => {
+    const { className, children, style, align, ...otherProps } = props;
+    return (
+        <GridElement { ...otherProps } className={`product-title text-align-${align ? align : 'left'} ${className || ''}`} style={{ alignSelf: 'center', textTransform: 'uppercase', ...style }}>
+            <h4 className="block">{ children }</h4>
+        </GridElement>
+    );
+};
 
-export class ProductInfo extends Component {
-    render() {
-        const { className, children } = this.props;
-        return React.createElement(GridElement , { ...this.props, className: `product-info h-align-center ${className || ''}`, children });
-    }
-}
+export const ProductInfo = (props) => {
+    const { className } = props;
+    return <GridElement { ...props } className={`product-info h-align-center ${className || ''}`} />;
+};
 
-export class ProductFooter extends Component {
-    render() {
-        const { className } = this.props;
-        return React.createElement(GridElement , { ...this.props, className: `h-align-center ${className || ''}`, children: <Footer><FooterLine>{ children }</FooterLine></Footer> });
-    }
-}
+export const ProductFooter = (props) => {
+    const { className, children, ...otherProps } = props;
+    return <GridElement { ...otherProps } className={`h-align-center ${className || ''}`}><Footer><FooterLine>{ children }</FooterLine></Footer></GridElement>;
+};

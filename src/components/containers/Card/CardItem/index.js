@@ -3,13 +3,12 @@ import { Footer, FooterLine } from '../../Footer/index';
 import { GridElement } from '../../Grid/GridElement/index';
 
 export const CardImage = (props) => {
-    const { src, className, style } = props;
-    return <GridElement { ...props } className={className}><img src={src} className={`card-image`} style={style} /></GridElement>;
+    return <GridElement { ...props }><img src={props.src} className={`card-image`} style={props.style}/></GridElement>;
 };
 
 export const CardDescription = (props) => {
-    const { className, children, style } = props;
-    return <GridElement { ...props } className={`card-description ${className || ''}`} style={style}>{ children }</GridElement>;
+    const { className, children } = props;
+    return <GridElement { ...props } className={`card-description ${className || ''}`}>{ children }</GridElement>;
 };
 
 export const CardFooter = (props) => {

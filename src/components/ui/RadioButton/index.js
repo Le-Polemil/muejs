@@ -12,12 +12,9 @@ const defaultSpring = -totalLength;
 const circleSpring = spring(circleLength, { stiffness: 150, damping: 18 });
 
 const RadioButton = (props) => {
-    console.log('checked', props.checked);
-    const { id = (props.name && props.value) ? `${props.name}-${props.value}` : uuidv4(), name = 'radiobutton', disabled = false, value = id, onChange, checked = null } = props;
+    const { id = (props.name && props.value) ? `${props.name}-${props.value}` : uuidv4(), name = 'radiobutton', disabled = false, value = id, onChange, checked = null, label = null } = props;
     return (
-        <Fragment>
-            <input className="" type="radio" name={name} id={id} value={value !== null ? value : id}
-                   disabled={disabled} onChange={onChange}/>
+        <span>
             <label htmlFor={id} className="radiobutton"
                    style={{color: checked ? '#7ca728' : 'rgb(119, 165, 255)', transition: 'color 0.8s'}}>
                 <svg className="svg-container" viewBox="0 0 24 24">
@@ -31,17 +28,19 @@ const RadioButton = (props) => {
                                     strokeDasharray={`${totalLength} ${totalLength}`}
                                     strokeDashoffset={checked ? offset : checkedLength}
                                     d="
-                  M 18.5 5.2
-                  L 7.8 15.8 2.5 10.5
-                  c 0-4.4 3.6-8 8-8
-                  s 8 3.6 8 8-3.6 8-8 8-8-3.6-8-8"
+                                      M 18.5 5.2
+                                      L 7.8 15.8 2.5 10.5
+                                      c 0-4.4 3.6-8 8-8
+                                      s 8 3.6 8 8-3.6 8-8 8-8-3.6-8-8"
                                 />
                             )}
                         </Motion>
                     </g>
                 </svg>
+            { label && <span className="radiobutton-label">{ label }</span> }
             </label>
-        </Fragment>
+            <input className="hidden" type="radio" name={name} id={id} value={value !== null ? value : id} checked={checked} disabled={disabled} onChange={onChange}/>
+        </span>
     )
 };
 export default RadioButton;
