@@ -11,7 +11,7 @@ const checkedLength = -22.55687141418457;
 const defaultSpring = -totalLength;
 const circleSpring = spring(circleLength, { stiffness: 150, damping: 18 });
 
-const RadioButton = (props) => {
+export const RadioButton = (props) => {
     const { id = (props.name && props.value) ? `${props.name}-${props.value}` : uuidv4(), name = 'radiobutton', disabled = false, value = id, onChange, checked = null, label = null } = props;
     return (
         <span>
@@ -43,4 +43,3 @@ const RadioButton = (props) => {
         </span>
     )
 };
-export default RadioButton;

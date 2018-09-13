@@ -1,0 +1,33 @@
+.artp-btn 
+  button-bg-color = #efefef
+  button-font-color = #717171
+
+  background-color button-bg-color
+  border 0
+  border-radius 0.1rem
+  color button-font-color
+  cursor pointer
+  font inherit
+  margin 0.4rem 0.4rem 0.4rem 0
+  outline inherit
+  padding 0.4rem
+  transition background-color 0.2s, color 0.2s
+
+  &:hover
+    hover-ratio = 8%
+    background-color darken(button-bg-color, hover-ratio)
+    color darken(button-font-color, hover-ratio)
+
+  &:disabled
+    background-color lighten(button-bg-color, 3%)
+    color lighten(button-font-color, 25%)
+    cursor not-allowed
+
+  .btn-label 
+    align-items center
+    display inline-grid
+    grid-template-columns auto auto
+
+  i.fa 
+    font-size 1.2rem
+    margin-right 10px

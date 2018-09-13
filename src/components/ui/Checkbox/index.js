@@ -19,7 +19,7 @@ const undeterminedSpringOffset = spring(-checkedLength - squareLength, animation
 const squareSpringOffset = spring(-checkedLength, animationOption);
 const checkedSpringOffset = spring(0, animationOption);
 
-class Checkbox extends Component {
+export class Checkbox extends Component {
     constructor(props) {
         super(props);
         const { defaultChecked = null, onChange = null } = this.props;
@@ -82,5 +82,3 @@ class Checkbox extends Component {
         );
     }
 }
-
-export default Checkbox;
