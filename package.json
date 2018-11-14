@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/Cobelt/muejs.git"
   },
+  "dependencies": {
+    "uuid": "^3.3.2"
+  },
   "peerDependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -21,6 +24,8 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-loader": "^0.5.5",
@@ -50,19 +55,9 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --host muejs --config webpack/dev.config.babel.js",
+    "start": "webpack-dev-server --config webpack/dev.config.babel.js",
     "watch": "webpack --watch",
-
-    "build": "webpack --mode production --config webpack/prod.config.babel.js",
-    "build-package": "webpack --mode production --config webpack/package.config.babel.js",
-
-    "babel": "./node_modules/.bin/babel src --out-dir lib",
-    "transpile": "babel src -d dist --copy-files",
-
-    "prepublish": "rm -rf ./dist && yarn transpile",
-    "publish": "rm -rf ./build && yarn build-package"
-  },
-  "dependencies": {
-    "uuid": "^3.3.2"
+    "build": "webpack --config webpack/dev.config.babel.js --hot --inline",
+    "build-package": "webpack --config webpack/package.config.babel.js"
   }
 }

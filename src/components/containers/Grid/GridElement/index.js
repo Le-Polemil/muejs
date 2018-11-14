@@ -15,8 +15,8 @@ export class GridElement extends Component {
         };
     }
     render() {
-        const { props, getStyle } = this;
-        return <div className={`grid-element ${props.className ? props.className : ''}`} style={ getStyle() }>{ props.children }</div>;
+        const { className, children, ...otherProps } = this.props;
+        return <div {...otherProps} className={`grid-element ${className ? className : ''}`} style={ this.getStyle() }>{ children }</div>;
     }
 }
 

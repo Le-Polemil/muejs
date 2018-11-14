@@ -29,7 +29,7 @@ export class Navbar extends Component {
     };
 
     render () {
-        const { children, className, ...otherProps } = this.props;
+        const { children, className, style, ...otherProps } = this.props;
         return <Grid columnsTemplate={this.generateColumnsTemplate(children)} rowsTemplate={"1fr"} { ...otherProps } className={`navbar ${className || ''}`}>{ this.renderChildren() }</Grid>;
     }
 };

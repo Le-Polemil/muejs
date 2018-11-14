@@ -17,7 +17,7 @@ class Tabs extends Component {
     this.props.onChange(value);
   }
 
-  renderChildren = () => {
+  renderChildren() {
     const { current } = this.state;
     const { onChange, children } = this.props;
 
@@ -39,16 +39,4 @@ class Tabs extends Component {
   }
 }
 
-Tabs.defaultProps = {
-  children: null,
-  initialValue: null,
-};
-
-Tabs.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  initialValue: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-};
-
 export default Tabs;
-export Tab from './Tab';

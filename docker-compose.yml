@@ -1,0 +1,24 @@
+version: '3.7'
+
+volumes:
+  node_modules:
+
+services:
+  muejs:
+    image: cobelt/muejs
+    container_name: muejs_frontend
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - .:/app
+    - node_modules:/app/muejs/node_modules
+
+    ports:
+    - '3006:80'
+
+    environment:
+    - NODE_ENV=development
+
+    command: yarn start

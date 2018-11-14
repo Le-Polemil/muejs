@@ -36,7 +36,7 @@ export class Dropdown extends Component {
     }
   }
 
-  handleClickOutside = (e) => {
+  handleClickOutside(e) {
     if (this.dropdownNode.contains(e.target)) return;
     this.setState({ isOpen: false });
   };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {GridElement, Row} from './GridElement';
+import { GridElement, Row } from './GridElement';
 import { FooterLine } from '../Footer/FooterItem';
 import { NumberOrOne } from '../../../static/Math';
 
@@ -122,19 +122,23 @@ export class Grid extends Component {
 
     // to perform
     getStyle() {
-        const { props } = this;
-        const { rows, ...dimensions } = this.calculateGridSize(props.children) || { x: 1, y: 1, rows: [] };
+        const { children, style, columnsTemplate, rowsTemplate } = this.props;
+        const { rows, ...dimensions } = this.calculateGridSize(children) || { x: 1, y: 1, rows: [] };
         this.gridDimensions = dimensions;
         return {
-            gridTemplateColumns: props.columnsTemplate || (dimensions.x ? 'auto '.repeat(dimensions.x) : 'fit-content(100%)'),
-            gridTemplateRows: props.rowsTemplate || (dimensions.y ? 'auto '.repeat(dimensions.y) : 'fit-content(100%)'),
-            ...props.style
+            gridTemplateColumns: columnsTemplate || (dimensions.x ? 'auto '.repeat(dimensions.x) : 'fit-content(100%)'),
+            gridTemplateRows: rowsTemplate || (dimensions.y ? 'auto '.repeat(dimensions.y) : 'fit-content(100%)'),
+            ...style
         };
     }
 
     render() {
-        const { props, getStyle, } = this;
-        return <div className={`grid ${props.className || ''}`} style={ getStyle() }>{ this.constructGrid(props.children, this.gridDimensions) }</div>;
+        const { className, children, } = this.props;
+        return (
+            <div className={`grid ${className || ''}`} style={ this.getStyle() }>
+                { this.constructGrid(children, this.gridDimensions) }
+            </div>
+        );
     }
 }
 
