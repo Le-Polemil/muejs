@@ -26,39 +26,48 @@ class App extends Component {
                 </Navbar>
 
 
-                <GridElement row={2} width={3} className="bg-error">
-                    Bonjour 2
-                </GridElement>
-
-                <GridElement row={2} height={5} col={4} width={4} className="bg-info">
-                    Bonjour 1
-                </GridElement>
-
-                <GridElement row={2} col={8} width={3} className="bg-error">
+                <GridElement row={2} width={2} className="bg-error">
                     Bonjour 2
                 </GridElement>
 
 
+                <GridElement row={3} col={2} className="bg-success">
+                    Bonjour 3
+                </GridElement>
+
+                <GridElement row={4} height={2} col={2} className="bg-pastel-purple">
+                    Bonjour 5
+                </GridElement>
 
                 <GridElement row={3} height={3} className="bg-warning">
                     Bonjour 4
                 </GridElement>
 
-                <GridElement row={3} col={2} width={2} className="bg-success">
-                    Bonjour 3
+
+                <GridElement row={6} width={2} className="bg-error">
+                    Bonjour 2
                 </GridElement>
 
-                <GridElement row={4} height={2} col={2} width={2} className="bg-pastel-purple">
+
+
+
+                <GridElement row={2} height={5} col={3} width={6} className="bg-info">
+                    Bonjour 1
+                </GridElement>
+
+
+
+
+                <GridElement row={2} col={9} width={2} className="bg-error">
+                    Bonjour 2
+                </GridElement>
+
+
+                <GridElement row={3} height={2} col={9} className="bg-pastel-purple">
                     Bonjour 5
                 </GridElement>
 
-
-
-                <GridElement row={3} height={2} col={8} width={2} className="bg-pastel-purple">
-                    Bonjour 5
-                </GridElement>
-
-                <GridElement row={5} col={8} width={2} className="bg-success">
+                <GridElement row={5} col={9} className="bg-success">
                     Bonjour 3
                 </GridElement>
 
@@ -67,12 +76,7 @@ class App extends Component {
                 </GridElement>
 
 
-
-                <GridElement row={6} width={3} className="bg-error">
-                    Bonjour 2
-                </GridElement>
-
-                <GridElement row={6} col={8} width={3} className="bg-error">
+                <GridElement row={6} col={9} width={2} className="bg-error">
                     Bonjour 2
                 </GridElement>
 
