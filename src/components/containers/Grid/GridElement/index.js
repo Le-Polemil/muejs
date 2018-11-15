@@ -19,12 +19,3 @@ export class GridElement extends Component {
         return <div {...otherProps} className={`grid-element ${className ? className : ''}`} style={ this.getStyle() }>{ children }</div>;
     }
 }
-
-export const Row = ({ col, row, width, height, children, className, style }) => {
-    return <GridElement col={col} row={row} width={width} height={height} className={className} style={style} fullWidth>{ children }</GridElement>;
-};
-
-// Doesn't work very well
-export const Col = ({ col, row, width, height, children, className, style }) => {
-    return <GridElement col={col} row={row} width={width} height={height} className={className} style={style} fullHeight>{ children }</GridElement>;
-};

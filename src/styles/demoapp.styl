@@ -2,12 +2,17 @@
   min-height: 15rem;
 }
 
-.grid {
-  .grid-element {
-    .bg-error, .bg-info, .bg-warning, .bg-success {
-      justify-content center
-      align-items center
-      display flex
-    }
+.min-width-15 {
+  min-width: 15rem;
+}
+
+.grid.page {
+  min-width 100vw
+  min-height: 100vh
+
+  > .grid-element:not(.navbar):not(.footer) {
+    justify-content center
+    align-content center
   }
+
 }

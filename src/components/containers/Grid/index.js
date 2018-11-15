@@ -22,7 +22,7 @@ export class Grid extends Component {
                     row: child.props.row,
                     width: child.props.width || 1,
                     height: child.props.height || 1,
-                    fullWidth: child.props.fullWidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine'),
+                    fullwidth: child.props.fullwidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine'),
                 };
 
                 const isAuto = (!details.col || !details.row);
@@ -31,12 +31,12 @@ export class Grid extends Component {
                     details.row = details.row || currentRow;
                 }
 
-                if (details.fullWidth) currentRow += details.height;
+                if (details.fullwidth) currentRow += details.height;
 
                 if (!rows[details.row]) rows[details.row] = {width: 0, height: 0}; // create row on first entry of each row
 
                 const colSize = NumberOrOne(details.col) + details.width - 1; // Because col n with width 1 should return a col of n instead of n + 1
-                console.log(child.type.name, 'row =', details.row);
+                // console.log(child.type.name, 'row =', details.row);
                 const width = (details.col === 'auto') ? rows[details.row].width + colSize :  Math.max(rows[details.row].width, colSize);
                 const height = Math.max(rows[details.row].height, details.height);
 
@@ -77,21 +77,21 @@ export class Grid extends Component {
             const editedChildren = React.Children.map(children, child => {
                 if (!child || !child.props || !child.type.name) return child;
 
-                let { row, col, height, width, fullWidth } = child.props;
+                let { row, col, height, width, fullwidth } = child.props;
 
 
-                fullWidth = fullWidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine');
-                width = fullWidth ? gridDimensions.x : width || 1;
-                if (fullWidth) console.log('gdX =', gridDimensions.x);
+                fullwidth = fullwidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine');
+                width = fullwidth ? gridDimensions.x : width || 1;
+                if (fullwidth) console.log('gdX =', gridDimensions.x);
 
-                const { currentRow, currentCol } = this.findNextEmptyCoordinates(grid, width, height) || { currentCol: 1, currentRow: 1 };
+                // const { currentRow, currentCol } = this.findNextEmptyCoordinates(grid, width, height) || { currentCol: 1, currentRow: 1 };
 
                 const childInfos = {
                     col: col || currentCol,
                     width,
                     row: row || currentRow,
                     height,
-                    fullWidth,
+                    fullwidth,
                 };
                 console.log('child:', child.type.name, '=', childInfos.col);
                 childrenInfos.push(childInfos);
@@ -114,26 +114,47 @@ export class Grid extends Component {
         }
     }
 
-    findNextEmptyCoordinates(grid, width, height) {
-        grid.forEach(row => {
+    // findNextEmptyCoordinates(grid, width, height) {
+    //     grid.forEach(row => {
+    //
+    //     })
+    // }
 
-        })
+    static generateTemplate({ propsTemplate, dimension }) {
+        if (!propsTemplate && dimension !== undefined) return 'auto '.repeat(dimension);
+        if (typeof propsTemplate === typeof '') return propsTemplate;
+        if (typeof propsTemplate === typeof {} && dimension) {
+            let template = '';
+            for (let i = 1; i < dimension + 1; i++) {
+                const row = propsTemplate[i];
+                template += (typeof row === typeof '') ? row : 'auto';
+                template += ' ';
+            }
+            return template;
+        }
+        return 'fit-content(100%)'
     }
 
     // to perform
     getStyle() {
-        const { children, style, columnsTemplate, rowsTemplate } = this.props;
+        const { children, style, columnsTemplate, rowsTemplate, gap = '', rowGap = gap, colGap = gap } = this.props;
         const { rows, ...dimensions } = this.calculateGridSize(children) || { x: 1, y: 1, rows: [] };
         this.gridDimensions = dimensions;
+
+        const gridTemplateRows = Grid.generateTemplate({ propsTemplate: rowsTemplate, dimension: dimensions.y});
+        const gridTemplateColumns = Grid.generateTemplate({ propsTemplate: columnsTemplate, dimension: dimensions.x});
+
         return {
-            gridTemplateColumns: columnsTemplate || (dimensions.x ? 'auto '.repeat(dimensions.x) : 'fit-content(100%)'),
-            gridTemplateRows: rowsTemplate || (dimensions.y ? 'auto '.repeat(dimensions.y) : 'fit-content(100%)'),
+            gridTemplateColumns,
+            gridTemplateRows,
+            gridRowGap: rowGap,
+            gridColumnGap: colGap,
             ...style
         };
     }
 
     render() {
-        const { className, children, } = this.props;
+        const { className, children } = this.props;
         return (
             <div className={`grid ${className || ''}`} style={ this.getStyle() }>
                 { this.constructGrid(children, this.gridDimensions) }

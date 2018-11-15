@@ -29,8 +29,14 @@ export class Navbar extends Component {
     };
 
     render () {
-        const { children, className, style, ...otherProps } = this.props;
-        return <Grid columnsTemplate={this.generateColumnsTemplate(children)} rowsTemplate={"1fr"} { ...otherProps } className={`navbar ${className || ''}`}>{ this.renderChildren() }</Grid>;
+        const { children, className, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps } = this.props;
+        return (
+            <GridElement className={`navbar ${className || ''}`} { ...otherProps }>
+                <Grid columnsTemplate={columnsTemplate || this.generateColumnsTemplate(children)} rowsTemplate={rowsTemplate || "1fr"} gap={gap} rowGap={rowGap} colGap={colGap}>
+                    { this.renderChildren() }
+                </Grid>
+            </GridElement>
+        );
     }
 };
 

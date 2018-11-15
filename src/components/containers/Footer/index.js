@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import './index.styl';
 
-import { Grid } from '../Grid';
+import { Grid, GridElement } from '../Grid';
 
 export class Footer extends Component {
     render() {
-        const { children, className } = this.props;
-        return React.createElement(Grid, { ...this.props, className: `footer ${className || ''}`, children });
+        const { children, className, style, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps  } = this.props;
+        return (
+            <GridElement className={`footer ${className || ''}`} style={style} { ...otherProps }>
+                <Grid columnsTemplate={columnsTemplate} rowsTemplate={rowsTemplate} gap={gap} rowGap={rowGap} colGap={colGap}>
+                    { children }
+                </Grid>
+            </GridElement>
+        );
     }
 };
 
