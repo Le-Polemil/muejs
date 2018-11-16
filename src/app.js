@@ -16,7 +16,7 @@ class App extends Component {
 
     render() {
         return (
-            <Grid className="page" gap='1rem' rowsTemplate={{ 1:'fit-content(100%)', 7: 'fit-content(100%)' }}>
+            <Grid className="page" gap='1rem' rowsTemplate={{ 1:'fit-content(100%)', 10: 'fit-content(100%)' }}>
                 <Navbar width={10}>
                     <NavLogo justify="left">MueJS</NavLogo>
                     <NavLabel justify="right" label="cobelt.fr" route="http://cobelt.fr"/>
@@ -44,14 +44,27 @@ class App extends Component {
                 </GridElement>
 
 
-                <GridElement row={6} width={2} className="bg-error">
+                <GridElement row={6} height={2} className="bg-pastel-purple">
+                    Bonjour 5
+                </GridElement>
+
+                <GridElement row={8} className="bg-success">
+                    Bonjour 3
+                </GridElement>
+
+                <GridElement row={6} height={3} col={2} className="bg-warning">
+                    Bonjour 4
+                </GridElement>
+
+
+                <GridElement row={9} width={2} className="bg-error">
                     Bonjour 2
                 </GridElement>
 
 
 
 
-                <GridElement row={2} height={5} col={3} width={6} className="bg-info">
+                <GridElement row={2} height={8} col={3} width={6} className="bg-info">
                     Bonjour 1
                 </GridElement>
 
@@ -76,13 +89,27 @@ class App extends Component {
                 </GridElement>
 
 
-                <GridElement row={6} col={9} width={2} className="bg-error">
+                <GridElement row={6} col={10} className="bg-success">
+                    Bonjour 3
+                </GridElement>
+
+                <GridElement row={7} height={2} col={10} className="bg-pastel-purple">
+                    Bonjour 5
+                </GridElement>
+
+                <GridElement row={6} height={3} col={9} className="bg-warning">
+                    Bonjour 4
+                </GridElement>
+
+
+
+                <GridElement row={9} col={9} width={2} className="bg-error">
                     Bonjour 2
                 </GridElement>
 
 
 
-                <Footer row={7} width={10} columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
+                <Footer row={10} width={10} columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
                     <FooterList row={1} col={1} width={2}>
                         <h5>Who am I ?</h5>
                         <p style={{ textAlign: 'left' }}>
