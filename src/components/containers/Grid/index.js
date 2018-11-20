@@ -9,7 +9,41 @@ export class Grid extends Component {
     constructor (props) {
         super(props);
         this.getStyle = this.getStyle.bind(this);
+        this.state = { children: undefined };
     }
+
+    componentDidMount() {
+        this.setState(() => ({ children: Grid.getImportantInfos(this.props.children) }));
+    }
+
+    static getImportantInfos(children) {
+        console.log(children);
+        return React.Children.map(children, child => {
+            const { width, height, col, row, fullwidth, fullheight } = child.props;
+            return { col, row, width, height, fullwidth, fullheight };
+        })
+    }
+
+    static generateTemplate({ propsTemplate, dimension }) {
+        if (!propsTemplate && dimension !== undefined) return 'auto '.repeat(dimension);
+        if (typeof propsTemplate === typeof '') return propsTemplate;
+        if (typeof propsTemplate === typeof {} && dimension) {
+            let template = '';
+            for (let i = 1; i < dimension + 1; i++) {
+                const itemTemplate = propsTemplate[i];
+                template += (typeof itemTemplate === typeof '') ? itemTemplate : 'auto';
+                template += ' ';
+            }
+            return template;
+        }
+        return 'fit-content(100%)'
+    }
+
+    onChildPropsUpdate() {
+        const { children } = this.props;
+        this.setState(() => Grid.getImportantInfos(children))
+    }
+
 
     calculateGridSize(children) {
         try {
@@ -46,7 +80,7 @@ export class Grid extends Component {
 
             let maxCol = 1;
             let maxRow = 1;
-            console.log(rows)
+            console.log(rows);
             rows.forEach((row, index) => {
                 if (!row || !row.width || !row.height) return null;
                 maxCol = Math.max(maxCol, row.width);
@@ -68,9 +102,6 @@ export class Grid extends Component {
             const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
             // console.log('Got', grid);
 
-            let currentRow = 1;
-            let currentCol = 1;
-
             // console.log('rowsAuto=',rows['auto']);
 
             const childrenInfos = [];
@@ -84,7 +115,7 @@ export class Grid extends Component {
                 width = fullwidth ? gridDimensions.x : width || 1;
                 if (fullwidth) console.log('gdX =', gridDimensions.x);
 
-                // const { currentRow, currentCol } = this.findNextEmptyCoordinates(grid, width, height) || { currentCol: 1, currentRow: 1 };
+                const { row: currentRow, col: currentCol } = this.findNextEmptyCoordinates(grid, width, height);
 
                 const childInfos = {
                     col: col || currentCol,
@@ -93,7 +124,7 @@ export class Grid extends Component {
                     height,
                     fullwidth,
                 };
-                console.log('child:', child.type.name, '=', childInfos.col);
+                // console.log('child:', child.type.name, '=', childInfos.col);
                 childrenInfos.push(childInfos);
 
                 // grid[0] = the 1st row of the grid, grid[1][6] the 7th column of the second row, ....
@@ -109,31 +140,20 @@ export class Grid extends Component {
             return editedChildren;
         }
         catch (e) {
-            console.log(e);
+            console.error(e);
             return null;
         }
     }
 
-    // findNextEmptyCoordinates(grid, width, height) {
-    //     grid.forEach(row => {
-    //
-    //     })
-    // }
+    findNextEmptyCoordinates(grid, width, height) {
+        // grid.forEach(row => {
+        //
+        // })
 
-    static generateTemplate({ propsTemplate, dimension }) {
-        if (!propsTemplate && dimension !== undefined) return 'auto '.repeat(dimension);
-        if (typeof propsTemplate === typeof '') return propsTemplate;
-        if (typeof propsTemplate === typeof {} && dimension) {
-            let template = '';
-            for (let i = 1; i < dimension + 1; i++) {
-                const row = propsTemplate[i];
-                template += (typeof row === typeof '') ? row : 'auto';
-                template += ' ';
-            }
-            return template;
-        }
-        return 'fit-content(100%)'
+        // console.log("BOUH", grid);
+        return { col: 1, row: 1 };
     }
+
 
     // to perform
     getStyle() {

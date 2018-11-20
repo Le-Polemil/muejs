@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import gridify from '../../../../hoc/gridify';
 
-export class GridElement extends Component {
+export class Element extends Component {
     constructor (props) {
         super(props);
         this.getStyle = this.getStyle.bind(this);
@@ -19,3 +20,5 @@ export class GridElement extends Component {
         return <div {...otherProps} className={`grid-element ${className ? className : ''}`} style={ this.getStyle() }>{ children }</div>;
     }
 }
+
+export const GridElement = gridify(Element);
