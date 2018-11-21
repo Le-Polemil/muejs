@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { GridElement, Row } from './GridElement';
-import { FooterLine } from '../Footer/FooterItem';
-import { NumberOrOne } from '../../../static/Math';
+import uuid from 'uuid/v4';
 
 import './index.styl';
 
@@ -9,11 +7,16 @@ export class Grid extends Component {
     constructor (props) {
         super(props);
         this.getStyle = this.getStyle.bind(this);
-        this.state = { children: undefined };
+
+        const ownUuid = uuid();
+        this.state = { children: undefined, uuid: ownUuid };
     }
 
     componentDidMount() {
-        this.setState(() => ({ children: Grid.getImportantInfos(this.props.children) }));
+        const { uuid } = this.props;
+        this.gridContext = React.createContext(uuid);
+        // this.context = { [this.state.uuid]: [Grid.getImportantInfos(this.props.children)] };
+        console.log('tocard', this.gridContext);
     }
 
     static getImportantInfos(children) {
@@ -39,118 +42,37 @@ export class Grid extends Component {
         return 'fit-content(100%)'
     }
 
-    onChildPropsUpdate() {
-        const { children } = this.props;
-        this.setState(() => Grid.getImportantInfos(children))
-    }
-
-
-    calculateGridSize(children) {
-        try {
-            let currentRow = 1;
-            const rows = [];
-            React.Children.forEach(children, child => {
-                if (!child || !child.props) return;
-                const details = {
-                    col: child.props.col,
-                    row: child.props.row,
-                    width: child.props.width || 1,
-                    height: child.props.height || 1,
-                    fullwidth: child.props.fullwidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine'),
-                };
-
-                const isAuto = (!details.col || !details.row);
-                if (isAuto) {
-                    details.col = details.col || 'auto';
-                    details.row = details.row || currentRow;
-                }
-
-                if (details.fullwidth) currentRow += details.height;
-
-                if (!rows[details.row]) rows[details.row] = {width: 0, height: 0}; // create row on first entry of each row
-
-                const colSize = NumberOrOne(details.col) + details.width - 1; // Because col n with width 1 should return a col of n instead of n + 1
-                // console.log(child.type.name, 'row =', details.row);
-                const width = (details.col === 'auto') ? rows[details.row].width + colSize :  Math.max(rows[details.row].width, colSize);
-                const height = Math.max(rows[details.row].height, details.height);
-
-                rows[details.row] = {width, height};
-            });
-            // console.log(rows);
-
-            let maxCol = 1;
-            let maxRow = 1;
-            console.log(rows);
-            rows.forEach((row, index) => {
-                if (!row || !row.width || !row.height) return null;
-                maxCol = Math.max(maxCol, row.width);
-                maxRow = Math.max(maxRow, NumberOrOne(index) + row.height - 1);
-            });
-            return { x: maxCol, y: maxRow, rows };
-        }
-        catch (e) {
-            console.log(e);
-            return { x: 1, y: 1, rows: [[]] };
-        }
+    calculateGridSize() {
+        return { x: 1, y: 1, rows: [[]] };
     }
 
     constructGrid (children, gridDimensions) {
-        // const { rows } = this.calculateGridSize(children);
+
+        const GridContext = this.gridContext;
+
         if (!children) return { editedChildren: null, gridDimensions };
-        try {
-            // console.log('Should return', gridDimensions.y, 'arrays of', gridDimensions.x, 'element(s)');
-            const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
-            // console.log('Got', grid);
 
-            // console.log('rowsAuto=',rows['auto']);
+        const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
 
-            const childrenInfos = [];
-            const editedChildren = React.Children.map(children, child => {
-                if (!child || !child.props || !child.type.name) return child;
+        const childrenInfos = [];
+        const editedChildren = React.Children.map(children, child => {
+            if (!child || !child.props) return child;
 
-                let { row, col, height, width, fullwidth } = child.props;
+            const { col, row, width, height, fullwidth, fullheight } = child.props;
+            const newChildProps = { };
 
+            newChildProps.width = fullwidth === 'true' ? gridDimensions.x : width;
 
-                fullwidth = fullwidth || (child.type.name === 'Row') || (child.type.name === 'FooterLine');
-                width = fullwidth ? gridDimensions.x : width || 1;
-                if (fullwidth) console.log('gdX =', gridDimensions.x);
+            if (fullwidth === 'true') console.log('gdX =', gridDimensions.x);
 
-                const { row: currentRow, col: currentCol } = this.findNextEmptyCoordinates(grid, width, height);
+            console.log('Ok here', newChildProps);
 
-                const childInfos = {
-                    col: col || currentCol,
-                    width,
-                    row: row || currentRow,
-                    height,
-                    fullwidth,
-                };
-                // console.log('child:', child.type.name, '=', childInfos.col);
-                childrenInfos.push(childInfos);
-
-                // grid[0] = the 1st row of the grid, grid[1][6] the 7th column of the second row, ....
-                for (let y = childInfos.row -1; y <  childInfos.row + childInfos.height - 1; y++) {
-                    for (let x = childInfos.col -1; x <  childInfos.col + childInfos.width - 1; x++) {
-                        // console.log('', grid[y][x], `elements already placed in [${y}][${x}]`);
-                        grid[y][x] = grid[y][x]++ || 1;
-                    }
-                }
-                return React.cloneElement(child, { ...childInfos });
-            });
-            // console.log('final', grid);
-            return editedChildren;
-        }
-        catch (e) {
-            console.error(e);
-            return null;
-        }
+            return <GridContext.Provider>{ React.cloneElement(child, { ...child.props, ...newChildProps }) }</GridContext.Provider>
+        });
+        return editedChildren;
     }
 
-    findNextEmptyCoordinates(grid, width, height) {
-        // grid.forEach(row => {
-        //
-        // })
-
-        // console.log("BOUH", grid);
+    findNextEmptyCoordinates() {
         return { col: 1, row: 1 };
     }
 
@@ -183,4 +105,4 @@ export class Grid extends Component {
     }
 }
 
-export * from './GridElement';
+export { Element, Row, BasicElement } from './GridElement';
