@@ -1,7 +1,7 @@
 import React from 'react';
 import { camelToKebab } from '../../filters/stringFormat';
 
-import { GridsContext } from '../../components/containers/Grid';
+import { GridsConsumer } from '../../store/consumers/Grids';
 
 function gridify(Component, { forcedProps = {}, staticMethods = [], componentName } = {}) {
 
@@ -24,7 +24,6 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
         }
 
         render() {
-            console.log('TOCAAARD', this.context);
             const {
                 className,
                 style,
@@ -57,23 +56,25 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
             };
 
             return (
-                <Component
-                    className={classNames}
-                    style={styles}
+                <GridsConsumer>
+                    <Component
+                        className={classNames}
+                        style={styles}
 
-                    col={col}
-                    row={row}
+                        col={col}
+                        row={row}
 
-                    width={width}
-                    height={height}
+                        width={width}
+                        height={height}
 
-                    fullwidth={fullwidth}
-                    fullheight={fullheight}
+                        fullwidth={fullwidth}
+                        fullheight={fullheight}
 
-                    {...otherProps}
-                >
-                    { children }
-                </Component>
+                        {...otherProps}
+                    >
+                        { children }
+                    </Component>
+                </GridsConsumer>
             );
         }
     }

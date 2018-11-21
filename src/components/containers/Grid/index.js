@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 
 import './index.styl';
+import { GridsProvider } from '../../../store/providers/Grids';
 
 export class Grid extends Component {
     constructor (props) {
@@ -14,7 +15,6 @@ export class Grid extends Component {
 
     componentDidMount() {
         const { uuid } = this.props;
-        this.gridContext = React.createContext(uuid);
         // this.context = { [this.state.uuid]: [Grid.getImportantInfos(this.props.children)] };
         console.log('tocard', this.gridContext);
     }
@@ -66,8 +66,8 @@ export class Grid extends Component {
             if (fullwidth === 'true') console.log('gdX =', gridDimensions.x);
 
             console.log('Ok here', newChildProps);
-
-            return <GridContext.Provider>{ React.cloneElement(child, { ...child.props, ...newChildProps }) }</GridContext.Provider>
+            return child;
+            // return { React.cloneElement(child, { ...child.props, ...newChildProps }) };
         });
         return editedChildren;
     }
@@ -98,9 +98,11 @@ export class Grid extends Component {
     render() {
         const { className, children } = this.props;
         return (
-            <div className={`grid ${className || ''}`} style={ this.getStyle() }>
-                { this.constructGrid(children, this.gridDimensions) }
-            </div>
+            <GridsProvider>
+                <div className={`grid ${className || ''}`} style={ this.getStyle() }>
+                    { this.constructGrid(children, this.gridDimensions) }
+                </div>
+            </GridsProvider>
         );
     }
 }
