@@ -28,7 +28,6 @@ class App extends Component {
     }
 
     render() {
-        const footerRow = 3;
         return (
             <Grid className="page">
 
