@@ -9,6 +9,8 @@
     "url": "https://github.com/Cobelt/muejs.git"
   },
   "dependencies": {
+    "immer": "^1.8.0",
+    "lodash": "^4.17.11",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {

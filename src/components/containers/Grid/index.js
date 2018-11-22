@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 
+import context from '../../../store/context/Grids';
+import { updateGridAction } from '../../../store/actions/Grids';
+
 import './index.styl';
-import { GridsProvider } from '../../../store/providers/Grids';
+
 
 export class Grid extends Component {
     constructor (props) {
@@ -10,14 +13,17 @@ export class Grid extends Component {
         this.getStyle = this.getStyle.bind(this);
 
         const ownUuid = uuid();
-        this.state = { children: undefined, uuid: ownUuid };
+        this.state = { uuid: ownUuid };
     }
 
     componentDidMount() {
-        const { uuid } = this.props;
-        // this.context = { [this.state.uuid]: [Grid.getImportantInfos(this.props.children)] };
-        console.log('tocard', this.gridContext);
+        const { uuid } = this.state;
+        const { dispatch } = this.context;
+
+        dispatch(updateGridAction({ griduuid: uuid, elements: {} }));
     }
+
+
 
     static getImportantInfos(children) {
         console.log(children);
@@ -48,8 +54,6 @@ export class Grid extends Component {
 
     constructGrid (children, gridDimensions) {
 
-        const GridContext = this.gridContext;
-
         if (!children) return { editedChildren: null, gridDimensions };
 
         const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
@@ -65,9 +69,9 @@ export class Grid extends Component {
 
             if (fullwidth === 'true') console.log('gdX =', gridDimensions.x);
 
-            console.log('Ok here', newChildProps);
-            return child;
-            // return { React.cloneElement(child, { ...child.props, ...newChildProps }) };
+            // console.log('Ok here', newChildProps);
+            // return child;
+            return React.cloneElement(child, { ...child.props, griduuid: this.state.uuid });
         });
         return editedChildren;
     }
@@ -97,14 +101,15 @@ export class Grid extends Component {
 
     render() {
         const { className, children } = this.props;
+
         return (
-            <GridsProvider>
-                <div className={`grid ${className || ''}`} style={ this.getStyle() }>
-                    { this.constructGrid(children, this.gridDimensions) }
-                </div>
-            </GridsProvider>
+            <div className={`grid ${className || ''}`} style={this.getStyle()}>
+                {this.constructGrid(children, this.gridDimensions)}
+            </div>
         );
     }
 }
+
+Grid.contextType = context;
 
 export { Element, Row, BasicElement } from './GridElement';

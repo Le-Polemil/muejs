@@ -1,7 +1,10 @@
 import React from 'react';
 import { camelToKebab } from '../../filters/stringFormat';
+import uuid from 'uuid/v4';
 
-import { GridsConsumer } from '../../store/consumers/Grids';
+import GridsContext from '../../store/context/Grids';
+import {findElement, getElement, getGrid} from '../../store/selectors/Grids';
+
 
 function gridify(Component, { forcedProps = {}, staticMethods = [], componentName } = {}) {
 
@@ -12,16 +15,53 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
     class GridifiedComponent extends React.Component {
         constructor(props) {
             super(props);
+
+            const ownUuid = uuid();
+            this.state = { uuid: ownUuid };
         }
 
-        componentDidMount() {
-            console.log('Props: ', this.props);
+        componentWillReceiveProps(nextProps, nextContext, snapshot) {
+            if (JSON.stringify(this.context.grids) !== JSON.stringify(nextContext.grids)) {
+                console.log(nextContext.grids);
+                // this.dispatchSelfToContext();
+            }
+        }
+        //
+        //
+        // dispatchSelfToContext() {
+        //     const { griduuid } = this.props;
+        //     const { uuid } = this.state;
+        //     const { state, dispatch } = this.context;
+        //
+        //     const minifiedSelf = this.getMinified();
+        //
+        //     const existingElement = getElement(state, { griduuid, uuid });
+        //     if (JSON.stringify(existingElement) !== JSON.stringify(minifiedSelf)) {
+        //         // actions.setElement(griduuid, { [uuid]: this.getMinified() })
+        //     }
+        //
+        // }
+
+
+
+        getMinified() {
+            const {
+                col,
+                row,
+
+                width,
+                height,
+
+                fullwidth,
+                fullheight,
+            } = this.props;
+
+            return { col, row, width, height, fullwidth, fullheight };
         }
 
-        componentDidUpdate(prevProps) {
-            console.log('Previous props: ', prevProps);
-            console.log('Props: ', this.props);
-        }
+
+
+
 
         render() {
             const {
@@ -49,37 +89,48 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
             const classNames = [specificClassName, className].filter(e => !!e).join(' ');
 
-            const styles = {
-                gridColumn: `${col} / span ${width}`,
-                gridRow: `${row} / span ${height}`,
-                ...style
-            };
+            const styles = !forcedProps.noGridPlacement === 'true'
+                ? {
+                    gridColumn: `${col} / span ${width}`,
+                    gridRow: `${row} / span ${height}`,
+                    ...style
+                }
+                : {};
+
 
             return (
-                <GridsConsumer>
-                    <Component
-                        className={classNames}
-                        style={styles}
+                <Component
+                    className={classNames}
+                    style={styles}
 
-                        col={col}
-                        row={row}
+                    col={col}
+                    row={row}
 
-                        width={width}
-                        height={height}
+                    width={width}
+                    height={height}
 
-                        fullwidth={fullwidth}
-                        fullheight={fullheight}
+                    fullwidth={fullwidth}
+                    fullheight={fullheight}
 
-                        {...otherProps}
-                    >
-                        { children }
-                    </Component>
-                </GridsConsumer>
+                    {...otherProps}
+                >
+                    { children }
+                </Component>
             );
         }
     }
 
+
+    staticMethods.forEach(method => GridifiedComponent[method] = Component[method]);
+
     GridifiedComponent.displayName = 'GridifiedComponent';
+
+    GridifiedComponent.contextType = GridsContext;
+
+
+
+
+
 
     GridifiedComponent.defaultProps = {
         className: getDefaultProps('className', ''),
@@ -95,11 +146,8 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
         fullheight: getDefaultProps('fullheight', 'false'),
     };
 
-    staticMethods.forEach(method => GridifiedComponent[method] = Component[method]);
-
     return GridifiedComponent;
 }
-
 
 
 export default gridify;

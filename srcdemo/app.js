@@ -4,23 +4,9 @@ import ReactDOM from 'react-dom';
 import '../src/styles/muejs.styl';
 
 import { Grid, Element, Row } from '../src/components/containers/Grid';
-import { Navbar, NavIcon, NavLabel, NavLogo } from '../src/components/containers/Navbar';
-import { Footer, FooterLine, FooterList, FooterSeparator } from '../src/components/containers/Footer';
-import { ArticleList } from '../src/components/containers/ArticleList';
 
 import './styles/demoapp.styl';
-
-const articleList = [
-    'coucou',
-    'coucou2',
-    'coucou23',
-    'coucou234',
-    'coucou2345',
-    'coucou23456',
-    'coucou234567',
-    'coucou2345678',
-    'coucou23456789',
-];
+import {GridsProvider} from "../src/store/context/Grids";
 
 class App extends Component {
     constructor(props) {
@@ -44,4 +30,9 @@ class App extends Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render((
+    <GridsProvider>
+        <App />
+    </GridsProvider>
+    ), document.getElementById('root')
+);
