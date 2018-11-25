@@ -3,7 +3,7 @@ import { camelToKebab } from '../../filters/stringFormat';
 import uuid from 'uuid/v4';
 
 import GridsContext from '../../store/context/Grids';
-import {findElement, getElement, getGrid} from '../../store/selectors/Grids';
+import { updateGridElementAction } from '../../store/actions/Grids';
 
 
 function gridify(Component, { forcedProps = {}, staticMethods = [], componentName } = {}) {
@@ -15,52 +15,32 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
     class GridifiedComponent extends React.Component {
         constructor(props) {
             super(props);
-
-            const ownUuid = uuid();
-            this.state = { uuid: ownUuid };
+            this.state = { uuid: uuid() };
         }
 
         componentWillReceiveProps(nextProps, nextContext, snapshot) {
-            if (JSON.stringify(this.context.grids) !== JSON.stringify(nextContext.grids)) {
-                console.log(nextContext.grids);
-                // this.dispatchSelfToContext();
+            const { dispatch, state } = nextContext;
+            if (JSON.stringify(this.context.state.grids) !== JSON.stringify(state.grids)) {
+                const { griduuid } = this.props;
+                if (griduuid && state.grids && state.grids[griduuid]) {
+	                dispatch(updateGridElementAction(
+		                state,
+                        {
+                            griduuid,
+                            elementuuid: this.state.uuid,
+                            minifiedElement: this.getMinified(),
+	                    },
+	                ));
+                }
             }
         }
-        //
-        //
-        // dispatchSelfToContext() {
-        //     const { griduuid } = this.props;
-        //     const { uuid } = this.state;
-        //     const { state, dispatch } = this.context;
-        //
-        //     const minifiedSelf = this.getMinified();
-        //
-        //     const existingElement = getElement(state, { griduuid, uuid });
-        //     if (JSON.stringify(existingElement) !== JSON.stringify(minifiedSelf)) {
-        //         // actions.setElement(griduuid, { [uuid]: this.getMinified() })
-        //     }
-        //
-        // }
-
-
 
         getMinified() {
-            const {
-                col,
-                row,
+            const { col, row, width, height, fullwidth, fullheight } = this.props;
+            const type = componentName || Component.displayName || `Gridified${Component.name || 'Component'}`;
 
-                width,
-                height,
-
-                fullwidth,
-                fullheight,
-            } = this.props;
-
-            return { col, row, width, height, fullwidth, fullheight };
+            return { type, col, row, width, height, fullwidth, fullheight };
         }
-
-
-
 
 
         render() {

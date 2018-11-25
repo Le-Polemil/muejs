@@ -1,14 +1,15 @@
 import { get } from 'lodash';
 
+const getGridStore = (store) => get(store, `grids`);
 
-export const getGrid = (state, { uuid }) => get(state, `grids.${uuid}`);
+export const getGrid = (store, { uuid }) => get(getGridStore(store), `${uuid}`);
+
+export const getElement = (store, { griduuid, uuid }) => get(getGridStore(store), `${griduuid}.${uuid}`);
 
 
-export const getElement = (state, { griduuid, uuid }) => get(state, `grids.${griduuid}.${uuid}`);
+export const findElement = (store, { uuid }) => {
+	const grids = getGridStore(store) || [];
 
-
-export const findElement = (state, { uuid }) => {
-	const grids = get(state, `grids`) ||  [];
 	return Object.keys(grids).forEach(gridkey => {
 		const found = Object.keys(grids[gridkey]).find(elemkey => elemkey === uuid);
 		if (found) return found;

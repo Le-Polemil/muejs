@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gridsReducer } from '../../reducers/Grids';
+import { getElement, getGrid } from '../../selectors/Grids';
 
 
 const GridsContext = React.createContext();
@@ -18,6 +18,19 @@ export const updateGridAction = ({ griduuid, elements }) => ({
 	}
 });
 
+export const updateGridElementAction = (store, { griduuid, elementuuid, minifiedElement }) => {
+	if (!griduuid || !elementuuid || !minifiedElement) return;
+
+	const existingElement = getElement(store, { griduuid, uuid: elementuuid });
+
+	if (JSON.stringify(existingElement) === JSON.stringify(minifiedElement)) return;
+
+	const newElements = {
+		...getGrid(store, { uuid: griduuid }),
+		[elementuuid]: minifiedElement
+	};
+	return updateGridAction({ griduuid: griduuid, elements: newElements });
+};
 
 
 

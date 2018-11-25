@@ -13,7 +13,7 @@ export class Grid extends Component {
         this.getStyle = this.getStyle.bind(this);
 
         const ownUuid = uuid();
-        this.state = { uuid: ownUuid };
+        this.state = { uuid: ownUuid, columns: 1, rows: 1 };
     }
 
     componentDidMount() {
@@ -23,17 +23,15 @@ export class Grid extends Component {
         dispatch(updateGridAction({ griduuid: uuid, elements: {} }));
     }
 
-
-
-    static getImportantInfos(children) {
-        console.log(children);
-        return React.Children.map(children, child => {
-            const { width, height, col, row, fullwidth, fullheight } = child.props;
-            return { col, row, width, height, fullwidth, fullheight };
-        })
+    componentWillReceiveProps (nextProps, nextContext) {
+    	console.log('this:', this.context.state);
+    	console.log('next:', nextContext.state);
+    	if (JSON.stringify(this.context.state) !== JSON.stringify(nextContext.state)) {
+			console.log('coucou');
+	    }
     }
 
-    static generateTemplate({ propsTemplate, dimension }) {
+	static generateTemplate({ propsTemplate, dimension }) {
         if (!propsTemplate && dimension !== undefined) return 'auto '.repeat(dimension);
         if (typeof propsTemplate === typeof '') return propsTemplate;
         if (typeof propsTemplate === typeof {} && dimension) {
@@ -48,36 +46,44 @@ export class Grid extends Component {
         return 'fit-content(100%)'
     }
 
+
     calculateGridSize() {
         return { x: 1, y: 1, rows: [[]] };
     }
+	findNextEmptyCoordinates() {
+		return { col: 1, row: 1 };
+	}
 
-    constructGrid (children, gridDimensions) {
+    // constructGrid (children, gridDimensions) {
+    //
+    //     if (!children) return { editedChildren: null, gridDimensions };
+    //
+    //     const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
+    //
+    //     const childrenInfos = [];
+    //     const editedChildren = React.Children.map(children, child => {
+    //         if (!child || !child.props) return child;
+    //
+    //         const { col, row, width, height, fullwidth, fullheight } = child.props;
+    //         const newChildProps = { };
+    //
+    //         newChildProps.width = fullwidth === 'true' ? gridDimensions.x : width;
+    //
+    //         if (fullwidth === 'true') console.log('gdX =', gridDimensions.x);
+    //
+    //         // console.log('Ok here', newChildProps);
+    //         // return child;
+    //         return React.cloneElement(child, { ...child.props, griduuid: this.state.uuid });
+    //     });
+    //     return editedChildren;
+    // }
 
-        if (!children) return { editedChildren: null, gridDimensions };
 
-        const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
-
-        const childrenInfos = [];
-        const editedChildren = React.Children.map(children, child => {
-            if (!child || !child.props) return child;
-
-            const { col, row, width, height, fullwidth, fullheight } = child.props;
-            const newChildProps = { };
-
-            newChildProps.width = fullwidth === 'true' ? gridDimensions.x : width;
-
-            if (fullwidth === 'true') console.log('gdX =', gridDimensions.x);
-
-            // console.log('Ok here', newChildProps);
-            // return child;
-            return React.cloneElement(child, { ...child.props, griduuid: this.state.uuid });
+    injectUuid (children) {
+        const { uuid } = this.state;
+        return React.Children.map(children, child => {
+            return React.cloneElement(child, { ...child.props, griduuid: uuid });
         });
-        return editedChildren;
-    }
-
-    findNextEmptyCoordinates() {
-        return { col: 1, row: 1 };
     }
 
 
@@ -104,7 +110,7 @@ export class Grid extends Component {
 
         return (
             <div className={`grid ${className || ''}`} style={this.getStyle()}>
-                {this.constructGrid(children, this.gridDimensions)}
+                { this.injectUuid(children) }
             </div>
         );
     }

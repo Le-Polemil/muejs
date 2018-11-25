@@ -13,9 +13,14 @@ export class GridsProvider extends Component {
 		super(props);
 
 		this.state = {
-			grids: {},
+			store: {},
 			dispatch: action => {
-                this.setState(state => gridsReducer(state, action));
+				if (!action) return;
+                this.setState(({ store }) => ({
+	                store: {
+		                grids: gridsReducer(store.grids, action),
+	                }
+                }));
             },
 		};
 	}
@@ -23,7 +28,7 @@ export class GridsProvider extends Component {
 
 	render() {
 		return (
-			<GridsContext.Provider value={this.state}>
+			<GridsContext.Provider value={{ state: this.state.store, dispatch: this.state.dispatch }}>
 				{ this.props.children }
 			</GridsContext.Provider>
 		)
