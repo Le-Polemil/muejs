@@ -3,6 +3,9 @@ import uuid from 'uuid/v4';
 
 import context from '../../../store/context/Grids';
 import { updateGridAction } from '../../../store/actions/Grids';
+import { getGrid } from "../../../store/selectors/Grids";
+
+import { NumberOrOne } from '../../../static/Math';
 
 import './index.styl';
 
@@ -12,8 +15,7 @@ export class Grid extends Component {
         super(props);
         this.getStyle = this.getStyle.bind(this);
 
-        const ownUuid = uuid();
-        this.state = { uuid: ownUuid, columns: 1, rows: 1 };
+        this.state = { uuid: uuid(), childrenInfos: [], columns: 1, rows: 1 };
     }
 
     componentDidMount() {
@@ -24,17 +26,33 @@ export class Grid extends Component {
     }
 
     componentWillReceiveProps (nextProps, nextContext) {
-    	console.log('this:', this.context.state);
-    	console.log('next:', nextContext.state);
-    	if (JSON.stringify(this.context.state) !== JSON.stringify(nextContext.state)) {
-			console.log('coucou');
-	    }
+        const { uuid } = this.state;
+
+        const actualGrid = getGrid(this.context.state, { uuid });
+        const nextGrid = getGrid(nextContext.state, { uuid });
+
+        if (!nextGrid) return;
+
+        if (JSON.stringify(actualGrid) !== JSON.stringify(nextGrid)) {
+            this.setState(() => ({
+                childrenInfos: Object.values(nextGrid),
+            }))
+        }
     }
 
-	static generateTemplate({ propsTemplate, dimension }) {
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        const actualGrid = getGrid(this.context.state, { uuid });
+        const nextGrid = getGrid(nextContext.state, { uuid });
+
+        return JSON.stringify(actualGrid) !== JSON.stringify(nextGrid);
+    }
+
+
+    static generateTemplate({ propsTemplate, dimension }) {
         if (!propsTemplate && dimension !== undefined) return 'auto '.repeat(dimension);
         if (typeof propsTemplate === typeof '') return propsTemplate;
-        if (typeof propsTemplate === typeof {} && dimension) {
+        if (dimension) {
             let template = '';
             for (let i = 1; i < dimension + 1; i++) {
                 const itemTemplate = propsTemplate[i];
@@ -48,11 +66,79 @@ export class Grid extends Component {
 
 
     calculateGridSize() {
-        return { x: 1, y: 1, rows: [[]] };
+        const { colsCount, rowsCount } = this.props;
+        if (colsCount && rowsCount) return { col: colsCount, row: rowsCount };
+
+        const { childrenInfos } = this.state;
+        if (!childrenInfos || childrenInfos.length <= 0) return { col: 1, row: 1 };
+
+        let currentRow = 1;
+        const rows = [];
+
+        childrenInfos.forEach(childInfos => {
+            if (!childInfos) return;
+
+            const isAuto = (!childInfos.col || !childInfos.row);
+            if (isAuto) {
+                childInfos.col = childInfos.col || 'auto';
+                childInfos.row = childInfos.row || currentRow;
+            }
+
+            if (childInfos.fullWidth) currentRow += childInfos.height;
+
+            if (!rows[childInfos.row]) rows[childInfos.row] = {width: 0, height: 0}; // create row on first entry of each row
+
+            const colSize = NumberOrOne(childInfos.col) + childInfos.width - 1; // Because col n with width 1 should return a col of n instead of n + 1
+
+            const width = (childInfos.col === 'auto') ? rows[childInfos.row].width + colSize :  Math.max(rows[childInfos.row].width, colSize);
+            const height = Math.max(rows[childInfos.row].height, childInfos.height);
+
+            rows[childInfos.row] = {width, height};
+        });
+        console.log('BONJOUR LOUIS', rows);
+
+        let maxCol = 1;
+        let maxRow = 1;
+        rows.forEach((row, index) => {
+            if (!row || !row.width || !row.height) return null;
+            maxCol = Math.max(maxCol, row.width);
+            maxRow = Math.max(maxRow, NumberOrOne(index) + row.height - 1);
+        });
+
+        return { x: maxCol, y: maxRow };
     }
+
+
 	findNextEmptyCoordinates() {
 		return { col: 1, row: 1 };
 	}
+
+
+	getVirtualGrid() {
+        let currentRow = 0;
+        const rows = [];
+        this.state.childrenInfos.forEach(childInfos => {
+
+            let { type, col, row, width, height, fullwidth, fullheight, selfRowTemplate, selfColTemplate } = childInfos;
+            if (row !== 'auto' && row > currentRow) {
+                currentRow = row;
+            }
+            else if (row === 'auto') {
+                row = currentRow;
+            }
+
+            if (fullwidth) {
+                rows[row - 1] = { template: selfRowTemplate || 'auto' };
+            }
+            else {
+                const rowWidth = get(rows, `[${row - 1}].width`);
+
+                rows[row - 1] = { width: (rowWidth || 0) + col + width - 1 }
+            }
+
+            console.log('child infos :', type, '=>', childInfos, rows);
+        });
+    }
 
     // constructGrid (children, gridDimensions) {
     //
@@ -90,7 +176,8 @@ export class Grid extends Component {
     // to perform
     getStyle() {
         const { children, style, columnsTemplate, rowsTemplate, gap = '', rowGap = gap, colGap = gap } = this.props;
-        const { rows, ...dimensions } = this.calculateGridSize(children) || { x: 1, y: 1, rows: [] };
+        const { rows, ...dimensions } = this.calculateGridSize(children);
+        this.getVirtualGrid();
         this.gridDimensions = dimensions;
 
         const gridTemplateRows = Grid.generateTemplate({ propsTemplate: rowsTemplate, dimension: dimensions.y});

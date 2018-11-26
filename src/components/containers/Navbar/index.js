@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+
 import { Grid, GridElement } from '../Grid';
+import gridify from '../../../hoc/gridify';
+
 import './index.styl';
 
-export class Navbar extends Component {
+
+
+class UngridifiedNavbar extends Component {
     generateColumnsTemplate (children) {
         if (!children) return;
 
@@ -20,24 +25,25 @@ export class Navbar extends Component {
     }
 
     renderChildren () {
-        const { props, columns } = this;
+        const { props: { children } = {}, columns } = this;
 
-        return React.Children.map(props.children, (child, index) => {
+        return React.Children.map(children, child => {
             const col = columns.findIndex(element => element === child) + 1 || child.props && child.props.col;
-            return <GridElement key={index} row={1} col={col}>{ child }</GridElement>;
+            return React.cloneElement(child, { row: 1, col });
         });
     };
 
     render () {
-        const { children, className, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps } = this.props;
+        const { children, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps } = this.props;
         return (
-            <GridElement className={`navbar ${className || ''}`} { ...otherProps }>
-                <Grid columnsTemplate={columnsTemplate || this.generateColumnsTemplate(children)} rowsTemplate={rowsTemplate || "1fr"} gap={gap} rowGap={rowGap} colGap={colGap}>
-                    { this.renderChildren() }
-                </Grid>
-            </GridElement>
+            <Grid {...otherProps} columnsTemplate={columnsTemplate || this.generateColumnsTemplate(children)} rowsTemplate={rowsTemplate || "fit-content(100%)"} gap={gap} rowGap={rowGap} colGap={colGap}>
+                { this.renderChildren() }
+            </Grid>
         );
     }
 };
+
+
+export const Navbar = gridify(UngridifiedNavbar, { forcedProps: { fullwidth: 'true', selfRowTemplate: 'fit-content(100%)' }, componentName: 'navbar' });
 
 export * from './NavItem';

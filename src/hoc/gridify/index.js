@@ -37,9 +37,11 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
         getMinified() {
             const { col, row, width, height, fullwidth, fullheight } = this.props;
+            const { selfRowTemplate, selfColTemplate } = forcedProps;
+
             const type = componentName || Component.displayName || `Gridified${Component.name || 'Component'}`;
 
-            return { type, col, row, width, height, fullwidth, fullheight };
+            return { type, col, row, width, height, fullwidth, fullheight, selfRowTemplate, selfColTemplate };
         }
 
 
@@ -69,7 +71,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
             const classNames = [specificClassName, className].filter(e => !!e).join(' ');
 
-            const styles = !forcedProps.noGridPlacement === 'true'
+            const styles = forcedProps.noGridPlacement !== 'true'
                 ? {
                     gridColumn: `${col} / span ${width}`,
                     gridRow: `${row} / span ${height}`,
