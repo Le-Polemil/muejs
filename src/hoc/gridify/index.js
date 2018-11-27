@@ -3,7 +3,8 @@ import { camelToKebab } from '../../filters/stringFormat';
 import uuid from 'uuid/v4';
 
 import GridsContext from '../../store/context/Grids';
-import { updateGridElementAction } from '../../store/actions/Grids';
+import { updateGridElement } from '../../store/actions/Grids';
+import { getGridWidth } from "../../store/selectors/Grids";
 
 
 function gridify(Component, { forcedProps = {}, staticMethods = [], componentName } = {}) {
@@ -15,16 +16,16 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
     class GridifiedComponent extends React.Component {
         constructor(props) {
             super(props);
-            this.state = { uuid: uuid() };
+            this.state = { uuid: uuid(), width: props.width };
         }
 
         componentWillReceiveProps(nextProps, nextContext, snapshot) {
-            const { dispatch, state } = nextContext;
-            if (JSON.stringify(this.context.state.grids) !== JSON.stringify(state.grids)) {
+            const { dispatch, store } = nextContext;
+            if (JSON.stringify(this.context.store.grids) !== JSON.stringify(store.grids)) {
+
                 const { griduuid } = this.props;
-                if (griduuid && state.grids && state.grids[griduuid]) {
-	                dispatch(updateGridElementAction(
-		                state,
+                if (griduuid && store.grids && store.grids[griduuid]) {
+	                dispatch(updateGridElement(
                         {
                             griduuid,
                             elementuuid: this.state.uuid,
@@ -32,8 +33,24 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 	                    },
 	                ));
                 }
+
+                if (this.props.fullwidth === 'true' || forcedProps.fullWidth === 'true') {
+                    const actualGridWidth = getGridWidth(this.context.store, { uuid: griduuid });
+                    const nextGridWidth = getGridWidth(store, { uuid: griduuid });
+
+                    if (actualGridWidth !== nextGridWidth) {
+                        this.setState(() => ({ width: nextGridWidth }));
+                    }
+                }
+
             }
         }
+
+
+        isFullWidth() {
+            return this.props.fullwidth || forcedProps.fullWidth;
+        }
+
 
         getMinified() {
             const { col, row, width, height, fullwidth, fullheight } = this.props;
@@ -73,7 +90,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
             const styles = forcedProps.noGridPlacement !== 'true'
                 ? {
-                    gridColumn: `${col} / span ${width}`,
+                    gridColumn: `${col} / span ${(fullwidth || forcedProps.fullwidth) ? this.state.width : width}`,
                     gridRow: `${row} / span ${height}`,
                     ...style
                 }

@@ -14,21 +14,23 @@ export class GridsProvider extends Component {
 
 		this.state = {
 			store: {},
-			dispatch: action => {
+			dispatch: transmitStore => {
+				const action = transmitStore(this.state);
+
 				if (!action) return;
-                this.setState(({ store }) => ({
-	                store: {
-		                grids: gridsReducer(store.grids, action),
-	                }
-                }));
-            },
+				this.setState(({ store }) => ({
+					store: {
+						grids: gridsReducer(store.grids, action),
+					}
+				}));
+			},
 		};
 	}
 
 
 	render() {
 		return (
-			<GridsContext.Provider value={{ state: this.state.store, dispatch: this.state.dispatch }}>
+			<GridsContext.Provider value={ this.state }>
 				{ this.props.children }
 			</GridsContext.Provider>
 		)

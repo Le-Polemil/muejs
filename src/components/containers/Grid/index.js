@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
+import get from 'lodash.get';
 
 import context from '../../../store/context/Grids';
-import { updateGridAction } from '../../../store/actions/Grids';
-import { getGrid } from "../../../store/selectors/Grids";
+import {createGrid, updateGrid} from '../../../store/actions/Grids';
+import { getElements, getGrid, getGridDimensions, getGridHeight, getGridWidth } from "../../../store/selectors/Grids";
 
 import { NumberOrOne } from '../../../static/Math';
 
@@ -22,80 +23,75 @@ export class Grid extends Component {
         const { uuid } = this.state;
         const { dispatch } = this.context;
 
-        dispatch(updateGridAction({ griduuid: uuid, elements: {} }));
+        dispatch(createGrid({ uuid, elements: {} }));
     }
 
     componentWillReceiveProps (nextProps, nextContext) {
         const { uuid } = this.state;
 
-        const actualGrid = getGrid(this.context.state, { uuid });
-        const nextGrid = getGrid(nextContext.state, { uuid });
+        const actualChildrenInfos = getElements(this.context.store, { uuid });
+        const nextChildrenInfos = getElements(nextContext.store, { uuid });
 
-        if (!nextGrid) return;
+        if (!nextChildrenInfos) return;
 
-        if (JSON.stringify(actualGrid) !== JSON.stringify(nextGrid)) {
+        if (JSON.stringify(actualChildrenInfos) !== JSON.stringify(nextChildrenInfos)) {
             this.setState(() => ({
-                childrenInfos: Object.values(nextGrid),
-            }))
+                childrenInfos: getElements(nextContext.store, { uuid }),
+            }));
         }
     }
 
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        const actualGrid = getGrid(this.context.state, { uuid });
-        const nextGrid = getGrid(nextContext.state, { uuid });
-
-        return JSON.stringify(actualGrid) !== JSON.stringify(nextGrid);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.updateGridDimensions();
     }
 
 
+
     static generateTemplate({ propsTemplate, dimension }) {
-        if (!propsTemplate && dimension !== undefined) return 'auto '.repeat(dimension);
-        if (typeof propsTemplate === typeof '') return propsTemplate;
+        if (propsTemplate && typeof propsTemplate === typeof '') return propsTemplate;
         if (dimension) {
-            let template = '';
-            for (let i = 1; i < dimension + 1; i++) {
-                const itemTemplate = propsTemplate[i];
-                template += (typeof itemTemplate === typeof '') ? itemTemplate : 'auto';
-                template += ' ';
+            const templates = [];
+            for (let i = 0; i < dimension; i++) {
+                if (propsTemplate && propsTemplate[i + 1]) {
+                    templates[i] = propsTemplate[i + 1];
+                } else {
+                    templates[i] = 'auto';
+                }
             }
-            return template;
+            return templates.filter(e => !!e).join(' ');
         }
         return 'fit-content(100%)'
     }
 
 
+
     calculateGridSize() {
         const { colsCount, rowsCount } = this.props;
-        if (colsCount && rowsCount) return { col: colsCount, row: rowsCount };
+        if (colsCount && rowsCount) return { width: colsCount, height: rowsCount };
 
         const { childrenInfos } = this.state;
-        if (!childrenInfos || childrenInfos.length <= 0) return { col: 1, row: 1 };
+        if (!childrenInfos || childrenInfos.length <= 0) return { width: 1, height: 1 };
+
 
         let currentRow = 1;
         const rows = [];
 
-        childrenInfos.forEach(childInfos => {
+        Object.values(childrenInfos).forEach(childInfos => {
             if (!childInfos) return;
 
-            const isAuto = (!childInfos.col || !childInfos.row);
-            if (isAuto) {
-                childInfos.col = childInfos.col || 'auto';
-                childInfos.row = childInfos.row || currentRow;
-            }
-
-            if (childInfos.fullWidth) currentRow += childInfos.height;
-
+            // if (childInfos.fullWidth) currentRow += childInfos.height;
             if (!rows[childInfos.row]) rows[childInfos.row] = {width: 0, height: 0}; // create row on first entry of each row
+
 
             const colSize = NumberOrOne(childInfos.col) + childInfos.width - 1; // Because col n with width 1 should return a col of n instead of n + 1
 
-            const width = (childInfos.col === 'auto') ? rows[childInfos.row].width + colSize :  Math.max(rows[childInfos.row].width, colSize);
+            const width = (childInfos.col === 'auto') ? rows[childInfos.row].width + colSize : Math.max(rows[childInfos.row].width, colSize);
             const height = Math.max(rows[childInfos.row].height, childInfos.height);
+
 
             rows[childInfos.row] = {width, height};
         });
-        console.log('BONJOUR LOUIS', rows);
+
 
         let maxCol = 1;
         let maxRow = 1;
@@ -105,46 +101,58 @@ export class Grid extends Component {
             maxRow = Math.max(maxRow, NumberOrOne(index) + row.height - 1);
         });
 
-        return { x: maxCol, y: maxRow };
+        return { width: maxCol, height: maxRow };
+    }
+
+    updateGridDimensions() {
+        const { uuid } = this.state;
+        const { store, dispatch } = this.context;
+
+        const gridSize = this.calculateGridSize();
+
+
+        if (JSON.stringify(getGridDimensions(store, { uuid })) !== JSON.stringify(gridSize)) {
+            dispatch(updateGrid({ uuid: uuid, ...gridSize }));
+        }
     }
 
 
 	findNextEmptyCoordinates() {
-		return { col: 1, row: 1 };
+		return { width: 1, height: 1 };
 	}
 
 
 	getVirtualGrid() {
-        let currentRow = 0;
-        const rows = [];
-        this.state.childrenInfos.forEach(childInfos => {
-
-            let { type, col, row, width, height, fullwidth, fullheight, selfRowTemplate, selfColTemplate } = childInfos;
-            if (row !== 'auto' && row > currentRow) {
-                currentRow = row;
-            }
-            else if (row === 'auto') {
-                row = currentRow;
-            }
-
-            if (fullwidth) {
-                rows[row - 1] = { template: selfRowTemplate || 'auto' };
-            }
-            else {
-                const rowWidth = get(rows, `[${row - 1}].width`);
-
-                rows[row - 1] = { width: (rowWidth || 0) + col + width - 1 }
-            }
-
-            console.log('child infos :', type, '=>', childInfos, rows);
-        });
+        // let currentRow = 0;
+        // const rows = [];
+        // this.state.childrenInfos.forEach(childInfos => {
+        //
+        //     let { type, col, row, width, height, fullwidth, fullheight, selfRowTemplate, selfColTemplate } = childInfos;
+        //     if (row !== 'auto' && row > currentRow) {
+        //         currentRow = row;
+        //     }
+        //     else if (row === 'auto') {
+        //         row = currentRow;
+        //     }
+        //
+        //     if (fullwidth) {
+        //         rows[row - 1] = { template: selfRowTemplate || 'auto' };
+        //     }
+        //     else {
+        //         const rowWidth = get(rows, `[${row - 1}].width`);
+        //
+        //         rows[row - 1] = { width: (rowWidth || 0) + col + width - 1 }
+        //     }
+        //
+        //     console.log('child infos :', type, '=>', childInfos, rows);
+        // });
     }
 
     // constructGrid (children, gridDimensions) {
     //
     //     if (!children) return { editedChildren: null, gridDimensions };
     //
-    //     const grid = Array(gridDimensions.y).fill(Array(gridDimensions.x).fill(0));
+    //     const grid = Array(gridDimensions.height).fill(Array(gridDimensions.width).fill(0));
     //
     //     const childrenInfos = [];
     //     const editedChildren = React.Children.map(children, child => {
@@ -153,9 +161,9 @@ export class Grid extends Component {
     //         const { col, row, width, height, fullwidth, fullheight } = child.props;
     //         const newChildProps = { };
     //
-    //         newChildProps.width = fullwidth === 'true' ? gridDimensions.x : width;
+    //         newChildProps.width = fullwidth === 'true' ? gridDimensions.width : width;
     //
-    //         if (fullwidth === 'true') console.log('gdX =', gridDimensions.x);
+    //         if (fullwidth === 'true') console.log('gdX =', gridDimensions.width);
     //
     //         // console.log('Ok here', newChildProps);
     //         // return child;
@@ -175,13 +183,16 @@ export class Grid extends Component {
 
     // to perform
     getStyle() {
-        const { children, style, columnsTemplate, rowsTemplate, gap = '', rowGap = gap, colGap = gap } = this.props;
-        const { rows, ...dimensions } = this.calculateGridSize(children);
-        this.getVirtualGrid();
+        const { store } = this.context
+        const { style, columnsTemplate, rowsTemplate, gap = '', rowGap = gap, colGap = gap } = this.props;
+
+        const dimensions = getGridDimensions(store, { uuid: this.state.uuid });
+
+        // this.getVirtualGrid();
         this.gridDimensions = dimensions;
 
-        const gridTemplateRows = Grid.generateTemplate({ propsTemplate: rowsTemplate, dimension: dimensions.y});
-        const gridTemplateColumns = Grid.generateTemplate({ propsTemplate: columnsTemplate, dimension: dimensions.x});
+        const gridTemplateRows = Grid.generateTemplate({ propsTemplate: rowsTemplate, dimension: dimensions.height});
+        const gridTemplateColumns = Grid.generateTemplate({ propsTemplate: columnsTemplate, dimension: dimensions.width});
 
         return {
             gridTemplateColumns,

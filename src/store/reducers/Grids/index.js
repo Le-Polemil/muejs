@@ -1,7 +1,7 @@
 import produce  from 'immer';
-import { set } from 'lodash';
+import set from 'lodash.set';
 
-import { UPDATE_GRID } from '../../actions/Grids';
+import {CREATE_GRID, UPDATE_GRID, UPDATE_GRID_ELEMENT} from '../../actions/Grids';
 
 
 function getInitialState() {
@@ -14,16 +14,23 @@ export const gridsReducer = (store = getInitialState(), { type, payload } = {}) 
 	return produce(store, (draft) => {
         switch (type) {
 
+
+            case CREATE_GRID:
             case UPDATE_GRID: {
-                const { griduuid, elements } = payload;
-                return set(draft, `${griduuid}`, elements);
+                const { griduuid, elements, width, height } = payload;
+                return set(draft, `${griduuid}`, { elements, width, height });
             }
 
-			case 'GRID/REMOVE': {
-                const { uuid } = payload;
-                delete draft[uuid];
-                return;
-			}
+            case UPDATE_GRID_ELEMENT: {
+                const { griduuid, uuid, element } = payload;
+                return set(draft, `${griduuid}.elements.${uuid}`, element);
+            }
+
+			// case 'GRID/REMOVE': {
+            //     const { uuid } = payload;
+            //     delete draft[uuid];
+            //     return;
+			// }
 
         }
     })

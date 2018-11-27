@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import './index.styl';
 
-import { Grid, GridElement } from '../Grid';
+import { Grid } from '../Grid';
+import gridify from '../../../hoc/gridify';
 
-export class Footer extends Component {
+export class UngridifiedFooter extends Component {
     render() {
-        const { children, className, style, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps  } = this.props;
+        const { children, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps  } = this.props;
         return (
-            <GridElement className={`footer ${className || ''}`} style={style} { ...otherProps }>
-                <Grid columnsTemplate={columnsTemplate} rowsTemplate={rowsTemplate} gap={gap} rowGap={rowGap} colGap={colGap}>
-                    { children }
-                </Grid>
-            </GridElement>
+            <Grid {...otherProps} columnsTemplate={columnsTemplate} rowsTemplate={rowsTemplate} gap={gap} rowGap={rowGap} colGap={colGap}>
+                { children }
+            </Grid>
         );
     }
 };
+
+
+export const Footer = gridify(UngridifiedFooter, { forcedProps: { fullwidth: 'true', selfRowTemplate: 'fit-content(100%)' }, componentName: 'footer' });
 
 export * from './FooterItem';
