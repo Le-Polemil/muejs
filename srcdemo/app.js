@@ -13,6 +13,7 @@ import './styles/demoapp.styl';
 class App extends Component {
     constructor(props) {
         super(props);
+        this.state = { opened: false }
     }
 
     render() {
@@ -28,11 +29,15 @@ class App extends Component {
                 </Navbar>
 
 
-                <Element width={2} row={2}>
-                    Bouh
+                <Element row={2} onClick={() => this.setState(state => ({ opened: !state.opened }))} className="bg-pastel-orange">
+                    Click to { this.state.opened ? 'close' : 'open' } !
                 </Element>
 
-                <Element width={2} row={2}>
+                <Element col={2} width={this.state.opened ? 3 : 0} row={2} className="bg-success">
+                    Blblblbl
+                </Element>
+
+                <Element row={2} className="bg-pastel-purple">
                     Bouh
                 </Element>
 
@@ -70,6 +75,7 @@ class App extends Component {
                         </p>
                         <FooterLine row={1}>
                             <a href="http://cobelt.fr">cobelt.fr</a>
+                            <a href="http://muejs.cobelt.fr">muejs.fr</a>
                             <a href="http://karyt.fr">karyt.fr</a>
                         </FooterLine>
                     </FooterList>
@@ -84,7 +90,6 @@ class App extends Component {
                         <a href="http://github.com/cobelt">Github</a>
                     </FooterLine>
                 </Footer>
-
             </Grid>
         );
     }

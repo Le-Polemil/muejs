@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
-import get from 'lodash.get';
 
 import context from '../../../store/context/Grids';
-import {createGrid, updateGrid} from '../../../store/actions/Grids';
-import { getElements, getGrid, getGridDimensions, getGridHeight, getGridWidth } from "../../../store/selectors/Grids";
+import { setGrid } from '../../../store/actions/Grids';
+import { getElements, getGridDimensions, getGridHeight, getGridWidth } from "../../../store/selectors/Grids";
 
 import { NumberOrOne } from '../../../static/Math';
 
@@ -16,30 +15,16 @@ export class Grid extends Component {
         super(props);
         this.getStyle = this.getStyle.bind(this);
 
-        this.state = { uuid: uuid(), childrenInfos: [], columns: 1, rows: 1 };
+        this.state = { uuid: uuid(), columns: 1, rows: 1 };
     }
 
     componentDidMount() {
         const { uuid } = this.state;
         const { dispatch } = this.context;
 
-        dispatch(createGrid({ uuid, elements: {} }));
+        dispatch(setGrid({ grid: uuid, elements: {}, width: 1, height: 1 }));
     }
 
-    componentWillReceiveProps (nextProps, nextContext) {
-        const { uuid } = this.state;
-
-        const actualChildrenInfos = getElements(this.context.store, { uuid });
-        const nextChildrenInfos = getElements(nextContext.store, { uuid });
-
-        if (!nextChildrenInfos) return;
-
-        if (JSON.stringify(actualChildrenInfos) !== JSON.stringify(nextChildrenInfos)) {
-            this.setState(() => ({
-                childrenInfos: getElements(nextContext.store, { uuid }),
-            }));
-        }
-    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         this.updateGridDimensions();
@@ -64,14 +49,27 @@ export class Grid extends Component {
     }
 
 
+    updateGridDimensions() {
+        const { uuid } = this.state;
+        const { store, dispatch } = this.context;
+
+        const { width, height } = this.calculateGridSize();
+
+        if (width && width === getGridWidth(store, { grid: uuid }) &&
+            height && height === getGridHeight(store, { grid: uuid })) return;
+
+        dispatch(setGrid({ grid: uuid, width, height }));
+    }
+
 
     calculateGridSize() {
         const { colsCount, rowsCount } = this.props;
+        const { store } = this.context;
+        const { uuid } = this.state;
         if (colsCount && rowsCount) return { width: colsCount, height: rowsCount };
 
-        const { childrenInfos } = this.state;
+        const childrenInfos  = getElements(store, { grid: uuid });
         if (!childrenInfos || childrenInfos.length <= 0) return { width: 1, height: 1 };
-
 
         let currentRow = 1;
         const rows = [];
@@ -104,18 +102,6 @@ export class Grid extends Component {
         return { width: maxCol, height: maxRow };
     }
 
-    updateGridDimensions() {
-        const { uuid } = this.state;
-        const { store, dispatch } = this.context;
-
-        const gridSize = this.calculateGridSize();
-
-
-        if (JSON.stringify(getGridDimensions(store, { uuid })) !== JSON.stringify(gridSize)) {
-            dispatch(updateGrid({ uuid: uuid, ...gridSize }));
-        }
-    }
-
 
 	findNextEmptyCoordinates() {
 		return { width: 1, height: 1 };
@@ -125,7 +111,9 @@ export class Grid extends Component {
 	getVirtualGrid() {
         // let currentRow = 0;
         // const rows = [];
-        // this.state.childrenInfos.forEach(childInfos => {
+
+        // const childrenInfos  = getElements(store, { grid: uuid });
+        // childrenInfos.forEach(childInfos => {
         //
         //     let { type, col, row, width, height, fullwidth, fullheight, selfRowTemplate, selfColTemplate } = childInfos;
         //     if (row !== 'auto' && row > currentRow) {
@@ -154,7 +142,8 @@ export class Grid extends Component {
     //
     //     const grid = Array(gridDimensions.height).fill(Array(gridDimensions.width).fill(0));
     //
-    //     const childrenInfos = [];
+    //
+    //     const childrenInfos  = getElements(store, { grid: uuid });
     //     const editedChildren = React.Children.map(children, child => {
     //         if (!child || !child.props) return child;
     //
@@ -186,7 +175,7 @@ export class Grid extends Component {
         const { store } = this.context
         const { style, columnsTemplate, rowsTemplate, gap = '', rowGap = gap, colGap = gap } = this.props;
 
-        const dimensions = getGridDimensions(store, { uuid: this.state.uuid });
+        const dimensions = getGridDimensions(store, { grid: this.state.uuid });
 
         // this.getVirtualGrid();
         this.gridDimensions = dimensions;
@@ -216,4 +205,4 @@ export class Grid extends Component {
 
 Grid.contextType = context;
 
-export { Element, Row, BasicElement } from './GridElement';
+export { Element, Row, UngridifiedElement } from './GridElement';

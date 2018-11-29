@@ -3,28 +3,36 @@ import get from 'lodash.get';
 const getGridStore = (store) => get(store, `grids`);
 
 
-export const getGrid = (store, { uuid }) => get(getGridStore(store), `${uuid}`);
-
-
-export const getElements = (store, { uuid }) => get(getGridStore(store), `${uuid}.elements`);
-
-export const getElement = (store, { griduuid, uuid }) => get(getElements(store, { griduuid }), `${uuid}`);
+export const getGrid = (store, { grid }) => get(getGridStore(store), `${grid}`);
 
 
 
-export const getGridWidth = (store, { uuid }) => get(getGridStore(store), `${uuid}.width`);
-export const getGridHeight = (store, { uuid }) => get(getGridStore(store), `${uuid}.height`);
+export const getGridExceptElements = (store, { grid }) => {
+	const found = getGrid(store, `${grid}`) || { elements: {} };
+	delete found.elements;
+	return found;
+};
 
-export const getGridDimensions = (store, { uuid }) => ({ width: getGridWidth(store, { uuid }), height: getGridHeight(store, { uuid }) });
+
+export const getElements = (store, { grid }) => get(getGridStore(store), `${grid}.elements`);
+
+export const getElement = (store, { grid, element }) => get(getElements(store, { grid }), `${element}`);
+
+
+
+export const getGridWidth = (store, { grid }) => get(getGridStore(store), `${grid}.width`);
+export const getGridHeight = (store, { grid }) => get(getGridStore(store), `${grid}.height`);
+
+export const getGridDimensions = (store, { grid }) => ({ width: getGridWidth(store, { grid }), height: getGridHeight(store, { grid }) });
 
 
 
 
-export const findElement = (store, { uuid }) => {
+export const findElement = (store, { id }) => {
 	const grids = getGridStore(store) || [];
 
 	return Object.keys(grids).forEach(gridkey => {
-		const found = Object.keys(grids[gridkey]).find(elemkey => elemkey === uuid);
+		const found = Object.keys(grids[gridkey]).find(elemkey => elemkey === id);
 		if (found) return found;
 	});
 };

@@ -1,5 +1,7 @@
 import React from 'react';
-import {getElement, getElements, getGridHeight, getGridWidth} from '../../selectors/Grids';
+import deepEqual from 'lodash.isequal';
+
+import { getElement, getElements, getGridDimensions, getGridHeight, getGridWidth } from '../../selectors/Grids';
 
 
 const GridsContext = React.createContext();
@@ -10,64 +12,56 @@ export const GridsConsumer = GridsContext.Consumer;
 
 
 
-export const CREATE_GRID = 'grids/CREATE_GRID';
-const createGridAction = ({ griduuid, elements, width, height }) => ({
-	type: CREATE_GRID,
-	payload: {
-		griduuid,
-		elements,
-		width,
-		height,
-	}
-});
-export const createGrid = ({ uuid, elements = {}, width = 1, height = 1 }) => {
-	return store => {
-		return createGridAction({ griduuid: uuid, elements, width, height });
+export const SET_GRID = 'grids/SET_GRID';
+const updateGridAction = ({ id, elements, width, height }) => ({
+    type: SET_GRID,
+    payload: {
+        id,
+        elements,
+        width,
+        height
     }
-};
-
-
-
-export const UPDATE_GRID = 'grids/UPDATE_GRID';
-const updateGridAction = ({ griduuid, elements, width, height }) => ({
-	type: UPDATE_GRID,
-	payload: {
-		griduuid,
-		elements,
-		width,
-		height
-	}
 });
-export const updateGrid = ({ uuid, elements, width, height }) => {
+
+export const setGrid = ({ grid, elements, width, height }) => {
 	return store => {
-		elements = elements || getElements(store, { uuid });
-        width = width || getGridWidth(store, { uuid });
-        height = height || getGridHeight(store, { uuid });
-		return updateGridAction({ griduuid: uuid, elements, width, height });
+		if (!grid || !elements && !width && !height) return;
+
+		if (elements === undefined) {
+		    elements = getElements(store, { grid });
+        }
+		if (width === undefined) {
+		    width = getGridWidth(store, { grid});
+        }
+		if (height === undefined) {
+		    height = getGridHeight(store, { grid });
+        }
+
+        return updateGridAction({ id: grid, elements, width, height });
     }
 };
 
 
 
 export const UPDATE_GRID_ELEMENT = 'grids/UPDATE_GRID_ELEMENT';
-const updateGridElementAction = ({ griduuid, uuid, element }) => ({
+const updateGridElementAction = ({ idGrid, id, element }) => ({
 	type: UPDATE_GRID_ELEMENT,
 	payload: {
-		griduuid,
-		uuid,
+		idGrid,
+		id,
 		element,
 	}
 });
 
-export const updateGridElement = ({ griduuid, elementuuid, minifiedElement }) => {
-	return (store) => {
-        if (!store || !griduuid || !elementuuid || !minifiedElement) return;
+export const updateGridElement = ({ grid, id, element }) => {
+	return store => {
+        if (!store || !grid || !id || !element) return;
 
-        const existingElement = getElement(store, { griduuid, uuid: elementuuid });
+        const existingElement = getElement(store, { grid, element: id });
 
-        if (JSON.stringify(existingElement) === JSON.stringify(minifiedElement)) return;
+        if (deepEqual(existingElement, element)) return;
 
-        return updateGridElementAction({ griduuid: griduuid, uuid: elementuuid, element: minifiedElement });
+        return updateGridElementAction({ idGrid: grid, id, element });
     };
 };
 

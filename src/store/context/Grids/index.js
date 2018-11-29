@@ -15,9 +15,10 @@ export class GridsProvider extends Component {
 		this.state = {
 			store: {},
 			dispatch: transmitStore => {
-				const action = transmitStore(this.state);
+				const action = transmitStore(this.state.store);
 
 				if (!action) return;
+
 				this.setState(({ store }) => ({
 					store: {
 						grids: gridsReducer(store.grids, action),
