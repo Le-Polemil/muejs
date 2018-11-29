@@ -25,12 +25,12 @@ class App extends Component {
                     <NavLabel justify="right" label="cobelt.fr" route="http://cobelt.fr"/>
                     <NavLabel justify="right" label="Ophis" route="http://ophis.cobelt.fr"/>
                     <NavIcon justify="right" route="http://github.com/cobelt" icon="github" svg />
-                    <NavIcon className="border-menu-icon" justify="right" icon="menu" />
+                    <NavIcon className="border-menu-icon" justify="right" icon="menu" onClick={() => this.setState(state => ({ opened: !state.opened }))} />
                 </Navbar>
 
 
-                <Element row={2} onClick={() => this.setState(state => ({ opened: !state.opened }))} className="bg-pastel-orange">
-                    Click to { this.state.opened ? 'close' : 'open' } !
+                <Element row={2} className="bg-pastel-orange">
+                    <span>Click on <i className="material-icons align-with-text">menu</i> to { this.state.opened ? 'close' : 'open' } !</span>
                 </Element>
 
                 <Element col={2} width={this.state.opened ? 3 : 0} row={2} className="bg-success">
@@ -60,7 +60,7 @@ class App extends Component {
 
                     <FooterList className="donation" row={1} col={3} width={2}>
                         <h5>Donation</h5>
-                        <p>If you like my work and want to support me, you can do it here :</p>
+                        <p>If you like my work and want to support me, you can do it here&nbsp;:</p>
                         <FooterLine>
                             <a href="https://www.tipeee.com/cobelt">Tipeee</a>
                             <a href="https://www.utip.io">U-Tip</a>
