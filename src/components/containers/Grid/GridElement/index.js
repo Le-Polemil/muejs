@@ -3,12 +3,16 @@ import gridify from '../../../../hoc/gridify';
 
 export class UngridifiedElement extends Component {
     render() {
-        const { children, ...otherProps } = this.props;
-        return <div {...otherProps}>{ children }</div>;
+        const { children, type: Component, ...otherProps } = this.props;
+        return Component ?
+               <Component {...otherProps}>{ children }</Component> :
+               <div {...otherProps}>{ children }</div>;
     }
 }
 UngridifiedElement.displayName = 'GridElement';
 
 export const Element = gridify(UngridifiedElement);
+
+
 
 export const Row = gridify(UngridifiedElement, { componentName: 'Row', forcedProps: { fullwidth: 'true' }});

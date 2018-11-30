@@ -6,15 +6,15 @@ import gridify from "../../../../hoc/gridify";
 class List extends Component {
     constructor(props) {
         super(props);
-        this.state = { uuid: uuid()}
+        this.state = { id: uuid()}
     }
 
     renderChildren() {
         const { children } = this.props;
-        const { uuid } = this.state;
+        const { id } = this.state;
 
         return React.Children.map(children, (child, index) => {
-            return React.cloneElement(child, { key: uuid, className: [child.props.className, 'list-item'].filter(e => !!e).join(' '), col: 1, row: index + 1 });
+            return React.cloneElement(child, { key: id, className: [child.props.className, 'list-item'].filter(e => !!e).join(' '), col: 1, row: index + 1 });
         });
     }
 
@@ -35,15 +35,15 @@ export const FooterList = gridify(List, { componentName: 'footer-list' });
 export class Line extends Component {
     constructor(props) {
         super(props);
-        this.state = { uuid: uuid()}
+        this.state = { id: uuid()}
     }
 
     renderChildren() {
         const { children } = this.props;
-        const { uuid } = this.state;
+        const { id } = this.state;
 
         return React.Children.map(children, (child, index) => {
-            return React.cloneElement(child, { key: uuid, className: [child.props.className, 'line-item'].filter(e => !!e).join(' '), col: index + 1, row: 1 });
+            return React.cloneElement(child, { key: id, className: [child.props.className, 'line-item'].filter(e => !!e).join(' '), col: index + 1, row: 1 });
         });
     }
 

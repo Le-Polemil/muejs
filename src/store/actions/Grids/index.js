@@ -44,10 +44,10 @@ export const setGrid = ({ grid, elements, width, height }) => {
 
 
 export const UPDATE_GRID_ELEMENT = 'grids/UPDATE_GRID_ELEMENT';
-const updateGridElementAction = ({ idGrid, id, element }) => ({
+const updateGridElementAction = ({ idgrid, id, element }) => ({
 	type: UPDATE_GRID_ELEMENT,
 	payload: {
-		idGrid,
+		idgrid,
 		id,
 		element,
 	}
@@ -61,7 +61,7 @@ export const updateGridElement = ({ grid, id, element }) => {
 
         if (deepEqual(existingElement, element)) return;
 
-        return updateGridElementAction({ idGrid: grid, id, element });
+        return updateGridElementAction({ idgrid: grid, id, element });
     };
 };
 
@@ -81,11 +81,11 @@ export const updateGridElement = ({ grid, id, element }) => {
 // 	}));
 // }
 //
-// 	setElement(griduuid, element) {
+// 	setElement(idgrid, element) {
 // 		const { grids } = this.state;
-// 		if (!grids || !grids[griduuid] || !element) return;
+// 		if (!grids || !grids[idgrid] || !element) return;
 //
-// 		const updatedGrid = { [griduuid]: { ...grids[griduuid], element } };
+// 		const updatedGrid = { [idgrid]: { ...grids[idgrid], element } };
 //
 // 		this.setGrid(updatedGrid);
 // 	}

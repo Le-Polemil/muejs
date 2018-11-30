@@ -20,15 +20,9 @@ export const gridsReducer = (store = getInitialState(), { type, payload } = {}) 
             }
 
             case UPDATE_GRID_ELEMENT: {
-                const { idGrid, id, element } = payload;
-                return set(draft, `${idGrid}.elements.${id}`, element);
+                const { idgrid, id, element } = payload;
+                return set(draft, `${idgrid}.elements.${id}`, element);
             }
-
-			// case 'GRID/REMOVE': {
-            //     const { uuid } = payload;
-            //     delete draft[uuid];
-            //     return;
-			// }
 
         }
     })

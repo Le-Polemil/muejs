@@ -7,7 +7,10 @@ import { getElements, getGridDimensions, getGridHeight, getGridWidth } from "../
 
 import { NumberOrOne } from '../../../static/Math';
 
+import { getTemplateLength, generateTemplate } from './static';
+
 import './index.styl';
+
 
 
 export class Grid extends Component {
@@ -15,14 +18,19 @@ export class Grid extends Component {
         super(props);
         this.getStyle = this.getStyle.bind(this);
 
-        this.state = { uuid: uuid(), columns: 1, rows: 1 };
+        this.state = {
+            id: [null, undefined].includes(props.idgrid) ? uuid() : props.idgrid,
+            columns: 1,
+            rows: 1,
+        };
     }
 
+
     componentDidMount() {
-        const { uuid } = this.state;
+        const { id } = this.state;
         const { dispatch } = this.context;
 
-        dispatch(setGrid({ grid: uuid, elements: {}, width: 1, height: 1 }));
+        dispatch(setGrid({ grid: id, elements: {}, width: 1, height: 1 }));
     }
 
 
@@ -31,44 +39,29 @@ export class Grid extends Component {
     }
 
 
+	updateGridDimensions() {
+		const { id } = this.state;
+		const { store, dispatch } = this.context;
 
-    static generateTemplate({ propsTemplate, dimension }) {
-        if (propsTemplate && typeof propsTemplate === typeof '') return propsTemplate;
-        if (dimension) {
-            const templates = [];
-            for (let i = 0; i < dimension; i++) {
-                if (propsTemplate && propsTemplate[i + 1]) {
-                    templates[i] = propsTemplate[i + 1];
-                } else {
-                    templates[i] = 'auto';
-                }
-            }
-            return templates.filter(e => !!e).join(' ');
-        }
-        return 'fit-content(100%)'
-    }
+		const { width, height } = this.calculateGridSize();
 
+		if (width && width === getGridWidth(store, { grid: id }) &&
+			height && height === getGridHeight(store, { grid: id })) return;
 
-    updateGridDimensions() {
-        const { uuid } = this.state;
-        const { store, dispatch } = this.context;
-
-        const { width, height } = this.calculateGridSize();
-
-        if (width && width === getGridWidth(store, { grid: uuid }) &&
-            height && height === getGridHeight(store, { grid: uuid })) return;
-
-        dispatch(setGrid({ grid: uuid, width, height }));
-    }
+		dispatch(setGrid({ grid: id, width, height }));
+	}
 
 
     calculateGridSize() {
-        const { colsCount, rowsCount } = this.props;
+        const {
+	        columnsTemplate,
+	        rowsTemplate,
+        } = this.props;
         const { store } = this.context;
-        const { uuid } = this.state;
-        if (colsCount && rowsCount) return { width: colsCount, height: rowsCount };
+        const { id } = this.state;
 
-        const childrenInfos  = getElements(store, { grid: uuid });
+
+        const childrenInfos  = getElements(store, { grid: id });
         if (!childrenInfos || childrenInfos.length <= 0) return { width: 1, height: 1 };
 
         let currentRow = 1;
@@ -99,11 +92,15 @@ export class Grid extends Component {
             maxRow = Math.max(maxRow, NumberOrOne(index) + row.height - 1);
         });
 
+
+	    maxCol = getTemplateLength(columnsTemplate) || maxRow;
+        maxRow = getTemplateLength(rowsTemplate) || maxRow;
+
         return { width: maxCol, height: maxRow };
     }
 
 
-	findNextEmptyCoordinates() {
+	findNextEmptyCoordinates(grid) {
 		return { width: 1, height: 1 };
 	}
 
@@ -112,7 +109,7 @@ export class Grid extends Component {
         // let currentRow = 0;
         // const rows = [];
 
-        // const childrenInfos  = getElements(store, { grid: uuid });
+        // const childrenInfos  = getElements(store, { grid: id });
         // childrenInfos.forEach(childInfos => {
         //
         //     let { type, col, row, width, height, fullwidth, fullheight, selfRowTemplate, selfColTemplate } = childInfos;
@@ -143,7 +140,7 @@ export class Grid extends Component {
     //     const grid = Array(gridDimensions.height).fill(Array(gridDimensions.width).fill(0));
     //
     //
-    //     const childrenInfos  = getElements(store, { grid: uuid });
+    //     const childrenInfos  = getElements(store, { grid: id });
     //     const editedChildren = React.Children.map(children, child => {
     //         if (!child || !child.props) return child;
     //
@@ -156,32 +153,33 @@ export class Grid extends Component {
     //
     //         // console.log('Ok here', newChildProps);
     //         // return child;
-    //         return React.cloneElement(child, { ...child.props, griduuid: this.state.uuid });
+    //         return React.cloneElement(child, { ...child.props, idgrid: this.state.id });
     //     });
     //     return editedChildren;
     // }
 
 
-    injectUuid (children) {
-        const { uuid } = this.state;
+    injectUuid () {
+        const { children } = this.props;
+        const { id } = this.state;
         return React.Children.map(children, child => {
-            return React.cloneElement(child, { ...child.props, griduuid: uuid });
+            return React.cloneElement(child, { ...child.props, idgrid: id });
         });
     }
 
 
     // to perform
     getStyle() {
-        const { store } = this.context
+        const { store } = this.context;
         const { style, columnsTemplate, rowsTemplate, gap = '', rowGap = gap, colGap = gap } = this.props;
 
-        const dimensions = getGridDimensions(store, { grid: this.state.uuid });
+        const dimensions = getGridDimensions(store, { grid: this.state.id });
 
         // this.getVirtualGrid();
         this.gridDimensions = dimensions;
 
-        const gridTemplateRows = Grid.generateTemplate({ propsTemplate: rowsTemplate, dimension: dimensions.height});
-        const gridTemplateColumns = Grid.generateTemplate({ propsTemplate: columnsTemplate, dimension: dimensions.width});
+        const gridTemplateRows = generateTemplate({ propsTemplate: rowsTemplate, dimension: dimensions.height});
+        const gridTemplateColumns = generateTemplate({ propsTemplate: columnsTemplate, dimension: dimensions.width});
 
         return {
             gridTemplateColumns,

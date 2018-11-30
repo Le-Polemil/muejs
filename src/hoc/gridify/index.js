@@ -18,19 +18,19 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
         constructor(props) {
             super(props);
             this.state = {
-                uuid: uuid(),
+                id: uuid(),
             };
         }
 
         componentDidUpdate(prevProps, prevState, snapshot) {
             const { dispatch, store } = this.context;
-            const { griduuid } = this.props;
-            const { uuid } = this.state;
+            const { idgrid } = this.props;
+            const { id } = this.state;
 
             dispatch(updateGridElement(
                 {
-                    grid: griduuid,
-                    id: uuid,
+                    grid: idgrid,
+                    id: id,
                     element: this.getMinified(),
                 },
             ));
@@ -54,7 +54,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
         render() {
             const {
-                griduuid,
+                idgrid,
 
                 className,
                 style,
@@ -80,7 +80,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
             const classNames = [specificClassName, className].filter(e => !!e).join(' ');
 
-            const spanWidth = this.isFullWidth() ? getGridWidth(this.context.store, { grid: griduuid }) : null;
+            const spanWidth = this.isFullWidth() ? getGridWidth(this.context.store, { grid: idgrid }) : null;
             const styles = width > 0 && height > 0
                 ? {
                     gridColumn: `${col} / span ${spanWidth || width}`,
