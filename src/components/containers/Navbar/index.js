@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import { Grid, GridElement } from '../Grid';
+import deepEqual from 'lodash.isequal';
+import { Grid } from '../Grid';
 import gridify from '../../../hoc/gridify';
 
 import './index.styl';
@@ -8,7 +8,13 @@ import './index.styl';
 
 
 class UngridifiedNavbar extends Component {
-    generateColumnsTemplate (children) {
+    constructor(props) {
+        super(props);
+        this.state = { columns: [] };
+    }
+
+    constructColumns() {
+        const { children } = this.props;
         if (!children) return;
 
         const columns = { start:[], left: [], center: [], right: [], end:[] };
@@ -16,6 +22,12 @@ class UngridifiedNavbar extends Component {
             columns[child.props.justify || 'left'].push(child);
         });
         this.columns = [ ...columns.start, ...columns.left, null, ...columns.center, null, ...columns.right, ...columns.end ] || this.columns;
+    }
+
+    generateColumnsTemplate () {
+        const { children } = this.props;
+        if (!children) return;
+
 
         const template = { start: '', left: '', center: '', right: '', end:'' };
         this.columns.map((col) => {
@@ -35,6 +47,7 @@ class UngridifiedNavbar extends Component {
 
     render () {
         const { children, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps } = this.props;
+        this.constructColumns();
         return (
             <Grid {...otherProps} columnsTemplate={columnsTemplate || this.generateColumnsTemplate(children)} rowsTemplate={rowsTemplate || "fit-content(100%)"} gap={gap} rowGap={rowGap} colGap={colGap}>
                 { this.renderChildren() }
@@ -44,6 +57,6 @@ class UngridifiedNavbar extends Component {
 };
 
 
-export const Navbar = gridify(UngridifiedNavbar, { forcedProps: { fullwidth: 'true', selfRowTemplate: 'fit-content(100%)' }, componentName: 'navbar' });
+export const Navbar = gridify(UngridifiedNavbar, { forcedProps: { fullwidth: 'true', selfRowTemplate: 'fit-content(100%)' }, componentName: 'Navbar' });
 
 export * from './NavItem';

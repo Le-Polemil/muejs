@@ -5,7 +5,7 @@ import deepEqual from 'lodash.isequal';
 
 import GridsContext from '../../store/context/Grids';
 import { updateGridElement } from '../../store/actions/Grids';
-import { getGrid, getGridExceptElements, getElement, getGridWidth, getElements } from "../../store/selectors/Grids";
+import { getGridWidth } from "../../store/selectors/Grids";
 
 
 function gridify(Component, { forcedProps = {}, staticMethods = [], componentName } = {}) {
@@ -19,95 +19,104 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
             super(props);
             this.state = {
                 id: uuid(),
+                lastMinified: {},
             };
         }
 
         componentDidUpdate(prevProps, prevState, snapshot) {
             const { dispatch, store } = this.context;
             const { idgrid } = this.props;
-            const { id } = this.state;
+            const { id, lastMinified } = this.state;
 
-            dispatch(updateGridElement(
-                {
-                    grid: idgrid,
-                    id: id,
-                    element: this.getMinified(),
-                },
-            ));
+            const newMinified = this.getMinified();
+
+            if (deepEqual(newMinified, lastMinified)) return;
+
+            dispatch(updateGridElement({
+                grid: idgrid,
+                id: id,
+                element: newMinified,
+            }));
+            this.setState(state => ({ lastMinified: newMinified }));
         }
 
+
+        isFixed() {
+            return this.props.fixed === 'true' || forcedProps.fixed === 'true';
+        }
 
         isFullWidth() {
             return this.props.fullwidth === 'true' || forcedProps.fullWidth === 'true';
         }
 
+        fullWidthValue() {
+            const { idgrid, width } = this.props;
+
+            const gridWidth = getGridWidth(this.context.store, { grid: idgrid });
+            return this.isFullWidth() && gridWidth ? gridWidth : width;
+        }
+
 
         getMinified() {
-            const { col, row, width, height, fullwidth, fullheight } = this.props;
+            const { col, row, height, fullwidth, fullheight } = this.props;
             const { selfRowTemplate, selfColTemplate } = forcedProps;
 
             const type = componentName || Component.displayName || `Gridified${Component.name || 'Component'}`;
 
-            return { type, col, row, width, height, fullwidth, fullheight, selfRowTemplate, selfColTemplate };
+            return { type, col: this.isFixed() ? 0 : col, row: this.isFixed() ? 0 : row, width: this.fullWidthValue(), height, fullwidth, fullheight, selfRowTemplate, selfColTemplate };
         }
 
 
         render() {
-            const {
-                idgrid,
+            // To get every transmissibleProps we remove all our customProps and get others with spread operator
+            let {
+                col: _col,
+                row: _row,
+                width: _width,
+                height: _height,
+                fullwidth: _fullwidth,
+                fullheight: _fullheight,
 
+                idgrid,
                 className,
                 style,
-
-                col,
-                row,
-
-                width,
-                height,
-
-                fullwidth,
-                fullheight,
-
                 children,
-                ...otherProps,
+                ...transmissibleProps
             } = this.props;
 
-            const specificClassName = camelToKebab(
-                componentName ||
-                Component.displayName ||
-                `Gridified${Component.name || 'Component'}`
-            );
+            const { type, col, row, width, height, fullwidth, fullheight } = this.getMinified();
+            const { shouldTransmitProps } = forcedProps;
 
-            const classNames = [specificClassName, className].filter(e => !!e).join(' ');
 
-            const spanWidth = this.isFullWidth() ? getGridWidth(this.context.store, { grid: idgrid }) : null;
-            const styles = width > 0 && height > 0
-                ? {
-                    gridColumn: `${col} / span ${spanWidth || width}`,
-                    gridRow: `${row} / span ${height}`,
-                    ...style,
-                }
-                : {
-                    display: 'none',
-                    ...style,
-                };
+            const classNames = [camelToKebab(type), className].filter(e => !!e).join(' ');
+
+
+            let styles = { };
+
+            if (width <= 0 && height <= 0) {
+                styles['display'] = 'none';
+            }
+            else {
+                styles['gridColumn'] = `${col} / span ${width}`;
+                styles['gridRow'] = `${row} / span ${height}`;
+            }
+            if (col === 0 || row === 0) {
+                styles['position'] = 'fixed';
+            }
+
+            styles = { ...styles, ...style };
+
+            const gridElementProps = shouldTransmitProps ? { idgrid, col, row, width, height, fullwidth, fullheight } : {};
 
 
             return (
                 <Component
+                    {...transmissibleProps}
+                    {...gridElementProps}
+
                     className={classNames}
+
                     style={styles}
-
-                    col={col}
-                    row={row}
-
-                    width={width}
-                    height={height}
-
-                    fullwidth={fullwidth}
-                    fullheight={fullheight}
-
-                    {...otherProps}
                 >
                     { children }
                 </Component>

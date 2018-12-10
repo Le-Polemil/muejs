@@ -9,7 +9,7 @@ const Logo = ({ children, imgSrc, route, ...otherProps }) => (
         { imgSrc ? <img src={imgSrc} alt={children}/> : children }
     </a>
 );
-export const NavLogo = gridify(Logo, { componentName: 'nav-logo' });
+export const NavLogo = gridify(Logo, { componentName: 'NavLogo' });
 
 
 
@@ -17,7 +17,7 @@ export const NavLogo = gridify(Logo, { componentName: 'nav-logo' });
 const Brand = ({ children, route, ...otherProps }) => (
     <a {...otherProps} href={ route || '/' }>{ children }</a>
 );
-export const NavBrand = gridify(Brand, { componentName: 'nav-brand' });
+export const NavBrand = gridify(Brand, { componentName: 'NavBrand' });
 
 
 
@@ -25,7 +25,7 @@ export const NavBrand = gridify(Brand, { componentName: 'nav-brand' });
 const Label = ({ label, route, children, ...otherProps }) => (
     <a {...otherProps} href={ route }>{ label || children }</a>
 );
-export const NavLabel = gridify(Label, { componentName: 'nav-label' });
+export const NavLabel = gridify(Label, { componentName: 'NavLabel' });
 
 
 
@@ -40,4 +40,4 @@ const Icon = ({ icon, route, size, svg, onClick, ...otherProps }) => {
         </a>
     );
 };
-export const NavIcon = gridify(Icon, { componentName: 'nav-icon' });
+export const NavIcon = gridify(Icon, { componentName: 'NavIcon' });

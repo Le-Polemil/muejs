@@ -1,7 +1,13 @@
 import React from 'react';
 import deepEqual from 'lodash.isequal';
 
-import { getElement, getElements, getGridDimensions, getGridHeight, getGridWidth } from '../../selectors/Grids';
+import {
+    getElement,
+    getGridElements,
+    getGrid,
+    getGridHeight,
+    getGridWidth
+} from '../../selectors/Grids';
 
 
 const GridsContext = React.createContext();
@@ -12,34 +18,63 @@ export const GridsConsumer = GridsContext.Consumer;
 
 
 
-export const SET_GRID = 'grids/SET_GRID';
-const updateGridAction = ({ id, elements, width, height }) => ({
-    type: SET_GRID,
+export const CREATE_GRID = 'grids/CREATE_GRID';
+const createGridAction = ({ grid, data }) => ({
+    type: CREATE_GRID,
     payload: {
-        id,
-        elements,
-        width,
-        height
+        grid,
+        data
     }
 });
-
-export const setGrid = ({ grid, elements, width, height }) => {
+export const createGrid = ({ grid, data }) => {
 	return store => {
-		if (!grid || !elements && !width && !height) return;
+		if (!grid || !data) return;
 
-		if (elements === undefined) {
-		    elements = getElements(store, { grid });
-        }
-		if (width === undefined) {
-		    width = getGridWidth(store, { grid});
-        }
-		if (height === undefined) {
-		    height = getGridHeight(store, { grid });
-        }
-
-        return updateGridAction({ id: grid, elements, width, height });
-    }
+        return createGridAction({ grid, data });
+    };
 };
+
+
+export const UPDATE_GRID_ELEMENTS = 'grids/UPDATE_GRID_ELEMENTS';
+const updateGridElementsAction = ({ grid, elements }) => ({
+	type: UPDATE_GRID_ELEMENTS,
+	payload: {
+		grid,
+		elements,
+	}
+});
+export const updateGridElements = ({ grid, elements }) => {
+	return store => {
+		if (!grid || !elements) return;
+
+		if (deepEqual(elements, getGridElements(store, { grid }))) return;
+
+		return updateGridElementsAction({ grid, elements });
+	};
+};
+
+
+
+export const UPDATE_GRID_DIMENSIONS = 'grids/UPDATE_GRID_DIMENSIONS';
+const updateGridDimensionsAction = ({ grid, width, height }) => ({
+	type: UPDATE_GRID_DIMENSIONS,
+	payload: {
+		grid,
+		width,
+        height,
+	}
+});
+export const updateGridDimensions = ({ grid, width, height }) => {
+    return store => {
+        if (!grid || !width || !height) return;
+
+		if (width === getGridWidth(store, { grid }) && height === getGridHeight(store, { grid })) return;
+
+
+        return updateGridDimensionsAction({ grid, width, height });
+    };
+};
+
 
 
 
@@ -71,7 +106,7 @@ export const updateGridElement = ({ grid, id, element }) => {
 
 
 
-// export function setGrid(grid) {
+// export function createGrid(grid) {
 // 	const { grids } = this.state;
 // 	if (!grid || !grids) return;
 //
@@ -87,7 +122,7 @@ export const updateGridElement = ({ grid, id, element }) => {
 //
 // 		const updatedGrid = { [idgrid]: { ...grids[idgrid], element } };
 //
-// 		this.setGrid(updatedGrid);
+// 		this.createGrid(updatedGrid);
 // 	}
 //
 //

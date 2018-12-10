@@ -8,13 +8,21 @@ import { Grid, Element as Cell, Row } from '../src/components/containers/Grid';
 import { Navbar as MueJSNavbar, NavIcon, NavLabel, NavLogo, NavBrand } from '../src/components/containers/Navbar';
 import { Footer as MueJSFooter, FooterLine, FooterList, FooterSeparator } from '../src/components/containers/Footer';
 
+import { Screen } from "../src/components/containers/Screen";
+
+import Button, { Button as GridButton } from "../src/components/ui/inputs/Button";
+import { scrollTo as buttonScrollTo } from "../src/components/ui/inputs/Button/static";
+
+
 import './styles/demoapp.styl';
+
+
 
 class Navbar extends Component {
     render() {
         const { idgrid } = this.props;
         return (
-            <MueJSNavbar idgrid={idgrid}>
+            <MueJSNavbar idgrid={idgrid} fixed="true">
                 <NavBrand justify="left">MueJS</NavBrand>
                 <NavLabel justify="right" label="cobelt.fr" route="http://cobelt.fr"/>
                 <NavLabel justify="right" label="Ophis" route="http://ophis.cobelt.fr"/>
@@ -29,7 +37,7 @@ class Footer extends Component {
 	render() {
 		const { idgrid } = this.props;
 		return (
-			<MueJSFooter idgrid={idgrid} row={3} columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
+			<MueJSFooter idgrid={idgrid} row={4} columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
 				<FooterList row={1} col={1} width={2}>
 					<Cell type="h5">Who am I ?</Cell>
 
@@ -86,28 +94,69 @@ class Footer extends Component {
 	}
 }
 
+function goTo ({ elementId, offset }) {
+    buttonScrollTo({ target: document.getElementById(elementId), offset });
+}
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = { opened: true }
+        this.state = { opened: true, shouldDisplayTopButton: false };
     }
+
+    componentDidMount() {
+        window.addEventListener('scroll', () => this.handleScroll())
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', () => this.handleScroll())
+    }
+
+    handleScroll() {
+        const actualScroll = window.scrollY;
+        const anchor = document.getElementById('orangeScreen');
+
+        this.setState({ shouldDisplayTopButton: actualScroll > (anchor && anchor.offsetTop - 64) });
+    }
+
 
     render() {
         return (
-            <Grid className="page" rowsTemplate={{ 1: 'fit-content(100%)', 3: 'fit-content(100%)' }} columnsTemplate={'1fr 60vw 1fr'}>
+            <Grid className="page" rowsTemplate={{ 4: 'fit-content(100%)' }} columnsTemplate={{ 1: '1fr', 2: '60vw', 3: '1fr' }}>
 
                 <Navbar />
 
-                <Cell col={2} row={2} className="bg-success">
+                <Screen id="greenScreen" row={1} className="test-div bg-success" marginNavHeight="true" navHeight={'64px'}>
                     Blblblbl
-                </Cell>
+                    <Button className="scroll-btn" onClick={() => goTo({ elementId: 'purpleScreen', offset: -64 })}>Click me !</Button>
+                </Screen>
 
-                {/*<ArticleList row={2} quantity={10} style={{ paddingLeft: '1rem' }} />*/}
+                <Screen id="orangeScreen" row={2} className="test-div bg-pastel-orange" navHeight={'64px'}>
+                    Blblblbl
+                    <Button className="scroll-btn" onClick={() => goTo({ elementId: 'greenScreen', offset: -64 })}>Click me !</Button>
+                </Screen>
 
-                {/*<ArticlePreview />*/}
+                <Screen  id="purpleScreen" row={3} className="test-div bg-pastel-purple" navHeight={'64px'}>
+                    Blblblbl
+                    <Button className="scroll-btn" onClick={() => goTo({ elementId: 'orangeScreen', offset: -64 })}>Click me !</Button>
+                </Screen>
 
-                {/*<ArticleList row={2} col={3} style={{ paddingRight: '1rem' }}/>*/}
+                {/*/!*<ArticleList row={2} quantity={10} style={{ paddingLeft: '1rem' }} />*!/*/}
+
+                {/*/!*<ArticlePreview />*!/*/}
+
+                {/*/!*<ArticleList row={2} col={3} style={{ paddingRight: '1rem' }}/>*!/*/}
+
+                {/*{ this.state.shouldDisplayTopButton && (*/}
+                    <GridButton
+                        className="circle"
+                        fixed="true"
+                        icon="arrow_drop_up"
+                        text=""
+                        style={{ backgroundColor: '#af4b2b', color: '#fff', bottom: '2.5%', right: '2.5%' }}
+                        onClick={() => goTo({ elementId: 'greenScreen', offset: -64 })}
+                    />
+                {/*) }*/}
 
                 <Footer />
 

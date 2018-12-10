@@ -24,18 +24,33 @@ export function getTemplateLength(template) {
 }
 
 
-export function generateTemplate({ propsTemplate, dimension }) {
-	if (propsTemplate && typeof propsTemplate === typeof '') return propsTemplate;
-	if (dimension) {
-		const templates = [];
-		for (let i = 0; i < dimension; i++) {
-			if (propsTemplate && propsTemplate[i + 1]) {
-				templates[i] = propsTemplate[i + 1];
-			} else {
-				templates[i] = 'auto';
-			}
+export function generateTemplate({ template, dimension }) {
+	try {
+		switch (typeof template) {
+			case 'object':
+				const templateToReturn = [];
+				for (let i = 0; i < dimension; i++) {
+                    templateToReturn[i] = template && template[i + 1] ? template[i + 1] : 'auto';
+				}
+				return templateToReturn.filter(e => !!e).join(' ');
+
+			case 'string':
+				return template;
+
+			case 'number':
+				return Array(NumberOrOne(template)).fill('auto').join(' ');
+
+			default:
+				if (dimension) {
+					return Array(dimension).fill('auto').join(' ');
+				}
+				else {
+					return 'fit-content(100%)';
+				}
 		}
-		return templates.filter(e => !!e).join(' ');
 	}
-	return 'fit-content(100%)'
+	catch (e) {
+		console.error('Got an error generating template :', e, '-> Gave fit-content(100%)');
+		return 'fit-content(100%)';
+	}
 }

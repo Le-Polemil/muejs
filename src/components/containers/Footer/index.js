@@ -6,9 +6,9 @@ import gridify from '../../../hoc/gridify';
 
 export class UngridifiedFooter extends Component {
     render() {
-        const { children, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps  } = this.props;
+        const { children, ...otherProps  } = this.props;
         return (
-            <Grid {...otherProps} columnsTemplate={columnsTemplate} rowsTemplate={rowsTemplate} gap={gap} rowGap={rowGap} colGap={colGap}>
+            <Grid {...otherProps}>
                 { children }
             </Grid>
         );
@@ -16,6 +16,6 @@ export class UngridifiedFooter extends Component {
 };
 
 
-export const Footer = gridify(UngridifiedFooter, { forcedProps: { fullwidth: 'true', selfRowTemplate: 'fit-content(100%)' }, componentName: 'footer' });
+export const Footer = gridify(UngridifiedFooter, { forcedProps: { fullwidth: 'true', selfRowTemplate: 'fit-content(100%)' }, componentName: 'Footer' });
 
 export * from './FooterItem';

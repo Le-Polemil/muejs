@@ -19,16 +19,16 @@ class List extends Component {
     }
 
     render() {
-        const { children, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps } = this.props;
+        const { children, ...otherProps } = this.props;
         return (
-            <Grid { ...otherProps } columnsTemplate={columnsTemplate} rowsTemplate={rowsTemplate} gap={gap} rowGap={rowGap} colGap={colGap}>
+            <Grid { ...otherProps }>
                 { this.renderChildren() }
             </Grid>
         );
     }
 }
 
-export const FooterList = gridify(List, { componentName: 'footer-list' });
+export const FooterList = gridify(List, { componentName: 'FooterList' });
 
 
 
@@ -48,17 +48,17 @@ export class Line extends Component {
     }
 
     render() {
-        const { children, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps } = this.props;
+        const { children, ...otherProps } = this.props;
         return (
-            <Grid { ...otherProps } columnsTemplate={columnsTemplate} rowsTemplate={rowsTemplate} gap={gap} rowGap={rowGap} colGap={colGap}>
+            <Grid { ...otherProps }>
                 { this.renderChildren() }
             </Grid>
         );
     }
 }
 
-export const FooterLine = gridify(Line, { forcedProps: { fullwidth: 'true' }, componentName: 'footer-line' });
+export const FooterLine = gridify(Line, { forcedProps: { fullwidth: 'true' }, componentName: 'FooterLine' });
 
 
 
-export const FooterSeparator = gridify(UngridifiedElement, { componentName: 'footer-separator' });
+export const FooterSeparator = gridify(UngridifiedElement, { componentName: 'FooterSeparator' });

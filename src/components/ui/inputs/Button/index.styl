@@ -1,6 +1,6 @@
-.artp-btn
-  $button-bg-color #efefef
-  $button-font-color #717171
+.btn
+  $button-bg-color = #efefef
+  $button-font-color = #717171
   
   background-color $button-bg-color
   border 0
@@ -10,16 +10,35 @@
   font inherit
   margin 0.4rem 0.4rem 0.4rem 0
   outline inherit
-  padding 0.4rem
   transition background-color 0.2s, color 0.2s
-  
-  &hover 
-    $hover-ratio 8%
+  padding 0.6rem 1.6rem
+  font-size 1.5rem
+
+  &.xs, &.extra-small
+    padding 0.2rem 0.8rem
+    font-size 0.9rem
+
+  &.sm, &.small
+    padding 0.4rem 1.2rem
+    font-size 1.2rem
+
+  &.lg, &.large
+    padding 0.8rem 2rem
+    font-size 1.8rem
+
+  &.xl, &.extra-large
+    padding 1.2rem 2.8rem
+    font-size 2.4rem
+
+
+
+  &:hover
+    $hover-ratio = 8%
     background-color darken($button-bg-color, $hover-ratio)
     color darken($button-font-color, $hover-ratio)
   
   
-  &disabled 
+  &.disabled
     background-color lighten($button-bg-color, 3%)
     color lighten($button-font-color, 25%)
     cursor not-allowed

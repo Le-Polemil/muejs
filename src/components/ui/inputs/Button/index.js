@@ -1,13 +1,20 @@
 import React from 'react';
+
+import gridify from '../../../../hoc/gridify';
+
 import './index.styl';
 
-const Button = ({ onClick, children, className = '', icon = '', disabled = false, text = '' }) => (
-    <button className={`artp-btn ${className}`} disabled={disabled} onClick={onClick} >
-        { text ?
-            <span>{ icon !== '' && <i className={`fa fa-${icon}`} /> }{ text.toUpperCase() }</span> :
-            children
-        }
-    </button>
-);
+const UngridifiedButton = ({ children, className = '', size = '', icon = '', text, ...otherProps }) => {
+    const classNames = ['btn', size, className].filter(e => !!e).join(' ');
+    return (
+        <button className={classNames} {...otherProps}>
+            { (text !== undefined) ?
+                <span>{ icon !== '' && <i className="material-icons">{icon}</i> }{ text.toUpperCase() }</span> :
+                children
+            }
+        </button>
+    );
+}
 
-export default Button;
+export const Button = gridify(UngridifiedButton);
+export default UngridifiedButton;

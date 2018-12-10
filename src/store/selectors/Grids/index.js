@@ -14,9 +14,9 @@ export const getGridExceptElements = (store, { grid }) => {
 };
 
 
-export const getElements = (store, { grid }) => get(getGridStore(store), `${grid}.elements`);
+export const getGridElements = (store, { grid }) => get(getGridStore(store), `${grid}.elements`);
 
-export const getElement = (store, { grid, element }) => get(getElements(store, { grid }), `${element}`);
+export const getElement = (store, { grid, element }) => get(getGridElements(store, { grid }), `${element}`);
 
 
 
