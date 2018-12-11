@@ -5,13 +5,10 @@ import './index.styl';
 
 export class UngridifiedScreen extends Component {
     render() {
-        const { navHeight, marginNavHeight, style, children, ...otherProps } = this.props;
+        const { navHeight, style, children, ...otherProps } = this.props;
         const styles = {};
         styles['marginBottom'] = `-${navHeight}`;
         styles['paddingBottom'] = navHeight;
-        if (marginNavHeight === 'true' && navHeight) {
-            styles['marginTop'] = navHeight;
-        }
         return <div style={{ ...styles, ...style }} {...otherProps}>{ children }</div>;
     }
 }

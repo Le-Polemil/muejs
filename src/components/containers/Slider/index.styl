@@ -1,0 +1,18 @@
+@require '../../../styles/variables.styl'
+
+.slider
+  &.screen-height
+    min-height 100vh
+
+  .slider-item
+
+    &:not(.active)
+      display none
+      height 0
+      width 0
+
+    &.active
+      object-fit cover
+      object-position center
+      min-width 100%
+      min-height 100%
