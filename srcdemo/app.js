@@ -37,7 +37,7 @@ class Footer extends Component {
 	render() {
 		const { idgrid } = this.props;
 		return (
-			<MueJSFooter idgrid={idgrid} row={4} columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
+			<MueJSFooter idgrid={idgrid} row={5} columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
 				<FooterList row={1} col={1} width={2}>
 					<Cell type="h5">Who am I ?</Cell>
 
@@ -104,21 +104,6 @@ class App extends Component {
         this.state = { opened: true, shouldDisplayTopButton: false };
     }
 
-    componentDidMount() {
-        window.addEventListener('scroll', () => this.handleScroll())
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', () => this.handleScroll())
-    }
-
-    handleScroll() {
-        const actualScroll = window.scrollY;
-        const anchor = document.getElementById('orangeScreen');
-
-        this.setState({ shouldDisplayTopButton: actualScroll > (anchor && anchor.offsetTop - 64) });
-    }
-
 
     render() {
         return (
@@ -133,12 +118,17 @@ class App extends Component {
 
                 <Screen id="orangeScreen" row={2} className="test-div bg-pastel-orange" navHeight={'64px'}>
                     Blblblbl
-                    <Button className="scroll-btn" onClick={() => goTo({ elementId: 'greenScreen', offset: -64 })}>Click me !</Button>
+                    <Button className="scroll-btn" onClick={() => goTo({ elementId: 'redScreen', offset: -64 })}>Click me !</Button>
                 </Screen>
 
                 <Screen  id="purpleScreen" row={3} className="test-div bg-pastel-purple" navHeight={'64px'}>
                     Blblblbl
                     <Button className="scroll-btn" onClick={() => goTo({ elementId: 'orangeScreen', offset: -64 })}>Click me !</Button>
+                </Screen>
+
+                <Screen  id="redScreen" row={4} className="test-div bg-error" navHeight={'64px'}>
+                    Blblblbl
+                    <Button className="scroll-btn" onClick={() => goTo({ elementId: 'greenScreen', offset: -64 })}>Click me !</Button>
                 </Screen>
 
                 {/*/!*<ArticleList row={2} quantity={10} style={{ paddingLeft: '1rem' }} />*!/*/}
