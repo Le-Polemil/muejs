@@ -113,7 +113,7 @@ class App extends Component {
 
                 <Navbar />
 
-                <Slider start={3} row={1} className="screen-height" style={{ marginBottom: '-64px', paddingBottom: '64px' }}>
+                <Slider start={0} row={1} className="screen-height" style={{ marginBottom: '-64px', paddingBottom: '64px' }}>
                     <img alt="slide" src="https://cdn.allwallpaper.in/wallpapers/1366x768/14917/nature-animals-dogs-husky-1366x768-wallpaper.jpg"/>
                     <img alt="slide" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_998194_5396441439-ab55e5a742-b.jpg"/>
                     <img alt="slide" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_a11de2_1630913.jpg"/>

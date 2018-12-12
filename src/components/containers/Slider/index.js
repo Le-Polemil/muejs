@@ -32,10 +32,18 @@ export default class UngridifiedSlider extends Component {
         const { id, activeSlide } = this.state;
 
         return React.Children.map(children, (child, index) => {
-            const classNames = [child.props.className, 'slider-item'].filter(e => !!e).join(' ');
-            const styles = { ...styles, transform: `translateX(${(index - activeSlide) * 100}%)`};
+            let distance = index - activeSlide;
+            if (Math.abs(distance) === children.length - 1) distance = -Math.sign(distance);
 
-            return React.cloneElement(child, { key: id, className: classNames, col: index + 1, row: 1, style: styles });
+            const classNames = [child.props.className, 'slider-item', (Math.abs(distance) > 1) ? 'opacity-0' : ''].filter(e => !!e).join(' ');
+
+            const styles = { ...child.props.style };
+            if (distance !== 0) {
+                styles['transform'] = `translateX(${(distance) * 100}%)`;
+            }
+            styles['zIndex'] = children.length - Math.abs(distance);
+
+            return React.cloneElement(child, { key: id, className: classNames, style: styles });
         });
     }
 
@@ -46,11 +54,33 @@ export default class UngridifiedSlider extends Component {
 
         return (
             <div { ...otherProps }>
-                { (loop === "true" || activeSlide > 0) && <Icon onClick={() => this.handleLeftArrow()} position="absolute" className="left-arrow lg">keyboard_arrow_left</Icon> }
+
+                { (loop === "true" || activeSlide > 0) && (
+                    <Icon
+                        onClick={() => this.handleLeftArrow()}
+                        position="absolute"
+                        className="left-arrow lg"
+                        style={{ zIndex: children.length + 1 }}
+                    >
+                        keyboard_arrow_left
+                    </Icon>
+                ) }
+
                 <div id={id} className="slider-wrapper">
                     { this.renderChildren() }
                 </div>
-                { (loop === "true" || activeSlide < children.length - 1) && <Icon onClick={() => this.handleRightArrow()} position="absolute" className="right-arrow lg">keyboard_arrow_right</Icon> }
+
+                { (loop === "true" || activeSlide < children.length - 1) && (
+                    <Icon
+                        onClick={() => this.handleRightArrow()}
+                        position="absolute"
+                        className="right-arrow lg"
+                        style={{ zIndex: children.length + 1 }}
+                    >
+                        keyboard_arrow_right
+                    </Icon>
+                ) }
+
             </div>
         );
     }
