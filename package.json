@@ -9,7 +9,11 @@
     "url": "https://github.com/Cobelt/muejs.git"
   },
   "dependencies": {
-    "uuid": "^3.3.2"
+    "immer": "^1.8.0",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
+    "lodash.set": "^4.3.2",
+    "id": "^3.3.2"
   },
   "peerDependencies": {
     "react": "^16.0.0",

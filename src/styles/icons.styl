@@ -1,3 +1,24 @@
+.clickable-icon
+  $bg-color = #666
+
+  align-self center
+  justify-self center
+  background-color rgba($bg-color, 0)
+  cursor pointer
+  display flex
+  font-size 1.5rem
+  padding 0.5rem
+  transition filter 0.2s, background-color 0.2s
+
+  &:hover
+    background-color rgba($bg-color, 0.25)
+    filter brightness(90%)
+
+  &:active
+    background-color rgba($bg-color, 0.4)
+    filter brightness(60%)
+
+
 i.material-icons
   .svg-container
     width 1.6rem

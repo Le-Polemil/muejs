@@ -19,7 +19,7 @@ export const SnackbarContainer = ({ notifications, closeNotification }) => (
       <a
         role="presentation"
         className="close-all"
-        onClick={() => (notifications.forEach(notif => closeNotification(notif.uuid)))}
+        onClick={() => (notifications.forEach(notif => closeNotification(notif.id)))}
       >
         <span>Fermer tout <i className="fa fa-trash" /></span>
       </a>
@@ -27,7 +27,7 @@ export const SnackbarContainer = ({ notifications, closeNotification }) => (
     {
       notifications.map(notification => (
         <Snackbar
-          key={notification.uuid}
+          key={notification.id}
           style={{
             position: 'relative',
             marginTop: 5,
@@ -35,9 +35,9 @@ export const SnackbarContainer = ({ notifications, closeNotification }) => (
             left: 0,
           }}
           autoHideDuration={notification.autoClose}
-          onClose={(_, reason) => reason !== 'clickaway' && closeNotification(notification.uuid)}
+          onClose={(_, reason) => reason !== 'clickaway' && closeNotification(notification.id)}
           SnackbarContentProps={{
-            'aria-describedby': notification.uuid,
+            'aria-describedby': notification.id,
           }}
           message={<span>{notification.messsage}</span>}
         />))

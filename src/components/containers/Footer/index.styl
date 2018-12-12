@@ -13,9 +13,15 @@ footer-title-font-size = 2.1rem
   color font-color-on-primary
   font-size footer-font-size
 
+  z-index 99
+
+  .footer-line
+    grid-auto-flow column
+
   .footer-list, .footer-line
     display inline-grid
     align-self start
+    height 100%
 
     .list-item, .line-item
       align-content center
@@ -24,12 +30,12 @@ footer-title-font-size = 2.1rem
       overflow hidden
       height 100%
 
-      > *
-        color white
-        border 0
-        margin 0
-        padding .5rem 0
+      color white
+      border 0
+      margin 0
+      padding .5rem 0
 
+    .list-item, .line-item
       a
         cursor pointer
         height 100%
@@ -37,20 +43,18 @@ footer-title-font-size = 2.1rem
     .list-item
       width 80%
 
-      > h1, h2, h3, h4, h5, h6
+    h1, h2, h3, h4, h5, h6
+      &.list-item
         font-weight bold
 
-      a, .line-item a
-        box-sizing border-box
-        font-weight normal
-
-    .line-item
+    a
+      box-sizing border-box
+      font-weight bold
+      transition background .3s
       width 100%
-      a
-        font-weight bold
-        transition background .3s
-        &:hover
-          background-color link-hover-black-shade-bg
+
+      &:hover
+        background-color link-hover-black-shade-bg
 
   .footer-separator
     height 1px

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Motion, spring } from 'react-motion';
-import uuidv4 from 'uuid/v4';
+import uuid from 'uuid/v4';
 
 import './index.styl';
 
@@ -12,7 +12,7 @@ const defaultSpring = -totalLength;
 const circleSpring = spring(circleLength, { stiffness: 150, damping: 18 });
 
 export const RadioButton = (props) => {
-    const { id = (props.name && props.value) ? `${props.name}-${props.value}` : uuidv4(), name = 'radiobutton', disabled = false, value = id, onChange, checked = null, label = null } = props;
+    const { id = (props.name && props.value) ? `${props.name}-${props.value}` : uuid(), name = 'radiobutton', disabled = false, value = id, onChange, checked = null, label = null } = props;
     return (
         <span>
             <label htmlFor={id} className="radiobutton"
