@@ -24,10 +24,16 @@ navbar-brand-font-color = #fff
 
   z-index 100
 
+  &::selection
+    background-color transparent
+
   .nav-icon, .nav-label, .nav-brand, .nav-logo
     cursor pointer
     display inline-grid
     justify-content center
+
+    &::selection
+      background-color transparent
 
   .nav-brand
     padding 0 .8rem
@@ -58,6 +64,9 @@ navbar-brand-font-color = #fff
       line-height navbar-height-mobile
       justify-content center
       display inline-grid
+
+      &::selection
+        background-color transparent
 
   h1, h2, h3, h4, h5, h6, p
     margin 0

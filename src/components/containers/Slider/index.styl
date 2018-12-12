@@ -1,18 +1,61 @@
 @require '../../../styles/variables.styl'
 
 .slider
+  display flex
+  position relative
+
   &.screen-height
-    min-height 100vh
+    height 100vh
 
-  .slider-item
 
-    &:not(.active)
-      display none
-      height 0
-      width 0
+  .slider-wrapper
+    height 100%
+    width 100%
 
-    &.active
+    transition transform 0.4s;
+
+
+    .slider-item
       object-fit cover
       object-position center
-      min-width 100%
+
       min-height 100%
+      width 100%
+
+      position absolute
+
+      transition transform 0.4s
+
+      &::selection
+        background-color transparent
+
+
+
+  .left-arrow, .right-arrow
+    display flex
+    align-items center
+    justify-content center
+
+    height 100%
+    width 15rem
+
+    margin 0
+
+    z-index 2
+
+    transition box-shadow 0.25s, color 0.25s
+
+    &:hover
+      color #eee
+
+
+  .left-arrow
+    left 0
+    &:hover
+      box-shadow inset rgba(16, 16, 16, 0.25) 5rem 0 5rem -3rem
+
+  .right-arrow
+    right 0
+
+    &:hover
+      box-shadow inset rgba(16, 16, 16, 0.25) -5rem 0 5rem -3rem

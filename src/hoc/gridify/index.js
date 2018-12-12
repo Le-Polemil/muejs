@@ -42,7 +42,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
 
         isFixed() {
-            return this.props.fixed === 'true' || forcedProps.fixed === 'true';
+            return this.props.position === 'fixed' || forcedProps.position === 'fixed';
         }
 
         isFullWidth() {
@@ -81,6 +81,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
                 className,
                 style,
                 children,
+                position,
                 ...transmissibleProps
             } = this.props;
 
@@ -100,8 +101,8 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
                 styles['gridColumn'] = `${col} / span ${width}`;
                 styles['gridRow'] = `${row} / span ${height}`;
             }
-            if (col === 0 || row === 0) {
-                styles['position'] = 'fixed';
+            if (position) {
+                styles['position'] = position;
             }
 
             styles = { ...styles, ...style };

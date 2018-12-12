@@ -24,7 +24,7 @@ class Navbar extends Component {
     render() {
         const { idgrid } = this.props;
         return (
-            <MueJSNavbar idgrid={idgrid} fixed="true">
+            <MueJSNavbar idgrid={idgrid} position="fixed">
                 <NavBrand justify="left">MueJS</NavBrand>
                 <NavLabel justify="right" label="cobelt.fr" route="http://cobelt.fr"/>
                 <NavLabel justify="right" label="Ophis" route="http://ophis.cobelt.fr"/>
@@ -113,11 +113,12 @@ class App extends Component {
 
                 <Navbar />
 
-                <Slider row={1} className="screen-height">
-                    <img alt="green-screen" src="https://cdn.allwallpaper.in/wallpapers/1366x768/14917/nature-animals-dogs-husky-1366x768-wallpaper.jpg"/>
-                    <img alt="orange-screen" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_998194_5396441439-ab55e5a742-b.jpg"/>
-                    <img alt="orange-screen" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_a11de2_1630913.jpg"/>
-                    <img alt="orange-screen" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_f4c1e0_jindo-coreen-21.jpg"/>
+                <Slider start={3} row={1} className="screen-height" style={{ marginBottom: '-64px', paddingBottom: '64px' }}>
+                    <img alt="slide" src="https://cdn.allwallpaper.in/wallpapers/1366x768/14917/nature-animals-dogs-husky-1366x768-wallpaper.jpg"/>
+                    <img alt="slide" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_998194_5396441439-ab55e5a742-b.jpg"/>
+                    <img alt="slide" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_a11de2_1630913.jpg"/>
+                    <img alt="slide" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_f4c1e0_jindo-coreen-21.jpg"/>
+                    <img alt="slide" src="https://img.over-blog-kiwi.com/2/65/07/88/20180317/ob_ebdc7c_2958866632-8e5278b704-b.jpg"/>
                 </Slider>
 
                 <Screen id="greenScreen" row={2} height={0} className="test-div bg-success" navHeight={'64px'}>
@@ -149,7 +150,7 @@ class App extends Component {
                 {/*{ this.state.shouldDisplayTopButton && (*/}
                     {/*<GridButton*/}
                         {/*className="circle"*/}
-                        {/*fixed="true"*/}
+                        {/*position="fixed"*/}
                         {/*icon="arrow_drop_up"*/}
                         {/*text=""*/}
                         {/*style={{ color: '#fff', bottom: '2.5%', right: '2.5%' }}*/}
