@@ -1,0 +1,62 @@
+@require '../../../styles/variables.styl'
+
+navbar-height = 5.1vw
+navbar-line-height = navbar-height
+
+navbar-height-mobile = 64px
+navbar-line-height-mobile = navbar-height-mobile
+
+navbar-font-size = 1.15rem
+navbar-brand-font-size = 2.1rem
+
+navbar-font-color = #fff
+navbar-brand-font-color = #fff
+
+
+.navbar
+  background-color primary-color
+
+  width 100%
+  height navbar-height-mobile
+  line-height navbar-height-mobile
+
+  font-size navbar-font-size
+
+  .nav-icon, .nav-label, .nav-brand, .nav-logo
+    cursor pointer
+    display inline-grid
+    justify-content center
+
+  .nav-brand
+    padding 0 .8rem
+    font-size navbar-brand-font-size
+    font-weight bold
+
+    color rgba(navbar-font-color, .6)
+    transition color .2s
+
+    &:hover
+      color navbar-brand-font-color
+      transition color .2s
+
+  .nav-label, .nav-icon
+    padding 0 .6rem
+    align-self center
+    height 100%
+
+    color rgba(navbar-font-color, .8)
+    transition background-color .3s, color .3s
+
+    &:hover
+      background-color link-hover-black-shade-bg
+      color navbar-brand-font-color
+      transition background-color .3s, color .3s
+
+    i.material-icons
+      line-height navbar-height-mobile
+      justify-content center
+      display inline-grid
+
+  h1, h2, h3, h4, h5, h6, p
+    margin 0
+    line-height inherit

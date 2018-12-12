@@ -1,40 +1,12 @@
-import './styles/muejs.styl';
+// import './styles/variables.styl';
 
-import Grid, { GridElement } from './components/Grid';
+// export { Grid, GridElement, Row, Col } from './components/containers/Grid';
+//
+// export { Navbar, NavIcon, NavLabel, NavLogo } from './components/containers/Navbar';
+// export { Body, BodyElement } from './components/containers/Body';
+// export { Footer, FooterList } from './components/containers/Footer';
+//
+// export { Card, CardDescription, CardImage, CardFooter } from './components/containers/Card';
+// export { Product, ProductDescription, ProductImage, ProductInfo, ProductTitle } from './components/containers/Product';
 
-import Navbar, {NavIcon, NavLabel, NavLogo} from './components/Navbar';
-
-import Body, { BodyElement } from './components/Body';
-
-import Footer, { FooterList } from './components/Footer';
-
-import Card, { CardDescription, CardImage, CardFooter } from './components/Card';
-
-import Product, { ProductDescription, ProductImage, ProductInfo, ProductTitle } from './components/Product';
-
-export {
-    Grid,
-    GridElement,
-
-    Navbar,
-    NavLogo,
-    NavLabel,
-    NavIcon,
-
-    Body,
-    BodyElement,
-
-    Footer,
-    FooterList,
-
-    Card,
-    CardImage,
-    CardDescription,
-    CardFooter,
-
-    Product,
-    ProductImage,
-    ProductInfo,
-    ProductTitle,
-    ProductDescription,
-};
+console.log('Looks like we are in', process.env.NODE_ENV, 'mode!');

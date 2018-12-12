@@ -1,0 +1,78 @@
+#modal-root 
+  position relative
+  z-index 4023
+
+
+modal-width = 70%
+modal-height = 70%
+
+.modal-black-bg
+  background-color rgba(0, 0, 0, 0.65)
+  display inline-grid
+  height 100%
+  position fixed
+  top 0
+  width 100%
+  
+  .artp-modal 
+    align-self center
+    background-color #fff
+    border-radius 0.15rem
+    justify-self center
+    overflow-y auto
+    
+    .artp-modal-header 
+      header-color=  #fff
+      header-bg = #1289a7
+
+      align-items center
+      display inline-grid
+      font-size 1.5rem
+      grid-template-columns min-content 1fr
+      grid-template-rows 1fr
+      min-height 8.8%
+      padding 0 1.6rem
+      width 100%
+      
+      h2, .clickable-icon
+        color header-color
+        padding 0 0.5rem
+      
+      &:not(.noheadbar)
+        background-color header-bg
+        box-shadow -2px 2px 10px rgba(0, 0, 0, 0.57)
+      
+      &.noheadbar h2 
+        color #333
+        font-weight 600
+        padding 0
+    
+    .artp-modal-content 
+      justify-self center
+      padding 0 1.6rem 1.6rem
+      
+      &.fitted 
+        border-left 1px solid rgba(0, 0, 0, 0.25)
+        border-right 1px solid rgba(0, 0, 0, 0.25)
+        margin auto
+        max-width 65%
+
+
+.fixed-gridcol-2 
+  grid-column 2
+
+
+.clickable-icon
+  cursor pointer
+  font-size 1.5rem
+  padding 0.5rem
+  transition filter 0.2s
+
+  &:hover
+    filter brightness(90%)
+  
+
+  &:active
+    filter brightness(60%)
+  
+

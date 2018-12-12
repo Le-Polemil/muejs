@@ -1,0 +1,34 @@
+@require '../../../styles/variables.styl'
+
+.grid, .navbar, .body, .footer, .card, .product
+  display grid
+  min-width 100%
+  grid-auto-flow row
+
+@media (max-width small-screen)
+  .grid, .body, .footer, .card, .product
+    grid-template-columns 1fr !important
+
+.grid
+  .grid-element
+    display inline-grid
+
+  .container
+    justify-self center
+    min-width 80%
+
+.flow-column
+  grid-auto-flow column
+
+.gap-column-1
+  grid-column-gap 1%
+.gap-column-2
+  grid-column-gap 2%
+.gap-column-3
+  grid-column-gap 3%
+.gap-column-4
+  grid-column-gap 4%
+.gap-column-5
+  grid-column-gap 5%
+.gap-column-10
+  grid-column-gap 10%

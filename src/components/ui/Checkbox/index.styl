@@ -1,0 +1,25 @@
+height = 1.7rem
+
+.checkbox,
+.checkbox-label
+  color #404040
+  cursor pointer
+  font-size 'calc(%s / 1.3)' % height
+  margin 0
+
+.checkbox-label
+  padding-left 0.45rem
+  vertical-align baseline
+
+.checkbox
+
+  .svg-container
+    vertical-align middle
+    width height
+
+    .svg-checkbox
+      fill none
+      stroke currentColor
+      stroke-linecap round
+      stroke-linejoin round
+      stroke-width 2.5px

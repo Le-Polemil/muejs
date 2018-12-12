@@ -1,0 +1,29 @@
+@require '../../../styles/variables.styl'
+
+.product
+  background-color #efefef
+  border-radius .2rem
+  overflow hidden
+  justify-self stretch
+
+  .product-image, .product-description
+    display inline-grid
+
+  .product-image
+    object-fit cover
+    object-position center
+    max-width 100%
+    min-height 100%
+
+  .product-info
+    margin 2rem
+
+  .product-title
+    color darken(primary-color, 10%)
+    > *
+      font-weight bold
+
+  .product-description
+    z-index 1
+    max-width 100%
+    font-size 1.4rem

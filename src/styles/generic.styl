@@ -1,4 +1,37 @@
-@import './colors.styl'
+.border-menu
+  border-width 0
+  border-color primary-color
+  border-style solid
+  box-sizing border-box
+  transition border-width .2s
+
+  &.opn
+    border-width border-wdth
+    border-top 0
+    border-bottom 0
+
+.border-menu-icon
+  transition width .2s
+  &.opn
+    width border-wdth
+
+.rotate-anim
+  max-height 15rem
+  transform rotate(20deg)
+  transition transform 0.5s
+  &:hover
+    animation rotate 0.5s
+
+  @keyframes rotate
+    0%
+      transform rotate(20deg)
+    100%
+      transform rotate(379deg)
+
+.banner
+  max-height 7rem
+  img
+    min-width 100%
 
 .font-success
   color success-color
@@ -17,6 +50,10 @@
   background-color error-color
 .bg-info
   background-color info-color
+.bg-pastel-purple
+  background-color pastel-purple
+.bg-pastel-orange
+  background-color pastel-orange
 
 .border-success, .border-warning, .border-error, .border-info
   box-sizing border-box
@@ -42,3 +79,20 @@
   transition height 10s
   &:hover
     height 120%
+
+.block
+  display block
+
+.hidden
+  visibility hidden
+  height 0
+  width 0
+  padding 0
+  margin 0
+  border 0
+
+span >
+    h1, h2, h3, h4, h5, h6
+      display inline-grid
+      margin 0
+      font-weight bold

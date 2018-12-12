@@ -1,0 +1,23 @@
+$duration 4s
+
+.position-relative 
+  position relative
+
+.linear-spinner 
+  left 0
+  max-height 3px
+  position absolute
+  top 0
+  z-index -1
+
+.linear-spinner-path 
+  animation colors ($duration*4) linear infinite
+  transform-origin center
+
+@keyframes colors 
+  0% fill #4285f4
+  25% fill #de3e35
+  50% fill #1b9a59
+  75% fill #f76414
+  100% fill #71349c
+  
