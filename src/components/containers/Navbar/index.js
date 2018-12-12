@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import { Grid, GridElement } from '../Grid';
+import deepEqual from 'lodash.isequal';
+import { Grid } from '../Grid';
+import gridify from '../../../hoc/gridify';
+
 import './index.styl';
 
-export class Navbar extends Component {
-    generateColumnsTemplate (children) {
+
+
+class UngridifiedNavbar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { columns: [] };
+    }
+
+    constructColumns() {
+        const { children } = this.props;
         if (!children) return;
 
         const columns = { start:[], left: [], center: [], right: [], end:[] };
@@ -11,6 +22,12 @@ export class Navbar extends Component {
             columns[child.props.justify || 'left'].push(child);
         });
         this.columns = [ ...columns.start, ...columns.left, null, ...columns.center, null, ...columns.right, ...columns.end ] || this.columns;
+    }
+
+    generateColumnsTemplate () {
+        const { children } = this.props;
+        if (!children) return;
+
 
         const template = { start: '', left: '', center: '', right: '', end:'' };
         this.columns.map((col) => {
@@ -20,24 +37,26 @@ export class Navbar extends Component {
     }
 
     renderChildren () {
-        const { props, columns } = this;
+        const { props: { children } = {}, columns } = this;
 
-        return React.Children.map(props.children, (child, index) => {
+        return React.Children.map(children, child => {
             const col = columns.findIndex(element => element === child) + 1 || child.props && child.props.col;
-            return <GridElement key={index} row={1} col={col}>{ child }</GridElement>;
+            return React.cloneElement(child, { row: 1, col });
         });
     };
 
     render () {
-        const { children, className, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps } = this.props;
+        const { children, columnsTemplate, rowsTemplate, gap, rowGap, colGap, ...otherProps } = this.props;
+        this.constructColumns();
         return (
-            <GridElement className={`navbar ${className || ''}`} { ...otherProps }>
-                <Grid columnsTemplate={columnsTemplate || this.generateColumnsTemplate(children)} rowsTemplate={rowsTemplate || "1fr"} gap={gap} rowGap={rowGap} colGap={colGap}>
-                    { this.renderChildren() }
-                </Grid>
-            </GridElement>
+            <Grid {...otherProps} columnsTemplate={columnsTemplate || this.generateColumnsTemplate(children)} rowsTemplate={rowsTemplate || "fit-content(100%)"} gap={gap} rowGap={rowGap} colGap={colGap}>
+                { this.renderChildren() }
+            </Grid>
         );
     }
 };
+
+
+export const Navbar = gridify(UngridifiedNavbar, { forcedProps: { fullwidth: 'true', selfRowTemplate: 'fit-content(100%)' }, componentName: 'Navbar' });
 
 export * from './NavItem';

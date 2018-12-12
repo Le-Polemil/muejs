@@ -6,8 +6,21 @@ import './styles/muejs.styl';
 import { Grid, GridElement } from './components/containers/Grid';
 import { Navbar, NavIcon, NavLabel, NavLogo } from "./components/containers/Navbar";
 import { Footer, FooterLine, FooterList, FooterSeparator } from "./components/containers/Footer";
+import { ArticleList } from './components/containers/ArticleList';
 
 import './styles/demoapp.styl';
+
+const articleList = [
+    'coucou',
+    'coucou2',
+    'coucou23',
+    'coucou234',
+    'coucou2345',
+    'coucou23456',
+    'coucou234567',
+    'coucou2345678',
+    'coucou23456789',
+];
 
 class App extends Component {
     constructor(props) {
@@ -15,10 +28,10 @@ class App extends Component {
     }
 
     render() {
-        const footer = 12
+        const footerRow = 3;
         return (
-            <Grid className="page" gap='1rem' rowsTemplate={{ 1:'fit-content(100%)', [footer]: 'fit-content(100%)' }}>
-                <Navbar width={10}>
+            <Grid className="page" gap='1rem' rowsTemplate={{ 1:'fit-content(100%)', [footerRow]: 'fit-content(100%)' }}>
+                <Navbar>
                     <NavLogo justify="left">MueJS</NavLogo>
                     <NavLabel justify="right" label="cobelt.fr" route="http://cobelt.fr"/>
                     <NavLabel justify="right" label="Ophis" route="http://ophis.cobelt.fr"/>
@@ -26,101 +39,14 @@ class App extends Component {
                     <NavIcon className="border-menu-icon" justify="right" icon="menu" />
                 </Navbar>
 
+                <ArticleList row={2} quantity={10} style={{ paddingLeft: '1rem' }} />
 
-                <GridElement row={2} width={2} className="bg-error">
-                    Bonjour 2
-                </GridElement>
+                {/*<ArticlePreview />*/}
 
-
-                <GridElement row={3} col={2} className="bg-success">
-                    Bonjour 3
-                </GridElement>
-
-                <GridElement row={4} height={2} col={2} className="bg-pastel-purple">
-                    Bonjour 5
-                </GridElement>
-
-                <GridElement row={3} height={3} className="bg-warning">
-                    Bonjour 4
-                </GridElement>
+                <ArticleList row={2} col={3} style={{ paddingRight: '1rem' }}/>
 
 
-                <GridElement row={6} width={2} className="bg-pastel-orange">
-                    Bonjour 6
-                </GridElement>
-
-
-                <GridElement row={7} height={2} className="bg-pastel-purple">
-                    Bonjour 5
-                </GridElement>
-
-                <GridElement row={9} className="bg-success">
-                    Bonjour 3
-                </GridElement>
-
-                <GridElement row={7} height={3} col={2} className="bg-warning">
-                    Bonjour 4
-                </GridElement>
-
-
-                <GridElement row={10} width={2} className="bg-error">
-                    Bonjour 2
-                </GridElement>
-
-
-
-
-                <GridElement row={2} height={9} col={3} width={6} className="bg-info">
-                    Bonjour 1
-                </GridElement>
-
-
-
-
-                <GridElement row={2} col={9} width={2} className="bg-error">
-                    Bonjour 2
-                </GridElement>
-
-
-                <GridElement row={3} height={2} col={9} className="bg-pastel-purple">
-                    Bonjour 5
-                </GridElement>
-
-                <GridElement row={5} col={9} className="bg-success">
-                    Bonjour 3
-                </GridElement>
-
-                <GridElement row={3} height={3} col={10} className="bg-warning">
-                    Bonjour 4
-                </GridElement>
-
-
-                <GridElement row={6} col={9} width={2} className="bg-pastel-orange">
-                    Bonjour 6
-                </GridElement>
-
-
-                <GridElement row={7} col={10} className="bg-success">
-                    Bonjour 3
-                </GridElement>
-
-                <GridElement row={8} height={2} col={10} className="bg-pastel-purple">
-                    Bonjour 5
-                </GridElement>
-
-                <GridElement row={7} height={3} col={9} className="bg-warning">
-                    Bonjour 4
-                </GridElement>
-
-
-
-                <GridElement row={10} col={9} width={2} className="bg-error">
-                    Bonjour 2
-                </GridElement>
-
-
-
-                <Footer row={11} width={10} columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
+                <Footer row={footerRow} columnsTemplate={"0.55fr 0.55fr 0.4fr 0.4fr 0.55fr 0.55fr"}>
                     <FooterList row={1} col={1} width={2}>
                         <h5>Who am I ?</h5>
                         <p style={{ textAlign: 'left' }}>
@@ -165,5 +91,6 @@ class App extends Component {
         );
     }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('root'));

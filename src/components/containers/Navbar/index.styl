@@ -22,10 +22,18 @@ navbar-brand-font-color = #fff
 
   font-size navbar-font-size
 
+  z-index 100
+
+  &::selection
+    background-color transparent
+
   .nav-icon, .nav-label, .nav-brand, .nav-logo
     cursor pointer
     display inline-grid
     justify-content center
+
+    &::selection
+      background-color transparent
 
   .nav-brand
     padding 0 .8rem
@@ -57,6 +65,21 @@ navbar-brand-font-color = #fff
       justify-content center
       display inline-grid
 
+      &::selection
+        background-color transparent
+
   h1, h2, h3, h4, h5, h6, p
     margin 0
     line-height inherit
+
+
+.nav-icon i.material-icons
+    minWidth: '2.5rem'
+    font-size 1.75rem
+
+    &.large
+      font-size 2.35rem
+    &.big
+      font-size 2.05rem
+    &.small
+      font-size 1.55rem

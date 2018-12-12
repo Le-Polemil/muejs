@@ -29,7 +29,7 @@ module.exports = {
     },
 
     entry: {
-        app: './src/app.js',
+        app: './srcdemo/app.js',
     },
 
     module: {
@@ -37,7 +37,7 @@ module.exports = {
     },
     plugins: [
         cleanPlugin('dist'),
-        copyPlugin('./src/app.js'),
+        copyPlugin('./srcdemo/app.js'),
         htmlPlugin,
         HMRPlugin({ webpack }),
     ]

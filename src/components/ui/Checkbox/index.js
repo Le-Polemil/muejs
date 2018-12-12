@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Motion, spring } from 'react-motion';
-import uuidv4 from 'uuid/v4';
+import uuid from 'uuid/v4';
 
 import './index.styl';
 
@@ -39,7 +39,7 @@ export class Checkbox extends Component {
 
     render() {
         const { inputIsChecked, undetermined } = this.state;
-        const { name = 'checkbox', id = uuidv4(), disabled = false, value = id, defaultChecked = null, label = null } = this.props;
+        const { name = 'checkbox', id = uuid(), disabled = false, value = id, defaultChecked = null, label = null } = this.props;
 
         let offsetSpring = undeterminedSpringOffset;
         let dashArraySpring = undeterminedSpringDash;
