@@ -38,10 +38,10 @@ export default class UngridifiedSlider extends Component {
             const classNames = [child.props.className, 'slider-item', (Math.abs(distance) > 1) ? 'opacity-0' : ''].filter(e => !!e).join(' ');
 
             const styles = { ...child.props.style };
-            if (distance !== 0) {
-                styles['transform'] = `translateX(${(distance) * 100}%)`;
-            }
+
             styles['zIndex'] = children.length - Math.abs(distance);
+
+            styles['transform'] = `translateX(${(distance) * 100}%)`;
 
             return React.cloneElement(child, { key: id, className: classNames, style: styles });
         });

@@ -46,7 +46,8 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
         }
 
         isFullWidth() {
-            return this.props.fullwidth === 'true' || forcedProps.fullWidth === 'true';
+            return [true, 'true'].includes(this.props.fullwidth)
+              || [true, 'true'].includes(forcedProps.fullWidth);
         }
 
         fullWidthValue() {
@@ -81,7 +82,9 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
                 className,
                 style,
                 children,
+
                 position,
+
                 ...transmissibleProps
             } = this.props;
 
@@ -147,8 +150,8 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
         width: getDefaultProps('width', 1),
         height: getDefaultProps('height', 1),
 
-        fullwidth: getDefaultProps('fullwidth', 'false'),
-        fullheight: getDefaultProps('fullheight', 'false'),
+        fullwidth: getDefaultProps('fullwidth', false),
+        fullheight: getDefaultProps('fullheight', false),
     };
 
     return GridifiedComponent;

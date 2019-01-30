@@ -1,6 +1,5 @@
 node_modules
 .idea
 build
-docs
-dist
+dist/
 .env

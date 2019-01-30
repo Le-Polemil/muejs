@@ -2,21 +2,29 @@
 // import path from 'path';
 //
 // import { HTML, JS, STYL } from './rules';
-// import { htmlPlugin } from './plugins';
+// import { cleanPlugin, copyPlugin, HMRPlugin, htmlPlugin } from './plugins';
 //
 // module.exports = {
 //     mode: 'production',
 //     devtool: 'source-map',
 //
-//     entry: "./src/app.js",
+//     entry: {
+//         app: "./src/app.js",
+//     },
 //     output: {
-//         path: path.resolve(__dirname, "../docs"),
+//         path: "/docs",
 //         filename: "./index.js",
 //     },
+//
 //     devServer: {
 //         inline:true,
 //         port: 3006
 //     },
 //     module: { rules: [HTML, JS, STYL] },
-//     plugins: [htmlPlugin],
+//     plugins: [
+//         cleanPlugin('../docs'),
+//         copyPlugin('./srcdemo/app.js'),
+//         htmlPlugin,
+//         HMRPlugin({ webpack }),
+//     ],
 // };

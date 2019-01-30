@@ -7,8 +7,7 @@ export class UngridifiedScreen extends Component {
     render() {
         const { navHeight, style, children, ...otherProps } = this.props;
         const styles = {};
-        styles['marginBottom'] = `-${navHeight}`;
-        styles['paddingBottom'] = navHeight;
+        styles['height'] = `calc(100vh - ${navHeight})`;
         return <div style={{ ...styles, ...style }} {...otherProps}>{ children }</div>;
     }
 }
