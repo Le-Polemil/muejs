@@ -6,9 +6,8 @@ import './index.styl';
 export class UngridifiedScreen extends Component {
     render() {
         const { navHeight, style, children, ...otherProps } = this.props;
-        const styles = {};
-        styles['height'] = `calc(100vh - ${navHeight})`;
-        return <div style={{ ...styles, ...style }} {...otherProps}>{ children }</div>;
+
+        return <div style={{ height: `calc(100vh - ${navHeight})`, ...style }} {...otherProps}>{ children }</div>;
     }
 }
 
