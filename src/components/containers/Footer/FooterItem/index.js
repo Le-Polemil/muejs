@@ -32,7 +32,7 @@ export const FooterList = gridify(List, { componentName: 'FooterList' });
 
 
 
-export class Line extends Component {
+class Line extends Component {
     constructor(props) {
         super(props);
         this.state = { id: uuid()}

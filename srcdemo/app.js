@@ -22,14 +22,14 @@ const ScreenClipped = ({ row, idgrid, clipPath = 'polygon(0 0, 100% 0, 100% 57%,
             <svg>
                 <defs>
                     <clipPath id="svgPath">
-                        <rect x="0" y="0" stroke="#000000" strokeMiterlimit="10" width="10.8%" height="100%"></rect>
-                        <rect x="121.5" y="25.5" stroke="#000000" strokeMiterlimit="10" width="5%" height="90%"></rect>
-                        <rect x="192.5" y="9.5" stroke="#000000" strokeMiterlimit="10" width="6%" height="80%"></rect>
-                        <rect x="271.5" y="44.5" stroke="#000000" strokeMiterlimit="10" width="6.3%" height="74%"></rect>
-                        <rect x="349.5" y="25.5" stroke="#000000" strokeMiterlimit="10" width="20.8%" height="79%"></rect>
-                        <rect x="574.5" y="44.5" stroke="#000000" strokeMiterlimit="10" width="6.0%" height="82.8%"></rect>
-                        <rect x="644.5" y="9.5" stroke="#000000" strokeMiterlimit="10" width="6.8%" height="95%"></rect>
-                        <rect x="736.5" y="18.5" stroke="#000000" strokeMiterlimit="10" width="4.9%" height="92%"></rect>
+                        <rect x="0" y="0" stroke="#000000" strokeMiterlimit="10" width="10.8%" height="100%" />
+                        <rect x="121.5" y="25.5" stroke="#000000" strokeMiterlimit="10" width="5%" height="90%" />
+                        <rect x="192.5" y="9.5" stroke="#000000" strokeMiterlimit="10" width="6%" height="80%" />
+                        <rect x="271.5" y="44.5" stroke="#000000" strokeMiterlimit="10" width="6.3%" height="74%" />
+                        <rect x="349.5" y="25.5" stroke="#000000" strokeMiterlimit="10" width="20.8%" height="79%" />
+                        <rect x="574.5" y="44.5" stroke="#000000" strokeMiterlimit="10" width="6.0%" height="82.8%" />
+                        <rect x="644.5" y="9.5" stroke="#000000" strokeMiterlimit="10" width="6.8%" height="95%" />
+                        <rect x="736.5" y="18.5" stroke="#000000" strokeMiterlimit="10" width="4.9%" height="92%" />
                     </clipPath>
                 </defs>
             </svg>
@@ -53,7 +53,7 @@ class App extends Component {
         <Navbar row={0} />
 
         {/*<img src="../src/assets/36188382_649433715391217_5733092298556702720_n.png" alt="img" />*/}
-        <ScreenClipped row={1} />
+        {/*<ScreenClipped row={1} />*/}
 
         <Footer row={6} />
 
