@@ -1,13 +1,7 @@
-@require '../../../styles/variables.styl'
-
 .grid, .navbar, .body, .footer, .card, .product
   display grid
   min-width 100%
   grid-auto-flow row
-
-@media (max-width small-screen)
-  .grid, .body, .footer, .card, .product
-    grid-template-columns 1fr !important
 
 .grid
   .grid-element

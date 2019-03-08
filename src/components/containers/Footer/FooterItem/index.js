@@ -21,7 +21,7 @@ class List extends Component {
     render() {
         const { children, ...otherProps } = this.props;
         return (
-            <Grid { ...otherProps }>
+            <Grid columnsTemplate="1fr" { ...otherProps }>
                 { this.renderChildren() }
             </Grid>
         );

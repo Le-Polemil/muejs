@@ -42,7 +42,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
 
         isFixed() {
-            return this.props.position === 'fixed' || forcedProps.position === 'fixed';
+            return (this.props.position === 'fixed' || forcedProps.position === 'fixed') && 'fixed';
         }
 
         isFullWidth() {
@@ -92,7 +92,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
             const { shouldTransmitProps } = forcedProps;
 
 
-            const classNames = [camelToKebab(type), className].filter(e => !!e).join(' ');
+            const classNames = [camelToKebab(type), className, this.isFixed()].filter(e => !!e).join(' ');
 
 
             let styles = { };
@@ -103,9 +103,6 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
             else {
                 styles['gridColumn'] = `${col} / span ${width}`;
                 styles['gridRow'] = `${row} / span ${height}`;
-            }
-            if (position) {
-                styles['position'] = position;
             }
 
             styles = { ...styles, ...style };
