@@ -85,7 +85,8 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
                 position,
 
-                stretch,
+                justify,
+                align,
 
                 ...transmissibleProps
             } = this.props;
@@ -93,7 +94,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
             const { type, col, row, width, height, fullwidth, fullheight } = this.getMinified();
             const { shouldTransmitProps } = forcedProps;
 
-            const classNames = [camelToKebab(type), className, stretch && 'stretch-content', this.isFixed()].filter(e => !!e).join(' ');
+            const classNames = [camelToKebab(type), className, justify && `justify-${justify}`, align && `align-${align}`, this.isFixed()].filter(e => !!e).join(' ');
 
 
             let styles = { };
