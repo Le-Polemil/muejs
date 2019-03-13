@@ -87,4 +87,4 @@ export default class UngridifiedSlider extends Component {
 }
 
 
-export const Slider = gridify(UngridifiedSlider, { forcedProps: { fullWidth: 'true' }, componentName: 'slider' });
+export const Slider = gridify(UngridifiedSlider, { forcedProps: { fullwidth: 'true' }, componentName: 'slider' });

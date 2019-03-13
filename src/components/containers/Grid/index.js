@@ -76,7 +76,7 @@ export class Grid extends Component {
             const row = childInfos.row === 'auto' ? currentRow : childInfos.row;
             // if (childInfos.row === 'auto') currentRow++;
 
-            if (childInfos.fullWidth) currentRow += childInfos.height;
+            if (childInfos.fullwidth) currentRow += childInfos.height;
 
             if (!rows[row]) rows[row] = {width: 0, height: 0}; // create row on first entry of each row
 

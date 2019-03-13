@@ -11,4 +11,4 @@ export class UngridifiedScreen extends Component {
     }
 }
 
-export const Screen = gridify(UngridifiedScreen, { forcedProps: { fullWidth: 'true' }, componentName: 'screen' });
+export const Screen = gridify(UngridifiedScreen, { forcedProps: { fullwidth: 'true' }, componentName: 'screen' });

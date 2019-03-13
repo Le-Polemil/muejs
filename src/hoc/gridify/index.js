@@ -47,10 +47,10 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
         isFullWidth() {
             return [true, 'true'].includes(this.props.fullwidth)
-              || [true, 'true'].includes(forcedProps.fullWidth);
+              || [true, 'true'].includes(forcedProps.fullwidth);
         }
 
-        fullWidthValue() {
+        fullwidthValue() {
             const { idgrid, width } = this.props;
 
             const gridWidth = getGridWidth(this.context.store, { grid: idgrid });
@@ -64,7 +64,7 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
 
             const type = componentName || Component.displayName || `Gridified${Component.name || 'Component'}`;
 
-            return { type, col: this.isFixed() ? 0 : col, row: this.isFixed() ? 0 : row, width: this.fullWidthValue(), height, fullwidth, fullheight, selfRowTemplate, selfColTemplate };
+            return { type, col: this.isFixed() ? 0 : col, row: this.isFixed() ? 0 : row, width: this.fullwidthValue(), height, fullwidth, fullheight, selfRowTemplate, selfColTemplate };
         }
 
 
