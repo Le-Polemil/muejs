@@ -1,4 +1,5 @@
 export * from './Button';
 export * from './Icon';
-// export * from './inputs/';
+export * from './Input';
+export * from './Label';
 export * from './Screen';
