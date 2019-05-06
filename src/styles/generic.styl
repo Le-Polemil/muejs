@@ -42,8 +42,35 @@
 .font-info
   color info-color
 
+hover-ration = 8%
+hover-ration = 4%
 .bg-primary
-  background-color primary-color
+  bg-color = primary-color
+  font-color = #fff
+  background-color bg-color
+  color font-color
+
+  &.btn
+    &:hover
+      background-color darken(bg-color, 8%)
+      color darken(font-color, 8%)
+
+    &:disabled
+      background-color darken(bg-color, 4%)
+      color darken(font-color, 4%)
+
+.bg-secondary
+  bg-color = secondary-color
+  font-color = #fff
+  background-color bg-color
+  color font-color
+
+  &.btn
+    &:hover
+      background-color darken(bg-color, 8%)
+    &:disabled
+      background-color darken(bg-color, 4%)
+
 .bg-success
   background-color success-color
 .bg-warning
