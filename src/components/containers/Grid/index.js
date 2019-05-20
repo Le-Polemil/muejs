@@ -167,6 +167,7 @@ export class Grid extends Component {
         const { children } = this.props;
         const { id } = this.state;
         return React.Children.map(children, child => {
+	    if (!child || !child.props) return;
             return React.cloneElement(child, { ...child.props, idgrid: id });
         });
     }
@@ -193,6 +194,8 @@ export class Grid extends Component {
         return {
             gridTemplateColumns,
             gridTemplateRows,
+            // gridAutoColumns: '1fr',
+            // gridAutoRows: '1fr',
             gridRowGap: rowGap,
             gridColumnGap: colGap,
             ...style

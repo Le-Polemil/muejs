@@ -42,47 +42,33 @@
 .font-info
   color info-color
 
-hover-ration = 8%
-hover-ration = 4%
+
 .bg-primary
-  bg-color = primary-color
-  font-color = #fff
-  background-color bg-color
-  color font-color
-
-  &.btn
-    &:hover
-      background-color darken(bg-color, 8%)
-      color darken(font-color, 8%)
-
-    &:disabled
-      background-color darken(bg-color, 4%)
-      color darken(font-color, 4%)
+  background-color primary-color
+  color #fff
 
 .bg-secondary
-  bg-color = secondary-color
-  font-color = #fff
-  background-color bg-color
-  color font-color
-
-  &.btn
-    &:hover
-      background-color darken(bg-color, 8%)
-    &:disabled
-      background-color darken(bg-color, 4%)
+  background-color secondary-color
+  color #fff
 
 .bg-success
   background-color success-color
+
 .bg-warning
   background-color warning-color
+
 .bg-error
   background-color error-color
+
 .bg-info
   background-color info-color
+
 .bg-pastel-purple
   background-color pastel-purple
+
 .bg-pastel-orange
   background-color pastel-orange
+
 
 .border-success, .border-warning, .border-error, .border-info
   box-sizing border-box
@@ -92,12 +78,16 @@ hover-ration = 4%
 
 .border-success
   border-color success-color
+
 .border-warning
   border-color warning-color
+
 .border-error
   border-color error-color
+
 .border-info
   border-color info-color
+
 
 .extends-on-hover
   transition width 10s
@@ -167,6 +157,44 @@ hover-ration = 4%
   align-content space-between !important
 .align-evenly
   align-content space-evenly !important
+
+for $i in (1..5)
+  .marg-$i
+    margin $i
+  .marg-t-$i
+    margin-top $i
+  .marg-b-$i
+    margin-bottom $i
+  .marg-l-$i
+    margin-left $i
+  .marg-r-$i
+    margin-right $i
+  .marg-h-$i
+    margin-left $i
+    margin-right $i
+  .marg-v-$i
+    margin-top $i
+    margin-bottom $i
+
+
+  .pad-$i
+    padding $i
+  .pad-t-$i
+    padding-top $i
+  .pad-b-$i
+    padding-bottom $i
+  .pad-l-$i
+    padding-left $i
+  .pad-r-$i
+    padding-right $i
+  .pad-h-$i
+    padding-left $i
+    padding-right $i
+  .pad-v-$i
+    padding-top $i
+    padding-bottom $i
+
+
 
 
 .hidden
