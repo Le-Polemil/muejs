@@ -3,10 +3,11 @@ import gridify from '../../../../hoc/gridify';
 
 export class UngridifiedElement extends Component {
     render() {
-        const { children, type: Component, ...otherProps } = this.props;
+        const { children, fill, className, type: Component, ...otherProps } = this.props;
+        const classNames = [className, fill ? "fill" : ""].join(' ').trim();
         return Component ?
-               <Component {...otherProps}>{ children }</Component> :
-               <div {...otherProps}>{ children }</div>;
+               <Component className={classNames} {...otherProps}>{ children }</Component> :
+               <div className={classNames} {...otherProps}>{ children }</div>;
     }
 }
 UngridifiedElement.displayName = 'GridElement';

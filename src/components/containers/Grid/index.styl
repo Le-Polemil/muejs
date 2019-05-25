@@ -7,6 +7,15 @@
   .grid-element
     display inline-grid
 
+    &.fill
+      position relative
+      > *
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        right 0
+
   .container
     justify-self center
     min-width 80%
