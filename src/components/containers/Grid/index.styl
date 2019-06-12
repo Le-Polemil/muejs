@@ -16,6 +16,14 @@
         left 0
         right 0
 
+  > *
+    --col auto
+    --row auto
+    --width 1
+    --height 1
+    grid-row var(--row) / span var(--height)
+    grid-column var(--col) / span var(--width)
+
   .container
     justify-self center
     min-width 80%

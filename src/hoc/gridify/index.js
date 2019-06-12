@@ -103,8 +103,10 @@ function gridify(Component, { forcedProps = {}, staticMethods = [], componentNam
                 styles['display'] = 'none';
             }
             else {
-                styles['gridColumn'] = `${col} / span ${width}`;
-                styles['gridRow'] = `${row} / span ${height}`;
+                if (col != 'auto') styles['--col'] = col;
+                if (width != 1) styles['--width'] = width;
+                if (row != 'auto') styles['--row'] = row;
+                if (height != 1) styles['--height'] = height;
             }
 
             styles = { ...styles, ...style };

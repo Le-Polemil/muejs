@@ -1,75 +1,86 @@
-html
-  for $i in (1..5)
-    .marg-$i
-      margin $i
-    .marg-t-$i
-      margin-top $i
-    .marg-b-$i
-      margin-bottom $i
-    .marg-l-$i
-      margin-left $i
-    .marg-r-$i
-      margin-right $i
-    .marg-h-$i
-      margin-left $i
-      margin-right $i
-    .marg-v-$i
-      margin-top $i
-      margin-bottom $i
+for $i in (1..5)
+  .marg-{$i}
+    margin $i
+
+  .marg-t-{$i}, .marg-v-{$i}
+    margin-top $i
+  .marg-b-{$i}, .marg-v-{$i}
+    margin-bottom $i
+
+  .marg-l-{$i}, .marg-h-{$i}
+    margin-left $i
+  .marg-r-{$i}, .marg-h-{$i}
+    margin-right $i
 
 
-    .pad-$i
-      padding $i
-    .pad-t-$i
-      padding-top $i
-    .pad-b-$i
-      padding-bottom $i
-    .pad-l-$i
-      padding-left $i
-    .pad-r-$i
-      padding-right $i
-    .pad-h-$i
-      padding-left $i
-      padding-right $i
-    .pad-v-$i
-      padding-top $i
-      padding-bottom $i
+  .pad-{$i}
+    padding $i
+
+  .pad-t-{$i}, .pad-v-{$i}
+    padding-top $i
+  .pad-b-{$i}, .pad-v-{$i}
+    padding-bottom $i
+
+  .pad-l-{$i}, .pad-h-{$i}
+    padding-left $i
+  .pad-r-{$i}, .pad-h-{$i}
+    padding-right $i
 
 
+for $step in (2..20)
+  $i = $step * 5
+  .marg-{$i}
+    margin $i
 
-  for $step in (1..20)
-    $i = $step * 5
-    .marg-$i
-      margin $i
-    .marg-t-$i
-      margin-top $i
-    .marg-b-$i
-      margin-bottom $i
-    .marg-l-$i
-      margin-left $i
-    .marg-r-$i
-      margin-right $i
-    .marg-h-$i
-      margin-left $i
-      margin-right $i
-    .marg-v-$i
-      margin-top $i
-      margin-bottom $i
+  .marg-t-{$i}, .marg-v-{$i}
+    margin-top $i
+  .marg-b-{$i}, .marg-v-{$i}
+    margin-bottom $i
+
+  .marg-l-{$i}, .marg-h-{$i}
+    margin-left $i
+  .marg-r-{$i}, .marg-h-{$i}
+    margin-right $i
 
 
-    .pad-$i
-      padding $i
-    .pad-t-$i
-      padding-top $i
-    .pad-b-$i
-      padding-bottom $i
-    .pad-l-$i
-      padding-left $i
-    .pad-r-$i
-      padding-right $i
-    .pad-h-$i
-      padding-left $i
-      padding-right $i
-    .pad-v-$i
-      padding-top $i
-      padding-bottom $i
+  .pad-{$i}
+    padding $i
+
+  .pad-t-{$i}, .pad-v-{$i}
+    padding-top $i
+  .pad-b-{$i}, .pad-v-{$i}
+    padding-bottom $i
+
+  .pad-l-{$i}, .pad-h-{$i}
+    padding-left $i
+  .pad-r-{$i}, .pad-h-{$i}
+    padding-right $i
+
+
+for $i in (1 1.2 1.4 1.6 1.8 2)
+  .marg-{$i}-rem
+    margin $i rem
+
+  .marg-t-{$i}-rem, .marg-v-{$i}-rem
+    margin-top $i rem
+  .marg-b-{$i}-rem, .marg-v-{$i}-rem
+    margin-bottom $i rem
+
+  .marg-l-{$i}-rem, .marg-h-{$i}-rem
+    margin-left $i rem
+  .marg-r-{$i}-rem, .marg-h-{$i}-rem
+    margin-right $i rem
+
+
+  .pad-{$i}-rem
+    padding $i rem
+
+  .pad-t-{$i}-rem, .pad-v-{$i}-rem
+    padding-top $i rem
+  .pad-b-{$i}-rem, .pad-v-{$i}-rem
+    padding-bottom $i rem
+
+  .pad-l-{$i}-rem, .pad-h-{$i}-rem
+    padding-left $i rem
+  .pad-r-{$i}-rem, .pad-h-{$i}-rem
+    padding-right $i rem
