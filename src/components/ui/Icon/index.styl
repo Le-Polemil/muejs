@@ -1,28 +1,50 @@
 .icon
-  &.material-icons, &.fa
+  &.material-icons, &.material-icons-round, &.material-icons-two-tone, &.material-icons-sharp, &.material-icons-outlined, &.fa
     color darken(#eee, 8%)
     cursor pointer
     margin 0.4rem
     outline inherit
-    padding 0.6rem
-    font-size 4rem
-    width fit-content
+    padding 0.3rem
+    font-size 2rem
+    min-width 2.5rem
 
-    &.xs, &.extra-small
+    .svg-container
+      max-height 2rem
+
+    &.sm, &.small
       padding 0.2rem
       font-size 1.5rem
 
-    &.sm, &.small
-      padding 0.4rem
-      font-size 2.5rem
+      .svg-container
+        max-height 1.5rem
+
+    &.md, &.medium
+      padding 0.45rem
+      font-size 3rem
+
+      .svg-container
+        max-height 3rem
 
     &.lg, &.large
+      padding 0.6rem
+      font-size 4rem
+
+      .svg-container
+        max-height 4rem
+
+    &.xl, &.extra-large
       padding 0.8rem
       font-size 8rem
 
-    &.xl, &.extra-large
+      .svg-container
+        max-height 8rem
+
+    &.xxl, &.extra-extra-large
       padding 1.2rem
       font-size 12rem
+
+      .svg-container
+        max-height 12rem
 
 
     &::selection
