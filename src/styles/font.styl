@@ -1,7 +1,29 @@
+:root
+  --google-fonts Rubik, Karla, Ubuntu, Poppins, Oswald
+  --font-stack var(--google-fonts), Roboto, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif
+  --off-black rgba(0, 0, 0, 0.85)
+
+  --h1-fontsize 3.5rem
+  --h2-fontsize 2.8rem
+  --h3-fontsize 2.2rem
+  --h4-fontsize 1.7rem
+  --h5-fontsize 1.3rem
+  --h6-fontsize 1.0rem
+
+
+  --sm-span-fontsize 0.8rem
+  --span-fontsize h6-fontsize
+  --md-span-fontsize h5-fontsize
+  --lg-span-fontsize h4-fontsize
+  --xl-span-fontsize h3-fontsize
+
+  --p-fontsize h6-fontsize
+
+
 html
   line-height 1.5
-  color off-black
-  font-family font-stack
+  color var(--off-black)
+  font-family var(--font-stack)
   font-weight normal
 
   @media only screen and (min-width 0)
@@ -22,30 +44,30 @@ html
       font-weight inherit
 
   h1
-    font-size h1-fontsize
+    font-size var(--h1-fontsize)
   h2
-    font-size h2-fontsize
+    font-size var(--h2-fontsize)
   h3
-    font-size h3-fontsize
+    font-size var(--h3-fontsize)
   h4
-    font-size h4-fontsize
+    font-size var(--h4-fontsize)
   h5
-    font-size h5-fontsize
+    font-size var(--h5-fontsize)
   h6
-    font-size h6-fontsize
+    font-size var(--h6-fontsize)
 
   p
-    font-size p-fontsize
+    font-size var(--p-fontsize)
   span
-    font-size span-fontsize
+    font-size var(--span-fontsize)
     &.sm
-      font-size sm-span-fontsize
+      font-size var(--sm-span-fontsize)
     &.md
-      font-size md-span-fontsize
+      font-size var(--md-span-fontsize)
     &.lg
-      font-size lg-span-fontsize
+      font-size var(--lg-span-fontsize)
     &.xl
-      font-size xl-span-fontsize
+      font-size var(--xl-span-fontsize)
 
 
   .text-center

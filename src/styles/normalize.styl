@@ -15,7 +15,7 @@ body
   overflow hidden
 
   > div
-    background-color body-bg
+    background-color var(--primary-bg)
 
 a
   text-decoration none
@@ -31,12 +31,12 @@ h1
   margin 0.65em 0
 
 .no-scrollbar
-  overflow scroll
-  overflow-x hidden
+  overflow auto !important
+  overflow-x hidden !important
 
   &::-webkit-scrollbar
-    width 0
-    background transparent
+    width 0 !important
+    background transparent !important
 
   &::-webkit-scrollbar-thumb
-    background red
+    background red !important

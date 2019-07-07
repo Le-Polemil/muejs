@@ -26,4 +26,4 @@ export const Grid = ({ columnsTemplate, rowsTemplate, children, className, style
   );
 }
 
-export { Element, Row, UngridifiedElement } from './GridElement';
+export { Element, Row, Column, UngridifiedElement } from './GridElement';

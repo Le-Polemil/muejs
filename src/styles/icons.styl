@@ -1,9 +1,9 @@
 .clickable-icon
-  $bg-color = #666
+  --clickable-icon-bg-color 102, 102, 102
 
   align-self center
   justify-self center
-  background-color rgba($bg-color, 0)
+  background-color RGBA(var(--clickable-icon-bg-color), 0)
   cursor pointer
   display flex
   font-size 1.5rem
@@ -11,18 +11,18 @@
   transition filter 0.2s, background-color 0.2s
 
   &:hover
-    background-color rgba($bg-color, 0.25)
+    background-color RGBA(var(--clickable-icon-bg-color), 0.25)
     filter brightness(90%)
 
   &:active
-    background-color rgba($bg-color, 0.4)
+    background-color RGBA(var(--clickable-icon-bg-color), 0.4)
     filter brightness(60%)
 
 
 i
   &.material-icons, &.material-icons-round, &.material-icons-two-tone, &.material-icons-sharp, &.material-icons-outlined
     .svg-container
-      width: 100%;
+      width 100%
       max-height: 2rem
       align-self center
       .svg-path

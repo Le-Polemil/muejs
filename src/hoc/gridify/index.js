@@ -24,10 +24,17 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
           position,
           justify, align,
 
+          show,
+          hide,
+
           ...transmissibleProps
       } = props;
 
-      const { selfRowTemplate, selfColTemplate, position: forcedPosition, shouldTransmitProps } = forcedProps;
+      if (show !== undefined && !show || hide !== undefined && hide) return null;
+
+
+      const { selfRowTemplate, selfColTemplate, position: forcedPosition, shouldTransmitProps, hide: forcedHide, show: forcedShow } = forcedProps;
+      if (forcedShow !== undefined && !forcedShow || forcedHide !== undefined && forcedHide) return null;
 
       const isFixed = [position, forcedPosition].includes('fixed') ? 'fixed' : '';
       const col = isFixed ? 0 : defaultCol;

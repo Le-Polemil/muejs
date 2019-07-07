@@ -105,12 +105,13 @@ export function calculateGridSize({ columnsTemplate, rowsTemplate, children }) {
 }
 
 
-export const getStyle = memoize(({ style, columnsTemplate, rowsTemplate, gap = '', rowGap = gap, colGap = gap, width, height }) => {
+export const getStyle = ({ style, columnsTemplate, rowsTemplate, gap, rowGap = gap, colGap = gap, width, height }) => {
+		let gridTemplateRows, gridTemplateColumns;
+		if (width !== undefined || columnsTemplate && height !== undefined || rowsTemplate) {
+			gridTemplateRows = generateTemplate({ template: rowsTemplate, dimension: height});
+			gridTemplateColumns = generateTemplate({ template: columnsTemplate, dimension: width});
+		}
 
-		if (width === undefined && !columnsTemplate || height === undefined && !rowsTemplate)	return style;
-
-		const gridTemplateRows = generateTemplate({ template: rowsTemplate, dimension: height});
-		const gridTemplateColumns = generateTemplate({ template: columnsTemplate, dimension: width});
 
 		return {
 				gridTemplateColumns,
@@ -121,4 +122,4 @@ export const getStyle = memoize(({ style, columnsTemplate, rowsTemplate, gap = '
 				gridColumnGap: colGap,
 				...style
 		};
-});
+};

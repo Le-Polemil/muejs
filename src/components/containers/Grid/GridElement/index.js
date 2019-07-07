@@ -12,4 +12,5 @@ export const Element = gridify(UngridifiedElement, { componentName: 'GridElement
 
 
 
-export const Row = gridify(UngridifiedElement, { componentName: 'Row', forcedProps: { fullwidth: 'true' }});
+export const Row = gridify(UngridifiedElement, { componentName: 'Row' });
+export const Column = gridify(UngridifiedElement, { componentName: 'Column' });
