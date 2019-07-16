@@ -106,10 +106,12 @@ export function calculateGridSize({ columnsTemplate, rowsTemplate, children }) {
 
 
 export const getStyle = ({ style, columnsTemplate, rowsTemplate, gap, rowGap = gap, colGap = gap, width, height }) => {
-		let gridTemplateRows, gridTemplateColumns;
-		if (width !== undefined || columnsTemplate && height !== undefined || rowsTemplate) {
-			gridTemplateRows = generateTemplate({ template: rowsTemplate, dimension: height});
+		let gridTemplateRows = rowsTemplate, gridTemplateColumns = columnsTemplate;
+		if (width !== undefined || columnsTemplate) {
 			gridTemplateColumns = generateTemplate({ template: columnsTemplate, dimension: width});
+		}
+		if (height !== undefined || rowsTemplate) {
+			gridTemplateRows = generateTemplate({ template: rowsTemplate, dimension: height});
 		}
 
 

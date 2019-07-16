@@ -24,6 +24,43 @@
     grid-row var(--row) / span var(--height)
     grid-column var(--col) / span var(--width)
 
+    @media (min-width: 641px)
+      --col-sm var(--col)
+      --row-sm var(--row)
+      --width-sm var(--width)
+      --height-sm var(--height)
+
+      grid-row var(--row-sm) / span var(--height-sm)
+      grid-column var(--col-sm) / span var(--width-sm)
+
+    @media (min-width: 1041px)
+      --col-md var(--col-sm)
+      --row-md var(--row-sm)
+      --width-md var(--width-sm)
+      --height-md var(--height-sm)
+
+      grid-row var(--row-md) / span var(--height-md)
+      grid-column var(--col-md) / span var(--width-md)
+
+    @media (min-width: 1281px)
+      --col-lg var(--col-md)
+      --row-lg var(--row-md)
+      --width-lg var(--width-md)
+      --height-lg var(--height-md)
+
+      grid-row var(--row-lg) / span var(--height-lg)
+      grid-column var(--col-lg) / span var(--width-lg)
+
+    @media (min-width: 1541px)
+      --col-xl var(--col-lg)
+      --row-xl var(--row-lg)
+      --width-xl var(--width-lg)
+      --height-xl var(--height-lg)
+
+      grid-row var(--row-xl) / span var(--height-xl)
+      grid-column var(--col-xl) / span var(--width-xl)
+
+
   .container
     justify-self center
     min-width 80%

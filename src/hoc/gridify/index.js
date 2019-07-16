@@ -1,5 +1,8 @@
 import React from 'react';
+import get from 'lodash.get';
+
 import { camelToKebab } from '../../filters/stringFormat';
+import { isObject } from '../../utils/typeCheck';
 
 
 function gridify(Component, { forcedProps = {}, componentName } = {}) {
@@ -47,14 +50,48 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
 
       // css variables
       let styles = { };
-      if (width <= 0 && height <= 0) {
+      if (parseInt(width, 10) <= 0 && parseInt(height, 10) <= 0) {
           styles['display'] = 'none';
       }
       else {
-          if (col != 'auto') styles['--col'] = col;
-          if (width != 1) styles['--width'] = width;
-          if (row != 'auto') styles['--row'] = row;
-          if (height != 1) styles['--height'] = height;
+        ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+          const suffix = size !== 'xs' ? `-${size}` : '';
+
+          if (isObject(col)) {
+            const trueCol = get(col, size);
+            if (trueCol && trueCol !== 'auto') styles[`--col${suffix}`] = trueCol;
+          }
+          else if (['string', 'number'].includes(typeof col) && size === 'xs' && col !== 'auto') {
+            styles[`--col${suffix}`] = col;
+          }
+
+          if (isObject(row)) {
+            const trueRow = get(row, size);
+            if (trueRow && row !== 'auto') styles[`--row${suffix}`] = trueRow;
+          }
+          else if (['string', 'number'].includes(typeof row) && size === 'xs' && row !== 'auto') {
+            styles[`--row${suffix}`] = row;
+          }
+
+
+
+          if (isObject(width)) {
+            const trueWidth = get(width, size);
+            if (trueWidth && parseInt(width, 10) !== 1) styles[`--width${suffix}`] = trueWidth;
+          }
+          else if (['string', 'number'].includes(typeof width) && size === 'xs' && parseInt(width, 10) !== 1) {
+            styles[`--width${suffix}`] = width;
+          }
+
+          if (isObject(height)) {
+            const trueHeight = get(height, size);
+            if (trueHeight && parseInt(height, 10) !== 1) styles[`--height${suffix}`] = trueHeight;
+          }
+          else if (['string', 'number'].includes(typeof height) && size === 'xs' && parseInt(height, 10) !== 1) {
+            styles[`--height${suffix}`] = height;
+          }
+
+        })
       }
       styles = { ...styles, ...style };
 
