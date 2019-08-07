@@ -33,7 +33,7 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
           ...transmissibleProps
       } = props;
 
-      if (show !== undefined && !show || hide !== undefined && hide) return null;
+      if (show !== undefined && !show || hide) return null;
 
 
       const { selfRowTemplate, selfColTemplate, position: forcedPosition, shouldTransmitProps, hide: forcedHide, show: forcedShow } = forcedProps;

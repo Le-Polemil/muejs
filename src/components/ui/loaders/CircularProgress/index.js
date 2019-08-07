@@ -1,4 +1,5 @@
 import React from 'react';
+import gridify from '../../../../hoc/gridify';
 import './index.styl';
 
 const CircularProgress = ({ size = '32', width = '6' }) => (
@@ -7,4 +8,4 @@ const CircularProgress = ({ size = '32', width = '6' }) => (
     </svg>
 );
 
-export default CircularProgress;
+export default gridify(CircularProgress);

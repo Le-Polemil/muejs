@@ -1,86 +1,114 @@
+  .marg-auto
+    margin auto !important
+
+  .marg-t-auto, .marg-v-auto
+    margin-top auto !important
+  .marg-b-auto, .marg-v-auto
+    margin-bottom auto !important
+
+  .marg-l-auto, .marg-h-auto
+    margin-left auto !important
+  .marg-r-auto, .marg-h-auto
+    margin-right auto !important
+
+
+  .pad-auto
+    padding auto !important
+
+  .pad-t-auto, .pad-v-auto
+    padding-top auto !important
+  .pad-b-auto, .pad-v-auto
+    padding-bottom auto !important
+
+  .pad-l-auto, .pad-h-auto
+    padding-left auto !important
+  .pad-r-auto, .pad-h-auto
+    padding-right auto !important
+
+
 for $i in (0..5)
   .marg-{$i}
-    margin $i px
+    margin $i * 1px !important
 
   .marg-t-{$i}, .marg-v-{$i}
-    margin-top $i px
+    margin-top $i * 1px !important
   .marg-b-{$i}, .marg-v-{$i}
-    margin-bottom $i px
+    margin-bottom $i * 1px !important
 
   .marg-l-{$i}, .marg-h-{$i}
-    margin-left $i px
+    margin-left $i * 1px !important
   .marg-r-{$i}, .marg-h-{$i}
-    margin-right $i px
+    margin-right $i * 1px !important
 
 
   .pad-{$i}
-    padding $i px
+    padding $i * 1px !important
 
   .pad-t-{$i}, .pad-v-{$i}
-    padding-top $i px
+    padding-top $i * 1px !important
   .pad-b-{$i}, .pad-v-{$i}
-    padding-bottom $i px
+    padding-bottom $i * 1px !important
 
   .pad-l-{$i}, .pad-h-{$i}
-    padding-left $i px
+    padding-left $i * 1px !important
   .pad-r-{$i}, .pad-h-{$i}
-    padding-right $i px
+    padding-right $i * 1px !important
 
 
 for $step in (2..20)
   $i = $step * 5
   .marg-{$i}
-    margin $i px
+    margin $i * 1px !important
 
   .marg-t-{$i}, .marg-v-{$i}
-    margin-top $i px
+    margin-top $i * 1px !important
   .marg-b-{$i}, .marg-v-{$i}
-    margin-bottom $i px
+    margin-bottom $i * 1px !important
 
   .marg-l-{$i}, .marg-h-{$i}
-    margin-left $i px
+    margin-left $i * 1px !important
   .marg-r-{$i}, .marg-h-{$i}
-    margin-right $i px
+    margin-right $i * 1px !important
 
 
   .pad-{$i}
-    padding $i px
+    padding $i * 1px !important
 
   .pad-t-{$i}, .pad-v-{$i}
-    padding-top $i px
+    padding-top $i * 1px !important
   .pad-b-{$i}, .pad-v-{$i}
-    padding-bottom $i px
+    padding-bottom $i * 1px !important
 
   .pad-l-{$i}, .pad-h-{$i}
-    padding-left $i px
+    padding-left $i * 1px !important
   .pad-r-{$i}, .pad-h-{$i}
-    padding-right $i px
+    padding-right $i * 1px !important
 
 
 for $i in (1..5)
   .marg-{$i}-rem
-    margin $i rem
+    margin $i * 1rem !important
 
   .marg-t-{$i}-rem, .marg-v-{$i}-rem
-    margin-top $i rem
+    margin-top $i * 1rem !important
   .marg-b-{$i}-rem, .marg-v-{$i}-rem
-    margin-bottom $i rem
+    margin-bottom $i * 1rem !important
 
   .marg-l-{$i}-rem, .marg-h-{$i}-rem
-    margin-left $i rem
+    margin-left $i * 1rem !important
   .marg-r-{$i}-rem, .marg-h-{$i}-rem
-    margin-right $i rem
+    margin-right $i * 1rem !important
 
 
   .pad-{$i}-rem
-    padding $i rem
+    padding $i * 1rem !important
 
   .pad-t-{$i}-rem, .pad-v-{$i}-rem
-    padding-top $i rem
+    padding-top $i * 1rem !important
   .pad-b-{$i}-rem, .pad-v-{$i}-rem
-    padding-bottom $i rem
+    padding-bottom $i * 1rem !important
 
   .pad-l-{$i}-rem, .pad-h-{$i}-rem
-    padding-left $i rem
+    padding-left $i * 1rem !important
   .pad-r-{$i}-rem, .pad-h-{$i}-rem
-    padding-right $i rem
+    padding-right $i * 1rem !important

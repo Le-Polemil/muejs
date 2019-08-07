@@ -1,1 +1,1 @@
-import gridify from './gridify';
+export gridify from './gridify';

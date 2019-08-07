@@ -1,4 +1,5 @@
 import React from 'react';
+import gridify from '../../../../hoc/gridify';
 import './index.styl';
 
 const LinearProgress = ({ size = 35 }) => (
@@ -14,4 +15,4 @@ const LinearProgress = ({ size = 35 }) => (
     </div>
 );
 
-export default LinearProgress;
+export default gridify(LinearProgress);

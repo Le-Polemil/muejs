@@ -6,9 +6,9 @@ import gridify from '../../../hoc/gridify';
 
 export class UngridifiedFooter extends Component {
     render() {
-        const { children, ...otherProps  } = this.props;
+        const { children, className, ...otherProps  } = this.props;
         return (
-            <Grid {...otherProps}>
+            <Grid className={['bg-primary', className].filter(e => !!e).join(' ').trim()} {...otherProps}>
                 { children }
             </Grid>
         );

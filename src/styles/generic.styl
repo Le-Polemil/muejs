@@ -43,6 +43,15 @@
 .font-white
   color #fafafa !important
 
+.font-over-primary
+  color var(--font-color-on-primary) !important
+.font-over-secondary
+  color var(--font-color-on-secondary) !important
+.font-over-tertiary
+  color var(--font-color-on-tertiary) !important
+.font-over-error
+  color var(--font-color-on-error) !important
+
 .font-success
   color var(--success-color) !important
 .font-warning
@@ -52,14 +61,20 @@
 .font-info
   color var(--info-color) !important
 
+.bg-none
+  background-color none !important
 
 .bg-primary
   background-color var(--primary-color) !important
-  color #fafafa
+  color var(--font-color-on-primary)
 
 .bg-secondary
   background-color var(--secondary-color) !important
-  color #fafafa
+  color var(--font-color-on-secondary)
+
+.bg-tertiary
+  background-color var(--tertiary-color) !important
+  color var(--font-color-on-tertiary)
 
 .bg-success
   background-color var(--success-color) !important
@@ -69,6 +84,7 @@
 
 .bg-error
   background-color var(--error-color) !important
+  color var(--font-color-on-error)
 
 .bg-info
   background-color var(--info-color) !important
@@ -110,18 +126,23 @@
     height 120%
 
 .block
-  display block
+  display block !important
+
+.flex
+  display flex !important
+
+  .flex-1
+    flex 1 !important
 
 .fixed
-  position fixed
+  position fixed !important
   max-width 100vw
 
 .absolute
-  position absolute
+  position absolute !important
 
 .relative
-  position relative
-
+  position relative !important
 
 .justify-baseline
   justify-content baseline !important
