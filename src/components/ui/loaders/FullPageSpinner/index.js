@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from '../../../containers/Grid';
+import { Grid } from '../../../containers/Grid';
 import Spinner from '../CircularProgress';
 
 const FullPageSpinner = (props) => (
