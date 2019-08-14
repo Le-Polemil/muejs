@@ -1,45 +1,29 @@
 .hourglass
-    animation spin 3050ms cubic-bezier(.34,-0.27,.14,1) infinite
-    margin 0 auto
-    position relative
-    width 100%
+  animation spin 3050ms cubic-bezier(.34,-0.27,.14,1) infinite
+  margin 0 auto
+  position relative
+  width var(--size)
+  height var(--size)
+
+  svg
     height 100%
+    left 0
+    position absolute
+    top 0
+    width 100%
 
-    svg
-      height 100%
-      left 0
-      position absolute
-      top 0
-      width 100%
-    }
-
-    svg.full
-      animation empty 3050ms linear infinite
-      fill var(--primary-color)
-    }
-  }
-
-  span
-    display block
-    height 0
-    text-indent -999em
-  }
-}
+  svg.full
+    animation empty 3050ms linear infinite
+    fill var(--primary-color)
 
 @keyframes spin {
-  to {
+  to
     transform rotate(1080deg)
-  }
-}
 
 @keyframes empty {
-  0% {
+  0%
     clip rect(66px, 66px, 66px, 0)
-  }
-  1% {
+  1%
     clip rect(0, 66px, 66px, 0)
-  }
-  100% {
+  100%
     clip rect(66px, 66px, 66px, 0)
-  }
-}

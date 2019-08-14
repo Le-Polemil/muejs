@@ -2,7 +2,7 @@ import React from 'react';
 import gridify from '../../../../hoc/gridify';
 import './index.styl';
 
-const Hourglass = ({ size, ...props }) => (
+const Hourglass = ({ size = "32px", ...props }) => (
   <div className="hourglass" style={{ '--size': size }} {...props}>
     <svg className="full" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
       <path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z"/>
