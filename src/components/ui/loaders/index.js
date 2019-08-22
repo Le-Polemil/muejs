@@ -1,4 +1,4 @@
 export Spinner from './CircularProgress';
 export Loader from './LinearProgress';
-export Hourglass from './Hourglass';
+export CustomSpinner from './CustomSpinner';
 export FullPageSpinner from './FullPageSpinner';

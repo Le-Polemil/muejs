@@ -2,10 +2,10 @@ import React from 'react';
 import gridify from '../../../../hoc/gridify';
 import './index.styl';
 
-const CircularProgress = ({ size = '32px', width = '6', ...props }) => (
-    <svg className="circular-spinner" width="66" height="66" viewBox="0 0 66 66" style={{ '--size': size }} {...props}>
-        <circle className="circular-spinner-path" fill="none" strokeWidth={width} strokeLinecap="round" cx="33" cy="33" r="30" />
+export const UngridifiedCircularProgress = ({ strokeWidth = '6', ...props }) => (
+    <svg width="100" height="100" viewBox="0 0 100 100" {...props}>
+        <circle className="circular-spinner-path" fill="none" strokeWidth={strokeWidth} strokeLinecap="round" cx="50" cy="50" r="47" />
     </svg>
 );
 
-export default gridify(CircularProgress);
+export default gridify(UngridifiedCircularProgress, { componentName: 'circular-spinner' });

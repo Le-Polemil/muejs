@@ -1,0 +1,12 @@
+.custom-spinner
+  --size 100
+  --duration 3s
+  .rotate
+    transform-origin center
+    transform rotate(0deg)
+    animation rotator var(--duration) ease-in-out infinite
+
+
+@keyframes rotator
+  to
+    transform rotate(720deg)

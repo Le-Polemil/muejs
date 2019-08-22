@@ -8,12 +8,15 @@
   color $button-font-color
   cursor pointer
   font inherit
-  margin 0.4rem 0.4rem 0.4rem 0
   outline inherit
   transition background-color 0.2s, color 0.2s
-  padding 0.6rem 1.6rem
-  font-size 1.5rem
-  width 100%
+
+  &:not(.small)
+    font-size 1.5rem
+    margin 0.4rem 0.4rem 0.4rem 0
+    padding 0.6rem 1.6rem
+    width 100%
+
 
   &:hover
     $hover-ratio = 8%

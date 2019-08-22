@@ -1,37 +1,27 @@
 .circular-spinner
-  --offset 190
-  --duration 1.4s
-  animation rotator var(--duration) linear infinite
-  width var(--size)
-  height var(--size)
+  size = 100
+  small-offset = 66
+  full-circle-offset = 314
+  --duration 3s
 
   .circular-spinner-path
     stroke var(--primary-color)
-    animation dash var(--duration) ease-in-out infinite, colors calc(var(--duration)*4) ease-in-out infinite
-    stroke-dasharray var(--offset)
-    stroke-dashoffset 0
+    stroke-dasharray 314 // one array of full circle perimeter
+    stroke-linecap round
     transform-origin center
+    transform rotate(0deg)
+    animation dash var(--duration) ease-in-out infinite
 
-@keyframes rotator
-  0% transform rotate(0deg)
-  100% transform rotate(360deg)
-
-@keyframes colors
-  0%
-    stroke #4285f4
-  25%
-    stroke #de3e35
-  50%
-    stroke #f7f223
-  75%
-    stroke #1b9a59
-  100%
-    stroke #4285f4
 
 @keyframes dash
   0%
-    stroke-dashoffset 0
+    stroke-dashoffset 66
+    transform rotate(-60deg)
+
   50%
-    stroke-dashoffset var(--offset)
+    stroke-dashoffset 314
+    transform rotate(630deg)
+
   100%
-    stroke-dashoffset 0
+    stroke-dashoffset 66
+    transform rotate(1020deg)
