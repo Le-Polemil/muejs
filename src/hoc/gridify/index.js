@@ -54,7 +54,7 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
           styles['display'] = 'none';
       }
       else {
-        ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+        ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'].forEach(size => {
           const suffix = size !== 'xs' ? `-${size}` : '';
 
           if (isObject(col)) {

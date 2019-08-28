@@ -4,6 +4,89 @@
   grid-auto-flow row
 
 .grid
+  --template-columns auto
+  --template-rows auto
+  --col-gap 0
+  --row-gap 0
+
+  grid-template-columns var(--template-columns)
+  grid-template-rows var(--template-rows)
+  grid-column-gap var(--col-gap)
+  grid-row-gap var(--row-gap)
+
+
+  @media (min-width 641px)
+    --template-columns-sm var(--template-columns)
+    --template-rows-sm var(--template-rows)
+    --col-gap-sm var(--col-gap)
+    --row-gap-sm var(--row-gap)
+
+    grid-template-columns var(--template-columns-sm)
+    grid-template-rows var(--template-rows-sm)
+    grid-column-gap var(--col-gap-sm)
+    grid-row-gap var(--row-gap-sm)
+
+
+  @media (min-width 841px)
+    --template-columns-md var(--template-columns-sm)
+    --template-rows-md var(--template-rows-sm)
+    --col-gap-md var(--col-gap-sm)
+    --row-gap-md var(--row-gap-sm)
+
+    grid-template-columns var(--template-columns-md)
+    grid-template-rows var(--template-rows-md)
+    grid-column-gap var(--col-gap-md)
+    grid-row-gap var(--row-gap-md)
+
+
+  @media (min-width 1041px)
+    --template-columns-lg var(--template-columns-md)
+    --template-rows-lg var(--template-rows-md)
+    --col-gap-lg var(--col-gap-md)
+    --row-gap-lg var(--row-gap-md)
+
+    grid-template-columns var(--template-columns-lg)
+    grid-template-rows var(--template-rows-lg)
+    grid-column-gap var(--col-gap-lg)
+    grid-row-gap var(--row-gap-lg)
+
+
+  @media (min-width 1281px)
+    --template-columns-xl var(--template-columns-lg)
+    --template-rows-xl var(--template-rows-lg)
+    --col-gap-xl var(--col-gap-lg)
+    --row-gap-xl var(--row-gap-lg)
+
+    grid-template-columns var(--template-columns-xl)
+    grid-template-rows var(--template-rows-xl)
+    grid-column-gap var(--col-gap-xl)
+    grid-row-gap var(--row-gap-xl)
+
+  @media (min-width 1541px)
+    --template-columns-xxl var(--template-columns-xl)
+    --template-rows-xxl var(--template-rows-xl)
+    --col-gap-xxl var(--col-gap-xl)
+    --row-gap-xxl var(--row-gap-xl)
+
+    grid-template-columns var(--template-columns-xxl)
+    grid-template-rows var(--template-rows-xxl)
+    grid-column-gap var(--col-gap-xxl)
+    grid-row-gap var(--row-gap-xxl)
+
+
+  @media (min-width 1881px)
+    --template-columns-xxxl var(--template-columns-xxl)
+    --template-rows-xxxl var(--template-rows-xxl)
+    --col-gap-xxxl var(--col-gap-xxl)
+    --row-gap-xxxl var(--row-gap-xxl)
+
+    grid-template-columns var(--template-columns-xxxl)
+    grid-template-rows var(--template-rows-xxxl)
+    grid-column-gap var(--col-gap-xxxl)
+    grid-row-gap var(--row-gap-xxxl)
+
+
+
   .grid-element
     display inline-grid
 
@@ -24,7 +107,7 @@
     grid-row var(--row) / span var(--height)
     grid-column var(--col) / span var(--width)
 
-    @media (min-width: 641px)
+    @media (min-width 641px)
       --col-sm var(--col)
       --row-sm var(--row)
       --width-sm var(--width)
@@ -33,7 +116,7 @@
       grid-row var(--row-sm) / span var(--height-sm)
       grid-column var(--col-sm) / span var(--width-sm)
 
-    @media (min-width: 1041px)
+    @media (min-width 841px)
       --col-md var(--col-sm)
       --row-md var(--row-sm)
       --width-md var(--width-sm)
@@ -42,7 +125,7 @@
       grid-row var(--row-md) / span var(--height-md)
       grid-column var(--col-md) / span var(--width-md)
 
-    @media (min-width: 1281px)
+    @media (min-width 1041px)
       --col-lg var(--col-md)
       --row-lg var(--row-md)
       --width-lg var(--width-md)
@@ -51,7 +134,7 @@
       grid-row var(--row-lg) / span var(--height-lg)
       grid-column var(--col-lg) / span var(--width-lg)
 
-    @media (min-width: 1541px)
+    @media (min-width 1281px)
       --col-xl var(--col-lg)
       --row-xl var(--row-lg)
       --width-xl var(--width-lg)
@@ -59,6 +142,24 @@
 
       grid-row var(--row-xl) / span var(--height-xl)
       grid-column var(--col-xl) / span var(--width-xl)
+
+    @media (min-width 1541px)
+      --col-xxl var(--col-xl)
+      --row-xxl var(--row-xl)
+      --width-xxl var(--width-xl)
+      --height-xxl var(--height-xl)
+
+      grid-row var(--row-xxl) / span var(--height-xxl)
+      grid-column var(--col-xxl) / span var(--width-xxl)
+
+    @media (min-width 1881px)
+        --col-xxxl var(--col-xxl)
+        --row-xxxl var(--row-xxl)
+        --width-xxxl var(--width-xxl)
+        --height-xxxl var(--height-xxl)
+
+        grid-row var(--row-xxxl) / span var(--height-xxxl)
+        grid-column var(--col-xxxl) / span var(--width-xxxl)
 
 
   .container
