@@ -8,7 +8,6 @@
     "url": "https://github.com/Cobelt/muejs.git"
   },
   "dependencies": {
-    "immer": "^1.8.0",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",
     "lodash.memoize": "^4.1.2",
@@ -32,16 +31,16 @@
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
     "babel-loader": "^8.0.5",
-    "clean-webpack-plugin": "^1.0.0",
-    "copy-webpack-plugin": "^4.6.0",
-    "css-loader": "^2.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.4.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-motion": "^0.5.2",
-    "style-loader": "^0.23.1",
+    "style-loader": "^1.1.3",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "webpack": "^4.12.1",
@@ -55,8 +54,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack/dev.config.babel.js",
     "watch": "webpack --watch",
-    "build": "webpack --config webpack/dev.config.babel.js --hot --inline",
-    "build-package": "webpack --config webpack/package.config.babel.js",
+    "build": "webpack --config webpack/package.config.babel.js",
     "transpile": "babel src -d dist --copy-files"
   }
 }

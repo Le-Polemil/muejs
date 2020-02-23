@@ -15,7 +15,7 @@
   grid-row-gap var(--row-gap)
 
 
-  @media (min-width 641px)
+  @media (min-width 641px) and (max-width 840px)
     --template-columns-sm var(--template-columns)
     --template-rows-sm var(--template-rows)
     --col-gap-sm var(--col-gap)
@@ -27,7 +27,7 @@
     grid-row-gap var(--row-gap-sm)
 
 
-  @media (min-width 841px)
+  @media (min-width 841px) and (max-width 1040px)
     --template-columns-md var(--template-columns-sm)
     --template-rows-md var(--template-rows-sm)
     --col-gap-md var(--col-gap-sm)
@@ -39,7 +39,7 @@
     grid-row-gap var(--row-gap-md)
 
 
-  @media (min-width 1041px)
+  @media (min-width 1041px) and (max-width 1280px)
     --template-columns-lg var(--template-columns-md)
     --template-rows-lg var(--template-rows-md)
     --col-gap-lg var(--col-gap-md)
@@ -51,7 +51,7 @@
     grid-row-gap var(--row-gap-lg)
 
 
-  @media (min-width 1281px)
+  @media (min-width 1281px) and (max-width 1540px)
     --template-columns-xl var(--template-columns-lg)
     --template-rows-xl var(--template-rows-lg)
     --col-gap-xl var(--col-gap-lg)
@@ -62,7 +62,7 @@
     grid-column-gap var(--col-gap-xl)
     grid-row-gap var(--row-gap-xl)
 
-  @media (min-width 1541px)
+  @media (min-width 1541px) and (max-width 1880px)
     --template-columns-xxl var(--template-columns-xl)
     --template-rows-xxl var(--template-rows-xl)
     --col-gap-xxl var(--col-gap-xl)
@@ -107,7 +107,7 @@
     grid-row var(--row) / span var(--height)
     grid-column var(--col) / span var(--width)
 
-    @media (min-width 641px)
+    @media (min-width 641px) and (max-width 840px)
       --col-sm var(--col)
       --row-sm var(--row)
       --width-sm var(--width)
@@ -116,7 +116,7 @@
       grid-row var(--row-sm) / span var(--height-sm)
       grid-column var(--col-sm) / span var(--width-sm)
 
-    @media (min-width 841px)
+    @media (min-width 841px) and (max-width 1040px)
       --col-md var(--col-sm)
       --row-md var(--row-sm)
       --width-md var(--width-sm)
@@ -125,7 +125,7 @@
       grid-row var(--row-md) / span var(--height-md)
       grid-column var(--col-md) / span var(--width-md)
 
-    @media (min-width 1041px)
+    @media (min-width 1041px) and (max-width 1280px)
       --col-lg var(--col-md)
       --row-lg var(--row-md)
       --width-lg var(--width-md)
@@ -134,7 +134,7 @@
       grid-row var(--row-lg) / span var(--height-lg)
       grid-column var(--col-lg) / span var(--width-lg)
 
-    @media (min-width 1281px)
+    @media (min-width 1281px) and (max-width 1540px)
       --col-xl var(--col-lg)
       --row-xl var(--row-lg)
       --width-xl var(--width-lg)
@@ -143,7 +143,7 @@
       grid-row var(--row-xl) / span var(--height-xl)
       grid-column var(--col-xl) / span var(--width-xl)
 
-    @media (min-width 1541px)
+    @media (min-width 1541px) and (max-width 1880px)
       --col-xxl var(--col-xl)
       --row-xxl var(--row-xl)
       --width-xxl var(--width-xl)
@@ -169,18 +169,9 @@
 .flow-column
   grid-auto-flow column
 
-.gap-column-1
-  grid-column-gap 1%
-.gap-column-2
-  grid-column-gap 2%
-.gap-column-3
-  grid-column-gap 3%
-.gap-column-4
-  grid-column-gap 4%
-.gap-column-5
-  grid-column-gap 5%
-.gap-column-10
-  grid-column-gap 10%
+for $gap in (1..10)
+  .gap-column-{$gap}
+    grid-column-gap $gap
 
 
 .row

@@ -1,5 +1,4 @@
 import React, { useReducer, forwardRef } from 'react';
-import produce  from 'immer';
 import set from 'lodash.set';
 import { Grid } from '../Grid';
 import gridify from '../../../hoc/gridify';
