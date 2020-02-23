@@ -5,8 +5,9 @@ import { isObject } from './typeCheck';
 export const getCSSVarForDimension = memoize(({ dimension, size, defaultValue }) => {
 
   if (isObject(dimension)) {
+    console.log({ dimension, size })
     const dimensionForSize = get(dimension, size);
-    if (dimensionForSize && dimensionForSize !==  defaultValue) {
+    if (dimensionForSize && dimensionForSize !== defaultValue) {
       return dimensionForSize;
     }
   }
@@ -14,4 +15,4 @@ export const getCSSVarForDimension = memoize(({ dimension, size, defaultValue })
     return dimension;
   }
 
-}, ({ dimension, size, defaultValue }) => `memoized#getCSSVarForDimension#${dimension}#${size}#${defaultValue}`)
+}, ({ dimension, size, defaultValue }) => `memoized#getCSSVarForDimension#${JSON.stringify(dimension)}#${size}#${defaultValue}`)
