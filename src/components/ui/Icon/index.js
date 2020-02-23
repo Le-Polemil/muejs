@@ -19,6 +19,6 @@ const UngridifiedIcon = ({ children, className = '', size = '', svg, icon, href,
 }
 
 
-export default UngridifiedIcon
+export default UngridifiedIcon;
 
 export const Icon = gridify(UngridifiedIcon, { componentName: 'icon' });

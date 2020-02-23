@@ -1,0 +1,49 @@
+:root
+  --leaning-size-sm 2vh
+  --leaning-size-md 5vh
+  --leaning-size-lg 7vh
+  --leaning-size-xl 10vh
+
+  --leaning-size var(--leaning-size-md)
+
+.lean-sm
+  --leaning-size var(--leaning-size-sm)
+.lean-lg
+  --leaning-size var(--leaning-size-lg)
+.lean-xl
+  --leaning-size var(--leaning-size-xl)
+
+
+.lean-top-right, .lean-top-left
+  padding-top var(--leaning-size)
+
+.lean-top-right
+  clip-path: polygon(0% 0%, 100% var(--leaning-size), 100% 100%, 0% 100%);
+
+.lean-top-left
+  clip-path: polygon(0% var(--leaning-size), 100% 0%, 100% 100%, 0% 100%);
+
+
+
+.lean-bottom-right, .lean-bottom-left
+  padding-bottom var(--leaning-size)
+
+.lean-bottom-right
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% calc(100% - var(--leaning-size)));
+
+.lean-bottom-left
+  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--leaning-size)), 0% 100%);
+
+
+.lean-top-right.lean-bottom-right
+  clip-path: polygon(0% 0%, 100% var(--leaning-size), 100% 100%, 0% calc(100% - var(--leaning-size)));
+
+.lean-top-left.lean-bottom-left
+  clip-path: polygon(0% var(--leaning-size), 100% 0%, 100% calc(100% - var(--leaning-size)), 0% 100%);
+
+
+.lean-top-right.lean-bottom-left
+  clip-path: polygon(0% 0%, 100% var(--leaning-size), 100% calc(100% - var(--leaning-size)), 0% 100%);
+
+.lean-top-left.lean-bottom-right
+  clip-path: polygon(0% var(--leaning-size), 100% 0%, 100% 100%, 0% calc(100% - var(--leaning-size)));

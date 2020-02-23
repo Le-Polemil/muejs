@@ -1,4 +1,5 @@
 export * from './Article';
+export * from './Slider';
 // export * from './ArticleList';
 // export { Body, BodyElement } from './Body';
 // export { Card } from './Card';

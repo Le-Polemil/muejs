@@ -1,8 +1,7 @@
-import React from 'react';
-import get from 'lodash.get';
+import React, { forwardRef } from 'react';
 
 import { camelToKebab } from '../../filters/stringFormat';
-import { isObject } from '../../utils/typeCheck';
+import { getCSSVarForDimension } from '../../utils/gridify';
 
 
 function gridify(Component, { forcedProps = {}, componentName } = {}) {
@@ -11,7 +10,7 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
         return (forcedProps[forcedPropsName] !== undefined) ? forcedProps[forcedPropsName] : defaultValue;
     }
 
-    const GridifiedComponent = (props) => {
+    const GridifiedComponent = forwardRef((props, ref) => {
       let {
           col: defaultCol,
           row: defaultRow,
@@ -31,12 +30,12 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
           hide,
 
           ...transmissibleProps
-      } = props;
+      } = props || {};
 
       if (show !== undefined && !show || hide) return null;
-
-
       const { selfRowTemplate, selfColTemplate, position: forcedPosition, shouldTransmitProps, hide: forcedHide, show: forcedShow } = forcedProps;
+
+
       if (forcedShow !== undefined && !forcedShow || forcedHide !== undefined && forcedHide) return null;
 
       const isFixed = [position, forcedPosition].includes('fixed') ? 'fixed' : '';
@@ -57,41 +56,11 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
         ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'].forEach(size => {
           const suffix = size !== 'xs' ? `-${size}` : '';
 
-          if (isObject(col)) {
-            const trueCol = get(col, size);
-            if (trueCol && trueCol !== 'auto') styles[`--col${suffix}`] = trueCol;
-          }
-          else if (['string', 'number'].includes(typeof col) && size === 'xs' && col !== 'auto') {
-            styles[`--col${suffix}`] = col;
-          }
-
-          if (isObject(row)) {
-            const trueRow = get(row, size);
-            if (trueRow && row !== 'auto') styles[`--row${suffix}`] = trueRow;
-          }
-          else if (['string', 'number'].includes(typeof row) && size === 'xs' && row !== 'auto') {
-            styles[`--row${suffix}`] = row;
-          }
-
-
-
-          if (isObject(width)) {
-            const trueWidth = get(width, size);
-            if (trueWidth && parseInt(width, 10) !== 1) styles[`--width${suffix}`] = trueWidth;
-          }
-          else if (['string', 'number'].includes(typeof width) && size === 'xs' && parseInt(width, 10) !== 1) {
-            styles[`--width${suffix}`] = width;
-          }
-
-          if (isObject(height)) {
-            const trueHeight = get(height, size);
-            if (trueHeight && parseInt(height, 10) !== 1) styles[`--height${suffix}`] = trueHeight;
-          }
-          else if (['string', 'number'].includes(typeof height) && size === 'xs' && parseInt(height, 10) !== 1) {
-            styles[`--height${suffix}`] = height;
-          }
-
-        })
+          styles[`--col${suffix}`] =    getCSSVarForDimension({ dimension: col, size, defaultValue: 'auto' });
+          styles[`--row${suffix}`] =    getCSSVarForDimension({ dimension: row, size, defaultValue: 'auto' });
+          styles[`--width${suffix}`] =  getCSSVarForDimension({ dimension: width, size, defaultValue: 1 });
+          styles[`--height${suffix}`] = getCSSVarForDimension({ dimension: height, size, defaultValue: 1 });
+        });
       }
       styles = { ...styles, ...style };
 
@@ -104,12 +73,13 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
 
               className={classNames}
               style={styles}
+              ref={ref}
           >
               { children }
           </Component>
       );
 
-    }
+    });
 
     GridifiedComponent.defaultProps = {
         className: getDefaultProps('className', ''),

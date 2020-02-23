@@ -1,5 +1,4 @@
 .slider
-  background-color var(--primary-color)
   display flex
   position relative
 
@@ -11,9 +10,11 @@
     height 100%
     width 100%
 
-    .slider-item
-      object-fit cover
-      object-position bottom center
+    .slide
+
+      display flex
+      justify-content center
+      align-items center
 
       height 100%
       width 100%
@@ -21,7 +22,7 @@
       position absolute
       opacity 1
 
-      transition transform 0.20s
+      transition transform 0.3s, opacity 0.3s
 
       &.opacity-0
         opacity 0
@@ -29,31 +30,35 @@
       &::selection
         background-color transparent
 
+      img
+        object-fit cover
+        object-position center
 
 
   .left-arrow, .right-arrow
-    display flex
-    align-items center
-    justify-content center
+    &.icon
+      position absolute
+      display flex
+      align-items center
+      justify-content center
 
-    height 100%
-    width 15rem
+      color var(--primary-color)
 
-    margin 0
+      font-size calc(8vw + 3em)
 
-    transition box-shadow 0.25s, color 0.25s
+      padding 0
+      top 50%
+      transform translateY(-50%)
 
-    &:hover
-      color #eee
+      margin 0
 
+      transition filter 0.25s
 
-  .left-arrow
-    left 0
-    &:hover
-      box-shadow inset rgba(16, 16, 16, 0.25) 5rem 0 5rem -3rem
+      &.left-arrow
+        left 0
 
-  .right-arrow
-    right 0
+      &.right-arrow
+        right 0
 
-    &:hover
-      box-shadow inset rgba(16, 16, 16, 0.25) -5rem 0 5rem -3rem
+      &:hover
+        filter brightness(120%) grayscale(65%)

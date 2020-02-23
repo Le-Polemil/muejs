@@ -1,90 +1,62 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import uuid from 'uuid/v4';
-import gridify from "../../../hoc/gridify";
+import { useGridify } from '../../../hooks';
 
 import { Icon } from "../../ui/Icon";
-
+import { Slide } from './Slide';
 
 import './index.styl';
 
-export default class UngridifiedSlider extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { id: uuid(), activeSlide: props.start || 0 }
-    }
+
+export const Slider = ({ start = 0, children, loop = true, className, style = {}, ...props }) => {
+  const [id] = useState(uuid());
+  const { hide, className: gridifyClassName, style: gridifyStyle } = useGridify({ componentName: 'slider', ...props });
+
+  const [activeSlide, setActiveSlide] = useState(start);
+  const slideCount = React.Children.count(children);
 
 
-    handleLeftArrow() {
-        const mod = this.props.children.length - 1;
-
-        this.setState(prevState => ({ activeSlide: (prevState.activeSlide - 1 >= 0) ? prevState.activeSlide - 1 : mod }));
-    }
-
-    handleRightArrow() {
-        const mod = this.props.children.length;
-        this.setState(prevState => ({ activeSlide: (prevState.activeSlide + 1) % mod }));
-
-    }
+  if (hide) return null;
+  if (!children || slideCount <= 0) return null;
 
 
-    renderChildren() {
-        const { children } = this.props;
-        const { id, activeSlide } = this.state;
+  return (
+    <div className={[gridifyClassName, className].filter(e => !!e).join(' ').trim()} style={{ ...gridifyStyle, ...style }} { ...props }>
 
-        return React.Children.map(children, (child, index) => {
-            let distance = index - activeSlide;
-            if (Math.abs(distance) === children.length - 1) distance = -Math.sign(distance);
+      { (loop || activeSlide > 0) && (
+        <Icon
+          onClick={() => setActiveSlide((activeSlide - 1 >= 0) ? activeSlide - 1 : slideCount - 1)}
+          position="absolute"
+          className="left-arrow"
+          style={{ zIndex: slideCount + 1 }}
+        >
+          keyboard_arrow_left
+        </Icon>
+      ) }
 
-            const classNames = [child.props.className, 'slider-item', (Math.abs(distance) > 1) ? 'opacity-0' : ''].filter(e => !!e).join(' ');
+      <div id={id} className="slider-wrapper">
+        { React.Children.map(children, (child, index) => {
+          return (
+            <Slide key={`slide#${id}#${index}`} slideCount={slideCount} index={index} activeSlide={activeSlide}>
+              { child }
+            </Slide>
+          );
+        }) }
+      </div>
 
-            const styles = { ...child.props.style };
+      { (loop || activeSlide < slideCount - 1) && (
+        <Icon
+          onClick={() => setActiveSlide((activeSlide + 1) % slideCount)}
+          position="absolute"
+          className="right-arrow"
+          style={{ zIndex: slideCount + 1 }}
+        >
+          keyboard_arrow_right
+        </Icon>
+      ) }
 
-            styles['zIndex'] = children.length - Math.abs(distance);
+    </div>
+  );
+};
 
-            styles['transform'] = `translateX(${(distance) * 100}%)`;
-
-            return React.cloneElement(child, { key: id, className: classNames, style: styles });
-        });
-    }
-
-    render() {
-        const { children, loop = "true", ...otherProps } = this.props;
-        const { id, activeSlide } = this.state;
-
-
-        return (
-            <div { ...otherProps }>
-
-                { (loop === "true" || activeSlide > 0) && (
-                    <Icon
-                        onClick={() => this.handleLeftArrow()}
-                        position="absolute"
-                        className="left-arrow lg"
-                        style={{ zIndex: children.length + 1 }}
-                    >
-                        keyboard_arrow_left
-                    </Icon>
-                ) }
-
-                <div id={id} className="slider-wrapper">
-                    { this.renderChildren() }
-                </div>
-
-                { (loop === "true" || activeSlide < children.length - 1) && (
-                    <Icon
-                        onClick={() => this.handleRightArrow()}
-                        position="absolute"
-                        className="right-arrow lg"
-                        style={{ zIndex: children.length + 1 }}
-                    >
-                        keyboard_arrow_right
-                    </Icon>
-                ) }
-
-            </div>
-        );
-    }
-}
-
-
-export const Slider = gridify(UngridifiedSlider, { forcedProps: { fullwidth: 'true' }, componentName: 'slider' });
+export * from './Slide';

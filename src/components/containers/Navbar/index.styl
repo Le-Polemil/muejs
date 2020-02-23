@@ -1,31 +1,30 @@
 .navbar
-  --navbar-font-color #fff
-  --navbar-brand-font-color #fff
+  --navbar-height 5vh
 
-  --navbar-height 5.1vw
-  --navbar-height-mobile 64px
-
-  --navbar-font-size 1.2rem
-  --navbar-brand-font-size 2.1rem
-
-  background-color var(--primary-color)
+  --navbar-brand-font-size 2.5em
 
   width 100%
-  height var(--navbar-height-mobile)
-  line-height var(--navbar-height-mobile)
+  height var(--navbar-height-mobile, 64px)
+  line-height var(--navbar-height-mobile, 64px)
 
-  font-size var(--navbar-font-size)
 
   z-index 100
+
+  a
+    display flex
+
 
   &::selection
     background-color transparent
 
-  .nav-icon, .nav-label, .nav-brand, .nav-logo
+  .nav-item
+    color var(--font-color-on-primary)
+
     cursor pointer
     display inline-grid
+    align-self center
+    align-content center
     justify-content center
-    font-size var(--navbar-font-size)
 
     &::selection
       background-color transparent
@@ -33,52 +32,45 @@
     > a
       color inherit
 
+    &.brand
+      padding 0 .8em
+      font-size var(--navbar-brand-font-size)
+      font-weight bold
 
-  .nav-brand
-    padding 0 .8rem
-    font-size var(--navbar-brand-font-size)
-    font-weight bold
+    &.label
+      padding 0 .6em
+      height 100%
 
-    color RGBA(var(--navbar-brand-font-color), .6)
-    transition color .2s
+    &.icon
+      height 100%
+      display flex
+      align-items center
+      margin 0
+      padding 0.5em 0.3em
 
-    &:hover
-      color var(--navbar-brand-font-color)
-      transition color .2s
+    &.label, &.icon
+      transition background-color .3s, box-shadow .3s
 
-  .nav-label, .nav-icon
-    padding 0 .6rem
-    align-self center
-    height 100%
+      &:hover
+        background-color var(--link-hover-black-shade-bg)
 
-    color RGBA(var(--navbar-font-color), .8)
-    transition background-color .3s, color .3s
+        &::selection
+          background-color transparent
 
-    &:hover
-      background-color var(--link-hover-black-shade-bg)
-      color var(--navbar-brand-font-color)
-      transition background-color .3s, color .3s
 
-    i.material-icons
-      line-height var(--navbar-height-mobile)
-      justify-content center
-      display inline-grid
-
-      &::selection
-        background-color transparent
 
   h1, h2, h3, h4, h5, h6, p
     margin 0
     line-height inherit
 
 
-.nav-icon i.material-icons
-    min-width 2.5rem
-    font-size 1.75rem
+.nav-item.icon i.material-icons
+  min-width 2.5em
+  font-size 1.75em
 
-    &.large
-      font-size 2.35rem
-    &.big
-      font-size 2.05rem
-    &.small
-      font-size 1.55rem
+  &.large
+    font-size 2.35em
+  &.big
+    font-size 2.05em
+  &.small
+    font-size 1.55em

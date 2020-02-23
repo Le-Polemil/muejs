@@ -17,102 +17,12 @@
   &.opn
     width var(--border-wdth)
 
-.rotate-anim
-  max-height 15rem
-  transform rotate(20deg)
-  transition transform 0.5s
-  &:hover
-    animation rotate 0.5s
-
-  @keyframes rotate
-    0%
-      transform rotate(20deg)
-    100%
-      transform rotate(379deg)
-
 .banner
   max-height 7rem
   img
     min-width 100%
 
 
-.font-primary
-  color var(--primary-color) !important
-.font-secondary
-  color var(--secondary-color) !important
-.font-white
-  color #fafafa !important
-
-.font-over-primary
-  color var(--font-color-on-primary) !important
-.font-over-secondary
-  color var(--font-color-on-secondary) !important
-.font-over-tertiary
-  color var(--font-color-on-tertiary) !important
-.font-over-error
-  color var(--font-color-on-error) !important
-
-.font-success
-  color var(--success-color) !important
-.font-warning
-  color var(--warning-color) !important
-.font-error
-  color var(--error-color) !important
-.font-info
-  color var(--info-color) !important
-
-.bg-none
-  background-color none !important
-
-.bg-primary
-  background-color var(--primary-color) !important
-  color var(--font-color-on-primary)
-
-.bg-secondary
-  background-color var(--secondary-color) !important
-  color var(--font-color-on-secondary)
-
-.bg-tertiary
-  background-color var(--tertiary-color) !important
-  color var(--font-color-on-tertiary)
-
-.bg-success
-  background-color var(--success-color) !important
-
-.bg-warning
-  background-color var(--warning-color) !important
-
-.bg-error
-  background-color var(--error-color) !important
-  color var(--font-color-on-error)
-
-.bg-info
-  background-color var(--info-color) !important
-
-.bg-pastel-purple
-  background-color var(--pastel-purple) !important
-
-.bg-pastel-orange
-  background-color var(--pastel-orange) !important
-
-
-.border-success, .border-warning, .border-error, .border-info
-  box-sizing border-box
-  border 1 solid #222
-  &.border-rounded
-    border-radius .2rem
-
-.border-success
-  border-color var(--success-color) !important
-
-.border-warning
-  border-color var(--warning-color) !important
-
-.border-error
-  border-color var(--error-color) !important
-
-.border-info
-  border-color var(--info-color) !important
 
 
 .extends-on-hover
@@ -134,70 +44,7 @@
 .flex-1
   flex 1 !important
 
-.fixed
-  position fixed !important
-  max-width 100vw
 
-.absolute
-  position absolute !important
-
-.relative
-  position relative !important
-
-.justify-baseline
-  justify-content baseline !important
-.justify-stretch
-  justify-content stretch !important
-.justify-start
-  justify-content start !important
-.justify-flex-start
-  justify-content flex-start !important
-.justify-left
-  justify-content left !important
-.justify-center
-  justify-content center !important
-.justify-right
-  justify-content right !important
-.justify-end
-  justify-content end !important
-.justify-flex-end
-  justify-content flex-end !important
-.justify-around
-  justify-content space-around !important
-.justify-between
-  justify-content space-between !important
-.justify-evenly
-  justify-content space-evenly !important
-
-
-.align-baseline
-  align-content baseline !important
-.align-stretch
-  align-content stretch !important
-.align-start
-  align-content start !important
-.align-flex-start
-  align-content flex-start !important
-.align-left
-  align-content left !important
-.align-center
-  align-content center !important
-.align-right
-  align-content right !important
-.align-end
-  align-content end !important
-.align-flex-end
-  align-content flex-end !important
-.align-around
-  align-content space-around !important
-.align-between
-  align-content space-between !important
-.align-evenly
-  align-content space-evenly !important
-
-.place-center
-  align-content center !important
-  justify-content center !important
 
 .hidden
   visibility hidden
@@ -227,3 +74,6 @@ span >
   height 60rem
   width 100%
   transition all 1.2s;
+
+a, a > *
+  outline none
