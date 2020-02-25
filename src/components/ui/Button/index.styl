@@ -1,40 +1,52 @@
-.btn
-  button-bg-color = #efefef
-  button-font-color = #717171
+.before-as-button
+  position relative
 
-  background-color button-bg-color
+  &:before
+    background-color var(--hover-black-shade)
+    bottom 0
+    content ''
+    left 0
+    position absolute
+    top 0
+    transition width 0.2s
+    width 0
+
+  &:hover:before
+    width 0.5rem
+
+  &:active:before
+    width 100%
+
+  &:disabled:before
+    cursor not-allowed
+    width 0 !important
+
+
+.btn
+  @extends .before-as-button
   border 0
   border-radius 0.1rem
-  color button-font-color
   cursor pointer
   font inherit
   font-size 1.3rem
-  margin 0.4rem
   outline inherit
-  padding 0.6rem 1.6rem
-
-  ::before
-    content ""
-    background-color rgba(0,0,0,0)
-    transition background-color 0.2s
-
-  &:hover
-    hover-ratio = 8%
-
-    ::before
-      background-color rgba(0,0,0,hover-ratio)
-
-  &:disabled
-    cursor not-allowed
-
-    ::before
-      background-color rgba(255,255,255, 10%)
+  padding 1rem 2rem
 
   .btn-label
     align-items center
-    display inline-grid
+    display flex
     grid-template-columns auto auto
 
   i.fa
     font-size 1.2rem
     margin-right 10px
+
+  &.filled
+    @extends .btn
+    background-color var(--default-input-bg)
+    color var(--default-input-color)
+
+  &.filled-primary
+    @extends .btn.filled
+    background-color var(--primary-color) !important
+    color var(--font-color-on-primary)

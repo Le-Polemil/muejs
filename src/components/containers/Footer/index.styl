@@ -1,7 +1,7 @@
 .footer
-  --footer-font-size 1.1rem
-  --footer-font-size-bigger 1.6rem
-  --footer-title-font-size 2.1rem
+  --footer-font-size 1rem
+  --footer-font-size-bigger 1.25rem
+  --footer-title-font-size 1.6rem
 
   align-content end
   grid-row-gap 0.8rem
@@ -42,19 +42,17 @@
   .list-item
     width 80%
 
-  h1, h2, h3, h4, h5, h6
-    &.list-item
-      font-weight bold
-
   a
     color var(--font-color-on-primary)
     box-sizing border-box
-    font-weight bold
     transition background .4s, color .4s
     width 100%
 
     &:hover
-      background-color var(--link-hover-black-shade-bg)
+      background-color var(--hover-black-shade)
+
+    &:active
+      background-color var(--active-black-shade)
 
   .footer-separator
     height 1px

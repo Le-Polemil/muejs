@@ -7,57 +7,18 @@
 .relative
   position relative !important
 
+for value in baseline stretch start flex-start left center right end flex-end space-around space-between space-evenly
+  .justify-{value}
+    justify-content value !important
+  .align-{value}
+    align-content value !important
+    
+  for suffix in items self
+    .justify-{suffix}-{value}
+      justify-{suffix} value !important
+    .align-{suffix}-{value}
+      align-{suffix} value !important
 
-.justify-baseline
-  justify-content baseline !important
-.justify-stretch
-  justify-content stretch !important
-.justify-start
-  justify-content start !important
-.justify-flex-start
-  justify-content flex-start !important
-.justify-left
-  justify-content left !important
-.justify-center
-  justify-content center !important
-.justify-right
-  justify-content right !important
-.justify-end
-  justify-content end !important
-.justify-flex-end
-  justify-content flex-end !important
-.justify-around
-  justify-content space-around !important
-.justify-between
-  justify-content space-between !important
-.justify-evenly
-  justify-content space-evenly !important
-
-
-.align-baseline
-  align-content baseline !important
-.align-stretch
-  align-content stretch !important
-.align-start
-  align-content start !important
-.align-flex-start
-  align-content flex-start !important
-.align-left
-  align-content left !important
-.align-center
-  align-content center !important
-.align-right
-  align-content right !important
-.align-end
-  align-content end !important
-.align-flex-end
-  align-content flex-end !important
-.align-around
-  align-content space-around !important
-.align-between
-  align-content space-between !important
-.align-evenly
-  align-content space-evenly !important
 
 .place-center
   align-content center !important
