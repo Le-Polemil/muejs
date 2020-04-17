@@ -24,12 +24,14 @@
 
 .btn
   @extends .before-as-button
+  background-color: unset
   border 0
   border-radius 0.1rem
   cursor pointer
   font inherit
   font-size 1.3rem
   outline inherit
+  overflow hidden
   padding 1rem 2rem
 
   .btn-label
@@ -50,3 +52,27 @@
     @extends .btn.filled
     background-color var(--primary-color) !important
     color var(--font-color-on-primary)
+
+  &.filled-secondary
+    @extends .btn.filled
+    background-color var(--secondary-color) !important
+    color var(--font-color-on-secondary)
+
+  &.filled-error
+    @extends .btn.filled
+    background-color var(--error-color) !important
+    color var(--font-color-on-error)
+
+  &.filled-input
+    @extends .btn.filled
+    background-color var(--default-input-bg) !important
+    color var(--default-input-color)
+
+  &.filled-input-reversed
+    @extends .btn.filled
+    background-color var(--default-input-color) !important
+    color var(--default-input-bg)
+
+  &.text
+    @extend .btn
+    padding 5px 10px

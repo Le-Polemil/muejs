@@ -4,8 +4,8 @@ import gridify from '../../../hoc/gridify';
 
 import './index.styl';
 
-const UngridifiedInput = (props) => (
-  <input {...props} />
+const UngridifiedInput = ({ type = 'text', ...props }) => (
+  <input type={type} {...props} />
 );
 
 export const Input = gridify(UngridifiedInput, { componentName: 'input' });

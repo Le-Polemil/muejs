@@ -9,4 +9,5 @@ export * from './Footer';
 export * from './Form';
 export * from './Grid';
 export * from './List';
+export * from './Dropdown';
 export * from './';

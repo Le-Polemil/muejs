@@ -9,7 +9,7 @@ import './index.styl';
 
 export function Grid({ columnsTemplate, rowsTemplate, children, className, style, gap, colGap, rowGap, width: defaultWidth, height: defaultHeight, ...otherProps }) {
   return (
-      <div className={`grid ${className || ''}`} style={getStyle({ style, columnsTemplate, rowsTemplate, gap, rowGap, colGap, width: defaultWidth, height: defaultHeight })}>
+      <div className={`grid ${className || ''}`.trim()} style={getStyle({ style, columnsTemplate, rowsTemplate, gap, rowGap, colGap, width: defaultWidth, height: defaultHeight })}>
         { children }
       </div>
   );

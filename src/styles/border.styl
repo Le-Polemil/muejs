@@ -1,15 +1,90 @@
 
-.border-success, .border-warning, .border-error, .border-info
+.b-success, .b-warning, .b-error, .b-info
   box-sizing border-box
   border 1 solid #222
-  &.border-rounded
+  &.b-rounded
     border-radius .2rem
 
-.border-success
+.round
+  border-radius 50% !important
+
+
+for value in primary secondary success warning error info
+  colorVar = unquote('var(--' + value + '-color)')
+  .b-{value}
+    border-color colorVar !important
+
+  .bl-{value}
+    border-left-color colorVar !important
+
+  .br-{value}
+    border-right-color colorVar !important
+    
+  .bt-{value}
+    border-top-color colorVar !important
+    
+  .bb-{value}
+    border-bottom-color colorVar !important
+    
+
+
+for value in (1..20)
+  .b-{value}
+    border-style solid
+    border-color black
+    border-width value * 1px !important
+
+  .bl-{value}
+    border-left-style solid
+    border-left-color black
+    border-left-width value * 1px !important
+
+  .br-{value}
+    border-right-style solid
+    border-right-color black
+    border-right-width value * 1px !important
+
+  .bt-{value}
+    border-top-style solid
+    border-top-color black
+    border-top-width value * 1px !important
+
+  .bb-{value}
+    border-bottom-style solid
+    border-bottom-color black
+    border-bottom-width value * 1px !important
+
+for style in solid dashed dotted double groove ridge inset ouset unset inherit
+  .b-{style}
+    border-style style !important
+
+  .bl-{style}
+    border-left-style style !important
+
+  .br-{style}
+    border-right-style style !important
+
+  .bt-{style}
+    border-top-style style !important
+
+  .bb-{style}
+    border-bottom-style style !important
+
+    
+
+.b-success
   border-color var(--success-color) !important
-.border-warning
+.b-warning
   border-color var(--warning-color) !important
-.border-error
+.b-error
   border-color var(--error-color) !important
-.border-info
-  border-color var(--info-color) !important
+.b-info
+  border-color var(--error-color) !important
+  
+.b-input
+  border-color var(--input-default-bg) !important
+
+.b-grey
+  border-color var(--grey) !important
+.b-dark-grey
+  border-color var(--dark-grey) !important

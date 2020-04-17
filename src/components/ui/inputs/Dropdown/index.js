@@ -29,7 +29,6 @@ class Dropdown extends Component {
 
     render() {
         const { title, children, style = {}, badgeComponent = undefined } = this.props;
-        console.log(style);
         return (
             <div className="dropdown-wrapper" ref={(node) => { this.dropdownNode = node; }}>
                 <Button className="artp-dropdown" onClick={() => this.handleClick()}>

@@ -1,13 +1,15 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from 'react'
 
-import { camelToKebab } from '../../filters/stringFormat';
-import { getCSSVarForDimension } from '../../utils/gridify';
+import { camelToKebab } from '../../filters/stringFormat'
+import { getCSSVarForDimension } from '../../utils/gridify'
+
+import { ErrorBoundary } from '../errorCatcher'
 
 
 function gridify(Component, { forcedProps = {}, componentName } = {}) {
 
     function getDefaultProps(forcedPropsName, defaultValue = undefined) {
-        return (forcedProps[forcedPropsName] !== undefined) ? forcedProps[forcedPropsName] : defaultValue;
+        return (forcedProps[forcedPropsName] !== undefined) ? forcedProps[forcedPropsName] : defaultValue
     }
 
     const GridifiedComponent = forwardRef((props, ref) => {
@@ -30,56 +32,56 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
           hide,
 
           ...transmissibleProps
-      } = props || {};
+      } = props || {}
 
-      if (show !== undefined && !show || hide) return null;
-      const { selfRowTemplate, selfColTemplate, position: forcedPosition, shouldTransmitProps, hide: forcedHide, show: forcedShow } = forcedProps;
+      if (show !== undefined && !show || hide) return null
+      const { selfRowTemplate, selfColTemplate, position: forcedPosition, shouldTransmitProps, hide: forcedHide, show: forcedShow } = forcedProps
 
 
-      if (forcedShow !== undefined && !forcedShow || forcedHide !== undefined && forcedHide) return null;
+      if (forcedShow !== undefined && !forcedShow || forcedHide !== undefined && forcedHide) return null
 
-      const isFixed = [position, forcedPosition].includes('fixed') ? 'fixed' : '';
-      const col = isFixed ? 0 : defaultCol;
-      const row = isFixed ? 0 : defaultRow;
-      const width = fullwidth ? -1 : defaultWidth;
-      const height = fullheight ? -1 : defaultHeight;
+      const isFixed = [position, forcedPosition].includes('fixed') ? 'fixed' : ''
+      const col = isFixed ? 0 : defaultCol
+      const row = isFixed ? 0 : defaultRow
+      const width = fullwidth ? -1 : defaultWidth
+      const height = fullheight ? -1 : defaultHeight
 
-      const type = componentName || Component.displayName || `Gridified${Component.name || 'Component'}`;
-      const classNames = [camelToKebab(type), className, justify && `justify-${justify}`, align && `align-${align}`, isFixed].filter(e => !!e).join(' ');
+      const type = componentName || Component.displayName || `Gridified${Component.name || 'Component'}`
+      const classNames = [camelToKebab(type), className, justify && `justify-${justify}`, align && `align-${align}`, isFixed].filter(e => !!e).join(' ')
 
       // css variables
-      let styles = { };
+      let styles = { }
       if (parseInt(width, 10) <= 0 && parseInt(height, 10) <= 0) {
-          styles['display'] = 'none';
+          styles['display'] = 'none'
       }
       else {
         ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'].forEach(size => {
-          const suffix = size !== 'xs' ? `-${size}` : '';
+          const suffix = size !== 'xs' ? `-${size}` : ''
 
-          styles[`--col${suffix}`] =    getCSSVarForDimension({ dimension: col, size, defaultValue: 'auto' });
-          styles[`--row${suffix}`] =    getCSSVarForDimension({ dimension: row, size, defaultValue: 'auto' });
-          styles[`--width${suffix}`] =  getCSSVarForDimension({ dimension: width, size, defaultValue: 1 });
-          styles[`--height${suffix}`] = getCSSVarForDimension({ dimension: height, size, defaultValue: 1 });
-        });
+          styles[`--col${suffix}`] =    getCSSVarForDimension({ dimension: col, size, defaultValue: 'auto' })
+          styles[`--row${suffix}`] =    getCSSVarForDimension({ dimension: row, size, defaultValue: 'auto' })
+          styles[`--width${suffix}`] =  getCSSVarForDimension({ dimension: width, size, defaultValue: 1 })
+          styles[`--height${suffix}`] = getCSSVarForDimension({ dimension: height, size, defaultValue: 1 })
+        })
       }
-      styles = { ...styles, ...style };
+      styles = { ...styles, ...style }
 
-      const gridElementProps = shouldTransmitProps ? { col, row, width, height, fullwidth, fullheight } : {};
+      const gridElementProps = shouldTransmitProps ? { col, row, width, height, fullwidth, fullheight } : {}
 
       return (
-          <Component
-              {...transmissibleProps}
-              {...gridElementProps}
+        <Component
+            {...transmissibleProps}
+            {...gridElementProps}
 
-              className={classNames}
-              style={styles}
-              ref={ref}
-          >
-              { children }
-          </Component>
-      );
+            className={classNames}
+            style={styles}
+            ref={ref}
+        >
+            { children }
+        </Component>
+      )
 
-    });
+    })
 
     GridifiedComponent.defaultProps = {
         className: getDefaultProps('className', ''),
@@ -93,10 +95,10 @@ function gridify(Component, { forcedProps = {}, componentName } = {}) {
 
         fullwidth: getDefaultProps('fullwidth', false),
         fullheight: getDefaultProps('fullheight', false),
-    };
+    }
 
-    return GridifiedComponent;
+    return GridifiedComponent
 }
 
 
-export default gridify;
+export default gridify

@@ -45,6 +45,52 @@
   flex 1 !important
 
 
+for i in (1..20)
+  step = 5 * i
+  .max-width-{step}
+    max-width step * 1%
+
+  .min-width-{step}
+    min-width step * 1%
+    
+  .width-{step}
+    width step * 1%
+
+  .max-height-{step}
+    max-height step * 1%
+
+  .min-height-{step}
+    min-height step * 1%
+    
+  .height-{step}
+    height step * 1%
+
+  .max-width-{step}vw
+    max-width step * 1vw
+
+  .min-width-{step}vw
+    min-width step * 1vw
+    
+  .width-{step}vw
+    width step * 1vw
+
+  .max-height-{step}vh
+    max-height step * 1vh
+
+  .min-height-{step}vh
+    min-height step * 1vh
+    
+  .height-{step}vh
+    height step * 1vh
+
+
+for value in contain cover fill scale-down
+  .object-fit-{value}
+    object-fit value
+
+for value in auto hidden visible scroll
+  .overflow-{value}
+    overflow value
 
 .hidden
   visibility hidden

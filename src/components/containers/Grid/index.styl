@@ -140,6 +140,7 @@
       --width-xl var(--width-lg)
       --height-xl var(--height-lg)
 
+
       grid-row var(--row-xl) / span var(--height-xl)
       grid-column var(--col-xl) / span var(--width-xl)
 
@@ -176,11 +177,13 @@ for $gap in (1..10)
 
 .row
   display flex
-  flex-wrap wrap
   flex-direction row
 
   &.reverse
     flex-direction row-reverse
+
+  &:not(.nowrap)
+    flex-wrap wrap
 
 .column
   display flex
@@ -189,6 +192,9 @@ for $gap in (1..10)
 
   &.reverse
     flex-direction column-reverse
+  
+  &:not(.nowrap)
+    flex-wrap wrap
 
 .flex-filler
   flex 1

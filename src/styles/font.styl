@@ -72,27 +72,36 @@ html
     text-align justify !important
 
 
-  .font-primary
+  .text-primary
     color var(--primary-color) !important
-  .font-secondary
+  .text-secondary
     color var(--secondary-color) !important
-  .font-white
+  .text-white
     color #fafafa !important
 
-  .font-over-primary
+  .text-over-primary
     color var(--font-color-on-primary) !important
-  .font-over-secondary
+  .text-over-secondary
     color var(--font-color-on-secondary) !important
-  .font-over-tertiary
+  .text-over-tertiary
     color var(--font-color-on-tertiary) !important
-  .font-over-error
+  .text-over-error
     color var(--font-color-on-error) !important
 
-  .font-success
+  .text-success
     color var(--success-color) !important
-  .font-warning
+  .text-warning
     color var(--warning-color) !important
-  .font-error
+  .text-error
     color var(--error-color) !important
-  .font-info
+  .text-info
     color var(--info-color) !important
+
+
+for value in (1..20)
+  step = 2 * value
+  .font-{step}
+    font-size step * 1px !important
+
+.bold
+  font-weight 900
