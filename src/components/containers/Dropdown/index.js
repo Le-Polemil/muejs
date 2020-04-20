@@ -8,6 +8,11 @@ export class Dropdown extends Component {
     this.state = { isOpen: false }
     this.handleClickOutside = this.handleClickOutside.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.close = this.close.bind(this)
+  }
+
+  close() {
+    this.setState(prevState => ({ isOpen: !prevState.isOpen }))
   }
 
   componentDidMount() {
@@ -19,7 +24,7 @@ export class Dropdown extends Component {
   }
 
   handleClick() {
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+    this.close()
   }
 
   handleClickOutside(e) {
@@ -29,7 +34,7 @@ export class Dropdown extends Component {
 
   render() {
     const { isOpen } = this.state
-    const { title = '', side = 'left', badgeComponent = null, trigger, children, style = {}, contentStyle } = this.props
+    const { title = '', detached = false, side = 'left', badgeComponent = null, trigger, renderChildren, style = {}, contentStyle } = this.props
 
     return (
       <div className="dropdown-wrapper" ref={(node) => { this.dropdownNode = node }}>
@@ -42,8 +47,8 @@ export class Dropdown extends Component {
           )}
         </button>
         { isOpen && (
-          <div className={("dropdown-menu " + side).trim()} style={contentStyle}>
-            {children}
+          <div className={`dropdown-menu ${side ? side : ''} ${detached ? 'detached' : ''}`.trim()} style={contentStyle}>
+            {typeof renderChildren === 'function' && renderChildren({ close: this.close })}
           </div>
         )}
       </div>

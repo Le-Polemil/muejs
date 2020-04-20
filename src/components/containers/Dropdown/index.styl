@@ -1,58 +1,62 @@
 .dropdown-wrapper
   position relative
 
+  .dropdown-trigger
+    background unset
+    border 0
+    color #333
+    cursor pointer
+    margin 0
+    opacity 0.75
+    outline none
+    transition opacity 0.2s
+
+    > span
+      align-items center
+      display flex
+
+    &:hover,
+    &:active
+      background unset
+      opacity 1
+
+    i.fa-caret-down
+      font-size 0.8rem
+
+  .dropdown-menu
+    background-color #fff
+    border 1px solid rgba(0, 0, 0, 0.12)
+    box-shadow 0 6px 12px rgba(0, 0, 0, 0.175)
+    min-width 10rem
+    padding 0.4rem 0
+    position absolute
+    top calc(100% + 1px)
+    transition max-height 0.2s, opacity 0.2s
+    z-index 1001
+
+    &.detached
+      position fixed
+
+    &.left
+      left 0
+      transform-origin top left
+      
+    &.center
+      left 50%
+      transform-origin top center
+      transform translateX(-50%)
+
+    &.right
+      right 0
+      transform-origin top right 
+
+    a
+      color #222
+      text-decoration none
+
+
 .divider
   border-bottom solid 1px #e5e5e5
   height 1px
   margin 9px 0
   width 100%
-
-.dropdown-trigger
-  background unset
-  border 0
-  color #333
-  cursor pointer
-  margin 0
-  opacity 0.75
-  outline none
-  transition opacity 0.2s
-
-  > span
-    align-items center
-    display flex
-
-  &:hover,
-  &:active
-    background unset
-    opacity 1
-
-  i.fa-caret-down
-    font-size 0.8rem
-
-.dropdown-menu
-  background-color #fff
-  border 1px solid rgba(0, 0, 0, 0.12)
-  box-shadow 0 6px 12px rgba(0, 0, 0, 0.175)
-  min-width 10rem
-  padding 0.4rem 0
-  position absolute
-  top calc(100% + 1px)
-  transition max-height 0.2s, opacity 0.2s
-  z-index 1001
-
-  &.left
-    left 0
-    transform-origin top left
-    
-  &.center
-    left 50%
-    transform-origin top center
-    transform translateX(-50%)
-
-  &.right
-    right 0
-    transform-origin top right 
-
-  a
-    color #222
-    text-decoration none
