@@ -35,11 +35,11 @@
   &:hover
     height 120%
 
-.block
-  display block !important
 
-.flex
-  display flex !important
+for value in inline-grid block flex
+  .{value}
+    display value !important
+
 
 .flex-1
   flex 1 !important
@@ -91,6 +91,13 @@ for value in contain cover fill scale-down
 for value in auto hidden visible scroll
   .overflow-{value}
     overflow value
+
+
+.text-ellipsis
+  text-overflow ellipsis !important
+  overflow hidden
+  white-space nowrap
+
 
 .hidden
   visibility hidden
