@@ -1,0 +1,10 @@
+// Color
+.text-transparent {
+    color: transparent !important;
+}
+
+@each $color in $colors {
+    .text-#{$color} {
+        color: var(--#{$color}-color) !important;
+    }
+}

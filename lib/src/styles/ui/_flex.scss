@@ -1,0 +1,26 @@
+@for $i from 0 through 10 {
+    .flex-#{$i} {
+        flex: #{$i} !important;
+    }
+}
+
+.flex {
+    align-content: center;
+}
+.flex-initial {
+    flex: initial !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+.flex-reverse-column {
+    flex-direction: column-reverse !important;
+}
+.flex-reverse {
+    flex-direction: row-reverse !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}

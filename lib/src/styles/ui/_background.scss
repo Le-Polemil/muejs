@@ -1,0 +1,12 @@
+.bg-none {
+    background-color: none !important;
+}
+.bg-transparent {
+    background-color: transparent !important;
+}
+
+@each $color in $colors {
+    .bg-#{$color} {
+        background-color: var(--#{$color}-color) !important;
+    }
+}

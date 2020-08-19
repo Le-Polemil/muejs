@@ -1,0 +1,150 @@
+@each $side in left, center, right, justify {
+    .text-#{$side} {
+        text-align: $side !important;
+    }
+}
+
+$justifies: (
+    left: flex-start,
+    center: center,
+    right: flex-end,
+    space-around: space-around,
+    space-between: space-between,
+    space-evenly: space-evenly
+);
+
+$alignments: (
+    top: flex-start,
+    center: center,
+    baseline: baseline,
+    bottom: flex-end
+);
+
+$types: (
+    '': content,
+    -items: items,
+    -self: self
+);
+
+@each $class, $type in $types {
+    @each $class2, $value in $justifies {
+        $fullClass: justify#{$class}-#{$class2};
+        @include withMediaQueries($fullClass) {
+            justify-#{$type}: $value !important;
+        }
+    }
+
+    @each $class2, $value in $alignments {
+        $fullClass: align#{$class}-#{$class2};
+        @include withMediaQueries($fullClass) {
+            align-#{$type}: $value !important;
+        }
+    }
+}
+
+.place-center {
+    align-content: center !important;
+    justify-content: center !important;
+}
+
+@each $value in static, fixed, relative, absolute, sticky {
+    @include withMediaQueries($value) {
+        position: $value !important;
+    }
+}
+
+.fixed,
+[class$='-fixed'],
+[class*='-fixed '] {
+    max-width: 100vw;
+}
+
+// PX
+@for $step from 0 through 50 {
+    $i: $step * 5;
+
+    .left-#{$i} {
+        left: #{$i}px !important;
+    }
+    .right-#{$i} {
+        right: #{$i}px !important;
+    }
+    .top-#{$i} {
+        top: #{$i}px !important;
+    }
+    .bottom-#{$i} {
+        bottom: #{$i}px !important;
+    }
+}
+
+// PERCENT
+@for $step from 1 through 20 {
+    $i: $step * 5;
+
+    .left-#{$i}\% {
+        left: $i * 1 !important;
+    }
+    .right-#{$i}\% {
+        right: $i * 1 !important;
+    }
+    .top-#{$i}\% {
+        top: $i * 1 !important;
+    }
+    .bottom-#{$i}\% {
+        bottom: $i * 1 !important;
+    }
+
+    // Z-INDEX
+    .z-index-#{$i} {
+        z-index: $i;
+    }
+}
+
+// CORNERS
+.top-right-corner,
+.top-left-corner,
+.bottom-right-corner,
+.bottom-left-corner {
+    position: absolute;
+}
+
+.top-right-corner,
+.top-left-corner {
+    top: 0;
+}
+
+.bottom-right-corner,
+.bottom-left-corner {
+    bottom: 0;
+}
+
+.top-left-corner,
+.bottom-left-corner,
+.center-left {
+    left: 0;
+}
+
+.top-right-corner,
+.bottom-right-corner,
+.center-right {
+    right: 0;
+}
+
+.top-right-corner.with-radius {
+    border-bottom-left-radius: 15%;
+}
+.top-left-corner.with-radius {
+    border-bottom-right-radius: 15%;
+}
+.bottom-right-corner.with-radius {
+    border-top-left-radius: 15%;
+}
+.bottom-left-corner.with-radius {
+    border-top-right-radius: 15%;
+}
+
+.center-left,
+.center-right {
+    top: 50%;
+    transform: translateY(-50%);
+}

@@ -1,0 +1,31 @@
+@each $limit in '', min-, max- {
+    @each $direction in width, height {
+        .#{$limit}#{$direction}-unset {
+            #{$limit}#{$direction}: unset !important;
+        }
+
+        @for $step from 0 through 100 {
+            $i: $step * 10;
+
+            .#{$limit}#{$direction}-#{$i} {
+                #{$limit}#{$direction}: #{$i}px !important;
+            }
+        }
+
+        @for $step from 0 through 20 {
+            $i: $step * 5;
+
+            .#{$limit}#{$direction}-#{$i}\% {
+                #{$limit}#{$direction}: $i * 1% !important;
+            }
+
+            .#{$limit}#{$direction}-#{$i}vw {
+                #{$limit}#{$direction}: #{$i}vw !important;
+            }
+
+            .#{$limit}#{$direction}-#{$i}vh {
+                #{$limit}#{$direction}: #{$i}vh !important;
+            }
+        }
+    }
+}

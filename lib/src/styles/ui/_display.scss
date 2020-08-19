@@ -1,0 +1,14 @@
+@each $display in block, inline, inline-block, flex, grid, inline-grid {
+    .#{$display} {
+        display: $display !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .md\:hidden {
+        display: none !important;
+    }
+}
+.display-none {
+    display: none !important;
+}
