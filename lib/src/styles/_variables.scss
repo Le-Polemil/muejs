@@ -1,38 +1,8 @@
-$colors: (
-    primary,
-    light-primary,
-    dark-primary,
-    over-primary,
-    secondary,
-    light-secondary,
-    dark-secondary,
-    over-secondary,
-    success,
-    warning,
-    error,
-    over-error,
-    helper,
-    pinky,
-    pastel-blue,
-    pastel-green,
-    pastel-red,
-    pastel-yellow,
-    'orange',
-    'white',
-    white-20,
-    'grey',
-    light-grey,
-    dark-grey,
-    dark,
-    'black',
-    black-20
-);
-
 :root {
     /*
     *  COLORS
     */
-    --pastel-blue-color: lighten(#35f, 20%);
+    --pastel-blue-color: #{lighten(#35f, 20%)};
     --cyan-color: rgb(92, 239, 233);
 
     // RED
@@ -40,12 +10,12 @@ $colors: (
     --red-color: rgb(204, 68, 68);
 
     // GREEN
-    --pastel-green-color: lighten(#8e3, 6%);
+    --pastel-green-color: #{lighten(#8e3, 6%)};
     --light-green-color: rgb(228, 237, 209);
     --dark-green-color: rgba(28, 68, 12, 0.7);
 
     // YELLOW / ORANGE
-    --pastel-yellow-color: lighten(gold, 16%);
+    --yellow-color: rgba(246, 185, 59);
     --light-orange-color: rgb(244, 182, 81);
     --light-orange-color-62: rgba(244, 182, 81, 0.62);
     --orange-color: rgb(232, 162, 18);
@@ -89,13 +59,13 @@ $colors: (
 
     // Primary Color
     --primary-color: #c75532;
-    --light-primary-color: lighten(#c75532, 15%);
-    --dark-primary-color: darken(#c75532, 15%);
+    --light-primary-color: #{lighten(#c75532, 15%)};
+    --dark-primary-color: #{darken(#c75532, 15%)};
 
     // Secondary Color
-    --secondary-color: lighten(gold, 10%);
-    --light-secondary-color: lighten(gold, 25%);
-    --dark-secondary-color: darken(gold, 25%);
+    --secondary-color: #{darken(gold, 20%)};
+    --light-secondary-color: #{lighten(gold, 25%)};
+    --dark-secondary-color: #{darken(gold, 25%)};
 
     // Font color over primary and secondary
     --over-primary-color: var(--white-color);
@@ -105,10 +75,11 @@ $colors: (
     --bg-color: var(--white-color);
 
     --success-color: var(--pastel-green-color);
-    --warning-color: var(--pastel-yellow-color);
+    --warning-color: var(--yellow-color);
     --error-color: var(--pastel-red-color);
 
     --over-error-color: var(--white-color);
+    --over-white-color: var(--black-color);
 
     --helper-color: rgb(150, 150, 150);
     --info-color: var(--pastel-blue);

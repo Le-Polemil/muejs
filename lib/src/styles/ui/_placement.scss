@@ -43,8 +43,8 @@ $types: (
 }
 
 .place-center {
-    align-content: center !important;
-    justify-content: center !important;
+    align-self: center !important;
+    justify-self: center !important;
 }
 
 @each $value in static, fixed, relative, absolute, sticky {

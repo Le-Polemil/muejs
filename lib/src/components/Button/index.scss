@@ -1,0 +1,185 @@
+@import '../../styles/_sassVariables';
+
+@mixin button {
+    --border-size: 2px;
+    --btn-padding-v: 12px;
+    --btn-padding-h: 20px;
+
+    align-items: center;
+    background-color: unset;
+    border-radius: 0;
+    box-shadow: unset;
+    cursor: pointer;
+    display: flex;
+    font-family: unset;
+    font-size: 13px;
+    font-weight: 600;
+    height: auto;
+    justify-content: center;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    margin: auto;
+    padding: var(--btn-padding-v) var(--btn-padding-h);
+    text-transform: uppercase;
+    width: auto;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    > i {
+        margin-right: var(--spacing);
+        vertical-align: sub;
+    }
+}
+
+$directions: (
+    to-bottom: bottom,
+    to-up: top,
+    to-left: left,
+    to-right: right
+);
+
+@mixin btn-filled($direction) {
+    background-image: linear-gradient(
+        to $direction,
+        var(--sub-bg, transparent) 50%,
+        var(--bg, var(--primary-color)) 50%
+    );
+    border: var(--border-size, 2px) solid var(--bg, var(--primary-color));
+    color: var(--text, #fff);
+
+    overflow: hidden;
+    padding: calc(var(--btn-padding-v) - var(--border-size))
+        calc(var(--btn-padding-h) - var(--border-size));
+    transition: background-position 0.25s, color 0.25s;
+
+    @if ($direction == 'bottom') {
+        background-position: 0% calc(100% + var(--border-size, 2px));
+        background-size: 100% calc(200% + 3 * var(--border-size, 2px));
+
+        &:hover {
+            color: var(--bg, var(--primary-color));
+            background-position: 0% 0%;
+        }
+    } @else if ($direction == 'top') {
+        background-position: 0% 0%;
+        background-size: 100% calc(200% + 3 * var(--border-size, 2px));
+
+        &:hover {
+            color: var(--bg, var(--primary-color));
+            background-position: 0% calc(100% + var(--border-size, 2px));
+        }
+    } @else if ($direction == 'left') {
+        background-position: 0% 0%;
+        background-size: calc(200% + 3 * var(--border-size, 2px)) 100%;
+
+        &:hover {
+            color: var(--bg, var(--primary-color));
+            background-position: calc(100% + var(--border-size, 2px)) 0%;
+        }
+    } @else if ($direction == 'right') {
+        background-position: calc(100% + var(--border-size, 2px)) 0%;
+        background-size: calc(200% + 3 * var(--border-size, 2px)) 100%;
+
+        &:hover {
+            color: var(--bg, var(--primary-color));
+            background-position: 0% 0%;
+        }
+    }
+}
+
+@mixin btn-border($direction) {
+    background-image: linear-gradient(
+        to $direction,
+        var(--border, var(--primary-color)) 50%,
+        var(--sub-bg, transparent) 50%
+    );
+    border: var(--border-size, 2px) solid var(--border, var(--primary-color));
+    color: var(--border, var(--primary-color));
+
+    overflow: hidden;
+    padding: calc(var(--btn-padding-v) - var(--border-size))
+        calc(var(--btn-padding-h) - var(--border-size));
+    transition: background-position 0.25s, color 0.25s;
+
+    @if ($direction == 'bottom') {
+        background-position: 0% calc(100% + var(--border-size, 2px));
+        background-size: 100% calc(200% + 3 * var(--border-size, 2px));
+
+        &:hover {
+            color: var(--white, #fff);
+            background-position: 0% 0%;
+        }
+    } @else if ($direction == 'top') {
+        background-position: 0% 0%;
+        background-size: 100% calc(200% + 3 * var(--border-size, 2px));
+
+        &:hover {
+            color: var(--white, #fff);
+            background-position: 0% calc(100% + var(--border-size, 2px));
+        }
+    } @else if ($direction == 'left') {
+        background-position: 0% 0%;
+        background-size: calc(200% + 3 * var(--border-size, 2px)) 100%;
+
+        &:hover {
+            color: var(--white, #fff);
+            background-position: calc(100% + var(--border-size, 2px)) 0%;
+        }
+    } @else if ($direction == 'right') {
+        background-position: calc(100% + var(--border-size, 2px)) 0%;
+        background-size: calc(200% + 3 * var(--border-size, 2px)) 100%;
+
+        &:hover {
+            color: var(--white, #fff);
+            background-position: 0% 0%;
+        }
+    }
+}
+
+.btn-dropdown {
+    --bg: transparent !important;
+    --sub-bg: transparent !important;
+}
+
+.sub-bg-transparent {
+    --sub-bg: transparent !important;
+}
+.sub-bg-white {
+    --sub-bg: var(--white) !important;
+}
+.sub-bg-bg-color {
+    --sub-bg: var(--bg-color) !important;
+}
+
+button,
+.button {
+    @include button;
+
+    @each $color in $colors {
+        &.filled-#{$color} {
+            --bg: var(--#{$color}-color);
+            --text: var(--over-#{$color}-color, var(--white));
+
+            @each $class, $direction in $directions {
+                &.#{$class} {
+                    @include btn-filled($direction);
+                }
+            }
+        }
+    }
+    @each $color in $colors {
+        &.border-#{$color} {
+            --border: var(--#{$color}-color);
+
+            @each $class, $direction in $directions {
+                &.#{$class} {
+                    @include btn-border($direction);
+                }
+            }
+        }
+    }
+}
