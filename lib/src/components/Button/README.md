@@ -6,7 +6,7 @@
 - onClick : Function || () => undefined
 - type : String || 'button'
 - disabled : Boolean || false
-- icon : String || null [Attention: dépend de la version de FontAwesome installée]
+- icon : String || null [We use material-icons]
 - text : String || null
 - className : String || ''
 - style : Object || {}
@@ -30,6 +30,6 @@ Example:
 
 ```JSX
 <Button onClick={handleClick}>
-  <i className="fa fa-times" />Close
+  <i className="material-icons-round">times</i>Close
 </Button>
 ```
