@@ -53,6 +53,14 @@ $types: (
     }
 }
 
+@each $value in middle, super, sub, baseline, bottom, top, text-bottom, text-top, initial,
+    unset, inherit
+{
+    @include withMediaQueries(v-align-#{$value}) {
+        vertical-align: $value !important;
+    }
+}
+
 .fixed,
 [class$='-fixed'],
 [class*='-fixed '] {

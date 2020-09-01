@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
+import { Grid, Element, ErrorBoundary, Button, Icon } from 'muejs'
 
-import { Grid, Element, ErrorBoundary } from 'muejs'
-import Button from 'muejs/src/components/Button/Button'
+import { Navbar } from './components/Navbar'
 
 export default function App() {
     const [error, setError] = useState(null)
@@ -20,9 +20,8 @@ export default function App() {
             rowsTemplate='auto repeat(4, 1fr)'
             colGap='24px'
         >
-            <Element className='bg-primary ph-10% pv-20' col='1' width='-1'>
-                Bonjour les loulous
-            </Element>
+            <Navbar />
+
             <Element
                 type='h1'
                 className='text-primary align-self-bottom'
@@ -39,8 +38,14 @@ export default function App() {
                 width='2'
             >
                 Cobelt
+                <Icon
+                    className='ml-5 text-info v-align-middle'
+                    icon='check_circle'
+                    type='outlined'
+                    size='xs'
+                    title='Vérifié'
+                />
             </Element>
-
             <Button
                 aspect='filled'
                 color='success'
@@ -50,7 +55,7 @@ export default function App() {
                 row='4'
                 onClick={() => window.alert('Success!')}
             >
-                <i className='material-icons-round'>done</i>Success !
+                Success !<Icon size='lg' className='ml-5' icon='done' />
             </Button>
             <Button
                 aspect='border'
@@ -61,7 +66,8 @@ export default function App() {
                 row='4'
                 onClick={() => window.alert('Warning')}
             >
-                <i className='material-icons-round'>warning</i>Warning !
+                Warning !
+                <Icon size='lg' className='ml-5' icon='warning' />
             </Button>
             <Button
                 aspect='filled'
@@ -72,14 +78,19 @@ export default function App() {
                 row='4'
                 onClick={() => setError("Vous n'auriez pas dû cliquer sur ce bouton")}
             >
-                <i className='material-icons-round'>error</i>ERROR
+                ERROR !
+                <Icon size='lg' className='ml-5' icon='error' />
             </Button>
         </Grid>
     )
 }
 
 ReactDOM.render(
-    <ErrorBoundary fallback="Oops y'a eu un soucis">
+    <ErrorBoundary
+        fallback={({ error, errorInfo }) => (
+            <h2 className='text-error'>{error.message}</h2>
+        )}
+    >
         <App />
     </ErrorBoundary>,
     document.getElementById('root')
