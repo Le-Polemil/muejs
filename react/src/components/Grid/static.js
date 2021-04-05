@@ -81,14 +81,14 @@ export function getStyle({
         if (isObject(rowGap)) {
             const trueRow = rowGap?.[size]
             if (trueRow && trueRow !== 'auto') {
-                styles[`--col-gap${suffix}`] = trueRow
+                styles[`--row-gap${suffix}`] = trueRow
             }
         } else if (
             ['string', 'number'].includes(typeof rowGap) &&
             size === 'xs' &&
             rowGap !== 'auto'
         ) {
-            styles[`--col-gap${suffix}`] = rowGap
+            styles[`--row-gap${suffix}`] = rowGap
         }
     })
 

@@ -107,6 +107,8 @@ a.button,
 input.button,
 button.button,
 select.button {
+    max-height: 50px;
+
     > i,
     > svg {
         margin-right: var(--spacing);
@@ -125,14 +127,14 @@ select.button {
     &.icon-left {
         i,
         svg {
-            margin-right: 12px;
+            margin-right: 8px;
         }
     }
 
     &.icon-right {
         i,
         svg {
-            margin-left: 12px;
+            margin-left: 8px;
         }
     }
 }
@@ -186,6 +188,18 @@ select.button {
     --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
     @include btn-filled;
 }
+@include withMediaQueries(btn-light-primary) {
+    --bg: var(--light-primary-color);
+    --color: var(--white-color, #fff);
+    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-dark-primary) {
+    --bg: var(--dark-primary-color);
+    --color: var(--white-color, #fff);
+    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    @include btn-filled;
+}
 
 @include withMediaQueries(btn-secondary) {
     --bg: var(--secondary-color);
@@ -193,37 +207,99 @@ select.button {
     --box-shadow: 0 0 16px 0 rgba(242, 183, 5, 0.3);
     @include btn-filled;
 }
+@include withMediaQueries(btn-light-secondary) {
+    --bg: var(--light-secondary-color);
+    --color: var(--white-color, #fff);
+    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-dark-secondary) {
+    --bg: var(--dark-secondary-color);
+    --color: var(--white-color, #fff);
+    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    @include btn-filled;
+}
+
 @include withMediaQueries(btn-white) {
     --bg: var(--white-color);
-    --color: var(--primary-color, #000);
+    --color: var(--primary-color);
+    --sub-bg: transparent;
+    --hovered-text: var(--black-color);
+    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
+        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-light) {
+    --bg: var(--light-color);
+    --color: var(--primary-color);
+    --sub-bg: transparent;
+    --hovered-text: var(--black-color);
+    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
+        0 2px 3px 0 rgba(26, 121, 206, 0.05);
     @include btn-filled;
 }
 @include withMediaQueries(btn-pale-grey) {
     --bg: var(--pale-grey-color);
-    --color: var(--black-color, #000);
-    --hovered-text: var(--black-color, #000);
+    --color: var(--primary-color);
+    --sub-bg: transparent;
+    --hovered-text: var(--black-color);
+    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
+        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-disabled) {
+    --bg: var(--disabled-color);
+    --color: var(--black-color);
+    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
+        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-grey) {
+    --bg: var(--grey-color);
+    --color: var(--white-color);
+    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
+        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-dark-grey) {
+    --bg: var(--dark-grey-color);
+    --color: var(--white-color);
+    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
+        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-dark) {
+    --bg: var(--dark-color);
+    --color: var(--white-color);
+    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
+        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-black) {
+    --bg: var(--black-color);
+    --color: var(--white-color);
     --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
         0 2px 3px 0 rgba(26, 121, 206, 0.05);
     @include btn-filled;
 }
 @include withMediaQueries(btn-info) {
     --bg: var(--info-color);
-    --color: var(--white-color, #fff);
+    --color: var(--white-color);
     @include btn-filled;
 }
 @include withMediaQueries(btn-success) {
     --bg: var(--success-color);
-    --color: var(--white-color, #fff);
+    --color: var(--white-color);
     @include btn-filled;
 }
 @include withMediaQueries(btn-warning) {
     --bg: var(--warning-color);
-    --color: var(--white-color, #fff);
+    --color: var(--white-color);
     @include btn-filled;
 }
 @include withMediaQueries(btn-error) {
     --bg: var(--error-color);
-    --color: var(--white-color, #fff);
+    --color: var(--white-color);
     @include btn-filled;
 }
 

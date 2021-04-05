@@ -1,7 +1,6 @@
 @import 'muejs/src/mixins/mediaQueries.scss';
 
 .grid {
-    min-width: 100%;
     grid-auto-flow: row;
 
     --template-columns: auto;

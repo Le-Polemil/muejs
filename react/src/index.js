@@ -15,5 +15,6 @@ import 'muejs/src/common/_sizing.scss'
 import 'muejs/src/common/_spacing.scss'
 
 export * from './components'
+export * from './contexts'
 export * from './hooks'
 export * from './static'

@@ -2,6 +2,8 @@ import React from 'react'
 
 import useGridify from '../../hooks/useGridify'
 
+import { Icon } from '../Icon'
+
 import { defaultProps, DIRECTIONS, propTypes } from './static'
 
 import './index.scss'
@@ -18,6 +20,7 @@ export function Button({
     onClick,
     text,
     icon,
+    iconSide,
     children,
     ...otherProps
 }) {
@@ -34,11 +37,12 @@ export function Button({
         <button
             className={[
                 gridClassName,
-                `${
+                `btn-${
                     color && aspect !== 'filled'
                         ? `${aspect}-${color}`
                         : color ?? ''
                 }`,
+                icon && `btn-with-icon icon-${iconSide}`,
                 `to-${DIRECTIONS.includes(direction) ? direction : 'bottom'}`,
                 className,
             ]
@@ -50,21 +54,23 @@ export function Button({
             onClick={onClick}
             {...props}
         >
-            {text ? (
-                <span className='btn-label justify-center'>
+            {!children && (
+                <span
+                    className={`flex align-items-center justify-center ${
+                        iconSide === 'left' ? 'flex-reverse' : ''
+                    }`}
+                >
+                    {text}
+
                     {icon &&
                         (typeof icon === 'string' ? (
-                            <i className='material-icons mr-5'>{icon}</i>
+                            <Icon icon={icon} />
                         ) : (
                             icon
                         ))}
-                    {text}
                 </span>
-            ) : typeof children === 'function' ? (
-                children()
-            ) : (
-                children
             )}
+            {children && typeof children === 'function' ? children() : children}
         </button>
     )
 }
