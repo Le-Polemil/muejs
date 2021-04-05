@@ -1,0 +1,122 @@
+// 0, 1, ... 30
+@for $i from 0 through 10 {
+    .b-#{$i} {
+        border-image-width: #{$i}px !important;
+        border-width: #{$i}px !important;
+        border-style: solid;
+    }
+    .bt-#{$i},
+    .bv-#{$i} {
+        border-top-width: #{$i}px !important;
+        border-top-style: solid;
+    }
+    .bb-#{$i},
+    .bv-#{$i} {
+        border-bottom-width: #{$i}px !important;
+        border-bottom-style: solid;
+    }
+    .bl-#{$i},
+    .bh-#{$i} {
+        border-left-width: #{$i}px !important;
+        border-left-style: solid;
+    }
+    .br-#{$i},
+    .bh-#{$i} {
+        border-right-width: #{$i}px !important;
+        border-right-style: solid;
+    }
+
+    .b-rad-#{$i} {
+        border-radius: #{$i}px !important;
+    }
+    .btl-rad-#{$i} {
+        border-top-left-radius: #{$i}px !important;
+    }
+    .btr-rad-#{$i} {
+        border-top-right-radius: #{$i}px !important;
+    }
+    .bbl-rad-#{$i} {
+        border-bottom-left-radius: #{$i}px !important;
+    }
+    .bbr-rad-#{$i} {
+        border-bottom-right-radius: #{$i}px !important;
+    }
+
+    $step: $i * 5;
+    .b-rad-#{$step}\% {
+        border-radius: unquote('#{$step}%') !important;
+    }
+}
+
+.b-transparent {
+    border-color: transparent !important;
+}
+.b-primary {
+    border-color: var(--primary-color) !important;
+}
+.b-dark-primary {
+    border-color: var(--dark-primary-color) !important;
+}
+.b-secondary {
+    border-color: var(--secondary-color) !important;
+}
+
+.b-info {
+    border-color: var(--info-color) !important;
+}
+.b-success {
+    border-color: var(--success-color) !important;
+}
+.b-warning {
+    border-color: var(--warning-color) !important;
+}
+.b-error {
+    border-color: var(--error-color) !important;
+}
+
+.b-info {
+    border-color: var(--info-color) !important;
+}
+.b-black {
+    border-color: var(--black-color) !important;
+}
+.b-light-black {
+    border-color: var(--light-black-color) !important;
+}
+.b-grey {
+    border-color: var(--grey-color) !important;
+}
+.b-disabled {
+    border-color: var(--disabled-color) !important;
+}
+.b-light {
+    border-color: var(--light-color) !important;
+}
+.b-white {
+    border-color: var(--white-color) !important;
+}
+
+@each $style in dashed, solid {
+    .b-#{$style} {
+        &[class^='b-'],
+        &[class*=' b-'] {
+            border-style: $style !important;
+        }
+        &[class^='bl-'],
+        &[class*=' bl-'] {
+            border-left-style: $style !important;
+        }
+        &[class^='br-'],
+        &[class*=' br-'] {
+            border-right-style: $style !important;
+        }
+        &[class^='bt-'],
+        &[class*=' bt-'] {
+            border-right-style: $style !important;
+        }
+        &[class^='bb-'],
+        &[class*=' bb-'] {
+            border-bottom-style: $style !important;
+        }
+    }
+}

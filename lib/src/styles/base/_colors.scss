@@ -1,0 +1,56 @@
+* {
+    color: var(--color, var(--black-color));
+    transition: color 0.3s;
+}
+
+// Color
+.color-inherit {
+    --color: inherit !important;
+}
+.text-transparent {
+    --color: transparent !important;
+}
+.text-primary {
+    --color: var(--primary-color) !important;
+}
+.text-dark-primary {
+    --color: var(--dark-primary-color) !important;
+}
+.text-secondary {
+    --color: var(--secondary-color) !important;
+}
+
+.text-black {
+    --color: var(--black-color) !important;
+}
+.text-light-black {
+    --color: var(--light-black-color) !important;
+}
+.text-grey {
+    --color: var(--grey-color) !important;
+}
+.text-disabled {
+    --color: var(--disabled-color) !important;
+}
+.text-pale-grey {
+    --color: var(--pale-grey-color) !important;
+}
+.text-light {
+    --color: var(--light-color) !important;
+}
+.text-white {
+    --color: var(--white-color) !important;
+}
+
+.text-info {
+    --color: var(--info-color) !important;
+}
+.text-success {
+    --color: var(--success-color) !important;
+}
+.text-warning {
+    --color: var(--warning-color) !important;
+}
+.text-error {
+    --color: var(--error-color) !important;
+}

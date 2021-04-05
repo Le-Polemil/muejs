@@ -1,0 +1,227 @@
+@import url('//fonts.googleapis.com/css?family=Karla');
+@import url('//fonts.googleapis.com/css?family=Ubuntu');
+@import url('//fonts.googleapis.com/css?family=Oswald');
+@import url('//fonts.googleapis.com/css?family=Poppins');
+@import url('//fonts.googleapis.com/css?family=Rubik');
+@import url('//fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp');
+@import url('//fonts.googleapis.com/css?family=Amatic+SC');
+
+@mixin rubik {
+    font-family: Rubik, sans-serif !important;
+}
+@mixin karla {
+    font-family: Karla, sans-serif !important;
+}
+@mixin ubuntu {
+    font-family: Ubuntu, sans-serif !important;
+}
+@mixin poppins {
+    font-family: Poppins, sans-serif !important;
+}
+@mixin oswald {
+    font-family: Oswald, sans-serif !important;
+}
+@mixin roboto {
+    font-family: Roboto, sans-serif !important;
+}
+
+@mixin thin {
+    font-weight: 100 !important;
+}
+@mixin extralight {
+    font-weight: 200 !important;
+}
+@mixin light {
+    font-weight: 300 !important;
+}
+@mixin regular {
+    font-weight: 400 !important;
+}
+@mixin medium {
+    font-weight: 500 !important;
+}
+@mixin semibold {
+    font-weight: 600 !important;
+}
+@mixin bold {
+    font-weight: 700 !important;
+}
+@mixin extrabold {
+    font-weight: 800 !important;
+}
+@mixin black {
+    font-weight: 900 !important;
+}
+
+.rubik {
+    @include rubik;
+}
+.karla {
+    @include karla;
+}
+.ubuntu {
+    @include ubuntu;
+}
+.poppins {
+    @include poppins;
+}
+.oswald {
+    @include oswald;
+}
+.roboto {
+    @include roboto;
+}
+
+.thin {
+    @include thin;
+}
+.extralight {
+    @include extralight;
+}
+.light {
+    @include light;
+}
+.regular {
+    @include regular;
+}
+.medium {
+    @include medium;
+}
+.semibold {
+    @include semibold;
+}
+.bold {
+    @include bold;
+}
+.extrabold {
+    @include extrabold;
+}
+.black {
+    @include black;
+}
+
+html,
+button,
+textarea {
+    @include karla;
+}
+
+@for $i from 0 through 30 {
+    .font-#{$i} {
+        font-size: #{$i}px !important;
+    }
+}
+
+.font-34 {
+    font-size: 34px !important;
+}
+
+@each $value in uppercase, lowercase, capitalize {
+    .#{$value} {
+        text-transform: $value !important;
+    }
+}
+
+@each $value in line-through, underline, overline {
+    .#{$value} {
+        text-decoration: $value !important;
+    }
+}
+
+.text-transform-initial {
+    text-transform: initial !important;
+}
+
+.letter-spacing-normal {
+    letter-spacing: normal !important;
+}
+
+.text-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+@mixin h1 {
+    @include rubik;
+    font-size: 40px;
+    letter-spacing: 0px;
+    line-height: 66px;
+}
+
+@mixin h2 {
+    @include rubik;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 0px;
+    line-height: 36px;
+}
+
+@mixin h3 {
+    @include rubik;
+    font-size: 18px;
+    letter-spacing: 0px;
+    line-height: 24px;
+}
+
+@mixin body-16 {
+    @include karla;
+    font-size: 16px;
+    letter-spacing: 0px;
+    line-height: 24px;
+}
+
+@mixin body-14 {
+    @include karla;
+    font-size: 14px;
+    letter-spacing: 0px;
+    line-height: 20px;
+}
+
+@mixin body-alt {
+    @include body-16;
+    font-size: 16px;
+    letter-spacing: 0px;
+    line-height: 24px;
+}
+
+@mixin caption {
+    @include karla;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+}
+
+h1 {
+    @include h1;
+}
+h2 {
+    @include h2;
+}
+h3 {
+    @include h3;
+}
+.body-16 {
+    @include body-16;
+}
+.body-14 {
+    @include body-14;
+}
+.body-alt {
+    @include body-alt;
+}
+.caption {
+    @include caption;
+}
+
+a {
+    text-decoration: none;
+}

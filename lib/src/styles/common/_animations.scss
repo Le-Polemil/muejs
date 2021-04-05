@@ -1,0 +1,117 @@
+.spinning {
+    animation: 2s linear infinite spin;
+}
+
+.spinning-reverse {
+    animation: 2s linear infinite reverse spin;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+.to-opacity-100 {
+    animation: var(--anim-duration, 0.5s) ease-in forwards opacity0to1;
+}
+
+.to-opacity-0 {
+    animation: var(--anim-duration, 0.5s) ease-out forwards opacity1to0;
+}
+
+@keyframes opacity0to1 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes opacity1to0 {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.to-translateX-100 {
+    animation: var(--anim-duration, 0.5s) ease-in-out forwards translateX0to100;
+}
+
+.to-translateX--100 {
+    animation: var(--anim-duration, 0.5s) ease-in-out forwards
+        translateX0toMinus100;
+}
+
+.to-translateX-0 {
+    animation: var(--anim-duration, 0.5s) ease-in-out forwards translateX100to0;
+}
+
+.to-translateX--0 {
+    animation: var(--anim-duration, 0.5s) ease-in-out forwards
+        translateXMinus100to0;
+}
+
+@keyframes translateX0to100 {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100vw);
+    }
+}
+
+@keyframes translateX100to0 {
+    0% {
+        transform: translateX(100vw);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes translateX0toMinus100 {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100vw);
+    }
+}
+
+@keyframes translateXMinus100to0 {
+    0% {
+        transform: translateX(-100vw);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.extends-on-hover {
+    transition: width 10s;
+    &:hover {
+        width: 120%;
+    }
+}
+
+.grow-on-hover {
+    transition: height 10s;
+    &:hover {
+        height: 120%;
+    }
+}
+
+.darken-on-hover {
+    transition: filter 10s;
+    &:hover {
+        filter: brightness(85%) !important;
+    }
+}

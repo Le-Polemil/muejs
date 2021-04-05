@@ -1,0 +1,12 @@
+.no-scrollbar {
+    overflow: auto !important;
+    overflow-x: hidden !important;
+
+    &::-webkit-scrollbar {
+        width: 0 !important;
+        background: transparent !important;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: transparent !important;
+    }
+}

@@ -1,0 +1,51 @@
+// Background-color
+.bg-none {
+    background-color: none !important;
+}
+.bg-transparent {
+    background-color: transparent !important;
+}
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+.bg-dark-primary {
+    background-color: var(--dark-primary-color) !important;
+}
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+.bg-black {
+    background-color: var(--black-color) !important;
+}
+.bg-light-black {
+    background-color: var(--light-black-color) !important;
+}
+.bg-grey {
+    background-color: var(--grey-color) !important;
+}
+.bg-disabled {
+    background-color: var(--disabled-color) !important;
+}
+.bg-pale-grey {
+    background-color: var(--pale-grey-color) !important;
+}
+.bg-light {
+    background-color: var(--light-color) !important;
+}
+.bg-white {
+    background-color: var(--white-color) !important;
+}
+
+.bg-info {
+    background-color: var(--info-color) !important;
+}
+.bg-success {
+    background-color: var(--success-color) !important;
+}
+.bg-warning {
+    background-color: var(--warning-color) !important;
+}
+.bg-error {
+    background-color: var(--error-color) !important;
+}

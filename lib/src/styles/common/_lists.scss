@@ -1,0 +1,5 @@
+@each $value in disc, circle, decimal {
+    .list-style-#{$value} {
+        list-style-type: $value !important;
+    }
+}
