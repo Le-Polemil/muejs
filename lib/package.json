@@ -1,6 +1,6 @@
 {
     "name": "muejs",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "A not professional framework js for some prefect UIs.",
     "main": "build/index.js",
     "repository": {
