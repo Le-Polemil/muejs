@@ -15,7 +15,7 @@ html {
 }
 
 body {
-    background-color: #333;
+    background-color: var(--black-color);
     margin: 0;
     padding: 0;
     max-width: 100%;
@@ -24,6 +24,10 @@ body {
     > div {
         background-color: var(--bg-color);
     }
+
+    #root {
+        height: 100vh;
+    }
 }
 
 * {
@@ -31,10 +35,7 @@ body {
     max-width: 100%;
 
     &::selection {
-        background-color: var(
-            --selection-background,
-            var(--light-primary-color, rgba(0, 0, 0, 0.1))
-        );
+        background-color: var(--selection-background, rgba(0, 0, 0, 0.1));
     }
 }
 

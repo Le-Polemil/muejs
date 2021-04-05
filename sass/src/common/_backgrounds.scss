@@ -8,18 +8,30 @@
 .bg-primary {
     background-color: var(--primary-color) !important;
 }
+.bg-light-primary {
+    background-color: var(--light-primary-color) !important;
+}
 .bg-dark-primary {
     background-color: var(--dark-primary-color) !important;
 }
 .bg-secondary {
     background-color: var(--secondary-color) !important;
 }
+.bg-light-secondary {
+    background-color: var(--light-secondary-color) !important;
+}
+.bg-dark-secondary {
+    background-color: var(--dark-secondary-color) !important;
+}
 
 .bg-black {
     background-color: var(--black-color) !important;
 }
-.bg-light-black {
-    background-color: var(--light-black-color) !important;
+.bg-dark {
+    background-color: var(--dark-color) !important;
+}
+.bg-dark-grey {
+    background-color: var(--dark-grey-color) !important;
 }
 .bg-grey {
     background-color: var(--grey-color) !important;

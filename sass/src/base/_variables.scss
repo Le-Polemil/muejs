@@ -4,7 +4,7 @@
     --dark-primary-color: #c92c2c;
 
     --secondary-color: #f2b705;
-    --light-secondary-color: #fbd35e;
+    --light-secondary-color: #ffd042;
     --dark-secondary-color: #bf920d;
 
     // Inputs Color
@@ -13,9 +13,9 @@
     --warning-color: #f7b500;
     --error-color: #d92b4b;
 
-    --dark-color: #333;
-    --black-color: #444;
-    --light-black-color: #787878;
+    --black-color: #333;
+    --dark-color: #444;
+    --dark-grey-color: #787878;
     --grey-color: #d7d7d7;
     --disabled-color: #eeeeee;
     --pale-grey-color: #f8f9fa;
@@ -27,7 +27,7 @@
 
 .dark-mode {
     --dark-mode-primary-color: var(--black-color);
-    --dark-mode-light-primary-color: var(--light-black-color);
+    --dark-mode-light-primary-color: var(--dark-grey-color);
     --dark-mode-dark-primary-color: var(--dark-color);
 
     --primary-color: var(--dark-mode-primary-color);
@@ -35,7 +35,7 @@
     --dark-primary-color: var(--dark-mode-dark-primary-color);
 
     --dark-mode-secondary-color: var(--black-color);
-    --dark-mode-light-secondary-color: var(--light-black-color);
+    --dark-mode-light-secondary-color: var(--dark-grey-color);
     --dark-mode-dark-secondary-color: var(--dark-color);
 
     --secondary-color: var(--dark-mode-secondary-color);
