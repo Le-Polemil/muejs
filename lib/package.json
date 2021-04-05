@@ -1,5 +1,5 @@
 {
-    "name": "muejs-sass",
+    "name": "muejs",
     "version": "1.0",
     "description": "A not professional framework js for some prefect UIs.",
     "main": "build/index.js",
@@ -38,6 +38,7 @@
         "extract-text-webpack-plugin": "^4.0.0-beta.0",
         "html-loader": "^1.1.0",
         "html-webpack-plugin": "^4.2.0",
+        "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-motion": "^0.5.2",

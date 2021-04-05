@@ -42,21 +42,6 @@
     --dark-grey-color: rgb(119, 119, 119);
     --dark-color: rgb(36, 36, 36);
 
-    /*
-    *  THEME
-    */
-    // Font
-    --google-fonts: Rubik, Karla, Ubuntu, Poppins, Oswald;
-    --font-stack: var(--google-fonts), Roboto, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell,
-        'Helvetica Neue', sans-serif;
-
-    --h1-fontsize: 3.5em;
-    --h2-fontsize: 2.8em;
-    --h3-fontsize: 2.2em;
-    --h4-fontsize: 1.7em;
-    --h5-fontsize: 1.3em;
-    --h6-fontsize: 1em;
-
     // Primary Color
     --primary-color: rgb(3, 127, 184);
     --light-primary-color: #{lighten(rgb(3, 127, 184), 15%)};

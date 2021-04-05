@@ -1,0 +1,111 @@
+$mobile-min: 320px;
+$mobile-max: 480px;
+
+$tablet-min: 481px;
+$tablet-max: 768px;
+
+$md-screen-min: 769px;
+$md-screen-max: 1024px;
+
+$lg-screen-min: 1025px;
+$lg-screen-max: 1200px;
+
+$xl-screen-min: 1201px;
+$xl-screen-max: 1800px;
+
+$xxl-screen-min: 1801px;
+
+$sizes: (
+    xs: (
+        min: $mobile-min,
+        max: $mobile-max,
+    ),
+    sm: (
+        min: $tablet-min,
+        max: $tablet-max,
+    ),
+    md: (
+        min: $md-screen-min,
+        max: $md-screen-max,
+    ),
+    lg: (
+        min: $lg-screen-min,
+        max: $lg-screen-max,
+    ),
+    xl: (
+        min: $xl-screen-min,
+        max: $xl-screen-max,
+    ),
+    xxl: (
+        min: $xxl-screen-min,
+    ),
+);
+
+@mixin for-exact-size($size) {
+    @if $size {
+        $bounds: map-get($sizes, $size);
+        $min: map-get($bounds, min);
+        $max: map-get($bounds, max);
+
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    }
+}
+
+@mixin for-size-down($size) {
+    @if $size {
+        $bounds: map-get($sizes, $size);
+        $value: map-get($bounds, max);
+
+        @media (max-width: $value) {
+            @content;
+        }
+    }
+}
+
+@mixin for-size-up($size) {
+    @if $size {
+        $bounds: map-get($sizes, $size);
+        $value: map-get($bounds, min);
+
+        @media (min-width: $value) {
+            @content;
+        }
+    }
+}
+
+@mixin withMediaQueries($class) {
+    @if $class {
+        .#{$class} {
+            @content;
+        }
+
+        @each $size, $bounds in $sizes {
+            // Exact Size
+            @include for-exact-size($size) {
+                .#{$size}\:#{$class} {
+                    @content;
+                }
+            }
+
+            @each $bound, $value in $bounds {
+                @if $bound == max {
+                    // Size and lower
+                    @media (max-width: $value) {
+                        .#{$size}\-\:#{$class} {
+                            @content;
+                        }
+                    }
+                } @else if $bound == min {
+                    // Size and upper
+                    @media (min-width: $value) {
+                        .#{$size}\+\:#{$class} {
+                            @content;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

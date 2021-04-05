@@ -1,7 +1,3 @@
-@import '_sassVariables';
-@import '_variables';
-@import '_normalize';
-@import '_trigonometry';
-
-@import 'ui/index';
+@import 'base/index';
+@import 'common/index';
 @import 'components/index';

@@ -1,0 +1,107 @@
+$justifies: (
+    left: flex-start,
+    center: center,
+    right: flex-end,
+    space-around: space-around,
+    space-between: space-between,
+    space-evenly: space-evenly,
+);
+
+$alignments: (
+    top: flex-start,
+    center: center,
+    baseline: baseline,
+    bottom: flex-end,
+);
+
+$types: (
+    '': content,
+    -items: items,
+    -self: self,
+);
+
+@each $class, $type in $types {
+    @each $class2, $value in $justifies {
+        $fullClass: justify#{$class}-#{$class2};
+        @include withMediaQueries($fullClass) {
+            justify-#{$type}: $value !important;
+        }
+    }
+
+    @each $class2, $value in $alignments {
+        $fullClass: align#{$class}-#{$class2};
+        @include withMediaQueries($fullClass) {
+            align-#{$type}: $value !important;
+        }
+    }
+}
+
+.place-center {
+    align-self: center !important;
+    justify-self: center !important;
+}
+
+@each $value in static, fixed, relative, absolute, sticky {
+    @include withMediaQueries($value) {
+        position: $value !important;
+    }
+}
+
+@each $value in middle, super, sub, baseline, bottom, top, text-bottom, text-top,
+    initial, unset, inherit
+{
+    @include withMediaQueries(v-align-#{$value}) {
+        vertical-align: $value !important;
+    }
+}
+
+@each $side in left, center, right, justify {
+    .text-#{$side} {
+        text-align: $side !important;
+    }
+}
+
+@each $side in left, top, bottom, right {
+    $class: #{$side}-unset;
+    @include withMediaQueries($class) {
+        #{$side}: unset !important;
+    }
+}
+
+@for $step from -10 through 50 {
+    $i: $step * 5;
+
+    @include withMediaQueries(left-#{$i}) {
+        left: #{$i}px !important;
+    }
+    @include withMediaQueries(right-#{$i}) {
+        right: #{$i}px !important;
+    }
+    @include withMediaQueries(top-#{$i}) {
+        top: #{$i}px !important;
+    }
+    @include withMediaQueries(bottom-#{$i}) {
+        bottom: #{$i}px !important;
+    }
+}
+
+@for $step from -10 through 20 {
+    $i: $step * 5;
+
+    .left-#{$i}\% {
+        left: unquote('#{$i}%') !important;
+    }
+    .right-#{$i}\% {
+        right: unquote('#{$i}%') !important;
+    }
+    .top-#{$i}\% {
+        top: unquote('#{$i}%') !important;
+    }
+    .bottom-#{$i}\% {
+        bottom: unquote('#{$i}%') !important;
+    }
+
+    .z-index-#{$i} {
+        z-index: $i;
+    }
+}

@@ -1,0 +1,315 @@
+:root {
+    --border-size: 1px;
+    --btn-padding-v: 12px;
+    --btn-padding-h: 32px;
+}
+
+@include withMediaQueries(to-bottom) {
+    --btn-direction: bottom;
+    --btn-bg-position: 0% calc(100% + var(--border-size, 2px));
+    --btn-bg-size: 100% calc(200% + 3 * var(--border-size, 2px));
+    --btn-bg-position-hover: 0% 0%;
+}
+@include withMediaQueries(to-top) {
+    --btn-direction: top;
+    --btn-bg-position: 0% 0%;
+    --btn-bg-size: 100% calc(200% + 3 * var(--border-size, 2px));
+    --btn-bg-position-hover: 0% calc(100% + var(--border-size, 2px));
+}
+@include withMediaQueries(to-left) {
+    --btn-direction: left;
+    --btn-bg-position: 0% 0%;
+    --btn-bg-size: calc(200% + 3 * var(--border-size, 2px)) 100%;
+    --btn-bg-position-hover: calc(100% + var(--border-size, 2px)) 0%;
+}
+@include withMediaQueries(to-right) {
+    --btn-direction: right;
+    --btn-bg-position: calc(100% + var(--border-size, 2px)) 0%;
+    --btn-bg-size: calc(200% + 3 * var(--border-size, 2px)) 100%;
+    --btn-bg-position-hover: 0% 0%;
+}
+
+@mixin filled {
+    background-image: linear-gradient(
+        to var(--btn-direction, bottom),
+        var(--sub-bg, transparent) 50%,
+        var(--bg, var(--primary-color)) 50%
+    );
+    background-position: var(
+        --btn-bg-position,
+        0% calc(100% + var(--border-size, 2px))
+    );
+    background-size: var(
+        --btn-bg-size,
+        100% calc(200% + 3 * var(--border-size, 2px))
+    );
+    box-shadow: var(--box-shadow, 0);
+    border: var(--border-size) solid var(--bg, var(--primary-color));
+
+    overflow: hidden;
+    position: relative;
+
+    transition: background-position 0.3s, color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        --color: var(--hovered-text, var(--bg, var(--primary-color)));
+        background-position: var(--btn-bg-position-hover, 0% 0%);
+    }
+}
+
+@mixin bordered {
+    background-image: linear-gradient(
+        to var(--btn-direction, top),
+        var(--border, var(--primary-color)) 50%,
+        var(--sub-bg, transparent) 50%
+    );
+    background-position: var(--btn-bg-position, 0% 0%);
+    background-size: var(
+        --btn-bg-size,
+        100% calc(200% + 3 * var(--border-size, 2px))
+    );
+    border: var(--border-size, 2px) solid var(--border, var(--primary-color));
+
+    overflow: hidden;
+    position: relative;
+
+    --color: var(--not-hovered-text, var(--border, var(--primary-color)));
+
+    transition: background-position 0.3s, color 0.3s;
+
+    &:hover {
+        --color: var(--text, var(--white-color, #fff));
+        background-position: var(
+            --btn-bg-position-hover,
+            0% calc(100% + var(--border-size, 2px))
+        );
+    }
+}
+
+/**
+ * BUTTONS
+ */
+button,
+input {
+    background-color: unset;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+a.button,
+input.button,
+button.button,
+select.button {
+    > i,
+    > svg {
+        margin-right: var(--spacing);
+        vertical-align: sub;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: unset;
+    }
+}
+
+.btn-with-icon {
+    --btn-padding-h: 24px;
+    &.icon-left {
+        i,
+        svg {
+            margin-right: 12px;
+        }
+    }
+
+    &.icon-right {
+        i,
+        svg {
+            margin-left: 12px;
+        }
+    }
+}
+
+.btn-small {
+    --btn-padding-h: 20px;
+    --btn-height: 40px;
+}
+
+@mixin button {
+    @include rubik;
+    @include bold;
+
+    align-items: center;
+    border: 0;
+    border-radius: 9px;
+    cursor: pointer;
+    display: flex;
+    font-size: 13px;
+    height: var(--btn-height, inherit);
+    justify-content: center;
+    letter-spacing: 0;
+    line-height: 24px;
+    padding: var(--btn-padding-v) var(--btn-padding-h);
+    width: auto;
+}
+
+.button {
+    @include button;
+}
+
+.sub-bg-transparent {
+    --sub-bg: transparent !important;
+}
+.sub-bg-white {
+    --sub-bg: var(--white) !important;
+}
+.sub-bg-bg-color {
+    --sub-bg: var(--bg-color) !important;
+}
+
+// BTN FILLED
+@mixin btn-filled {
+    @include button;
+    @include filled;
+}
+
+@include withMediaQueries(btn-primary) {
+    --bg: var(--primary-color);
+    --color: var(--white-color, #fff);
+    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    @include btn-filled;
+}
+
+@include withMediaQueries(btn-secondary) {
+    --bg: var(--secondary-color);
+    --color: var(--white-color, #fff);
+    --box-shadow: 0 0 16px 0 rgba(242, 183, 5, 0.3);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-white) {
+    --bg: var(--white-color);
+    --color: var(--primary-color, #000);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-pale-grey) {
+    --bg: var(--pale-grey-color);
+    --color: var(--black-color, #000);
+    --hovered-text: var(--black-color, #000);
+    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
+        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-info) {
+    --bg: var(--info-color);
+    --color: var(--white-color, #fff);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-success) {
+    --bg: var(--success-color);
+    --color: var(--white-color, #fff);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-warning) {
+    --bg: var(--warning-color);
+    --color: var(--white-color, #fff);
+    @include btn-filled;
+}
+@include withMediaQueries(btn-error) {
+    --bg: var(--error-color);
+    --color: var(--white-color, #fff);
+    @include btn-filled;
+}
+
+// BTN BORDER
+@mixin btn-border {
+    --bg: transparent;
+    @include button;
+    @include bordered;
+}
+
+@include withMediaQueries(btn-border-primary) {
+    --border: var(--primary-color);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-secondary) {
+    --border: var(--secondary-color);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-info) {
+    --border: var(--info-color);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-success) {
+    --border: var(--success-color);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-warning) {
+    --border: var(--warning-color);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-error) {
+    --border: var(--error-color);
+    @include btn-border;
+}
+
+// BTN TEXT
+@mixin btn-text {
+    align-items: center;
+    background: unset;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    margin: 0 8px;
+    outline: none;
+    padding: 0;
+    box-shadow: unset;
+    &:focus {
+        background-color: unset !important;
+    }
+
+    > i {
+        margin: 0;
+    }
+}
+
+@include withMediaQueries(btn-text) {
+    @include btn-text;
+}
+
+@include withMediaQueries(btn-text-primary) {
+    @include btn-text;
+    --color: var(--primary-color);
+}
+@include withMediaQueries(btn-text-secondary) {
+    @include btn-text;
+    --color: var(--secondary-color);
+}
+@include withMediaQueries(btn-text-white) {
+    @include btn-text;
+    --color: var(--white-color);
+}
+@include withMediaQueries(btn-text-grey) {
+    @include btn-text;
+    --color: var(--grey-color);
+}
+@include withMediaQueries(btn-text-black) {
+    @include btn-text;
+    --color: var(--black-color);
+}
+@include withMediaQueries(btn-text-error) {
+    @include btn-text;
+    --color: var(--error-color);
+}
+@include withMediaQueries(btn-text-success) {
+    @include btn-text;
+    --color: var(--success-color);
+}
+@include withMediaQueries(btn-text-warning) {
+    @include btn-text;
+    --color: var(--warning-color);
+}
