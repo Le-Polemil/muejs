@@ -1,6 +1,6 @@
 {
     "name": "muejs",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "A not professional library of SASS classes to make styling easier.",
     "main": "src/base/index.scss",
     "repository": {
