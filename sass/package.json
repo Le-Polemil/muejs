@@ -1,0 +1,46 @@
+{
+    "name": "muejs",
+    "version": "2.0.1",
+    "description": "A not professional library of SASS classes to make styling easier.",
+    "main": "src/base/index.scss",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Cobelt/muejs.git"
+    },
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.13.14",
+        "@babel/core": "^7.13.14",
+        "@babel/plugin-proposal-class-properties": "^7.13.0",
+        "@babel/plugin-proposal-export-default-from": "^7.12.13",
+        "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
+        "@babel/preset-env": "^7.13.12",
+        "@babel/preset-react": "^7.13.13",
+        "@babel/register": "^7.13.14",
+        "@babel/runtime": "^7.13.10",
+        "babel-loader": "^8.2.2",
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^8.1.0",
+        "css-loader": "^5.2.0",
+        "mini-css-extract-plugin": "^1.4.0",
+        "sass": "^1.32.8",
+        "sass-loader": "^11.0.1",
+        "style-loader": "^2.0.0",
+        "webpack": "^5.30.0",
+        "webpack-cli": "^4.6.0"
+    },
+    "engines": {
+        "node": ">=8",
+        "npm": ">=5"
+    },
+    "scripts": {
+        "build": "webpack --config webpack.babel.js",
+        "watch": "webpack --watch --config webpack.babel.js",
+        "transpile": "babel src -d dist --copy-files"
+    },
+    "dependencies": {
+        "webpack-fix-style-only-entries": "^0.6.1"
+    }
+}

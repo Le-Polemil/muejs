@@ -1,0 +1,49 @@
+@import '../mixins/mediaQueries';
+
+@each $limit in '', min-, max- {
+    @each $direction in width, height {
+        .#{$limit}#{$direction}-unset {
+            #{$limit}#{$direction}: unset !important;
+        }
+
+        @for $i from 0 through 10 {
+            .#{$limit}#{$direction}-#{$i} {
+                #{$limit}#{$direction}: #{$i}px !important;
+            }
+        }
+
+        @for $step from 3 through 12 {
+            $i: $step * 4;
+
+            .#{$limit}#{$direction}-#{$i} {
+                #{$limit}#{$direction}: #{$i}px !important;
+            }
+        }
+        @for $step from 5 through 100 {
+            $i: $step * 10;
+
+            .#{$limit}#{$direction}-#{$i} {
+                #{$limit}#{$direction}: #{$i}px !important;
+            }
+        }
+
+        @for $step from 1 through 20 {
+            $i: $step * 5;
+
+            $class: #{$limit}#{$direction}-#{$i}\%;
+            @include withMediaQueries($class) {
+                #{$limit}#{$direction}: unquote('#{$i}%') !important;
+            }
+
+            $class: #{$limit}#{$direction}-#{$i}vw;
+            @include withMediaQueries($class) {
+                #{$limit}#{$direction}: #{$i}vw !important;
+            }
+
+            $class: #{$limit}#{$direction}-#{$i}vh;
+            @include withMediaQueries($class) {
+                #{$limit}#{$direction}: #{$i}vh !important;
+            }
+        }
+    }
+}
