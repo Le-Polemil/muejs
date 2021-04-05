@@ -4,6 +4,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
 import webpack from 'webpack'
+import path from 'path'
 
 module.exports = {
     mode: 'development',
@@ -20,16 +21,19 @@ module.exports = {
 
         historyApiFallback: true,
         disableHostCheck: true,
-        allowedHosts: ['muejs', 'localhost']
+        allowedHosts: ['muejs', 'localhost'],
     },
     watchOptions: {
         aggregateTimeout: 300,
         poll: true,
-        ignored: ['node_modules', './**/components']
+        ignored: ['node_modules', './**/components'],
     },
 
     entry: {
-        app: './src/app.js'
+        app: './src/app.js',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
     },
 
     module: {
@@ -39,42 +43,30 @@ module.exports = {
                 use: [
                     {
                         loader: 'html-loader',
-                        options: { minimize: true }
-                    }
-                ]
+                        options: { minimize: true },
+                    },
+                ],
             },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: 'babel-loader'
+                use: 'babel-loader',
             },
             {
                 test: /\.(scss|sass)$/,
                 exclude: /node_modules/,
-                use: [
-                    process.env.NODE_ENV === 'development'
-                        ? 'style-loader'
-                        : {
-                              loader: MiniCssExtractPlugin.loader,
-                              options: {
-                                  hmr: process.env.NODE_ENV === 'development',
-                                  reloadAll: true
-                              }
-                          },
-                    'css-loader',
-                    'sass-loader'
-                ]
-            }
-        ]
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+        ],
     },
     plugins: [
         new CleanWebpackPlugin(),
         new CopyWebPackPlugin({ patterns: [{ from: './src/app.js' }] }),
         new HtmlWebPackPlugin({
             template: './public/index.html',
-            filename: './index.html'
+            filename: './index.html',
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new MiniCssExtractPlugin({ filename: '[name].css' })
-    ]
+        new MiniCssExtractPlugin({ filename: '[name].css' }),
+    ],
 }
