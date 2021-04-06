@@ -1,0 +1,92 @@
+@import 'muejs/src/mixins/mediaQueries.scss';
+
+.datepicker + .dropdown-content {
+    --nb-rows: 7;
+    --nb-columns: 7;
+    --padding-h: 24px;
+    --width: 4vw;
+    @media (max-width: #{$md-screen-max}) {
+        --width: 3vw;
+    }
+    @media (max-width: #{$tablet-max}) {
+        --width: 2vw;
+    }
+
+    padding: var(--padding-h) !important;
+    right: unset;
+    min-width: 100%;
+    justify-content: center;
+
+    .grid {
+        width: 100%;
+        grid-template-columns: repeat(var(--nb-columns), 1fr);
+        grid-template-rows: repeat(var(--nb-rows), 1fr);
+    }
+
+    .grid-item {
+        text-align: center;
+        margin: 0 calc(var(--width) / 10);
+    }
+
+    .month-and-year {
+        .month,
+        .year {
+            cursor: pointer;
+        }
+    }
+
+    button.arrow-left,
+    button.arrow-right {
+        cursor: pointer;
+
+        &::selection {
+            background-color: transparent;
+        }
+    }
+
+    .modifying-year .year,
+    .modifying-month .month {
+        color: var(--secondary-color) !important;
+        border-bottom: solid 2px currentColor;
+
+        &::selection {
+            background-color: transparent;
+        }
+    }
+
+    label.datepicker-day-label {
+        padding: 0.2rem;
+        text-align: center;
+        font-weight: 900;
+        font-size: 0.8rem;
+        color: var(--secondary-color) !important;
+    }
+
+    div.datepicker-month-day {
+        cursor: pointer;
+        padding: 0.2rem;
+        font-size: 1rem;
+        color: var(--grey-color);
+        border-radius: 4px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.08);
+        }
+
+        &::selection {
+            background-color: transparent;
+        }
+
+        &.in-month {
+            color: var(--black-color);
+        }
+
+        &.is-today:not(.is-current) {
+            color: var(--secondary-color);
+        }
+
+        &.is-current {
+            background-color: var(--secondary-color);
+        }
+    }
+}

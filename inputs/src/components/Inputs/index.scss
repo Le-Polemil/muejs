@@ -1,0 +1,234 @@
+@import 'muejs/src/base/_fonts.scss';
+
+.field {
+    display: inline-block;
+
+    .label {
+        @include caption;
+        @include karla;
+        display: inline-block;
+    }
+
+    input {
+        border: 0;
+        background-color: unset;
+        max-width: 100%;
+    }
+
+    .input {
+        --border-width: 1px;
+
+        @include body-14;
+        @include regular;
+        align-items: center;
+        background-color: unset;
+        --color: var(--black-color);
+        display: flex;
+        min-height: 48px;
+        position: relative;
+
+        transition: border-color 0.3s, box-shadow 0.3s, color 0.3s,
+            font-weight 0.3s;
+
+        &:not(.checkbox):not(.radio) {
+            border-style: solid;
+            border-width: 1px;
+            border-color: var(--grey-color);
+            border-radius: 9px;
+            box-shadow: 0;
+            padding-top: calc(14px - var(--border-width));
+            padding-left: calc(16px - var(--border-width));
+            padding-bottom: calc(14px - var(--border-width));
+            padding-right: calc(16px - var(--border-width));
+
+            &.with-icon {
+                padding-right: calc(16px - var(--border-width) + 16px + 28px);
+            }
+
+            &:not(.empty) {
+                @include medium;
+            }
+
+            &:not(.disabled) {
+                &.empty {
+                    background-color: var(--pale-grey-color);
+                    border-color: transparent;
+                    --color: var(--light-black-color);
+                }
+
+                &:hover {
+                    background-color: var(--pale-grey-color);
+                    border-color: var(--grey-color);
+                    box-shadow: 0 9px 16px 0 rgba(144, 144, 144, 0.1);
+                    --color: var(--black-color);
+                }
+
+                &:focus {
+                    @include medium;
+                    border-color: var(--secondary-color);
+                    box-shadow: 0 9px 16px 0 rgba(242, 183, 5, 0.1);
+                    --color: var(--black-color);
+
+                    &::placeholder,
+                    &:-ms-input-placeholder,
+                    &::-ms-input-placeholder,
+                    .placeholder {
+                        @include medium;
+                    }
+                }
+
+                &.invalid {
+                    --color: var(--error-color);
+                    border-color: var(--error-color);
+
+                    &::placeholder,
+                    &:-ms-input-placeholder,
+                    &::-ms-input-placeholder,
+                    .placeholder {
+                        @include bold;
+                        --color: var(--error-color);
+                        color: var(--error-color) !important;
+                    }
+                }
+
+                &.valid {
+                    --color: var(--success-color);
+                    border-color: var(--success-color);
+                }
+            }
+
+            &.disabled {
+                background-color: var(--disabled-color);
+                border-color: transparent;
+                --color: var(--light-black-color);
+                opacity: 0.5;
+            }
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+        }
+
+        &::placeholder,
+        &:-ms-input-placeholder,
+        &::-ms-input-placeholder,
+        .placeholder {
+            @include regular;
+            color: var(--light-black-color);
+            opacity: 1;
+        }
+
+        /* TO FIX */
+        &:-internal-autofill-previewed,
+        &:-internal-autofill-selected {
+            background-color: unset;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            -webkit-text-fill-color: var(--black-color);
+        }
+
+        &.checkbox,
+        &.radio {
+            .check-icon {
+                opacity: 0;
+                transition: opacity ease-in-out 0.2s;
+
+                &.checked {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &.autocomplete {
+            .no-suggestions {
+                color: #999;
+                padding: 0.5vw;
+            }
+
+            .suggestions button {
+                &:hover,
+                &.suggestion-active {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+    .select {
+        width: 100%;
+        cursor: pointer;
+
+        select {
+            // A reset of styles, including removing the default dropdown arrow
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            // Additional resets for further consistency
+            background-color: transparent;
+            border: none;
+            padding: 0 1em 0 0;
+            margin: 0;
+            width: 100%;
+            font-family: inherit;
+            font-size: inherit;
+            cursor: inherit;
+            line-height: inherit;
+
+            &::-ms-expand {
+                display: none;
+            }
+        }
+
+        .input-icon {
+            transform: rotate(0);
+            transition: transform 0.3s;
+
+            &.active {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .option,
+    .suggestion {
+        @include body-14;
+        @include medium;
+
+        box-shadow: unset !important;
+        border: solid 1px var(--pale-grey-color);
+        cursor: pointer;
+        text-align: left;
+        width: 100%;
+
+        > span {
+            padding: 14px 20px;
+        }
+
+        &.active {
+            --color: var(--secondary-color);
+        }
+
+        &:hover {
+            background-color: var(--pale-grey-color);
+        }
+
+        &:last-of-type {
+            border: 0;
+        }
+    }
+
+    .input-icon {
+        right: 16px;
+    }
+
+    .helper {
+        @include caption;
+        @include regular;
+        --color: var(--light-black-color);
+
+        &.invalid {
+            @include bold;
+            --color: var(--error-color);
+        }
+    }
+}
