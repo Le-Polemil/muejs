@@ -13,32 +13,58 @@
     --warning-color: #f7b500;
     --error-color: #d92b4b;
 
-    --black-color: #333;
-    --dark-color: #444;
-    --dark-grey-color: #787878;
-    --grey-color: #d7d7d7;
-    --disabled-color: #eeeeee;
-    --pale-grey-color: #f8f9fa;
-    --light-color: #f8f8f8;
-    --white-color: #ffffff;
+    --black: #333;
+    --dark: #444;
+    --dark-grey: #787878;
+    --grey: rgb(215, 215, 215);
+    --disabled: rgb(238, 238, 238);
+    --pale-grey: rgb(248, 249, 250);
+    --light: rgb(248, 248, 248);
+    --white: #ffffff;
+    --grey-10: rgba(215, 215, 215, 0.1);
+    --disabled-10: rgba(238, 238, 238, 0.1);
 
-    --bg-color: var(--light-color);
+    --black-color: var(--black);
+    --dark-color: var(--dark);
+    --dark-grey-color: var(--dark-grey);
+    --grey-color: var(--grey);
+    --disabled-color: var(--disabled);
+    --pale-grey-color: var(--pale-grey);
+    --light-color: var(--light);
+    --white-color: var(--white);
+
+    --bg-color: var(--light);
+
+    --color-hover-primary: var(--white);
+    --color-hover-secondary: var(--white);
 }
 
 .dark-mode {
-    --dark-mode-primary-color: var(--black-color);
-    --dark-mode-light-primary-color: var(--dark-grey-color);
-    --dark-mode-dark-primary-color: var(--dark-color);
+    --primary-color: var(--dark);
+    --light-primary-color: var(--dark-grey);
+    --dark-primary-color: var(--black);
 
-    --primary-color: var(--dark-mode-primary-color);
-    --light-primary-color: var(--dark-mode-light-primary-color);
-    --dark-primary-color: var(--dark-mode-dark-primary-color);
+    --secondary-color: var(--dark);
+    --light-secondary-color: var(--dark-grey);
+    --dark-secondary-color: var(--black);
 
-    --dark-mode-secondary-color: var(--black-color);
-    --dark-mode-light-secondary-color: var(--dark-grey-color);
-    --dark-mode-dark-secondary-color: var(--dark-color);
+    --color-hover-primary: var(--light);
+    --color-hover-secondary: var(--light);
 
-    --secondary-color: var(--dark-mode-secondary-color);
-    --light-secondary-color: var(--dark-mode-light-secondary-color);
-    --dark-secondary-color: var(--dark-mode-dark-secondary-color);
+    // Inputs Color
+    --info-color: var(--grey);
+    --success-color: var(--grey);
+    --warning-color: var(--grey);
+    --error-color: var(--grey);
+
+    --black-color: var(--grey);
+    --dark-color: var(--grey);
+    --dark-grey-color: var(--grey);
+    --grey-color: var(--grey);
+    --disabled-color: var(--dark-grey);
+    --pale-grey-color: var(--dark-grey);
+    --light-color: var(--dark);
+    --white-color: var(--black);
+
+    --bg-color: var(--dark-grey);
 }
