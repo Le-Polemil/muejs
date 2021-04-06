@@ -7,7 +7,7 @@
     border-color: var(--primary-color);
     border-style: solid;
     box-sizing: border-box;
-    transition: border-width 0.2s;
+    transition: border-width 0.3s;
 
     &.open {
         border-width: var(--border-wdth);
@@ -17,7 +17,7 @@
 }
 
 .border-menu-icon {
-    transition: width 0.2s;
+    transition: width 0.3s;
 
     &.open {
         width: var(--border-wdth);

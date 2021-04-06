@@ -1,0 +1,21 @@
+.spinner {
+    --border-width: 4px;
+
+    animation: 2s linear infinite spin;
+    border: var(--border-width) solid var(--color, var(--white-color));
+    border-top: var(--border-width) solid transparent;
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+
+    &.input-size {
+        height: 20px;
+        width: 20px;
+    }
+
+    &.xl {
+        --border-width: 6px;
+        height: 150px;
+        width: 150px;
+    }
+}

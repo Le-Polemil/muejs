@@ -1,0 +1,14 @@
+.breadcrumb .border {
+    --percent: 0;
+
+    border-image: linear-gradient(
+        to right,
+        var(--primary-color) calc(1% * var(--percent)),
+        var(--grey-color) calc(1% * var(--percent))
+    );
+    border-image-slice: 60 30;
+    border-top: 3px solid;
+    border-left: 0;
+    border-bottom: 0;
+    border-right: 0;
+}

@@ -1,13 +1,11 @@
-import React, { createContext, useState, useCallback } from 'react'
-
-import { tryParse } from '../../utils/parse'
+import React, { createContext, useState } from 'react'
 
 export const DarkModeContext = createContext()
 export default DarkModeContext
 
 export const DarkModeConsumer = DarkModeContext.Consumer
 
-const darkModeInLS = tryParse(localStorage.getItem('darkMode')) ?? ''
+const darkModeInLS = localStorage.getItem('darkMode') ?? ''
 
 export const DarkModeProvider = ({
     initialState = darkModeInLS ?? null,
@@ -15,16 +13,19 @@ export const DarkModeProvider = ({
 }) => {
     const [darkMode, _setDarkMode] = useState(initialState)
 
-    const setDarkMode = useCallback(
-        value => {
-            _setDarkMode(!!value)
-            localStorage.setItem('darkMode', !!value)
-        },
-        [!!value]
-    )
+    function setDarkMode(value) {
+        _setDarkMode(!!value)
+        localStorage.setItem('darkMode', !!value)
+    }
+
+    function switchDarkMode() {
+        setDarkMode(!darkMode)
+    }
 
     return (
-        <DarkModeContext.Provider value={[darkMode, setDarkMode]}>
+        <DarkModeContext.Provider
+            value={[darkMode, switchDarkMode, setDarkMode]}
+        >
             {children}
         </DarkModeContext.Provider>
     )

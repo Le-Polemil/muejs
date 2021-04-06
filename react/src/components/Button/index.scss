@@ -5,6 +5,15 @@
     --border-size: 1px;
     --btn-padding-v: 12px;
     --btn-padding-h: 32px;
+
+    --primary-shadow: rgba(242, 46, 46, 0.3);
+    --secondary-shadow: rgba(242, 183, 5, 0.3);
+    --dark-shadow: rgba(88, 98, 106, 0.3);
+}
+.dark-mode {
+    --primary-shadow: rgba(255, 255, 255, 0.2);
+    --secondary-shadow: rgba(255, 255, 255, 0.2);
+    --dark-shadow: rgba(255, 255, 255, 0.2);
 }
 
 @include withMediaQueries(to-bottom) {
@@ -184,102 +193,94 @@ select.button {
 
 @include withMediaQueries(btn-primary) {
     --bg: var(--primary-color);
-    --color: var(--white-color, #fff);
-    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    --color: var(--color-hover-primary, var(--light-color));
+    --box-shadow: 0 0 16px 0 var(--primary-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-light-primary) {
     --bg: var(--light-primary-color);
-    --color: var(--white-color, #fff);
-    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    --color: var(--color-hover-primary, var(--light-color));
+    --box-shadow: 0 0 16px 0 var(--primary-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-dark-primary) {
     --bg: var(--dark-primary-color);
-    --color: var(--white-color, #fff);
-    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    --color: var(--color-hover-primary, var(--light-color));
+    --box-shadow: 0 0 16px 0 var(--primary-shadow);
     @include btn-filled;
 }
-
 @include withMediaQueries(btn-secondary) {
     --bg: var(--secondary-color);
-    --color: var(--white-color, #fff);
-    --box-shadow: 0 0 16px 0 rgba(242, 183, 5, 0.3);
+    --color: var(--color-hover-secondary, var(--light-color));
+    --box-shadow: 0 0 16px 0 var(--secondary-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-light-secondary) {
     --bg: var(--light-secondary-color);
-    --color: var(--white-color, #fff);
-    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    --color: var(--color-hover-secondary, var(--light-color));
+    --box-shadow: 0 0 16px 0 var(--secondary-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-dark-secondary) {
     --bg: var(--dark-secondary-color);
-    --color: var(--white-color, #fff);
-    --box-shadow: 0 0 16px 0 rgba(242, 46, 46, 0.3);
+    --color: var(--color-hover-secondary, var(--light-color));
+    --box-shadow: 0 0 16px 0 var(--secondary-shadow);
     @include btn-filled;
 }
-
 @include withMediaQueries(btn-white) {
     --bg: var(--white-color);
-    --color: var(--primary-color);
-    --sub-bg: transparent;
-    --hovered-text: var(--black-color);
-    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
-        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    --color: var(--black-color);
+    --sub-bg: var(--black-color);
+    --hovered-text: var(--white-color);
+    --box-shadow: 0 0 16px 0 var(--dark-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-light) {
     --bg: var(--light-color);
-    --color: var(--primary-color);
-    --sub-bg: transparent;
-    --hovered-text: var(--black-color);
-    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
-        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    --color: var(--dark-color);
+    --sub-bg: var(--dark-color);
+    --hovered-text: var(--light-color);
+    --box-shadow: 0 0 16px 0 var(--dark-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-pale-grey) {
     --bg: var(--pale-grey-color);
-    --color: var(--primary-color);
-    --sub-bg: transparent;
-    --hovered-text: var(--black-color);
-    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
-        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    --color: var(--dark-grey-color);
+    --sub-bg: var(--dark-grey-color);
+    --hovered-text: var(--pale-grey-color);
+    --box-shadow: 0 0 16px 0 var(--dark-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-disabled) {
     --bg: var(--disabled-color);
-    --color: var(--black-color);
-    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
-        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    --color: var(--dark-grey-color);
+    --sub-bg: var(--dark-grey-color);
+    --hovered-text: var(--disabled-color);
+    --box-shadow: 0 0 16px 0 var(--dark-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-grey) {
     --bg: var(--grey-color);
     --color: var(--white-color);
-    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
-        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    --box-shadow: 0 0 16px 0 var(--dark-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-dark-grey) {
     --bg: var(--dark-grey-color);
     --color: var(--white-color);
-    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
-        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    --box-shadow: 0 0 16px 0 var(--dark-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-dark) {
     --bg: var(--dark-color);
     --color: var(--white-color);
-    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
-        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    --box-shadow: 0 0 16px 0 var(--dark-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-black) {
     --bg: var(--black-color);
     --color: var(--white-color);
-    --box-shadow: 0 4px 13px 0 rgba(21, 85, 142, 0.06),
-        0 2px 3px 0 rgba(26, 121, 206, 0.05);
+    --box-shadow: 0 0 16px 0 var(--dark-shadow);
     @include btn-filled;
 }
 @include withMediaQueries(btn-info) {
@@ -303,6 +304,17 @@ select.button {
     @include btn-filled;
 }
 
+.dark-mode {
+    [class*='btn-primary'],
+    [class*='btn-secondary'] {
+        --sub-bg: var(--grey-10);
+    }
+    [class*='btn-light-primary'],
+    [class*='btn-light-secondary'] {
+        --sub-bg: var(--disabled-10);
+    }
+}
+
 // BTN BORDER
 @mixin btn-border {
     --bg: transparent;
@@ -312,10 +324,32 @@ select.button {
 
 @include withMediaQueries(btn-border-primary) {
     --border: var(--primary-color);
+    --text: var(--color-hover-primary);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-light-primary) {
+    --border: var(--light-primary-color);
+    --text: var(--color-hover-primary);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-dark-primary) {
+    --border: var(--dark-primary-color);
+    --text: var(--color-hover-primary);
     @include btn-border;
 }
 @include withMediaQueries(btn-border-secondary) {
     --border: var(--secondary-color);
+    --text: var(--color-hover-secondary);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-light-secondary) {
+    --border: var(--light-secondary-color);
+    --text: var(--color-hover-secondary);
+    @include btn-border;
+}
+@include withMediaQueries(btn-border-dark-secondary) {
+    --border: var(--dark-secondary-color);
+    --text: var(--color-hover-secondary);
     @include btn-border;
 }
 @include withMediaQueries(btn-border-info) {

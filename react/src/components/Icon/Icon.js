@@ -3,7 +3,10 @@ import React from 'react'
 import useGridify from '../../hooks/useGridify'
 
 import { camelToSnake } from '../../utils/stringFormat'
+
 import { MATERIAL_TYPES, defaultProps, propTypes } from './static'
+
+import './index.scss'
 
 export function Icon({
     children,
