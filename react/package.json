@@ -1,6 +1,6 @@
 {
-    "name": "inputs-muejs",
-    "version": "1.0.0",
+    "name": "react-muejs",
+    "version": "1.0.2",
     "description": "A not professional JS framework. It'll help you to easily make grids, for sure.",
     "main": "src/index.js",
     "repository": {
@@ -8,7 +8,6 @@
         "url": "https://github.com/Cobelt/muejs.git"
     },
     "dependencies": {
-        "lodash.deburr": "^4.1.0",
         "lodash.memoize": "^4.1.2",
         "muejs": "^3.0.0",
         "uuid": "^8.3.2"
