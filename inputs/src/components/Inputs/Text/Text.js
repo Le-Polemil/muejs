@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useWatch } from 'react-hook-form'
+import { useGridify } from 'react-muejs'
 import { v4 as uuid } from 'uuid'
 import { any, bool, func, number, string } from 'prop-types'
-
-import { useGridify } from '../../../hooks'
 
 import { Eye } from '../../../svg/Eye'
 
@@ -26,6 +25,8 @@ const InputText = ({
     errors,
     control,
     register,
+    // grid props
+    ...gridProps
 }) => {
     const {
         className: gridClassName,
@@ -33,7 +34,7 @@ const InputText = ({
         ...props
     } = useGridify({
         componentName: 'InputText',
-        ...otherProps,
+        ...gridProps,
     })
 
     const [id] = useState(uuid())
@@ -54,7 +55,7 @@ const InputText = ({
 
     return (
         <label
-            className={`field ${className ?? ''} ${gridClassName}`.trim()}
+            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
             style={gridStyle}
             {...props}
         >

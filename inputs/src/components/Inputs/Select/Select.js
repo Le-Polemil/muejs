@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Controller } from 'react-hook-form'
-import { Spinner, Dropdown } from 'react-muejs'
+import { useGridify, Spinner, Dropdown } from 'react-muejs'
 import { v4 as uuid } from 'uuid'
 import { any, bool, func, array, oneOfType, string } from 'prop-types'
 
@@ -41,7 +41,18 @@ const Select = ({
     loading,
     // form
     errors,
+    //grid
+    ...gridProps
 }) => {
+    const {
+        className: gridClassName,
+        style: gridStyle = {},
+        ...props
+    } = useGridify({
+        componentName: 'InputSelect',
+        ...gridProps,
+    })
+
     const [id] = useState(uuid())
     const error = errors?.[name]
 
@@ -102,7 +113,11 @@ const Select = ({
     const spinning = loading && !(entries?.length > 0)
 
     return (
-        <label className={`field ${className ?? ''}`.trim()}>
+        <label
+            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            style={gridStyle}
+            {...props}
+        >
             <label className='label bold mb-4' htmlFor={id}>
                 {label || name}
             </label>

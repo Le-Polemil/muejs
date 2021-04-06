@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Controller } from 'react-hook-form'
+import { useGridify } from 'react-muejs'
 
 import { v4 as uuid } from 'uuid'
 import {
@@ -54,7 +55,18 @@ const Autocomplete = ({
     // form
     helper,
     errors,
+    // grid
+    ...gridProps
 }) => {
+    const {
+        className: gridClassName,
+        style: gridStyle = {},
+        ...props
+    } = useGridify({
+        componentName: 'InputAutocomplete',
+        ...gridProps,
+    })
+
     const [id] = useState(uuid())
     const [activeSuggestion, setActiveSuggestion] = useState(0)
     const [filteredSuggestions, setFilteredSuggestions] = useState(suggestions)
@@ -144,7 +156,12 @@ const Autocomplete = ({
     }
 
     return (
-        <label className={`field ${className ?? ''}`.trim()} ref={ref}>
+        <label
+            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            style={gridStyle}
+            ref={ref}
+            {...props}
+        >
             <label className='label bold mb-4' htmlFor={id}>
                 {label || name}
             </label>

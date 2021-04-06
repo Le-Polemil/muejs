@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useWatch } from 'react-hook-form'
+import { useGridify } from 'react-muejs'
 import { v4 as uuid } from 'uuid'
 import { any, bool, string } from 'prop-types'
 
@@ -19,7 +20,18 @@ const InputCheckbox = ({
     errors,
     control,
     register,
+    //grid
+    ...gridProps
 }) => {
+    const {
+        className: gridClassName,
+        style: gridStyle = {},
+        ...props
+    } = useGridify({
+        componentName: 'InputCheckbox',
+        ...gridProps,
+    })
+
     const [id] = useState(uuid())
     const error = errors?.[name]
 
@@ -30,7 +42,11 @@ const InputCheckbox = ({
     })
 
     return (
-        <label className={`field ${className ?? ''}`.trim()}>
+        <label
+            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            style={gridStyle}
+            {...props}
+        >
             <div
                 className={[
                     'checkbox input',

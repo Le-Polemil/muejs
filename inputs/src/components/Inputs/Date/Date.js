@@ -30,12 +30,27 @@ const Datepicker = ({
     // form
     setValue,
     errors,
+    // grid
+    ...gridProps
 }) => {
+    const {
+        className: gridClassName,
+        style: gridStyle = {},
+        ...props
+    } = useGridify({
+        componentName: 'InputDate',
+        ...gridProps,
+    })
+
     const [id] = useState(uuid())
     const error = errors?.[name]
 
     return (
-        <label className={`field ${className ?? ''}`.trim()}>
+        <label
+            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            style={gridStyle}
+            {...props}
+        >
             <label className='label bold mb-4' htmlFor={id}>
                 {label || name}
             </label>
