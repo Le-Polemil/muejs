@@ -1,7 +1,7 @@
 {
     "name": "react-muejs",
     "version": "1.0.3",
-    "description": "A not professional JS framework. It'll help you to easily make grids, for sure.",
+    "description": "A not professional React package. It'll help you to easily make grids and recurrent components, for sure.",
     "main": "src/index.js",
     "repository": {
         "type": "git",
