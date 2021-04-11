@@ -1,70 +1,68 @@
 :root {
-    --primary-color: #f23535;
-    --light-primary-color: #ff6464;
-    --dark-primary-color: #c92c2c;
+    --primary-color: hsl(0, 88%, 58%);
+    --light-primary-color: hsl(0, 85%, 63%);
+    --dark-primary-color: hsl(0, 68%, 48%);
 
-    --secondary-color: #f2b705;
-    --light-secondary-color: #ffd042;
-    --dark-secondary-color: #bf920d;
+    --secondary-color: hsl(45, 96%, 48%);
+    --light-secondary-color: hsl(45, 93%, 53%);
+    --dark-secondary-color: hsl(45, 76%, 43%);
 
     // Inputs Color
-    --info-color: #4478a6;
-    --success-color: #43ac8a;
-    --warning-color: #f7b500;
-    --error-color: #d92b4b;
+    --info-color: hsl(208, 42%, 46%);
+    --success-color: hsl(161, 44%, 47%);
+    --warning-color: hsl(36, 85%, 48%);
+    --error-color: hsl(349, 70%, 51%);
 
-    --black: #333;
-    --dark: #444;
-    --dark-grey: #787878;
-    --grey: rgb(215, 215, 215);
-    --disabled: rgb(238, 238, 238);
-    --pale-grey: rgb(248, 249, 250);
-    --light: rgb(248, 248, 248);
-    --white: #ffffff;
-    --grey-10: rgba(215, 215, 215, 0.1);
-    --disabled-10: rgba(238, 238, 238, 0.1);
+    --link-color: var(--info-color);
 
-    --black-color: var(--black);
-    --dark-color: var(--dark);
-    --dark-grey-color: var(--dark-grey);
-    --grey-color: var(--grey);
-    --disabled-color: var(--disabled);
-    --pale-grey-color: var(--pale-grey);
+    --light: rgb(210, 210, 210);
+
+    --black-color: rgb(51, 51, 51);
+    --dark-color: rgb(68, 68, 68);
+    --grey-color: rgb(120, 120, 120);
     --light-color: var(--light);
-    --white-color: var(--white);
+    --pale-color: rgb(242, 242, 242);
+    --bg-color: rgb(252, 252, 252);
 
-    --bg-color: var(--light);
+    // opacity 0.1
+    --grey-10: rgba(120, 120, 120, 0.1);
+    --light-10: rgba(200, 200, 200, 0.1);
+    //opacity 0.2
+    --grey-20: rgba(120, 120, 120, 0.2);
 
-    --color-hover-primary: var(--white);
-    --color-hover-secondary: var(--white);
+    --color-over-primary: var(--pale-color);
+    --color-over-secondary: var(--pale-color);
+    --color-over-bg: var(--black-color);
+
+    --disabled-opacity: 0.5;
 }
 
 .dark-mode {
-    --primary-color: var(--dark);
-    --light-primary-color: var(--dark-grey);
-    --dark-primary-color: var(--black);
+    --primary-color: hsl(0, 55%, 62%);
+    --light-primary-color: hsl(0, 55%, 70%);
+    --dark-primary-color: hsl(0, 55%, 54%);
 
-    --secondary-color: var(--dark);
-    --light-secondary-color: var(--dark-grey);
-    --dark-secondary-color: var(--black);
+    --secondary-color: hsl(45, 74%, 39%);
+    --light-secondary-color: hsl(45, 72%, 47%);
+    --dark-secondary-color: hsl(45, 68%, 36%);
 
-    --color-hover-primary: var(--light);
-    --color-hover-secondary: var(--light);
+    --dark-mode-light: rgb(160, 160, 160);
+    --dark-mode-pale: rgb(210, 210, 210);
+
+    --light-color: var(--dark-mode-light);
+    --pale-color: var(--dark-mode-pale);
+
+    --color-over-primary: var(--pale-color);
+    --color-over-secondary: var(--pale-color);
 
     // Inputs Color
-    --info-color: var(--grey);
-    --success-color: var(--grey);
-    --warning-color: var(--grey);
-    --error-color: var(--grey);
+    --info-color: hsl(209, 35%, 47%);
+    --success-color: hsl(161, 38%, 41%);
+    --warning-color: hsl(36, 47%, 43%);
+    --error-color: hsl(0, 55%, 62%);
 
-    --black-color: var(--grey);
-    --dark-color: var(--grey);
-    --dark-grey-color: var(--grey);
-    --grey-color: var(--grey);
-    --disabled-color: var(--dark-grey);
-    --pale-grey-color: var(--dark-grey);
-    --light-color: var(--dark);
-    --white-color: var(--black);
+    --dark-mode-bg: rgb(82, 88, 89);
 
-    --bg-color: var(--dark-grey);
+    --bg-color: var(--dark-mode-bg);
+    --color-over-bg: var(--pale-color);
 }

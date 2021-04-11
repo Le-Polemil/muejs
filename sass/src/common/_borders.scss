@@ -48,9 +48,12 @@
     }
 }
 
+// REMOVE
 .b-transparent {
     border-color: transparent !important;
 }
+
+// PRIMARY
 .b-primary {
     border-color: var(--primary-color) !important;
 }
@@ -60,6 +63,8 @@
 .b-dark-primary {
     border-color: var(--dark-primary-color) !important;
 }
+
+// SECONDARY
 .b-secondary {
     border-color: var(--secondary-color) !important;
 }
@@ -70,6 +75,24 @@
     border-color: var(--dark-secondary-color) !important;
 }
 
+// GREYS
+.b-black {
+    border-color: var(--black-color) !important;
+}
+.b-dark {
+    border-color: var(--dark-color) !important;
+}
+.b-grey {
+    border-color: var(--grey-color) !important;
+}
+.b-light {
+    border-color: var(--light-color) !important;
+}
+.b-pale {
+    border-color: var(--pale-color) !important;
+}
+
+// OTHERS
 .b-info {
     border-color: var(--info-color) !important;
 }
@@ -81,31 +104,6 @@
 }
 .b-error {
     border-color: var(--error-color) !important;
-}
-
-.b-black {
-    border-color: var(--black-color) !important;
-}
-.b-dark {
-    border-color: var(--dark-color) !important;
-}
-.b-dark-grey {
-    border-color: var(--dark-grey-color) !important;
-}
-.b-grey {
-    border-color: var(--grey-color) !important;
-}
-.b-disabled {
-    border-color: var(--disabled-color) !important;
-}
-.b-pale-grey {
-    border-color: var(--pale-grey-color) !important;
-}
-.b-light {
-    border-color: var(--light-color) !important;
-}
-.b-white {
-    border-color: var(--white-color) !important;
 }
 
 @each $style in dashed, solid {

@@ -1,3 +1,11 @@
+@import url('//fonts.googleapis.com/css?family=Karla');
+@import url('//fonts.googleapis.com/css?family=Ubuntu');
+@import url('//fonts.googleapis.com/css?family=Oswald');
+@import url('//fonts.googleapis.com/css?family=Poppins');
+@import url('//fonts.googleapis.com/css?family=Rubik');
+@import url('//fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp');
+@import url('//fonts.googleapis.com/css?family=Amatic+SC');
+
 @import '_variables';
 
 @import '_colors';
@@ -27,6 +35,7 @@ body {
 
     #root {
         min-height: 100vh;
+        position: relative;
     }
 }
 
@@ -54,10 +63,14 @@ section {
     display: block;
 }
 
+button {
+    border: 0;
+}
+
 a,
 .link {
     @include semibold;
-    --color: var(--link-color, var(--grey-color));
+    --color: var(--link-color);
     text-decoration: none;
 }
 

@@ -1,54 +1,57 @@
-// Background-color
+// REMOVE
 .bg-none {
     background-color: none !important;
 }
 .bg-transparent {
     background-color: transparent !important;
 }
+
+// PRIMARY
 .bg-primary {
     background-color: var(--primary-color) !important;
+    --color: var(--color-over-primary);
 }
 .bg-light-primary {
     background-color: var(--light-primary-color) !important;
+    --color: var(--color-over-primary);
 }
 .bg-dark-primary {
     background-color: var(--dark-primary-color) !important;
+    --color: var(--color-over-primary);
 }
+
+// SECONDARY
 .bg-secondary {
     background-color: var(--secondary-color) !important;
+    --color: var(--color-over-secondary);
 }
 .bg-light-secondary {
     background-color: var(--light-secondary-color) !important;
+    --color: var(--color-over-secondary);
 }
 .bg-dark-secondary {
     background-color: var(--dark-secondary-color) !important;
+    --color: var(--color-over-secondary);
 }
 
+// GREYS
 .bg-black {
     background-color: var(--black-color) !important;
 }
 .bg-dark {
     background-color: var(--dark-color) !important;
 }
-.bg-dark-grey {
-    background-color: var(--dark-grey-color) !important;
-}
 .bg-grey {
     background-color: var(--grey-color) !important;
-}
-.bg-disabled {
-    background-color: var(--disabled-color) !important;
-}
-.bg-pale-grey {
-    background-color: var(--pale-grey-color) !important;
 }
 .bg-light {
     background-color: var(--light-color) !important;
 }
-.bg-white {
-    background-color: var(--white-color) !important;
+.bg-pale {
+    background-color: var(--pale-color) !important;
 }
 
+// OTHERS
 .bg-info {
     background-color: var(--info-color) !important;
 }
