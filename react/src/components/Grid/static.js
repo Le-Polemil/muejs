@@ -1,6 +1,7 @@
 import {
     array,
     arrayOf,
+    func,
     node,
     number,
     object,
@@ -20,7 +21,7 @@ export const propTypes = {
     rowGap: oneOfType([string, number, array, object]),
     width: oneOfType([string, number, array, object]),
     height: oneOfType([string, number, array, object]),
-    children: oneOfType([string, number, arrayOf(node), node]),
+    children: oneOfType([string, number, arrayOf(node), node, func]),
 }
 
 export function getStyle({

@@ -23,7 +23,7 @@ export class ErrorBoundary extends Component {
 export function ErrorMessage({
     fallback = 'Something went wrong.',
     showDetails = false,
-    className = 'text-secondary',
+    className,
     error,
     errorInfo,
     ...otherProps
@@ -35,7 +35,7 @@ export function ErrorMessage({
     })
 
     return (
-        <div className={errorClassName} {...props}>
+        <div className={`p-4% ${errorClassName ?? ''}`} {...props}>
             {typeof fallback === 'function' ? (
                 fallback({ error, errorInfo })
             ) : (
@@ -50,7 +50,7 @@ export function ErrorMessage({
                     <div className='text-error font-18'>
                         {error && error.toString()}
                     </div>
-                    <div className='text-dark'>{errorInfo.componentStack}</div>
+                    <div>{errorInfo.componentStack}</div>
                 </details>
             )}
         </div>

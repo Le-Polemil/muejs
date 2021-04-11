@@ -1,12 +1,11 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
 import { string, object, number, oneOfType } from 'prop-types'
+
+import { Link } from '../Link'
 
 import './index.scss'
 
-export const Breadcrumb = ({ url, steps, noLinkAfterId }) => {
-    const { step } = useParams()
-
+export const Breadcrumb = ({ url, step, steps, noLinkAfterId, history }) => {
     const entries = steps instanceof Object && Object.entries(steps)
 
     if (!entries?.length) return null
@@ -31,7 +30,7 @@ export const Breadcrumb = ({ url, steps, noLinkAfterId }) => {
     return (
         <>
             <div className='height-100' />
-            <div className='breadcrumb absolute bottom-0 left-0 right-0 bg-pale-grey ph-4vw pv-16'>
+            <div className='breadcrumb absolute bottom-0 left-0 right-0 ph-4vw pv-20'>
                 <div
                     className='border flex justify-space-between sm-:flex-wrap'
                     style={{ '--percent': percent }}
@@ -53,29 +52,28 @@ export const Breadcrumb = ({ url, steps, noLinkAfterId }) => {
                                 <Tag
                                     key={stepId}
                                     to={
-                                        Tag === 'div'
-                                            ? undefined
-                                            : `/${url}/${key || stepId}`
+                                        Tag === Link &&
+                                        `/${url}/${key || stepId}`
                                     }
-                                    className='pt-16'
+                                    className='step pt-20'
+                                    history={Tag === Link && history}
                                 >
                                     <span
-                                        className={`body-14 medium ${
+                                        className={`body-14 mr-4 ${
                                             placement <= 0
-                                                ? 'text-primary'
-                                                : 'text-black'
+                                                ? 'step-passed bold'
+                                                : 'medium'
                                         }`}
                                     >
                                         {stepId}
                                     </span>
                                     <span
-                                        className={`body-14 medium ${
+                                        className={`body-14 ${
                                             placement === 0
-                                                ? 'text-primary'
-                                                : 'text-black'
+                                                ? 'step-current bold'
+                                                : 'medium'
                                         }`}
                                     >
-                                        {' '}
                                         - {breadcrumb}
                                     </span>
                                 </Tag>
@@ -93,6 +91,7 @@ Breadcrumb.propTypes = {
     steps: object.isRequired,
     url: string,
     noLinkAfterId: oneOfType([string, number]),
+    history: object?.isRequired,
 }
 
 export default Breadcrumb

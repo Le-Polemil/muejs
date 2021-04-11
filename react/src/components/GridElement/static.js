@@ -2,6 +2,7 @@ import {
     arrayOf,
     bool,
     element,
+    func,
     node,
     number,
     oneOfType,
@@ -9,7 +10,7 @@ import {
 } from 'prop-types'
 
 export const propTypes = {
-    children: oneOfType([string, number, arrayOf(node), node]),
+    children: oneOfType([string, number, arrayOf(node), node, func]),
     componentName: string,
     fill: bool,
     type: oneOfType([string, element]),

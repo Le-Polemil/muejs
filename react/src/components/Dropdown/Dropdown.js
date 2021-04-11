@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { any, bool, func, object, string } from 'prop-types'
 
+import './index.scss'
+
 export const Dropdown = ({
     trigger,
     content,

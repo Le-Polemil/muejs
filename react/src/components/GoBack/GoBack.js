@@ -1,23 +1,40 @@
 import React from 'react'
-import { useHistory, Link } from 'react-router-dom'
 import { object, string } from 'prop-types'
 
-import { ArrowLeft } from '../../svg/ArrowLeft'
+import { useGridify } from '../../hooks'
 
-export const GoBack = ({ className = '', style, to, label }) => {
-    const history = useHistory()
+import { Icon } from '../Icon'
+import { Link } from '../Link'
 
+export const GoBack = ({
+    className,
+    style,
+    to,
+    label,
+    history,
+    ...otherProps
+}) => {
     function handleClick() {
-        history.goBack()
+        if (history?.goBack) {
+            history.goBack()
+        } else {
+            console.warn(
+                'history?.goBack is not defined, could not go to previous page'
+            )
+        }
     }
+    const { className: gridClassName, ...props } = useGridify({
+        componentName: 'GoBack',
+        ...otherProps,
+    })
 
-    const cN = `btn-primary p-16 b-rad-50% ${className}`.trim()
+    const cN = `btn-primary p-16 b-rad-50% ${className ?? ''}`.trim()
 
     return (
-        <div className='z-index-5'>
+        <div className={`z-index-5 ${gridClassName ?? ''}`} {...props}>
             {to ? (
-                <Link className={cN} to={to} style={style}>
-                    <ArrowLeft />
+                <Link className={cN} to={to} history={history} style={style}>
+                    <Icon icon='arrow_left' />
                     {label}
                 </Link>
             ) : (
@@ -27,7 +44,7 @@ export const GoBack = ({ className = '', style, to, label }) => {
                     type='button'
                     style={style}
                 >
-                    <ArrowLeft />
+                    <Icon icon='arrow_left' />
                     {label}
                 </button>
             )}
@@ -40,6 +57,7 @@ GoBack.propTypes = {
     label: string,
     to: string,
     style: object,
+    history: object?.isRequired,
 }
 
 GoBack.defaultProps = {

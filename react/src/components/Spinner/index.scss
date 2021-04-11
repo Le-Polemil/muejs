@@ -2,7 +2,7 @@
     --border-width: 4px;
 
     animation: 2s linear infinite spin;
-    border: var(--border-width) solid var(--color, var(--white-color));
+    border: var(--border-width) solid var(--color, var(--pale-color));
     border-top: var(--border-width) solid transparent;
     border-radius: 50%;
     height: 36px;

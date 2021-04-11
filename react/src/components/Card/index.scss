@@ -1,0 +1,39 @@
+.card {
+    --card-bg: var(--pale-color);
+    --color: var(--dark-color);
+    --hover-bg: var(--grey-20);
+    background-color: var(--card-bg);
+    border-radius: 9px;
+
+    padding: 24px;
+
+    &.link {
+        position: relative;
+
+        &:after {
+            background-color: var(--hover-bg);
+            border-radius: inherit;
+            content: '';
+            bottom: 50%;
+            left: 50%;
+            position: absolute;
+            right: 50%;
+            top: 50%;
+
+            transition: bottom 0.3s, top 0.3s, left 0.3s, right 0.3s;
+        }
+
+        &:hover:after {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+        }
+    }
+}
+
+.dark-mode .card {
+    --card-bg: var(--dark-color);
+    --color: var(--pale-color);
+    --hover-bg: var(--grey-20);
+}

@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { object, string } from 'prop-types'
 
-import { Home } from '../../svg/Home'
+import { useGridify } from '../../hooks'
+
+import { Icon } from '../Icon'
+import { Link } from '../Link'
 
 export const GoHome = ({
     btnClass,
@@ -10,15 +12,28 @@ export const GoHome = ({
     containerClassName,
     style,
     label,
+    history,
+    ...otherProps
 }) => {
+    const { className: gridClassName, ...props } = useGridify({
+        componentName: 'GoHome',
+        ...otherProps,
+    })
+
     return (
-        <div className={`z-index-5 ${containerClassName}`.trim()}>
+        <div
+            className={`z-index-5 ${
+                containerClassName ?? ''
+            } ${gridClassName}`.trim()}
+            {...props}
+        >
             <Link
                 to='/'
                 className={`${btnClass} p-16 b-rad-50% ${className}`.trim()}
                 style={style}
+                history={history}
             >
-                <Home />
+                <Icon icon='home' />
                 {label}
             </Link>
         </div>
@@ -31,6 +46,7 @@ GoHome.propTypes = {
     containerClassName: string,
     label: string,
     style: object,
+    history: object?.isRequired,
 }
 
 GoHome.defaultProps = {

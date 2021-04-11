@@ -41,11 +41,7 @@ UncatchedGrid.propTypes = propTypes
 
 export const Grid = props => {
     return (
-        <ErrorBoundary
-            fallback='Houston, on a un problème'
-            showDetails
-            className='text-dark'
-        >
+        <ErrorBoundary fallback='Houston, on a un problème' showDetails>
             <UncatchedGrid {...props} />
         </ErrorBoundary>
     )

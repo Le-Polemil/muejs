@@ -8,7 +8,7 @@ export const DarkModeConsumer = DarkModeContext.Consumer
 const darkModeInLS = localStorage.getItem('darkMode') ?? ''
 
 export const DarkModeProvider = ({
-    initialState = darkModeInLS ?? null,
+    initialState = darkModeInLS === 'true' ?? null,
     children,
 }) => {
     const [darkMode, _setDarkMode] = useState(initialState)

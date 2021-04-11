@@ -2,10 +2,10 @@ import {
     arrayOf,
     string,
     bool,
+    func,
     object,
     oneOf,
     oneOfType,
-    func,
     number,
     node,
 } from 'prop-types'

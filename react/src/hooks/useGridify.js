@@ -19,16 +19,10 @@ export const useGridify = ({
     hide,
 
     shouldTransmitProps,
-    selfRowTemplate,
-    selfColTemplate,
     componentName,
-    ...rest
 }) => {
-    if ((show !== undefined && !show) || hide) return null
-
-    const isFixed = [position].includes('fixed') ? 'fixed' : ''
-    const col = isFixed ? 0 : defaultCol
-    const row = isFixed ? 0 : defaultRow
+    const col = position === 'fixed' ? 0 : defaultCol
+    const row = position === 'fixed' ? 0 : defaultRow
 
     const type = componentName || 'GridifiedElement'
 
@@ -70,20 +64,19 @@ export const useGridify = ({
         : {}
 
     return {
-        hide: (show !== undefined && !show) || hide,
+        hide: !(show ?? true) || hide,
 
         className: [
             camelToKebab(type),
             className,
             justify && `justify-${justify}`,
             align && `align-${align}`,
-            isFixed,
+            position,
         ]
             .filter(e => !!e)
             .join(' '),
         style: { ...styles, ...style },
         ...gridElementProps,
-        ...rest,
     }
 }
 

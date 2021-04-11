@@ -1,0 +1,43 @@
+.modal-bg {
+    --modal-dark-bg: rgba(68, 68, 68, 0.4);
+    --modal-bg: var(--bg-color);
+}
+.dark-mode .modal-bg {
+    --modal-dark-bg: rgba(162, 162, 162, 0.4);
+    --modal-bg: var(--dark-color);
+}
+
+.modal-bg {
+    background-color: var(--modal-dark-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    z-index: 100;
+
+    .modal {
+        --modal-padding-v: 48px;
+        --modal-padding-h: 10%;
+        background-color: var(--modal-bg);
+        border-radius: 9px;
+
+        width: 100%;
+        max-width: 58vw;
+
+        height: 52vh;
+
+        padding: var(--modal-padding-v) var(--modal-padding-h) !important;
+        z-index: 101;
+
+        & > div {
+            // max-height: calc(100% - var(--modal-padding-v) * 2);
+            overflow: auto;
+        }
+    }
+}

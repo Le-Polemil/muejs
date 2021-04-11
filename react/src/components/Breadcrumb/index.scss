@@ -1,14 +1,49 @@
-.breadcrumb .border {
-    --percent: 0;
+.breadcrumb {
+    --breadcrumb-bg: var(--pale-color);
+    --breadcrumb-filled-border: var(--primary-color);
+    --breadcrumb-empty-border: var(--light-color);
+    // text-colors
+    --step-color: var(--dark-color);
+    --step-current-color: var(--primary-color);
+    --step-passed-color: var(--primary-color);
+}
+.dark-mode .breadcrumb {
+    --breadcrumb-bg: var(--primary-color);
+    --breadcrumb-filled-border: var(--pale-color);
+    --breadcrumb-empty-border: var(--dark-color);
+    // text-colors
+    --step-color: var(--dark-color);
+    --step-current-color: var(--pale-color);
+    --step-passed-color: var(--pale-color);
+}
 
-    border-image: linear-gradient(
-        to right,
-        var(--primary-color) calc(1% * var(--percent)),
-        var(--grey-color) calc(1% * var(--percent))
-    );
-    border-image-slice: 60 30;
-    border-top: 3px solid;
-    border-left: 0;
-    border-bottom: 0;
-    border-right: 0;
+.breadcrumb {
+    background-color: var(--breadcrumb-bg);
+
+    .border {
+        --percent: 0;
+
+        border-image: linear-gradient(
+            to right,
+            var(--breadcrumb-filled-border) calc(1% * var(--percent)),
+            var(--breadcrumb-empty-border) calc(1% * var(--percent))
+        );
+        border-image-slice: 60 30;
+        border-top: 3px solid;
+        border-left: 0;
+        border-bottom: 0;
+        border-right: 0;
+
+        .step {
+            --color: var(--step-color);
+
+            .step-current {
+                --color: var(--step-current-color);
+            }
+
+            .step-passed {
+                --color: var(--step-passed-color);
+            }
+        }
+    }
 }

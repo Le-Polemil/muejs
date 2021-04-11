@@ -36,11 +36,7 @@ UncatchedElement.defaultProps = defaultProps
 
 export const Element = props => {
     return (
-        <ErrorBoundary
-            fallback='Houston, on a un problème'
-            showDetails
-            className='text-dark'
-        >
+        <ErrorBoundary fallback='Houston, on a un problème' showDetails>
             <UncatchedElement {...props} />
         </ErrorBoundary>
     )
