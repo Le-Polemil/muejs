@@ -13,7 +13,7 @@ module.exports = {
         inline: false,
         host: '0.0.0.0',
         port: 3006,
-        public: 'localhost:3006',
+        public: '0.0.0.0:3006',
 
         hot: true,
 
@@ -21,7 +21,7 @@ module.exports = {
 
         historyApiFallback: true,
         disableHostCheck: true,
-        allowedHosts: ['muejs', 'localhost'],
+        allowedHosts: ['muejs', 'localhost', '0.0.0.0'],
     },
     watchOptions: {
         aggregateTimeout: 300,
@@ -34,6 +34,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+        filename: 'app.js',
     },
 
     module: {
@@ -48,13 +50,13 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
+                test: /\.js|\.jsx$/,
+                exclude: /node_modules\/(?!muejs)/,
                 use: 'babel-loader',
             },
             {
                 test: /\.(scss|sass)$/,
-                exclude: /node_modules/,
+                exclude: /node_modules\/(?!muejs)/,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
         ],

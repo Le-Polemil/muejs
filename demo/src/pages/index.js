@@ -1,29 +1,25 @@
 import React from 'react'
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
-
-// components
-import { ErrorBoundary } from 'react-muejs'
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
 
 // pages
 import Home from './Home'
+import Buttons from './Buttons'
+import Inputs from './Inputs'
+import Modals from './Modals'
 
-function UncatchedRouter() {
+function Router() {
     return (
         <Switch>
-            <Route path='/' component={Home} />
+            <Route exact path='/' component={Home} />
+            <Route exact path='/buttons' component={Buttons} />
+            <Route
+                exact
+                path='/inputs'
+                render={() => <Redirect to='/inputs/text' />}
+            />
+            <Route path='/inputs/:step?' component={Inputs} />
+            <Route path='/modals' component={Modals} />
         </Switch>
-    )
-}
-
-function Router(props) {
-    return (
-        <ErrorBoundary
-            fallback='Houston, on a un problème'
-            showDetails
-            className='text-dark'
-        >
-            <UncatchedRouter {...props} />
-        </ErrorBoundary>
     )
 }
 

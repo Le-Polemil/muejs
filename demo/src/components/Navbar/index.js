@@ -1,37 +1,31 @@
-import React, { useState } from 'react'
-import { Flex, Icon, ErrorBoundary } from 'react-muejs'
+import React from 'react'
+import { Link, Flex, Icon, useDarkMode, useGridify } from 'react-muejs'
+import { useHistory } from 'react-router'
 
-function UncatchedNavbarContent({ className = '', ...props }) {
-    throw new Error('Aucun content disponible')
-    return (
-        <>
-            <div>Bonjour les loulous</div>
-            <Icon icon='pan_tool' />
-        </>
-    )
-}
-
-function NavbarContent(props) {
-    return (
-        <ErrorBoundary
-            fallback='Houston, on a un problème'
-            showDetails
-            className='text-dark'
-        >
-            <NavbarContent {...props} />
-        </ErrorBoundary>
-    )
-}
+import './index.scss'
 
 export default function Navbar({ className = '', ...props }) {
+    const history = useHistory()
+    const [darkMode, switchDarkMode] = useDarkMode()
+
     return (
         <Flex
-            className={`${className} justify-space-between bg-primary ph-10% pv-20`.trim()}
+            className={`navbar md-:ph-6vw lg+:ph-10vw pv-20 ${
+                className ?? ''
+            }`.trim()}
+            justify='space-between'
             col='1'
             fullWidth
             {...props}
         >
-            <NavbarContent />
+            <Link align='items-center' to='/' history={history}>
+                <Icon icon='home' className='mr-6' />
+                Liste des composants
+            </Link>
+            <Icon
+                icon={darkMode ? 'dark_mode' : 'light_mode'}
+                onClick={switchDarkMode}
+            />
         </Flex>
     )
 }
