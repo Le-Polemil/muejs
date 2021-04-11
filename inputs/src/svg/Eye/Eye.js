@@ -3,7 +3,7 @@ import React from 'react'
 export function Eye({
     onClick = () => null,
     className = '',
-    color = 'var(--secondary-color)',
+    color = 'currentColor',
     size = 16,
 }) {
     return (

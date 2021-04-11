@@ -6,7 +6,9 @@ import { any, bool, string } from 'prop-types'
 
 import { Checkbox as CheckboxIcon } from '../../../svg/Checkbox'
 
-const InputCheckbox = ({
+import './index.scss'
+
+export const InputCheckbox = ({
     label,
     name,
     defaultChecked,
@@ -14,22 +16,24 @@ const InputCheckbox = ({
     readOnly = disabled,
     className,
     inputClassName,
+    // other
+    validIfNoErrors,
     helper,
-    rules,
     // form
-    errors,
+    rules,
+    formState: { errors },
     control,
     register,
     //grid
-    ...gridProps
+    ...props
 }) => {
     const {
         className: gridClassName,
         style: gridStyle = {},
-        ...props
+        ...gridProps
     } = useGridify({
         componentName: 'InputCheckbox',
-        ...gridProps,
+        ...props,
     })
 
     const [id] = useState(uuid())
@@ -43,22 +47,27 @@ const InputCheckbox = ({
 
     return (
         <label
-            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            className={[
+                'field',
+                gridClassName,
+                className,
+                error && 'invalid',
+                validIfNoErrors && !error && rules && rules !== {} && 'valid',
+                (disabled || readOnly) && 'disabled',
+            ]
+                ?.filter(e => !!e)
+                .join(' ')}
             style={gridStyle}
-            {...props}
+            {...gridProps}
         >
             <div
-                className={[
-                    'checkbox input',
-                    error && 'invalid',
-                    (disabled || readOnly) && 'disabled',
-                    inputClassName,
-                ]
+                className={['checkbox input', inputClassName]
                     ?.filter(e => !!e)
                     .join(' ')}
             >
-                <div className='flex align-items-center width-20 b-2 b-secondary mr-6'>
+                <div className='icon flex align-items-center width-20 mr-6'>
                     <CheckboxIcon
+                        color='var(--checkbox-color)'
                         className={`check-icon ${checked ? 'checked' : ''}`}
                     />
                 </div>
@@ -66,12 +75,11 @@ const InputCheckbox = ({
                 <input
                     id={id}
                     defaultChecked={defaultChecked}
-                    name={name}
                     type='checkbox'
                     className='hidden'
                     readOnly={readOnly}
                     disabled={disabled}
-                    ref={register(rules)}
+                    {...register(name, rules)}
                 />
 
                 <label className='body-14 medium' htmlFor={id}>

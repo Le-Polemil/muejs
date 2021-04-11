@@ -33,7 +33,7 @@ export function getSuggestionLabel(suggestion, mainField) {
     )
 }
 
-const Autocomplete = ({
+export const Autocomplete = ({
     // field
     label,
     name,
@@ -52,19 +52,22 @@ const Autocomplete = ({
     mainField,
     comparisonFunction,
     noneLabel,
+    // others
+    validIfNoErrors,
+    haveRules,
     // form
     helper,
-    errors,
+    formState: { errors },
     // grid
-    ...gridProps
+    ...props
 }) => {
     const {
         className: gridClassName,
         style: gridStyle = {},
-        ...props
+        ...gridProps
     } = useGridify({
         componentName: 'InputAutocomplete',
-        ...gridProps,
+        ...props,
     })
 
     const [id] = useState(uuid())
@@ -157,10 +160,19 @@ const Autocomplete = ({
 
     return (
         <label
-            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            className={[
+                'field',
+                gridClassName,
+                className,
+                !value?.length && 'empty',
+                error && 'invalid',
+                (disabled || readOnly) && 'disabled',
+            ]
+                .filter(e => !!e)
+                .join(' ')}
             style={gridStyle}
             ref={ref}
-            {...props}
+            {...gridProps}
         >
             <label className='label bold mb-4' htmlFor={id}>
                 {label || name}
@@ -171,9 +183,6 @@ const Autocomplete = ({
                     className={[
                         'input overflow-y-auto overflow-x-hidden width-100%',
                         'autocomplete',
-                        !value?.length && 'empty',
-                        error && 'invalid',
-                        (disabled || readOnly) && 'disabled',
                         inputClassName,
                     ]
                         .filter(e => !!e)
@@ -193,7 +202,7 @@ const Autocomplete = ({
                     readOnly={readOnly}
                     disabled={disabled}
                     placeholder={placeholder}
-                    autoComplete='off'
+                    autoComplete={id}
                 />
 
                 <Suggestions
@@ -249,7 +258,7 @@ Autocomplete.defaultProps = {
     suggestions: [],
 }
 
-const InputAutocomplete = ({
+export const InputAutocomplete = ({
     control,
     name,
     rules,
@@ -275,7 +284,7 @@ const InputAutocomplete = ({
             defaultValue={
                 defaultFound instanceof Object ? defaultFound?.id : defaultValue
             }
-            render={({ onChange, value, name }) => {
+            render={({ field: { onChange, value, name } = {} }) => {
                 const found =
                     suggestions?.length > 0 &&
                     suggestions?.find(sugg => sugg?.id === value)
@@ -312,6 +321,7 @@ const InputAutocomplete = ({
                         }}
                         mainField={mainField}
                         name={name}
+                        haveRules={rules && rules !== {}}
                     />
                 )
             }}

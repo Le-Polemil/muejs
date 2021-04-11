@@ -1,10 +1,15 @@
 @import 'muejs/src/mixins/mediaQueries.scss';
 
 .datepicker + .dropdown-content {
+    --calendar-color: var(--secondary-color);
+}
+
+.datepicker + .dropdown-content {
     --nb-rows: 7;
     --nb-columns: 7;
     --padding-h: 24px;
     --width: 4vw;
+
     @media (max-width: #{$md-screen-max}) {
         --width: 3vw;
     }
@@ -13,8 +18,9 @@
     }
 
     padding: var(--padding-h) !important;
-    right: unset;
+    right: unset !important;
     min-width: 100%;
+    max-width: unset;
     justify-content: center;
 
     .grid {
@@ -46,7 +52,7 @@
 
     .modifying-year .year,
     .modifying-month .month {
-        color: var(--secondary-color) !important;
+        color: var(--calendar-color) !important;
         border-bottom: solid 2px currentColor;
 
         &::selection {
@@ -55,16 +61,16 @@
     }
 
     label.datepicker-day-label {
-        padding: 0.2rem;
+        padding: 0.5vw;
         text-align: center;
         font-weight: 900;
         font-size: 0.8rem;
-        color: var(--secondary-color) !important;
+        color: var(--calendar-color) !important;
     }
 
     div.datepicker-month-day {
         cursor: pointer;
-        padding: 0.2rem;
+        padding: 0.5vw;
         font-size: 1rem;
         color: var(--grey-color);
         border-radius: 4px;
@@ -78,15 +84,15 @@
         }
 
         &.in-month {
-            color: var(--black-color);
+            color: var(--color-over-bg);
         }
 
         &.is-today:not(.is-current) {
-            color: var(--secondary-color);
+            color: var(--calendar-color);
         }
 
         &.is-current {
-            background-color: var(--secondary-color);
+            background-color: var(--calendar-color);
         }
     }
 }

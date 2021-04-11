@@ -5,8 +5,9 @@ import { v4 as uuid } from 'uuid'
 import { any, bool, func, number, string } from 'prop-types'
 
 import { Eye } from '../../../svg/Eye'
+import { EyeClosed } from '../../../svg/EyeClosed'
 
-const InputText = ({
+export const InputText = ({
     // input
     label,
     name,
@@ -18,29 +19,30 @@ const InputText = ({
     className,
     inputClassName,
     // other
+    validIfNoErrors,
     helper,
     maxCharacters,
     // form
     rules,
-    errors,
+    formState: { errors },
     control,
     register,
     // grid props
-    ...gridProps
+    ...props
 }) => {
     const {
         className: gridClassName,
         style: gridStyle = {},
-        ...props
+        ...gridProps
     } = useGridify({
         componentName: 'InputText',
-        ...gridProps,
+        ...props,
     })
 
     const [id] = useState(uuid())
     const [type, setType] = useState(_type)
 
-    const error = errors?.[name]
+    const error = errors?.[name]?.message
     const value = useWatch({
         control,
         name,
@@ -55,9 +57,19 @@ const InputText = ({
 
     return (
         <label
-            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            className={[
+                'field',
+                gridClassName,
+                className,
+                !value && 'empty',
+                error && 'invalid',
+                validIfNoErrors && !error && rules && rules !== {} && 'valid',
+                (disabled || readOnly) && 'disabled',
+            ]
+                .filter(e => e)
+                .join(' ')}
             style={gridStyle}
-            {...props}
+            {...gridProps}
         >
             <label className='label bold mb-4' htmlFor={id}>
                 {label || name}
@@ -67,37 +79,35 @@ const InputText = ({
                     className={[
                         'input flex-1',
                         _type === 'password' && 'with-icon',
-                        !value && 'empty',
-                        error && 'invalid',
-                        (disabled || readOnly) && 'disabled',
                         inputClassName,
                     ]
                         .filter(e => e)
                         .join(' ')}
                     id={id}
-                    ref={register(rules)}
-                    name={name}
                     type={type}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
                     readOnly={readOnly}
                     disabled={disabled}
+                    {...register(name, rules)}
                 />
 
-                {_type === 'password' && (
-                    <Eye
-                        className='input-icon absolute pointer'
-                        onClick={() =>
-                            setType(type === 'password' ? 'text' : 'password')
-                        }
-                    />
-                )}
+                {_type === 'password' &&
+                    (type === 'password' ? (
+                        <EyeClosed
+                            className='input-icon absolute pointer'
+                            onClick={() => setType('text')}
+                        />
+                    ) : (
+                        <Eye
+                            className='input-icon absolute pointer'
+                            onClick={() => setType('password')}
+                        />
+                    ))}
             </div>
 
             <div className='flex justify-space-between'>
-                <div
-                    className={`helper flex-1 ${error ? 'invalid' : ''}`.trim()}
-                >
+                <div className='helper flex-1'>
                     {error ? error?.message ?? 'Erreur' : helper}
                 </div>
 

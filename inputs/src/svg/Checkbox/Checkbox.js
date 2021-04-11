@@ -3,8 +3,8 @@ import React from 'react'
 export function Checkbox({
     onClick = () => null,
     className = '',
-    color = 'var(--secondary-color)',
-    checkColor = 'var(--white-color)',
+    color = 'currentColor',
+    checkColor = 'var(--pale-color)',
     size = 16,
 }) {
     return (

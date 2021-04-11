@@ -1,0 +1,22 @@
+.field {
+    .radio {
+        --radio-color: var(--secondary-color);
+        box-shadow: none !important;
+        background-color: unset !important;
+        &,
+        label {
+            cursor: pointer;
+        }
+
+        .icon {
+            border: solid 2px var(--radio-color);
+        }
+    }
+
+    &.disabled .radio {
+        &,
+        label {
+            cursor: not-allowed;
+        }
+    }
+}

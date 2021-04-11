@@ -9,6 +9,8 @@ import useArray from '../../../hooks/useArray'
 import { ChevronDown } from '../../../svg/ChevronDown'
 import { Check } from '../../../svg/Check'
 
+import './index.scss'
+
 // TODO export in another file
 const SEPARATOR = 'separator'
 
@@ -22,7 +24,7 @@ function getOptionLabel(opt) {
     return opt
 }
 
-const Select = ({
+export const Select = ({
     // input
     label,
     name,
@@ -36,21 +38,23 @@ const Select = ({
     onChange,
     // other
     direction,
-    helper,
     options,
     loading,
+    validIfNoErrors,
+    haveRules,
+    helper,
     // form
-    errors,
+    formState: { errors },
     //grid
-    ...gridProps
+    ...props
 }) => {
     const {
         className: gridClassName,
         style: gridStyle = {},
-        ...props
+        ...gridProps
     } = useGridify({
         componentName: 'InputSelect',
-        ...gridProps,
+        ...props,
     })
 
     const [id] = useState(uuid())
@@ -114,9 +118,19 @@ const Select = ({
 
     return (
         <label
-            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            className={[
+                'field',
+                gridClassName,
+                className,
+                !value?.length && 'empty',
+                error && 'invalid',
+                validIfNoErrors && !error && haveRules && 'valid',
+                (disabled || readOnly) && 'disabled',
+            ]
+                .filter(e => !!e)
+                .join(' ')}
             style={gridStyle}
-            {...props}
+            {...gridProps}
         >
             <label className='label bold mb-4' htmlFor={id}>
                 {label || name}
@@ -128,9 +142,6 @@ const Select = ({
                 className={[
                     'select input overflow-y-auto overflow-x-hidden',
                     'with-icon',
-                    !value?.length && 'empty',
-                    error && 'invalid',
-                    (disabled || readOnly) && 'disabled',
                     inputClassName,
                 ]
                     .filter(e => !!e)
@@ -273,7 +284,13 @@ Select.defaultProps = {
     onChange: () => null,
 }
 
-const InputSelect = ({ control, name, rules, defaultValue, ...otherProps }) => {
+export const InputSelect = ({
+    control,
+    name,
+    rules,
+    defaultValue,
+    ...otherProps
+}) => {
     return (
         <Controller
             control={control}
@@ -284,7 +301,7 @@ const InputSelect = ({ control, name, rules, defaultValue, ...otherProps }) => {
                     ? defaultValue.join(',')
                     : defaultValue || ''
             }
-            render={({ onChange, value, name }) => (
+            render={({ field: { onChange, value, name } }) => (
                 <Select
                     {...otherProps}
                     value={(value && value?.split(',')) || undefined}
@@ -292,6 +309,7 @@ const InputSelect = ({ control, name, rules, defaultValue, ...otherProps }) => {
                         onChange(Array.isArray(array) ? array.join(',') : array)
                     }
                     name={name}
+                    haveRules={rules && rules !== {}}
                 />
             )}
         />

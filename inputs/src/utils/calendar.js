@@ -1,4 +1,9 @@
 import dayjs from 'dayjs'
+import 'dayjs/locale/fr'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
+dayjs.locale('fr')
+dayjs.extend(customParseFormat)
 
 // (int) The current year
 export const THIS_YEAR = +new Date().getFullYear()

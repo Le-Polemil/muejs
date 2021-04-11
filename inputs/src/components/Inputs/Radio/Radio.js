@@ -6,7 +6,9 @@ import { any, bool, string } from 'prop-types'
 
 import { Checkbox as CheckboxIcon } from '../../../svg/Checkbox'
 
-const InputRadio = ({
+import './index.scss'
+
+export const InputRadio = ({
     label,
     name,
     value,
@@ -16,22 +18,23 @@ const InputRadio = ({
     className,
     inputClassName,
     // other
+    validIfNoErrors,
     helper,
-    rules,
     // form
+    rules,
+    formState: { errors },
     control,
-    errors,
     register,
     //grid
-    ...gridProps
+    ...props
 }) => {
     const {
         className: gridClassName,
         style: gridStyle = {},
-        ...props
+        ...gridProps
     } = useGridify({
         componentName: 'InputRadio',
-        ...gridProps,
+        ...props,
     })
 
     const [id] = useState(uuid())
@@ -46,22 +49,27 @@ const InputRadio = ({
 
     return (
         <label
-            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            className={[
+                'field',
+                gridClassName,
+                className,
+                error && 'invalid',
+                validIfNoErrors && !error && rules && rules !== {} && 'valid',
+                (disabled || readOnly) && 'disabled',
+            ]
+                ?.filter(e => !!e)
+                .join(' ')}
             style={gridStyle}
-            {...props}
+            {...gridProps}
         >
             <div
-                className={[
-                    'radio input',
-                    error && 'invalid',
-                    (disabled || readOnly) && 'disabled',
-                    inputClassName,
-                ]
+                className={['radio input', inputClassName]
                     ?.filter(e => !!e)
                     .join(' ')}
             >
-                <div className='flex align-items-center height-20 width-20 b-rad-50% b-2 b-secondary mr-6'>
+                <div className='icon flex align-items-center height-20 width-20 b-rad-50% mr-6'>
                     <CheckboxIcon
+                        color='var(--radio-color)'
                         size={18}
                         className={`check-icon m--1 b-rad-50% overflow-hidden ${
                             checked ? 'checked' : ''
@@ -72,13 +80,12 @@ const InputRadio = ({
                 <input
                     id={id}
                     defaultChecked={defaultChecked}
-                    name={name}
                     type='radio'
                     className='hidden'
                     readOnly={readOnly}
                     disabled={disabled}
                     value={value}
-                    ref={register(rules)}
+                    {...register(name, rules)}
                 />
 
                 <label className='label bold' htmlFor={id}>

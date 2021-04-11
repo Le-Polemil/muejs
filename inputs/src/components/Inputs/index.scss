@@ -1,12 +1,67 @@
 @import 'muejs/src/base/_fonts.scss';
 
 .field {
+    --border-width: 1px;
+
+    --placeholder-color: var(--grey-color);
+    --main-text-color: var(--black-color);
+
+    --empty-color: var(--dark-color);
+    --empty-bg: var(--pale-color);
+    --empty-border: var(--pale-color);
+
+    --filled-bg: var(--bg-color);
+    --filled-border: var(--grey-color);
+
+    --hover-bg: var(--bg-color);
+    --hover-border: var(--grey-color);
+
+    --focus-bg: var(--bg-color);
+    --focus-border: var(--secondary-color);
+    --focus-box-shadow: 0 9px 16px 0 rgba(242, 183, 5, 0.1);
+
+    --disabled-bg: var(--pale-color);
+    --disabled-border: var(--pale-color);
+    --disabled-color: var(--grey-color);
+
+    --invalid-bg: var(--error-color);
+    --invalid-border: var(--error-color);
+    --invalid-color: var(--error-color);
+
+    --valid-bg: var(--success-color);
+    --valid-border: var(--success-color);
+    --valid-color: var(--success-color);
+
+    --info-bg: var(--info-color);
+    --info-border: var(--info-color);
+    --input-info-color: var(--info-color);
+}
+.dark-mode .field {
+    --placeholder-color: var(--black-color);
+    --main-text-color: var(--pale-color);
+
+    --empty-bg: var(--grey-20);
+    --empty-border: var(--grey-color);
+
+    --filled-bg: var(--bg-color);
+    --filled-color: var(--pale-color);
+
+    --focus-border: var(--pale-color);
+    --focus-box-shadow: 0 9px 16px 0 rgba(80, 80, 80, 0.1);
+
+    --disabled-bg: var(--grey-color);
+    --disabled-border: var(--grey-color);
+    --disabled-color: var(--pale-color);
+}
+
+.field {
     display: inline-block;
 
     .label {
         @include caption;
         @include karla;
         display: inline-block;
+        --color: var(--main-text-color);
     }
 
     input {
@@ -16,175 +71,190 @@
     }
 
     .input {
-        --border-width: 1px;
+        --color: var(--main-text-color);
 
         @include body-14;
-        @include regular;
+        @include medium;
         align-items: center;
-        background-color: unset;
-        --color: var(--black-color);
+        background-color: var(--filled-bg);
         display: flex;
         min-height: 48px;
+
+        border-style: solid;
+        border-width: 1px;
+        border-color: var(--filled-border);
+        border-radius: 9px;
+        box-shadow: 0;
+        padding-top: calc(14px - var(--border-width));
+        padding-left: calc(16px - var(--border-width));
+        padding-bottom: calc(14px - var(--border-width));
+        padding-right: calc(16px - var(--border-width));
         position: relative;
 
         transition: border-color 0.3s, box-shadow 0.3s, color 0.3s,
-            font-weight 0.3s;
+            font-weight 0.3s, background-color 0.3s;
 
-        &:not(.checkbox):not(.radio) {
-            border-style: solid;
-            border-width: 1px;
-            border-color: var(--grey-color);
-            border-radius: 9px;
-            box-shadow: 0;
-            padding-top: calc(14px - var(--border-width));
-            padding-left: calc(16px - var(--border-width));
-            padding-bottom: calc(14px - var(--border-width));
-            padding-right: calc(16px - var(--border-width));
+        &.with-icon {
+            padding-right: calc(16px - var(--border-width) + 16px + 28px);
+        }
+    }
 
-            &.with-icon {
-                padding-right: calc(16px - var(--border-width) + 16px + 28px);
-            }
+    &.empty {
+        .input {
+            @include regular;
+            background-color: var(--empty-bg);
+            border-color: var(--empty-border);
 
-            &:not(.empty) {
-                @include medium;
-            }
-
-            &:not(.disabled) {
-                &.empty {
-                    background-color: var(--pale-grey-color);
-                    border-color: transparent;
-                    --color: var(--light-black-color);
-                }
-
-                &:hover {
-                    background-color: var(--pale-grey-color);
-                    border-color: var(--grey-color);
-                    box-shadow: 0 9px 16px 0 rgba(144, 144, 144, 0.1);
-                    --color: var(--black-color);
-                }
-
-                &:focus {
-                    @include medium;
-                    border-color: var(--secondary-color);
-                    box-shadow: 0 9px 16px 0 rgba(242, 183, 5, 0.1);
-                    --color: var(--black-color);
-
-                    &::placeholder,
-                    &:-ms-input-placeholder,
-                    &::-ms-input-placeholder,
-                    .placeholder {
-                        @include medium;
-                    }
-                }
-
-                &.invalid {
-                    --color: var(--error-color);
-                    border-color: var(--error-color);
-
-                    &::placeholder,
-                    &:-ms-input-placeholder,
-                    &::-ms-input-placeholder,
-                    .placeholder {
-                        @include bold;
-                        --color: var(--error-color);
-                        color: var(--error-color) !important;
-                    }
-                }
-
-                &.valid {
-                    --color: var(--success-color);
-                    border-color: var(--success-color);
-                }
-            }
-
-            &.disabled {
-                background-color: var(--disabled-color);
-                border-color: transparent;
-                --color: var(--light-black-color);
-                opacity: 0.5;
+            &.permanent-border {
+                border-color: var(--filled-bg);
             }
         }
+    }
 
-        &.disabled {
-            cursor: not-allowed;
+    .input:hover {
+        --color: var(--main-text-color);
+        background-color: var(--hover-bg);
+        border-color: var(--hover-border);
+        box-shadow: 0 9px 16px 0 rgba(144, 144, 144, 0.1);
+    }
+
+    &.invalid {
+        .input,
+        .label,
+        .helper {
+            --color: var(--invalid-color);
         }
+
+        .input {
+            border-color: var(--invalid-border);
+
+            &::placeholder,
+            &:-ms-input-placeholder,
+            &::-ms-input-placeholder,
+            .placeholder {
+                @include bold;
+                --color: var(--invalid-color);
+                color: var(--invalid-color) !important;
+            }
+        }
+    }
+
+    &.valid {
+        .input,
+        .label,
+        .helper {
+            --color: var(--valid-color);
+        }
+
+        .input {
+            border-color: var(--valid-color);
+
+            &::placeholder,
+            &:-ms-input-placeholder,
+            &::-ms-input-placeholder,
+            .placeholder {
+                @include bold;
+                --color: var(--valid-color);
+                color: var(--valid-color) !important;
+            }
+        }
+    }
+
+    &.info {
+        .input,
+        .label,
+        .helper {
+            --color: var(--input-info-color);
+        }
+
+        .input {
+            border-color: var(--info-border);
+
+            &::placeholder,
+            &:-ms-input-placeholder,
+            &::-ms-input-placeholder,
+            .placeholder {
+                @include bold;
+                --color: var(--input-info-color);
+                color: var(--input-info-color) !important;
+            }
+        }
+    }
+
+    .input:focus {
+        --color: var(--main-text-color);
+        @include medium;
+        background-color: var(--focus-bg);
+        border-color: var(--focus-border);
+        box-shadow: var(--focus-box-shadow);
 
         &::placeholder,
         &:-ms-input-placeholder,
         &::-ms-input-placeholder,
         .placeholder {
-            @include regular;
-            color: var(--light-black-color);
-            opacity: 1;
+            @include medium;
+            --color: var(--placeholder-color);
+            color: var(--placeholder-color) !important;
         }
+    }
 
-        /* TO FIX */
-        &:-internal-autofill-previewed,
-        &:-internal-autofill-selected {
-            background-color: unset;
+    &.disabled {
+        opacity: var(--disabled-opacity);
+
+        .input {
+            --color: var(--disabled-color);
+            background-color: var(--disabled-bg);
+            border-color: var(--disabled-border);
             box-shadow: none;
-            -webkit-box-shadow: none;
-            -webkit-text-fill-color: var(--black-color);
+            cursor: not-allowed;
+        }
+    }
+
+    &::placeholder,
+    &:-ms-input-placeholder,
+    &::-ms-input-placeholder,
+    .placeholder {
+        @include regular;
+        --color: var(--placeholder-color);
+        color: var(--placeholder-color) !important;
+        opacity: 1;
+    }
+
+    /* TO FIX */
+    &:-internal-autofill-previewed,
+    &:-internal-autofill-selected {
+        background-color: var(--focus-bg) !important;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -webkit-text-fill-color: var(--main-text-color);
+    }
+
+    .autocomplete {
+        .no-suggestions {
+            color: #999;
+            padding: 0.5vw;
         }
 
-        &.checkbox,
-        &.radio {
-            .check-icon {
-                opacity: 0;
-                transition: opacity ease-in-out 0.2s;
-
-                &.checked {
-                    opacity: 1;
-                }
-            }
-        }
-
-        &.autocomplete {
-            .no-suggestions {
-                color: #999;
-                padding: 0.5vw;
-            }
-
-            .suggestions button {
-                &:hover,
-                &.suggestion-active {
-                    font-weight: 700;
-                }
+        .suggestions button {
+            &:hover,
+            &.suggestion-active {
+                font-weight: 700;
             }
         }
     }
 
-    .select {
-        width: 100%;
-        cursor: pointer;
+    .checkbox,
+    .radio {
+        background-color: unset;
+        border: 0;
+        padding: 0;
 
-        select {
-            // A reset of styles, including removing the default dropdown arrow
-            appearance: none;
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            // Additional resets for further consistency
-            background-color: transparent;
-            border: none;
-            padding: 0 1em 0 0;
-            margin: 0;
-            width: 100%;
-            font-family: inherit;
-            font-size: inherit;
-            cursor: inherit;
-            line-height: inherit;
+        .check-icon {
+            opacity: 0;
+            transition: opacity ease-in-out 0.2s;
 
-            &::-ms-expand {
-                display: none;
-            }
-        }
-
-        .input-icon {
-            transform: rotate(0);
-            transition: transform 0.3s;
-
-            &.active {
-                transform: rotate(180deg);
+            &.checked {
+                opacity: 1;
             }
         }
     }
@@ -195,7 +265,6 @@
         @include medium;
 
         box-shadow: unset !important;
-        border: solid 1px var(--pale-grey-color);
         cursor: pointer;
         text-align: left;
         width: 100%;
@@ -209,7 +278,7 @@
         }
 
         &:hover {
-            background-color: var(--pale-grey-color);
+            background-color: var(--pale-color);
         }
 
         &:last-of-type {
@@ -224,11 +293,6 @@
     .helper {
         @include caption;
         @include regular;
-        --color: var(--light-black-color);
-
-        &.invalid {
-            @include bold;
-            --color: var(--error-color);
-        }
+        --color: var(--main-text-color);
     }
 }

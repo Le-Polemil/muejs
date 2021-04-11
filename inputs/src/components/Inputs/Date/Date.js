@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Controller } from 'react-hook-form'
-import { Dropdown } from 'react-muejs'
+import { Dropdown, useGridify } from 'react-muejs'
 import { v4 as uuid } from 'uuid'
 import { func, object, string, any, bool, array, oneOfType } from 'prop-types'
 
@@ -12,7 +12,7 @@ import { validateDate } from '../../../utils/calendar'
 
 import './index.scss'
 
-const Datepicker = ({
+export const Datepicker = ({
     //input
     label,
     name,
@@ -25,48 +25,47 @@ const Datepicker = ({
     contentClassName,
     onChange,
     //other
+    validIfNoErrors,
+    haveRules,
     direction,
     helper,
     // form
+    formState: { errors },
     setValue,
-    errors,
     // grid
-    ...gridProps
+    ...props
 }) => {
     const {
         className: gridClassName,
         style: gridStyle = {},
-        ...props
+        ...gridProps
     } = useGridify({
         componentName: 'InputDate',
-        ...gridProps,
+        ...props,
     })
 
     const [id] = useState(uuid())
-    const error = errors?.[name]
+    const error = errors?.[name]?.message
 
     return (
         <label
-            className={`field ${gridClassName ?? ''} ${className ?? ''}`.trim()}
+            className={[
+                'field',
+                gridClassName,
+                className,
+                !value?.length && 'empty',
+                error && 'invalid',
+                validIfNoErrors && !error && haveRules && 'valid',
+                (disabled || readOnly) && 'disabled',
+            ]
+                .filter(e => !!e)
+                .join(' ')}
             style={gridStyle}
-            {...props}
+            {...gridProps}
         >
             <label className='label bold mb-4' htmlFor={id}>
                 {label || name}
             </label>
-
-            {/* <div
-            className={[
-                'datepicker',
-                'input-field',
-                fieldClassName,
-                !value && 'empty',
-                (disabled || readOnly) && 'disabled',
-                error ? 'invalid' : 'valid',
-            ]
-                ?.filter(e => !!e)
-                .join(' ')}
-        > */}
 
             <Dropdown
                 disabled={disabled || readOnly}
@@ -76,9 +75,6 @@ const Datepicker = ({
                 className={[
                     'datepicker input overflow-y-auto overflow-x-hidden width-100%',
                     'with-icon',
-                    !value?.length && 'empty',
-                    error && 'invalid',
-                    (disabled || readOnly) && 'disabled',
                     inputClassName,
                 ]
                     .filter(e => !!e)
@@ -94,7 +90,7 @@ const Datepicker = ({
                             readOnly={readOnly}
                             disabled={disabled}
                             placeholder={placeholder}
-                            autoComplete='off'
+                            autoComplete={id}
                         />
 
                         <CalendarIcon className='input-icon absolute pointer' />
@@ -107,10 +103,8 @@ const Datepicker = ({
             </Dropdown>
 
             <div className='flex justify-space-between'>
-                <div
-                    className={`helper flex-1 ${error ? 'invalid' : ''}`.trim()}
-                >
-                    {error ? error?.message ?? 'Erreur' : helper}
+                <div className='helper flex-1'>
+                    {error ? error ?? 'Erreur' : helper}
                 </div>
             </div>
         </label>
@@ -144,7 +138,13 @@ Datepicker.defaultProps = {
     onChange: () => null,
 }
 
-const InputDate = ({ control, name, rules, defaultValue, ...otherProps }) => {
+export const InputDate = ({
+    control,
+    name,
+    rules,
+    defaultValue,
+    ...otherProps
+}) => {
     return (
         <Controller
             control={control}
@@ -159,12 +159,13 @@ const InputDate = ({ control, name, rules, defaultValue, ...otherProps }) => {
                         'Le format doit être JJ/MM/AAAA'),
             }}
             defaultValue={defaultValue}
-            render={({ onChange, value, name }) => (
+            render={({ field: { onChange, value, name } = {} }) => (
                 <Datepicker
                     {...otherProps}
                     value={value}
                     onChange={onChange}
                     name={name}
+                    haveRules={rules && rules !== {}}
                 />
             )}
         />

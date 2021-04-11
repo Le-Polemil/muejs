@@ -46,7 +46,7 @@ export default function MonthAndYear({ month, setMonth, year, setYear }) {
     }
 
     return (
-        <div className={`flex pb-12 width-100% modifying-${modifying}`}>
+        <div className={`flex pb-10 width-100% modifying-${modifying}`}>
             <button
                 className='btn-text arrow-left bold'
                 onMouseDown={handlePrevious}

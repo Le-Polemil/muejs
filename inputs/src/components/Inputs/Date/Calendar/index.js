@@ -72,26 +72,28 @@ export default function Calendar({
                 setYear={setYear}
             />
 
-            <div className='grid'>
-                {Object.keys(WEEK_DAYS).map((day, index) => (
-                    <Day key={`daylabel#${day}`} day={day} index={index} />
-                ))}
+            <div>
+                <div className='grid'>
+                    {Object.keys(WEEK_DAYS).map((day, index) => (
+                        <Day key={`daylabel#${day}`} day={day} index={index} />
+                    ))}
 
-                {getCalendarDates().map((date, index) => {
-                    return (
-                        <DateItem
-                            key={`calendarDate#${
-                                date ? date.join('-') : index
-                            }`}
-                            index={index}
-                            current={current}
-                            month={month}
-                            year={year}
-                            date={date}
-                            onClick={gotoDate}
-                        />
-                    )
-                })}
+                    {getCalendarDates().map((date, index) => {
+                        return (
+                            <DateItem
+                                key={`calendarDate#${
+                                    date ? date.join('-') : index
+                                }`}
+                                index={index}
+                                current={current}
+                                month={month}
+                                year={year}
+                                date={date}
+                                onClick={gotoDate}
+                            />
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )
