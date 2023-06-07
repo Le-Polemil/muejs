@@ -1,3 +1,7 @@
+# DEPRECATED, PLEASE LOOK AT THE NEW REPOSITORIES https://github.com/mue-js
+
+
+
 # [MueJS](https://cobelt.github.io/muejs)
 [![npm version](https://img.shields.io/npm/v/muejs.svg?style=flat)](https://www.npmjs.com/package/muejs)
 
